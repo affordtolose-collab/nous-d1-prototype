@@ -15,6 +15,8 @@ pre{white-space:pre-wrap;word-break:break-word;font-size:12px}#nousSpecJson{max-
 summary{cursor:pointer}label{display:block}fieldset{border:1px solid var(--line);border-radius:12px;margin:14px 0}fieldset label{margin:6px 0}a{color:var(--accent)}ol li,ul li{margin:4px 0}[hidden]{display:none!important}
 .num{white-space:nowrap}.tag{display:inline-block;white-space:nowrap;font-size:12px;border:1px solid var(--line);border-radius:999px;padding:0 8px;margin:0 4px 4px 0}
 .nous-card{border-top:1px solid var(--line);padding:12px 0;margin:8px 0}.nous-card h4{margin:4px 0}#nousSpecPanel{min-width:0}#nousSpecJson{max-height:440px;overflow:auto;white-space:pre;word-break:normal;border:1px solid var(--line);padding:12px;max-width:100%}#nousSpecPanel table td{overflow-wrap:anywhere}#nousSpecPanel table{table-layout:fixed}#nousSpecPanel h4{margin-top:24px}@media(max-width:500px){#nousSpecPanel{padding:14px}#nousSpecPanel table{font-size:12px}#nousSpecPanel td,#nousSpecPanel th{padding:5px}}
+
+[hidden]{display:none!important}.report-tabs{display:flex;gap:8px;overflow-x:auto;padding:8px 0 12px;margin:16px 0;border-bottom:1px solid #b9c7d8}.report-tabs button{flex:0 0 auto;white-space:nowrap;background:#eef3f8;color:#243b53;border:1px solid #b9c7d8}.report-tabs button[aria-selected="true"]{background:#193d63;color:white;border-color:#193d63}button:focus-visible,[role="tabpanel"]:focus-visible,summary:focus-visible{outline:3px solid #d18412;outline-offset:3px}.summary-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}.summary-card{padding:16px;border:1px solid #cad6e2;border-radius:12px;background:#f4f8fc}.summary-card h3{margin:0 0 8px}.summary-card p{margin:4px 0}[role="tabpanel"]{min-width:0}#nousSpecJson{max-height:65vh;overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere}#copyStatus{font-size:14px}.report-tabs+div h2{margin-top:16px}@media(max-width:600px){.report-tabs{gap:6px}.report-tabs button{padding:10px 12px}.summary-grid{grid-template-columns:1fr}}
 </style><main><p class="eyebrow">NOUS團隊 技術分享 · D1 / v1</p><h1>看見你學新規則的方式</h1><p class="muted">理解、推演、遷移，加上選答的高一學科題。這是探索原型，不是 IQ 測驗、不是學科考試，也不是學習能力的定論；最後提供一份初步的學習方案。</p><div id="app"></div><details id="debug"><summary>研發檢視：即時後驗、規則與事件</summary><div id="debugContent"></div></details><p class="muted"><small>所有計算都在此瀏覽器完成，不上傳、不儲存身分資料。重新整理即清除；可自行下載匿名測試事件。所有題目參數與平均作答時間都尚未經真人校準。</small></p></main>
 <script id="model">
 'use strict';
@@ -344,7 +346,7 @@ function specPanel(S,text){
   <h4>4. D7 EL 起步計畫</h4><p>合計 ${S.d7_el_plan.total_minutes} 分鐘；每日額度不重複累加互動模組時間。</p><div class="scroll"><table><tr><th>日期／時間</th><th class="l">任務與原因碼</th></tr>${dayRows}</table></div>
   <h4>5. 間隔回想與 D30 EM 檢核</h4><p>回想日：D${S.review_schedule.intervals_days.join('、D')}；種子卡 ${S.review_schedule.seed_items.length} 張；FSRS ready＝false。D30 約 ${S.d30_em_check.minutes} 分鐘，使用每章 ${S.d30_em_check.parallel_items.per_chapter} 題平行新題，禁止重複原題；平行題庫尚未備妥。</p>${cs}
   <h4>6. 原因碼對照</h4><div class="scroll"><table><tr><th>reason_code</th><th class="l">公開規則</th></tr>${reg}</table></div>
-  <h4>7. 原始 JSON（與下載檔相同）</h4><div class="row"><button id="downloadSpec">NOUS 學習方案 JSON</button></div><pre id="nousSpecJson" tabindex="0">${escape(text)}</pre></section>`;
+  <details><summary>原始 JSON（與下載檔相同）</summary><div class="row"><button id="copySpec">複製 JSON</button><button id="downloadSpec">NOUS 學習方案 JSON</button></div><p id="copyStatus" role="status" aria-live="polite"></p><pre id="nousSpecJson" tabindex="0">${escape(text)}</pre></details></section>`;
 }
 const SIG_TEXT={up:'偏高',flat:'中間',down:'偏低',none:'—'},EVID_TEXT={not_taken:'未施測',insufficient:'證據不足',measured:'已測'};
 const STRAT_TEXT={examples:['範例／圖解','先看 1 個完整範例，再把概念畫成圖或表（流程圖、比較表），最後用自己的話說一次。'],steps:['步驟拆解','把題目拆成「已知 → 要找什麼 → 逐步推 → 檢查邊界條件」，每一步寫一行，卡住時標出是哪一步。'],transfer:['多樣遷移','同一個概念換 2–3 種不同情境（生活例子、圖表、新題型）練習，作答前先找出兩個情境的相同結構。']};
@@ -404,13 +406,29 @@ function planSection(r){
   <li>學習模式：理解偏低→範例／圖解；推演偏低→步驟拆解；遷移偏低→多樣遷移（多個偏低時依 P(&lt;−0.5) 由大到小輪流）；都不偏低或都證據不足→三種輪流。</li>
   <li>信心校準：一律建議「作答前先標把握」。只有把握觀測 ≥ ${RULES.calib_min_n} 筆且 P(β&lt;−0.5) ≥ ${RULES.calib_p} 才提示可能過度自信。</li>
   <li>記憶：只報告再認筆數與答對數；間隔回想固定在 D${RULES.review_days.join('、D')}，未接 FSRS。</li>
-  <li>時間：D1–D7 依序 ${RULES.day_minutes.join('、')} 分鐘；D2–D6 依序輪流優先章節與學習模式；D30 約 ${RULES.check_minutes} 分鐘。</li></ol></details>${specPanel(state.nous,state.nousText)}`;
+  <li>時間：D1–D7 依序 ${RULES.day_minutes.join('、')} 分鐘；D2–D6 依序輪流優先章節與學習模式；D30 約 ${RULES.check_minutes} 分鐘。</li></ol></details>`;
 }
+function overviewSection(r){
+ return `<h2>總覽｜先看這三件事</h2><p class="callout">這是本次任務的初步觀察，不是能力定論，也不代表你的上限。先看結果，再選一個方向開始練習。</p><div class="summary-grid"><article class="summary-card"><h3>學習方式</h3>${DIMS.map(d=>`<p><strong>${NAMES[d]}</strong>：${escape(r.core[d].label)}</p>`).join('')}</article><article class="summary-card"><h3>學科表現</h3><p>本次選答 ${r.subjects.filter(s=>s.enabled).length} 科；各科最多 3 題，分開解讀、不做排名。</p><p>少量題目只能作為起點，請到學科頁籤查看有效題數。</p></article><article class="summary-card"><h3>下一步</h3><p>每天 10–15 分鐘，先試行 7 天。</p><p>${r.plan.priorities.length?'從本次有效錯題所對應的章節開始，再用新題確認。':'先補足有效作答，再決定優先章節。'}</p><p>第 30 天以平行新題檢核方向。</p></article></div><h3>怎麼讀「證據強度」？</h3><ul><li><strong>證據不足</strong>：有效題少於 2 題，先補足觀測，不判定強弱。</li><li><strong>初步</strong>：已有少量線索，但不確定性仍高；所有學科結果最多只到初步。</li><li><strong>未加「初步」</strong>：學習能力達模型精度門檻（SD ≤ 0.6）；仍不是經真人校準的正式診斷。</li><li><strong>未施測</strong>：這次沒有測，不等於不會。</li></ul><p class="muted">各頁保留計算依據。學習能力與學科表現不是同一量尺，不相加、不互相換算。</p>`;
+}
+function reportTabLayout(r){
+ const names=['總覽','學習能力評估','學科能力評估','學習方案（給學生）','NOUS 學習方案'];
+ const bodies=[overviewSection(r),learningSection(r),subjectSection(r),planSection(r),specPanel(state.nous,state.nousText)];
+ return `<div class="report-tabs" role="tablist" aria-label="報告分類">${names.map((n,i)=>`<button role="tab" id="report-tab-${i}" aria-controls="report-panel-${i}" aria-selected="${i===0}" tabindex="${i===0?0:-1}">${n}</button>`).join('')}</div>${bodies.map((body,i)=>`<div role="tabpanel" id="report-panel-${i}" aria-labelledby="report-tab-${i}" tabindex="0" ${i?'hidden':''}>${body}</div>`).join('')}`;
+}
+function initReportTabs(){
+ const tabs=Array.from(document.querySelectorAll('[role="tab"]'));
+ function activate(tab,focus=false){tabs.forEach(t=>{const on=t===tab;t.setAttribute('aria-selected',String(on));t.tabIndex=on?0:-1;document.getElementById(t.getAttribute('aria-controls')).hidden=!on});if(focus)tab.focus();}
+ tabs.forEach((tab,i)=>{tab.onclick=()=>activate(tab);tab.onkeydown=e=>{let j;if(e.key==='ArrowRight')j=(i+1)%tabs.length;if(e.key==='ArrowLeft')j=(i+tabs.length-1)%tabs.length;if(e.key==='Home')j=0;if(e.key==='End')j=tabs.length-1;if(j!==undefined){e.preventDefault();activate(tabs[j],true)}}});
+ const copy=document.getElementById('copySpec');if(copy)copy.onclick=async()=>{const text=document.getElementById('nousSpecJson').textContent;try{await navigator.clipboard.writeText(text);document.getElementById('copyStatus').textContent='已複製 JSON'}catch(e){document.getElementById('copyStatus').textContent='無法自動複製，請選取下方 JSON 手動複製或下載。'}};
+}
+
 function report(){
   let r=computeReport();state.report=r;state.nous=nousSpec(r,specContext());state.nousText=JSON.stringify(state.nous,null,2);
-  app.innerHTML=`<section>${state.simulation?`<div id="simulationBanner" class="caution" role="note"><h2>模擬數據範例，非真實學生</h2><p>${escape(state.simulation.description)}</p><p>以下仍按真實計分規則更新；不硬填強弱標籤。高把握設定不等於已判定過度自信。</p></div>`:''}<p class="flow">${state.subjectQueue.length?'05':'04'} / 初步側寫</p><h2>現在看見的是本次任務，不是你的上限</h2><p class="callout">${escape(state.stop)}。本報告分三部分：學習能力、學科表現、學習方案推薦；三者分開解讀。</p>
-  ${learningSection(r)}${subjectSection(r)}${planSection(r)}
+  app.innerHTML=`<section>${state.simulation?`<div id="simulationBanner" class="caution" role="note"><h2>模擬數據範例，非真實學生</h2><p>${escape(state.simulation.description)}</p><p>以下仍按真實計分規則更新；不硬填強弱標籤。高把握設定不等於已判定過度自信。</p></div>`:''}<p class="flow">${state.subjectQueue.length?'05':'04'} / 初步側寫</p><h2>現在看見的是本次任務，不是你的上限</h2><p class="callout">${escape(state.stop)}。從總覽開始，再用頁籤查看學習能力、學科表現與兩種學習方案。</p>
+  ${reportTabLayout(r)}
   <p class="muted">學科題未做 IRT 校準，也未與星港任務量尺等化；同材料多題可能有局部依賴。這份結果不能作正式升學、分班、選組或人格判定。</p><div class="row"><button id="review">看答案與解析</button><button id="download">下載匿名事件 JSON</button><button id="restart">重新開始</button></div><div id="answers"></div></section>`;
+  initReportTabs();
   document.getElementById('review').onclick=()=>{document.getElementById('answers').innerHTML=state.events.map(e=>{let i=itemById(e.item_id);return `<p><strong>${escape(i.id)}</strong>${i.dim==='S'?` <small>（${escape(i.subject)}）</small>`:''} <span class="stem" style="font-size:16px;font-weight:400">${escape(i.stem)}</span><br>你選 ${'ABCD'[e.response]}；正解 ${'ABCD'[i.answer]}　${escape(i.options[i.answer])}：${escape(i.explain)}</p>`}).join('')};
   document.getElementById('restart').onclick=reset;
   document.getElementById('downloadSpec').onclick=()=>{let blob=new Blob([state.nousText],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=`nous_learning_plan_${PAGE.mode}.json`;a.click();URL.revokeObjectURL(url)};
