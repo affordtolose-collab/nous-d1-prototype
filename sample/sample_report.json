@@ -3,7 +3,7 @@
   "generated_at": "2026-11-07T12:00:00.000Z",
   "source": {
     "page_mode": "public",
-    "prototype": "d1-v0.7",
+    "prototype": "d1-v0.8",
     "session_kind": "d1_initial_assessment",
     "is_simulated": true
   },
@@ -1311,7 +1311,7 @@
   ],
   "model_versions": {
     "mac": "mac-3.0-compatible-subset",
-    "prototype": "d1-v0.7",
+    "prototype": "d1-v0.8",
     "learning_plan_rules": "learningPlan d1-v1 (unchanged)",
     "reason_code_registry": "nous.d1.reason_codes/v0",
     "schema": "nous.d1.learning_plan/v0",
