@@ -41,7 +41,7 @@ function fisher(it,theta,s=it.s){let z=SIG(it.a_disc*(theta-it.b)),p=it.g+(1-it.
 // ---- v1 transparent rules (pure functions; mirrored in reference_model.py and parity-tested)
 const RULES={core_per_dim:4,core_max:12,stop_sd:.6,stop_min_n:2,band_min_n:2,confident_sd:.6,confident_p:.8,tentative_p:.7,tail:.5,explore_p:.5,select_s:.1,bored_p:.2,s_bored:.3,rapid_frac:.1,
   plan_min:2,plan_max:3,calib_min_n:10,calib_p:.8,review_days:[3,7,30],day_minutes:[10,15,10,15,10,15,15],check_minutes:15};
-const CORE_TEXT={high:'本任務較有把握',mid:'本任務暫居中間',low:'本任務建議加練'},SUBJ_TEXT={high:'本次學科題較穩',mid:'本次學科題暫居中間',low:'本次學科題建議加練'};
+const CORE_TEXT={high:'本任務較有把握',mid:'程度方向尚待確認',low:'本任務建議加練'},SUBJ_TEXT={high:'本次學科題較穩',mid:'程度方向尚待確認',low:'本次學科題建議加練'};
 function tailMass(p){let low=0,high=0;for(let i=0;i<p.length;i++){if(GRID[i]<-RULES.tail)low+=p[i];if(GRID[i]>RULES.tail)high+=p[i]}return {low,high}}
 function bandCore(p,n){
   if(n<RULES.band_min_n)return {code:'insufficient',level:'insufficient',label:'證據不足',n};
@@ -251,12 +251,12 @@ function runDemo(){
   const originalNow=Date.now,epoch=Date.parse('2026-11-07T12:00:00.000Z');let clock=epoch;
   try{
     Date.now=()=>clock;reset();
-    state.simulation={kind:'fixed_mixed_demo_v1',label:'模擬數據範例，非真實學生',generated_at:new Date(epoch).toISOString(),description:'高一；U全對、R混合、T需練習；國文較穩、歷史較弱；高把握但仍不足以診斷校準；兩次快速作答被排除。'};
+    state.simulation={kind:'fixed_differentiated_demo_v2',label:'模擬數據範例，非真實學生',generated_at:new Date(epoch).toISOString(),description:'高一模擬側寫；理解4/4、推演3/4、遷移0/4；國文與地理本次答題較穩，歷史與生物本次需優先練習，公民混合。這些是少量題目的表現差異，不是已確定的能力高低；兩次快速作答被排除。'};
     document.getElementById('grade').value='10';document.getElementById('grade').onchange();
     document.querySelectorAll('.learned').forEach(x=>x.checked=true);document.getElementById('start').click();
     clock+=60000;document.getElementById('read').click();
-    const coreCorrect={U1:1,U2:1,U3:1,U4:1,R1:1,R2:0,R3:1,R4:0,T1:0,T2:0,T3:0,T4:0,K1:1,K2:0};
-    const subjectCorrect={'國文':[1,1,1],'歷史':[0,0,0],'地理':[1,0,1],'公民與社會':[1,0,1],'生物':[0,1,0]},seen={};let guard=0;
+    const coreCorrect={U1:1,U2:1,U3:1,U4:1,R1:1,R2:0,R3:1,R4:1,T1:0,T2:0,T3:0,T4:0,K1:1,K2:0};
+    const subjectCorrect={'國文':[1,1,1],'歷史':[0,0,0],'地理':[1,1,1],'公民與社會':[1,0,1],'生物':[0,0,0]},seen={};let guard=0;
     while(active){
       if(++guard>29)throw new Error('demo question guard');
       const it=active,index=it.dim==='S'?(seen[it.subject]||0):0;
@@ -351,22 +351,27 @@ function specPanel(S,text){
 const SIG_TEXT={up:'偏高',flat:'中間',down:'偏低',none:'—'},EVID_TEXT={not_taken:'未施測',insufficient:'證據不足',measured:'已測'};
 const STRAT_TEXT={examples:['範例／圖解','先看 1 個完整範例，再把概念畫成圖或表（流程圖、比較表），最後用自己的話說一次。'],steps:['步驟拆解','把題目拆成「已知 → 要找什麼 → 逐步推 → 檢查邊界條件」，每一步寫一行，卡住時標出是哪一步。'],transfer:['多樣遷移','同一個概念換 2–3 種不同情境（生活例子、圖表、新題型）練習，作答前先找出兩個情境的相同結構。']};
 const chapLabel=p=>`${p.subject}・${p.chapter}${p.section?' '+p.section:''}`;
+function observedPerformance(correct,n){
+ if(n<2)return '觀察不足';
+ return correct/n>=.75?'本次答題較穩':correct/n<=.25?'本次需優先練習':'本次答題表現混合';
+}
+function coreObserved(d){const es=state.events.filter(e=>e.dim===d&&!e.skipped_m);const c=es.filter(e=>e.correct).length;return `${c} / ${es.length} · ${observedPerformance(c,es.length)}`;}
 function learningSection(r){
   let c=summaryC(state.c),eligible=state.events.filter(e=>DIMS.includes(e.dim)&&!e.skipped_m),errors=eligible.filter(e=>!e.correct),target=errors.length?errors[0].dim:DIMS.slice().sort((a,b)=>r.summaries[a].mean-r.summaries[b].mean)[0],it=errors.length?itemById(errors[0].item_id):null;
   let recall=state.events.filter(e=>e.dim==='K'&&!e.rapid_guess&&!e.background_invalid),calN=state.events.filter(e=>e.confidence_q!==null&&!e.background_invalid).length;
   return `<h2>一、學習能力評估（理解・推演・遷移）</h2><p class="callout">用一套你沒學過的「星港規則」觀察學新東西的方式。這是學習潛力的探索指標，不是學科成績、IQ 或年級常模；12 題星港題的參數都是未經真人校準的設計假設。</p>
-  <div class="scroll"><table><tr><th>面向</th><th class="l">結果</th><th>有效題</th><th>平均<br><small>95% 區間</small></th></tr>${DIMS.map(d=>{let s=r.summaries[d];return `<tr><td class="num">${NAMES[d]}</td><td class="l">${r.core[d].label}</td><td>${r.counts[d]}</td><td class="num">${fmt(s.mean)}<br><small>${s.lo.toFixed(1)}～${s.hi.toFixed(1)}</small></td></tr>`}).join('')}</table></div>
-  <p><small class="muted">標示規則：有效題少於 2 題→證據不足；後驗 SD &gt; 0.6→加「初步：」，且需 ≥ 70% 後驗機率落在 &gt;0.5（較有把握）或 &lt;−0.5（建議加練）；SD ≤ 0.6→不加「初步」，門檻提高到 80%；其餘為暫居中間。區間是模型內 95% 可信區間，未包含題目參數與效度的不確定性。</small></p>
+  <div class="scroll"><table><tr><th>面向</th><th class="l">本次答題觀察</th><th class="l">模型程度判斷</th><th>有效題</th><th>平均<br><small>95% 區間</small></th></tr>${DIMS.map(d=>{let s=r.summaries[d];return `<tr><td class="num">${NAMES[d]}</td><td class="l">${escape(coreObserved(d))}</td><td class="l">${r.core[d].label}</td><td>${r.counts[d]}</td><td class="num">${fmt(s.mean)}<br><small>${s.lo.toFixed(1)}～${s.hi.toFixed(1)}</small></td></tr>`}).join('')}</table></div>
+  <p><small class="muted">標示規則：有效題少於 2 題→證據不足；後驗 SD &gt; 0.6→加「初步：」，且需 ≥ 70% 後驗機率落在 &gt;0.5（較有把握）或 &lt;−0.5（建議加練）；SD ≤ 0.6→不加「初步」，門檻提高到 80%；其餘為「程度方向尚待確認」，不代表中等能力。區間是模型內 95% 可信區間，未包含題目參數與效度的不確定性。</small></p>
   <h3>下一個值得探索的方向：${NAMES[target]}</h3><p>${it?`本次 ${escape(it.id)} 尚未答對：「${escape(it.stem)}」。先看這題，不急著判定為能力弱點。`:'這次未觀察到有效錯題；只是選一個仍不確定的方向繼續探索，不代表你的弱點。'}</p><p>建議：${({U:'把每條規則改寫成自己的話，標出「誰、什麼條件、做什麼」。',R:'先列已知條件，再逐步換算，最後檢查「超過」的邊界。',T:'先忽略情境名稱，畫出兩個情境的相同關係，再換一題驗證。'})[target]}</p>
   <h3>初步：信心校準（還不能定型）</h3><p>本次僅 ${calN} 筆把握觀測。κ＝${fmt(c.kappa)}、β＝${fmt(c.bias)}，仍強烈受先驗影響；不據此說你過度自信或沒有鑑別力。快速作答仍依 mac §11 更新 c，但只作探索。</p>
   <h3>初步：短延遲再認（記憶），可信度很低</h3><p>${recall.length?`${recall.length} 筆有效觀測中答對 ${recall.filter(e=>e.correct).length} 題；實際延遲 ${Math.min(...recall.map(e=>e.delay_sec)).toFixed(0)}–${Math.max(...recall.map(e=>e.delay_sec)).toFixed(0)} 秒。`:'沒有有效的再認觀測。'}只有 2 題、延遲長短取決於你的作答速度${state.subjectQueue.length?'與學科題數':''}，沒有受控間隔，且前題曾接觸相同資訊；不能推估長期保留力，也沒有寫入 FSRS 穩定度。</p>`;
 }
 function subjectSection(r){
   let any=r.subjects.some(s=>s.enabled);
-  let rows=r.subjects.map(s=>`<tr><td>${escape(s.subject)}</td><td class="l">${s.enabled?s.band.label:'未施測'}</td><td class="num">${s.enabled?`${s.answered} / ${s.valid} / ${s.correct}`:'—'}</td><td class="num">${s.summary?`${fmt(s.summary.mean)}<br><small>${s.summary.lo.toFixed(1)}～${s.summary.hi.toFixed(1)}</small>`:'—'}</td></tr>`).join('');
+  let rows=r.subjects.map(s=>`<tr><td>${escape(s.subject)}</td><td class="l">${s.enabled?escape(observedPerformance(s.correct,s.valid)):'未施測'}</td><td class="l">${s.enabled?s.band.label:'未施測'}</td><td class="num">${s.enabled?`${s.answered} / ${s.valid} / ${s.correct}`:'—'}</td><td class="num">${s.summary?`${fmt(s.summary.mean)}<br><small>${s.summary.lo.toFixed(1)}～${s.summary.hi.toFixed(1)}</small>`:'—'}</td></tr>`).join('');
   let src=PRIVATE?`<details><summary>題目來源與暫定參數（本機私人）</summary><div class="scroll"><table><tr><th>科目</th><th class="l">題號</th><th class="l">章節</th><th>題庫 N</th><th>p</th><th>暫定 b</th><th class="l">本次</th></tr>${SUBJECT_ITEMS.map(it=>{let e=state.events.find(x=>x.item_id===it.id);return `<tr><td>${escape(it.subject)}</td><td class="l">${escape(it.id)}</td><td class="l">${escape(it.chapter)}</td><td>${it.source.n}</td><td>${it.source.p_correct.toFixed(3)}</td><td>${it.b.toFixed(2)}</td><td class="l">${!e?'未作答':e.skipped_m?'不採計':e.correct?'答對':'未答對'}</td></tr>`}).join('')}</table></div></details>`:'';
   return `<h2>二、學科能力評估（目前的學科題表現）</h2><p class="callout">這是你<strong>目前</strong>在這些高一學科題上的表現證據，和上面的「學習能力」分開估計，兩者不在同一量尺、不互相換算。每科只有 3 題，一律標示「初步」；有效題少於 2 題標示證據不足。</p>
-  ${any?`<h3>目前程度：本次學科題證據</h3><div class="scroll"><table><tr><th>科目</th><th class="l">結果</th><th>作答／有效／答對</th><th>平均<br><small>95% 區間</small></th></tr>${rows}</table></div><p><small class="muted">標示規則：有效題 ≥ 2 時，需 ≥ 70% 後驗機率落在 &gt;0.5（較穩）或 &lt;−0.5（建議加練），否則暫居中間；不論 SD 大小都不升為確定標示。快速作答或切到背景的題目不採計。95% 區間很寬，代表 3 題的證據有限。</small></p>`:`<p>本次沒有施測學科題：${escape(state.subjectPlan.reason)}</p>`}
+  ${any?`<h3>目前程度：本次學科題證據</h3><div class="scroll"><table><tr><th>科目</th><th class="l">本次答題觀察</th><th class="l">模型程度判斷</th><th>作答／有效／答對</th><th>平均<br><small>95% 區間</small></th></tr>${rows}</table></div><p><small class="muted">標示規則：有效題 ≥ 2 時，需 ≥ 70% 後驗機率落在 &gt;0.5（較穩）或 &lt;−0.5（建議加練），否則為「程度方向尚待確認」，不代表中等能力；不論 SD 大小都不升為確定標示。快速作答或切到背景的題目不採計。95% 區間很寬，代表 3 題的證據有限。</small></p>`:`<p>本次沒有施測學科題：${escape(state.subjectPlan.reason)}</p>`}
   ${any?`<h3>學習潛力：補強策略假設，非成績預測</h3><ul>${r.subjects.filter(s=>s.enabled).map(s=>`<li>${escape(s.subject)}：${s.valid<2?'目前證據不足，先補足有效作答。':r.plan.evidence.find(e=>e.subject===s.subject).potential==='try_boost'?'初步：可嘗試補強（探索）。理解與推演探索訊號偏高、這科訊號偏低；不保證補強後一定進步，需用 D30 平行新題回測確認。':'未判定：無法從 3 題判定成長速度；先依第三部分的方案練習，再以 D30 回測確認。'}</li>`).join('')}</ul><p class="muted">學習能力不加到學科分數，也不代表天賦上限；此處不保證「一定補得起來」。探索訊號的 50% 門檻詳列於第三部分的規則全文。</p>`:''}${src}<p class="muted"><small>${escape(PAGE.subject_caveat)}各科獨立估計，沒有合成總分，也不做跨科排名。</small></p>`;
 }
 function planSection(r){
@@ -409,7 +414,7 @@ function planSection(r){
   <li>時間：D1–D7 依序 ${RULES.day_minutes.join('、')} 分鐘；D2–D6 依序輪流優先章節與學習模式；D30 約 ${RULES.check_minutes} 分鐘。</li></ol></details>`;
 }
 function overviewSection(r){
- return `<h2>總覽｜先看這三件事</h2><p class="callout">這是本次任務的初步觀察，不是能力定論，也不代表你的上限。先看結果，再選一個方向開始練習。</p><div class="summary-grid"><article class="summary-card"><h3>學習方式</h3>${DIMS.map(d=>`<p><strong>${NAMES[d]}</strong>：${escape(r.core[d].label)}</p>`).join('')}</article><article class="summary-card"><h3>學科表現</h3><p>本次選答 ${r.subjects.filter(s=>s.enabled).length} 科；各科最多 3 題，分開解讀、不做排名。</p><p>少量題目只能作為起點，請到學科頁籤查看有效題數。</p></article><article class="summary-card"><h3>下一步</h3><p>每天 10–15 分鐘，先試行 7 天。</p><p>${r.plan.priorities.length?'從本次有效錯題所對應的章節開始，再用新題確認。':'先補足有效作答，再決定優先章節。'}</p><p>第 30 天以平行新題檢核方向。</p></article></div><h3>怎麼讀「證據強度」？</h3><ul><li><strong>證據不足</strong>：有效題少於 2 題，先補足觀測，不判定強弱。</li><li><strong>初步</strong>：已有少量線索，但不確定性仍高；所有學科結果最多只到初步。</li><li><strong>未加「初步」</strong>：學習能力達模型精度門檻（SD ≤ 0.6）；仍不是經真人校準的正式診斷。</li><li><strong>未施測</strong>：這次沒有測，不等於不會。</li></ul><p class="muted">各頁保留計算依據。學習能力與學科表現不是同一量尺，不相加、不互相換算。</p>`;
+ return `<h2>總覽｜先看這三件事</h2><p class="callout">這是本次任務的初步觀察，不是能力定論，也不代表你的上限。先看結果，再選一個方向開始練習。</p><div class="summary-grid"><article class="summary-card"><h3>學習方式</h3>${DIMS.map(d=>`<p><strong>${NAMES[d]}</strong>：${escape(coreObserved(d))}<br><small>${escape(r.core[d].label)}</small></p>`).join('')}</article><article class="summary-card"><h3>學科表現</h3><p>本次選答 ${r.subjects.filter(s=>s.enabled).length} 科；各科最多 3 題，分開解讀、不做排名。</p><p>${r.subjects.filter(s=>s.enabled).map(s=>escape(s.subject)+'：'+escape(observedPerformance(s.correct,s.valid))+'（'+s.correct+'/'+s.valid+'）').join('<br>')}</p></article><article class="summary-card"><h3>下一步</h3><p>每天 10–15 分鐘，先試行 7 天。</p><p>${r.plan.priorities.length?'從本次有效錯題所對應的章節開始，再用新題確認。':'先補足有效作答，再決定優先章節。'}</p><p>第 30 天以平行新題檢核方向。</p></article></div><h3>表現觀察 ≠ 能力程度</h3><p>有效題至少 2 題時，答對率 ≥ 75% 顯示「本次答題較穩」、≤ 25% 顯示「本次需優先練習」，其他為「本次答題表現混合」。這只描述本次答案，不是常模、排名或能力分級；沒有改動模型門檻。</p><h3>怎麼讀「證據強度」？</h3><ul><li><strong>證據不足</strong>：有效題少於 2 題，先補足觀測，不判定強弱。</li><li><strong>初步</strong>：已有少量線索，但不確定性仍高；所有學科結果最多只到初步。</li><li><strong>未加「初步」</strong>：學習能力達模型精度門檻（SD ≤ 0.6）；仍不是經真人校準的正式診斷。</li><li><strong>未施測</strong>：這次沒有測，不等於不會。</li></ul><p class="muted">各頁保留計算依據。學習能力與學科表現不是同一量尺，不相加、不互相換算。</p>`;
 }
 function reportTabLayout(r){
  const names=['總覽','學習能力評估','學科能力評估','學習方案（給學生）','NOUS 學習方案'];
