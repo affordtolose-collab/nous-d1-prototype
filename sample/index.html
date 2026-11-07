@@ -17,22 +17,22 @@ summary{cursor:pointer}label{display:block}fieldset{border:1px solid var(--line)
 .nous-card{border-top:1px solid var(--line);padding:12px 0;margin:8px 0}.nous-card h4{margin:4px 0}#nousSpecPanel{min-width:0}#nousSpecJson{max-height:440px;overflow:auto;white-space:pre;word-break:normal;border:1px solid var(--line);padding:12px;max-width:100%}#nousSpecPanel table td{overflow-wrap:anywhere}#nousSpecPanel table{table-layout:fixed}#nousSpecPanel h4{margin-top:24px}@media(max-width:500px){#nousSpecPanel{padding:14px}#nousSpecPanel table{font-size:12px}#nousSpecPanel td,#nousSpecPanel th{padding:5px}}
 
 [hidden]{display:none!important}.report-tabs{display:flex;gap:8px;overflow-x:auto;padding:8px 0 12px;margin:16px 0;border-bottom:1px solid #b9c7d8}.report-tabs button{flex:0 0 auto;white-space:nowrap;background:#eef3f8;color:#243b53;border:1px solid #b9c7d8}.report-tabs button[aria-selected="true"]{background:#193d63;color:white;border-color:#193d63}button:focus-visible,[role="tabpanel"]:focus-visible,summary:focus-visible{outline:3px solid #d18412;outline-offset:3px}.summary-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}.summary-card{padding:16px;border:1px solid #cad6e2;border-radius:12px;background:#f4f8fc}.summary-card h3{margin:0 0 8px}.summary-card p{margin:4px 0}[role="tabpanel"]{min-width:0}#nousSpecJson{max-height:65vh;overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere}#copyStatus{font-size:14px}.report-tabs+div h2{margin-top:16px}@media(max-width:600px){.report-tabs{gap:6px}.report-tabs button{padding:10px 12px}.summary-grid{grid-template-columns:1fr}}
-</style><main><h1>NOUS 模擬報告範例</h1><p>使用自製示例題產生的固定模擬；不是真實學生，不含私有題庫內容。此檔只有報告，不包含作答題庫。</p><div id="app"><section><div id="simulationBanner" class="caution" role="note"><h2>模擬數據範例，非真實學生</h2><p>高一；U全對、R混合、T需練習；國文較穩、歷史較弱；高把握但仍不足以診斷校準；兩次快速作答被排除。</p><p>以下仍按真實計分規則更新；不硬填強弱標籤。高把握設定不等於已判定過度自信。</p></div><p class="flow">05 / 初步側寫</p><h2>現在看見的是本次任務，不是你的上限</h2><p class="callout">12 題能力任務已用完（不代表達到精度門檻）。從總覽開始，再用頁籤查看學習能力、學科表現與兩種學習方案。</p>
-  <div class="report-tabs" role="tablist" aria-label="報告分類"><button role="tab" id="report-tab-0" aria-controls="report-panel-0" aria-selected="true" tabindex="0">總覽</button><button role="tab" id="report-tab-1" aria-controls="report-panel-1" aria-selected="false" tabindex="-1">學習能力評估</button><button role="tab" id="report-tab-2" aria-controls="report-panel-2" aria-selected="false" tabindex="-1">學科能力評估</button><button role="tab" id="report-tab-3" aria-controls="report-panel-3" aria-selected="false" tabindex="-1">學習方案（給學生）</button><button role="tab" id="report-tab-4" aria-controls="report-panel-4" aria-selected="false" tabindex="-1">NOUS 學習方案</button></div><div role="tabpanel" id="report-panel-0" aria-labelledby="report-tab-0" tabindex="0"><h2>總覽｜先看這三件事</h2><p class="callout">這是本次任務的初步觀察，不是能力定論，也不代表你的上限。先看結果，再選一個方向開始練習。</p><div class="summary-grid"><article class="summary-card"><h3>學習方式</h3><p><strong>理解力</strong>：初步：本任務暫居中間</p><p><strong>推演力</strong>：初步：本任務暫居中間</p><p><strong>遷移力</strong>：初步：本任務暫居中間</p></article><article class="summary-card"><h3>學科表現</h3><p>本次選答 5 科；各科最多 3 題，分開解讀、不做排名。</p><p>少量題目只能作為起點，請到學科頁籤查看有效題數。</p></article><article class="summary-card"><h3>下一步</h3><p>每天 10–15 分鐘，先試行 7 天。</p><p>從本次有效錯題所對應的章節開始，再用新題確認。</p><p>第 30 天以平行新題檢核方向。</p></article></div><h3>怎麼讀「證據強度」？</h3><ul><li><strong>證據不足</strong>：有效題少於 2 題，先補足觀測，不判定強弱。</li><li><strong>初步</strong>：已有少量線索，但不確定性仍高；所有學科結果最多只到初步。</li><li><strong>未加「初步」</strong>：學習能力達模型精度門檻（SD ≤ 0.6）；仍不是經真人校準的正式診斷。</li><li><strong>未施測</strong>：這次沒有測，不等於不會。</li></ul><p class="muted">各頁保留計算依據。學習能力與學科表現不是同一量尺，不相加、不互相換算。</p></div><div role="tabpanel" id="report-panel-1" aria-labelledby="report-tab-1" tabindex="0" hidden=""><h2>一、學習能力評估（理解・推演・遷移）</h2><p class="callout">用一套你沒學過的「星港規則」觀察學新東西的方式。這是學習潛力的探索指標，不是學科成績、IQ 或年級常模；12 題星港題的參數都是未經真人校準的設計假設。</p>
-  <div class="scroll"><table><tbody><tr><th>面向</th><th class="l">結果</th><th>有效題</th><th>平均<br><small>95% 區間</small></th></tr><tr><td class="num">理解力</td><td class="l">初步：本任務暫居中間</td><td>4</td><td class="num">0.880<br><small>-0.7～2.5</small></td></tr><tr><td class="num">推演力</td><td class="l">初步：本任務暫居中間</td><td>4</td><td class="num">-0.168<br><small>-1.9～1.5</small></td></tr><tr><td class="num">遷移力</td><td class="l">初步：本任務暫居中間</td><td>4</td><td class="num">-0.914<br><small>-2.4～0.5</small></td></tr></tbody></table></div>
-  <p><small class="muted">標示規則：有效題少於 2 題→證據不足；後驗 SD &gt; 0.6→加「初步：」，且需 ≥ 70% 後驗機率落在 &gt;0.5（較有把握）或 &lt;−0.5（建議加練）；SD ≤ 0.6→不加「初步」，門檻提高到 80%；其餘為暫居中間。區間是模型內 95% 可信區間，未包含題目參數與效度的不確定性。</small></p>
+</style><main><h1>NOUS 模擬報告範例</h1><p>使用自製示例題產生的固定模擬；不是真實學生，不含私有題庫內容。此檔只有報告，不包含作答題庫。</p><div id="app"><section><div id="simulationBanner" class="caution" role="note"><h2>模擬數據範例，非真實學生</h2><p>高一模擬側寫；理解4/4、推演3/4、遷移0/4；國文與地理本次答題較穩，歷史與生物本次需優先練習，公民混合。這些是少量題目的表現差異，不是已確定的能力高低；兩次快速作答被排除。</p><p>以下仍按真實計分規則更新；不硬填強弱標籤。高把握設定不等於已判定過度自信。</p></div><p class="flow">05 / 初步側寫</p><h2>現在看見的是本次任務，不是你的上限</h2><p class="callout">12 題能力任務已用完（不代表達到精度門檻）。從總覽開始，再用頁籤查看學習能力、學科表現與兩種學習方案。</p>
+  <div class="report-tabs" role="tablist" aria-label="報告分類"><button role="tab" id="report-tab-0" aria-controls="report-panel-0" aria-selected="true" tabindex="0">總覽</button><button role="tab" id="report-tab-1" aria-controls="report-panel-1" aria-selected="false" tabindex="-1">學習能力評估</button><button role="tab" id="report-tab-2" aria-controls="report-panel-2" aria-selected="false" tabindex="-1">學科能力評估</button><button role="tab" id="report-tab-3" aria-controls="report-panel-3" aria-selected="false" tabindex="-1">學習方案（給學生）</button><button role="tab" id="report-tab-4" aria-controls="report-panel-4" aria-selected="false" tabindex="-1">NOUS 學習方案</button></div><div role="tabpanel" id="report-panel-0" aria-labelledby="report-tab-0" tabindex="0"><h2>總覽｜先看這三件事</h2><p class="callout">這是本次任務的初步觀察，不是能力定論，也不代表你的上限。先看結果，再選一個方向開始練習。</p><div class="summary-grid"><article class="summary-card"><h3>學習方式</h3><p><strong>理解力</strong>：4 / 4 · 本次答題較穩<br><small>初步：程度方向尚待確認</small></p><p><strong>推演力</strong>：3 / 4 · 本次答題較穩<br><small>初步：程度方向尚待確認</small></p><p><strong>遷移力</strong>：0 / 4 · 本次需優先練習<br><small>初步：程度方向尚待確認</small></p></article><article class="summary-card"><h3>學科表現</h3><p>本次選答 5 科；各科最多 3 題，分開解讀、不做排名。</p><p>國文：本次答題較穩（3/3）<br>歷史：本次需優先練習（0/3）<br>地理：本次答題較穩（2/2）<br>公民與社會：本次答題表現混合（2/3）<br>生物：本次需優先練習（0/2）</p></article><article class="summary-card"><h3>下一步</h3><p>每天 10–15 分鐘，先試行 7 天。</p><p>從本次有效錯題所對應的章節開始，再用新題確認。</p><p>第 30 天以平行新題檢核方向。</p></article></div><h3>表現觀察 ≠ 能力程度</h3><p>有效題至少 2 題時，答對率 ≥ 75% 顯示「本次答題較穩」、≤ 25% 顯示「本次需優先練習」，其他為「本次答題表現混合」。這只描述本次答案，不是常模、排名或能力分級；沒有改動模型門檻。</p><h3>怎麼讀「證據強度」？</h3><ul><li><strong>證據不足</strong>：有效題少於 2 題，先補足觀測，不判定強弱。</li><li><strong>初步</strong>：已有少量線索，但不確定性仍高；所有學科結果最多只到初步。</li><li><strong>未加「初步」</strong>：學習能力達模型精度門檻（SD ≤ 0.6）；仍不是經真人校準的正式診斷。</li><li><strong>未施測</strong>：這次沒有測，不等於不會。</li></ul><p class="muted">各頁保留計算依據。學習能力與學科表現不是同一量尺，不相加、不互相換算。</p></div><div role="tabpanel" id="report-panel-1" aria-labelledby="report-tab-1" tabindex="0" hidden=""><h2>一、學習能力評估（理解・推演・遷移）</h2><p class="callout">用一套你沒學過的「星港規則」觀察學新東西的方式。這是學習潛力的探索指標，不是學科成績、IQ 或年級常模；12 題星港題的參數都是未經真人校準的設計假設。</p>
+  <div class="scroll"><table><tbody><tr><th>面向</th><th class="l">本次答題觀察</th><th class="l">模型程度判斷</th><th>有效題</th><th>平均<br><small>95% 區間</small></th></tr><tr><td class="num">理解力</td><td class="l">4 / 4 · 本次答題較穩</td><td class="l">初步：程度方向尚待確認</td><td>4</td><td class="num">0.880<br><small>-0.7～2.5</small></td></tr><tr><td class="num">推演力</td><td class="l">3 / 4 · 本次答題較穩</td><td class="l">初步：程度方向尚待確認</td><td>4</td><td class="num">0.393<br><small>-1.2～2.0</small></td></tr><tr><td class="num">遷移力</td><td class="l">0 / 4 · 本次需優先練習</td><td class="l">初步：程度方向尚待確認</td><td>4</td><td class="num">-0.914<br><small>-2.4～0.5</small></td></tr></tbody></table></div>
+  <p><small class="muted">標示規則：有效題少於 2 題→證據不足；後驗 SD &gt; 0.6→加「初步：」，且需 ≥ 70% 後驗機率落在 &gt;0.5（較有把握）或 &lt;−0.5（建議加練）；SD ≤ 0.6→不加「初步」，門檻提高到 80%；其餘為「程度方向尚待確認」，不代表中等能力。區間是模型內 95% 可信區間，未包含題目參數與效度的不確定性。</small></p>
   <h3>下一個值得探索的方向：遷移力</h3><p>本次 T3 尚未答對：「新情境：社團規定「每次訂購超過 10 份時，負責人要多付 1 份運費」。這條規定的結構最像星港哪一條規則？」。先看這題，不急著判定為能力弱點。</p><p>建議：先忽略情境名稱，畫出兩個情境的相同關係，再換一題驗證。</p>
   <h3>初步：信心校準（還不能定型）</h3><p>本次僅 4 筆把握觀測。κ＝0.673、β＝-0.362，仍強烈受先驗影響；不據此說你過度自信或沒有鑑別力。快速作答仍依 mac §11 更新 c，但只作探索。</p>
   <h3>初步：短延遲再認（記憶），可信度很低</h3><p>2 筆有效觀測中答對 1 題；實際延遲 894–916 秒。只有 2 題、延遲長短取決於你的作答速度與學科題數，沒有受控間隔，且前題曾接觸相同資訊；不能推估長期保留力，也沒有寫入 FSRS 穩定度。</p></div><div role="tabpanel" id="report-panel-2" aria-labelledby="report-tab-2" tabindex="0" hidden=""><h2>二、學科能力評估（目前的學科題表現）</h2><p class="callout">這是你<strong>目前</strong>在這些高一學科題上的表現證據，和上面的「學習能力」分開估計，兩者不在同一量尺、不互相換算。每科只有 3 題，一律標示「初步」；有效題少於 2 題標示證據不足。</p>
-  <h3>目前程度：本次學科題證據</h3><div class="scroll"><table><tbody><tr><th>科目</th><th class="l">結果</th><th>作答／有效／答對</th><th>平均<br><small>95% 區間</small></th></tr><tr><td>國文</td><td class="l">初步：本次學科題暫居中間</td><td class="num">3 / 3 / 3</td><td class="num">0.729<br><small>-1.0～2.4</small></td></tr><tr><td>歷史</td><td class="l">初步：本次學科題暫居中間</td><td class="num">3 / 3 / 0</td><td class="num">-0.913<br><small>-2.5～0.6</small></td></tr><tr><td>地理</td><td class="l">初步：本次學科題暫居中間</td><td class="num">3 / 2 / 2</td><td class="num">0.550<br><small>-1.3～2.3</small></td></tr><tr><td>公民與社會</td><td class="l">初步：本次學科題暫居中間</td><td class="num">3 / 3 / 2</td><td class="num">0.116<br><small>-1.7～1.9</small></td></tr><tr><td>生物</td><td class="l">初步：本次學科題暫居中間</td><td class="num">3 / 2 / 1</td><td class="num">-0.175<br><small>-2.0～1.7</small></td></tr></tbody></table></div><p><small class="muted">標示規則：有效題 ≥ 2 時，需 ≥ 70% 後驗機率落在 &gt;0.5（較穩）或 &lt;−0.5（建議加練），否則暫居中間；不論 SD 大小都不升為確定標示。快速作答或切到背景的題目不採計。95% 區間很寬，代表 3 題的證據有限。</small></p>
+  <h3>目前程度：本次學科題證據</h3><div class="scroll"><table><tbody><tr><th>科目</th><th class="l">本次答題觀察</th><th class="l">模型程度判斷</th><th>作答／有效／答對</th><th>平均<br><small>95% 區間</small></th></tr><tr><td>國文</td><td class="l">本次答題較穩</td><td class="l">初步：程度方向尚待確認</td><td class="num">3 / 3 / 3</td><td class="num">0.729<br><small>-1.0～2.4</small></td></tr><tr><td>歷史</td><td class="l">本次需優先練習</td><td class="l">初步：程度方向尚待確認</td><td class="num">3 / 3 / 0</td><td class="num">-0.913<br><small>-2.5～0.6</small></td></tr><tr><td>地理</td><td class="l">本次答題較穩</td><td class="l">初步：程度方向尚待確認</td><td class="num">3 / 2 / 2</td><td class="num">0.550<br><small>-1.3～2.3</small></td></tr><tr><td>公民與社會</td><td class="l">本次答題表現混合</td><td class="l">初步：程度方向尚待確認</td><td class="num">3 / 3 / 2</td><td class="num">0.116<br><small>-1.7～1.9</small></td></tr><tr><td>生物</td><td class="l">本次需優先練習</td><td class="l">初步：程度方向尚待確認</td><td class="num">3 / 2 / 0</td><td class="num">-0.767<br><small>-2.4～0.9</small></td></tr></tbody></table></div><p><small class="muted">標示規則：有效題 ≥ 2 時，需 ≥ 70% 後驗機率落在 &gt;0.5（較穩）或 &lt;−0.5（建議加練），否則為「程度方向尚待確認」，不代表中等能力；不論 SD 大小都不升為確定標示。快速作答或切到背景的題目不採計。95% 區間很寬，代表 3 題的證據有限。</small></p>
   <h3>學習潛力：補強策略假設，非成績預測</h3><ul><li>國文：未判定：無法從 3 題判定成長速度；先依第三部分的方案練習，再以 D30 回測確認。</li><li>歷史：未判定：無法從 3 題判定成長速度；先依第三部分的方案練習，再以 D30 回測確認。</li><li>地理：未判定：無法從 3 題判定成長速度；先依第三部分的方案練習，再以 D30 回測確認。</li><li>公民與社會：未判定：無法從 3 題判定成長速度；先依第三部分的方案練習，再以 D30 回測確認。</li><li>生物：未判定：無法從 3 題判定成長速度；先依第三部分的方案練習，再以 D30 回測確認。</li></ul><p class="muted">學習能力不加到學科分數，也不代表天賦上限；此處不保證「一定補得起來」。探索訊號的 50% 門檻詳列於第三部分的規則全文。</p><p class="muted"><small>公開版的學科題是為示範而原創的樣題，難度、鑑別度與 35 秒平均作答時間都是未經真人校準的假設，不代表任何正式題庫或年級常模。各科獨立估計，沒有合成總分，也不做跨科排名。</small></p></div><div role="tabpanel" id="report-panel-3" aria-labelledby="report-tab-3" tabindex="0" hidden=""><h2>三、學習方案推薦（初步）</h2><section id="studentPlan" aria-labelledby="studentPlanTitle"><h3 id="studentPlanTitle">A｜給你的學習方案</h3>
   <p>你已經完成第一步了！這份方案只根據今天的作答，是<strong>起點</strong>，不是你的上限。</p>
   <p><strong>這週先練：</strong>歷史・示範單元 史料類型、歷史・示範單元 史料推論、歷史・示範單元 史料考證</p>
   <p><strong>怎麼練：</strong></p><ul><li>先猜答案和理由，再對照解析，看看兩個情境哪裡一樣。</li><li>每題先想「我有多少把握」，再作答。</li><li>第 3、7、30 天，先不看筆記，用 2 分鐘回想重點。</li></ul>
   <p><strong>花多少時間：</strong>每天 10–15 分鐘，7 天共 90 分鐘。沒做完也沒關係，隔天繼續就好。</p>
   <p><strong>第 30 天：</strong>用新的題目看看自己往哪個方向進步，不是考試。</p></section><h3>方案細節與規則</h3><p class="caution">依下方<strong>公開規則</strong>，把本次的理解・推演・遷移訊號、信心校準、短延遲再認，以及各科的有效作答整理成一份起步方案。全部標示「初步」：題數很少、題目參數未經校準，<strong>不代表你的潛力上限，也不預測成績</strong>。請和老師或家人一起調整。</p>
-  <h3>方案輸入</h3><div class="scroll"><table><tbody><tr><th>面向</th><th class="l">探索訊號</th><th>P(&gt;0.5) / P(&lt;−0.5)</th></tr><tr><td class="num">理解力</td><td class="l">偏高</td><td class="num">0.66 / 0.04</td></tr><tr><td class="num">推演力</td><td class="l">中間</td><td class="num">0.19 / 0.31</td></tr><tr><td class="num">遷移力</td><td class="l">偏低</td><td class="num">0.02 / 0.68</td></tr></tbody></table></div>
-  <div class="scroll"><table><tbody><tr><th>科目</th><th class="l">本次證據</th><th>有效／未答對</th><th class="l">探索訊號</th><th class="l">探索潛力</th></tr><tr><td>國文</td><td class="l">已測</td><td class="num">3 / 0</td><td class="l">偏高</td><td class="l">未判定</td></tr><tr><td>歷史</td><td class="l">已測</td><td class="num">3 / 3</td><td class="l">偏低</td><td class="l">未判定</td></tr><tr><td>地理</td><td class="l">已測</td><td class="num">2 / 0</td><td class="l">偏高</td><td class="l">未判定</td></tr><tr><td>公民與社會</td><td class="l">已測</td><td class="num">3 / 1</td><td class="l">中間</td><td class="l">未判定</td></tr><tr><td>生物</td><td class="l">已測</td><td class="num">2 / 1</td><td class="l">中間</td><td class="l">未判定</td></tr></tbody></table></div>
+  <h3>方案輸入</h3><div class="scroll"><table><tbody><tr><th>面向</th><th class="l">探索訊號</th><th>P(&gt;0.5) / P(&lt;−0.5)</th></tr><tr><td class="num">理解力</td><td class="l">偏高</td><td class="num">0.66 / 0.04</td></tr><tr><td class="num">推演力</td><td class="l">中間</td><td class="num">0.42 / 0.11</td></tr><tr><td class="num">遷移力</td><td class="l">偏低</td><td class="num">0.02 / 0.68</td></tr></tbody></table></div>
+  <div class="scroll"><table><tbody><tr><th>科目</th><th class="l">本次證據</th><th>有效／未答對</th><th class="l">探索訊號</th><th class="l">探索潛力</th></tr><tr><td>國文</td><td class="l">已測</td><td class="num">3 / 0</td><td class="l">偏高</td><td class="l">未判定</td></tr><tr><td>歷史</td><td class="l">已測</td><td class="num">3 / 3</td><td class="l">偏低</td><td class="l">未判定</td></tr><tr><td>地理</td><td class="l">已測</td><td class="num">2 / 0</td><td class="l">偏高</td><td class="l">未判定</td></tr><tr><td>公民與社會</td><td class="l">已測</td><td class="num">3 / 1</td><td class="l">中間</td><td class="l">未判定</td></tr><tr><td>生物</td><td class="l">已測</td><td class="num">2 / 2</td><td class="l">偏低</td><td class="l">未判定</td></tr></tbody></table></div>
   <p><small class="muted">信心校準：4 筆把握觀測；短延遲再認：2 筆有效、答對 1 題。英文、數學、物理、化學、地球科學本版沒有施測，不列入。</small></p>
   <h3>初步：優先章節（2–3 個）</h3><p>以下 3 個章節來自你本次<strong>有效作答中未答對</strong>的學科題，依規則排序（初步，不是弱點定論）：</p><ol><li><strong>歷史・示範單元 史料類型</strong><br><small class="muted">依據：本次有效作答中未答對 1 題（示範2-1）；歷史探索訊號偏低。</small></li><li><strong>歷史・示範單元 史料推論</strong><br><small class="muted">依據：本次有效作答中未答對 1 題（示範2-2）；歷史探索訊號偏低。</small></li><li><strong>歷史・示範單元 史料考證</strong><br><small class="muted">依據：本次有效作答中未答對 1 題（示範2-3）；歷史探索訊號偏低。</small></li></ol><p><small class="muted">英文、數學、物理、化學、地球科學未施測，不推薦也不排除。</small></p>
   <h3>初步：學習模式</h3><p>初步：這個面向的探索訊號偏低（後驗 ≥ 50% 落在 &lt;−0.5），練習時以對應策略為主：</p><ul><li><strong>多樣遷移</strong>：同一個概念換 2–3 種不同情境（生活例子、圖表、新題型）練習，作答前先找出兩個情境的相同結構。</li></ul><p><small class="muted">對應：理解（U）偏低→範例／圖解；推演（R）偏低→步驟拆解；遷移（T）偏低→多樣遷移。探索訊號只是策略提示，不是能力定論。</small></p>
@@ -110,7 +110,7 @@ summary{cursor:pointer}label{display:block}fieldset{border:1px solid var(--line)
       },
       "band": {
         "code": "mid",
-        "label": "初步：本任務暫居中間",
+        "label": "初步：程度方向尚待確認",
         "threshold": 0.7
       },
       "evidence": "初步",
@@ -128,22 +128,22 @@ summary{cursor:pointer}label{display:block}fieldset{border:1px solid var(--line)
       "name": "推演力",
       "valid_n": 4,
       "posterior": {
-        "mean": -0.1683164863171989,
-        "sd": 0.8475857292503519,
+        "mean": 0.3925577897523801,
+        "sd": 0.7960043931311854,
         "ci95": [
-          -1.9,
-          1.5
+          -1.2000000000000002,
+          2
         ]
       },
       "band": {
         "code": "mid",
-        "label": "初步：本任務暫居中間",
+        "label": "初步：程度方向尚待確認",
         "threshold": 0.7
       },
       "evidence": "初步",
       "signal": "flat",
-      "p_high": 0.18981208935078134,
-      "p_low": 0.3129529207224096,
+      "p_high": 0.41951149886599853,
+      "p_low": 0.11072544619803407,
       "claim_type": "model_estimate_uncalibrated",
       "reason_codes": [
         "EVD.SD_TENTATIVE",
@@ -164,7 +164,7 @@ summary{cursor:pointer}label{display:block}fieldset{border:1px solid var(--line)
       },
       "band": {
         "code": "mid",
-        "label": "初步：本任務暫居中間",
+        "label": "初步：程度方向尚待確認",
         "threshold": 0.7
       },
       "evidence": "初步",
@@ -225,7 +225,7 @@ summary{cursor:pointer}label{display:block}fieldset{border:1px solid var(--line)
         },
         "band": {
           "code": "mid",
-          "label": "初步：本次學科題暫居中間"
+          "label": "初步：程度方向尚待確認"
         },
         "signal": "up",
         "p_high": 0.591024715286165,
@@ -269,7 +269,7 @@ summary{cursor:pointer}label{display:block}fieldset{border:1px solid var(--line)
         },
         "band": {
           "code": "mid",
-          "label": "初步：本次學科題暫居中間"
+          "label": "初步：程度方向尚待確認"
         },
         "signal": "down",
         "p_high": 0.028230256040821165,
@@ -365,7 +365,7 @@ summary{cursor:pointer}label{display:block}fieldset{border:1px solid var(--line)
         },
         "band": {
           "code": "mid",
-          "label": "初步：本次學科題暫居中間"
+          "label": "初步：程度方向尚待確認"
         },
         "signal": "up",
         "p_high": 0.508463296217455,
@@ -409,7 +409,7 @@ summary{cursor:pointer}label{display:block}fieldset{border:1px solid var(--line)
         },
         "band": {
           "code": "mid",
-          "label": "初步：本次學科題暫居中間"
+          "label": "初步：程度方向尚待確認"
         },
         "signal": "flat",
         "p_high": 0.3058156425198772,
@@ -462,20 +462,20 @@ summary{cursor:pointer}label{display:block}fieldset{border:1px solid var(--line)
       "status": "measured",
       "current_level": {
         "posterior": {
-          "mean": -0.17455119523011262,
-          "sd": 0.9448187197852633,
+          "mean": -0.7671317726363023,
+          "sd": 0.8386484586068126,
           "ci95": [
-            -2,
-            1.7000000000000002
+            -2.4,
+            0.9000000000000004
           ]
         },
         "band": {
           "code": "mid",
-          "label": "初步：本次學科題暫居中間"
+          "label": "初步：程度方向尚待確認"
         },
-        "signal": "flat",
-        "p_high": 0.21528533111772957,
-        "p_low": 0.344602924962798,
+        "signal": "down",
+        "p_high": 0.05796267079340984,
+        "p_low": 0.609917106991688,
         "evidence": "初步",
         "claim_type": "model_estimate_uncalibrated",
         "reason_codes": [
@@ -493,8 +493,8 @@ summary{cursor:pointer}label{display:block}fieldset{border:1px solid var(--line)
       "evidence": {
         "answered": 3,
         "valid": 2,
-        "correct": 1,
-        "valid_wrong": 1
+        "correct": 0,
+        "valid_wrong": 2
       },
       "weak_chapters": [
         {
@@ -508,6 +508,23 @@ summary{cursor:pointer}label{display:block}fieldset{border:1px solid var(--line)
             {
               "kind": "public_sample_item_id",
               "id": "示範5-1"
+            }
+          ],
+          "reason_codes": [
+            "PRI.VALID_WRONG_MEASURED"
+          ]
+        },
+        {
+          "chapter": {
+            "id": "sample-ch-14",
+            "name": "示範單元 酵素",
+            "section": null,
+            "section_id": null
+          },
+          "error_item_refs": [
+            {
+              "kind": "public_sample_item_id",
+              "id": "示範5-2"
             }
           ],
           "reason_codes": [
@@ -1493,7 +1510,7 @@ summary{cursor:pointer}label{display:block}fieldset{border:1px solid var(--line)
       },
       "band": {
         "code": "mid",
-        "label": "初步：本任務暫居中間",
+        "label": "初步：程度方向尚待確認",
         "threshold": 0.7
       },
       "evidence": "初步",
@@ -1511,22 +1528,22 @@ summary{cursor:pointer}label{display:block}fieldset{border:1px solid var(--line)
       "name": "推演力",
       "valid_n": 4,
       "posterior": {
-        "mean": -0.1683164863171989,
-        "sd": 0.8475857292503519,
+        "mean": 0.3925577897523801,
+        "sd": 0.7960043931311854,
         "ci95": [
-          -1.9,
-          1.5
+          -1.2000000000000002,
+          2
         ]
       },
       "band": {
         "code": "mid",
-        "label": "初步：本任務暫居中間",
+        "label": "初步：程度方向尚待確認",
         "threshold": 0.7
       },
       "evidence": "初步",
       "signal": "flat",
-      "p_high": 0.18981208935078134,
-      "p_low": 0.3129529207224096,
+      "p_high": 0.41951149886599853,
+      "p_low": 0.11072544619803407,
       "claim_type": "model_estimate_uncalibrated",
       "reason_codes": [
         "EVD.SD_TENTATIVE",
@@ -1547,7 +1564,7 @@ summary{cursor:pointer}label{display:block}fieldset{border:1px solid var(--line)
       },
       "band": {
         "code": "mid",
-        "label": "初步：本任務暫居中間",
+        "label": "初步：程度方向尚待確認",
         "threshold": 0.7
       },
       "evidence": "初步",
@@ -1608,7 +1625,7 @@ summary{cursor:pointer}label{display:block}fieldset{border:1px solid var(--line)
         },
         "band": {
           "code": "mid",
-          "label": "初步：本次學科題暫居中間"
+          "label": "初步：程度方向尚待確認"
         },
         "signal": "up",
         "p_high": 0.591024715286165,
@@ -1652,7 +1669,7 @@ summary{cursor:pointer}label{display:block}fieldset{border:1px solid var(--line)
         },
         "band": {
           "code": "mid",
-          "label": "初步：本次學科題暫居中間"
+          "label": "初步：程度方向尚待確認"
         },
         "signal": "down",
         "p_high": 0.028230256040821165,
@@ -1748,7 +1765,7 @@ summary{cursor:pointer}label{display:block}fieldset{border:1px solid var(--line)
         },
         "band": {
           "code": "mid",
-          "label": "初步：本次學科題暫居中間"
+          "label": "初步：程度方向尚待確認"
         },
         "signal": "up",
         "p_high": 0.508463296217455,
@@ -1792,7 +1809,7 @@ summary{cursor:pointer}label{display:block}fieldset{border:1px solid var(--line)
         },
         "band": {
           "code": "mid",
-          "label": "初步：本次學科題暫居中間"
+          "label": "初步：程度方向尚待確認"
         },
         "signal": "flat",
         "p_high": 0.3058156425198772,
@@ -1845,20 +1862,20 @@ summary{cursor:pointer}label{display:block}fieldset{border:1px solid var(--line)
       "status": "measured",
       "current_level": {
         "posterior": {
-          "mean": -0.17455119523011262,
-          "sd": 0.9448187197852633,
+          "mean": -0.7671317726363023,
+          "sd": 0.8386484586068126,
           "ci95": [
-            -2,
-            1.7000000000000002
+            -2.4,
+            0.9000000000000004
           ]
         },
         "band": {
           "code": "mid",
-          "label": "初步：本次學科題暫居中間"
+          "label": "初步：程度方向尚待確認"
         },
-        "signal": "flat",
-        "p_high": 0.21528533111772957,
-        "p_low": 0.344602924962798,
+        "signal": "down",
+        "p_high": 0.05796267079340984,
+        "p_low": 0.609917106991688,
         "evidence": "初步",
         "claim_type": "model_estimate_uncalibrated",
         "reason_codes": [
@@ -1876,8 +1893,8 @@ summary{cursor:pointer}label{display:block}fieldset{border:1px solid var(--line)
       "evidence": {
         "answered": 3,
         "valid": 2,
-        "correct": 1,
-        "valid_wrong": 1
+        "correct": 0,
+        "valid_wrong": 2
       },
       "weak_chapters": [
         {
@@ -1891,6 +1908,23 @@ summary{cursor:pointer}label{display:block}fieldset{border:1px solid var(--line)
             {
               "kind": "public_sample_item_id",
               "id": "示範5-1"
+            }
+          ],
+          "reason_codes": [
+            "PRI.VALID_WRONG_MEASURED"
+          ]
+        },
+        {
+          "chapter": {
+            "id": "sample-ch-14",
+            "name": "示範單元 酵素",
+            "section": null,
+            "section_id": null
+          },
+          "error_item_refs": [
+            {
+              "kind": "public_sample_item_id",
+              "id": "示範5-2"
             }
           ],
           "reason_codes": [
