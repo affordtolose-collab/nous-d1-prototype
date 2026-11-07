@@ -1,0 +1,2822 @@
+<!doctype html><html lang="zh-Hant"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>NOUS 模擬報告範例</title><style>
+:root{--bg:#F3F5F8;--surface:#fff;--ink:#172031;--muted:#586379;--line:#D6DCE5;--accent:#1F4FA8;--soft:#E4EAF6;--warn:#8A5A00}
+@media(prefers-color-scheme:dark){:root{--bg:#0D1118;--surface:#141A24;--ink:#E4E9F2;--muted:#98A3B7;--line:#283141;--accent:#8AABF2;--soft:#1B2638;--warn:#E8B85C}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.75 'IBM Plex Sans','Noto Sans TC',system-ui,sans-serif;overflow-wrap:anywhere}
+main{max-width:850px;margin:36px auto;padding:0 max(14px,env(safe-area-inset-left))}h1{font-size:clamp(25px,5vw,38px);line-height:1.3}h2{font-size:22px;line-height:1.45}h3{font-size:18px;margin-top:26px}
+.eyebrow{color:var(--accent);font-size:13px;letter-spacing:.12em}.muted,small{color:var(--muted)}
+section,details{border:1px solid var(--line);background:var(--surface);padding:20px;border-radius:16px;margin:18px 0}
+button,select{font:inherit;border:1px solid var(--line);border-radius:9px;padding:11px 15px;background:var(--surface);color:var(--ink);cursor:pointer}
+button:hover,button[aria-pressed=true]{background:var(--soft);border-color:var(--accent)}button:disabled{opacity:.45;cursor:not-allowed}.primary{background:var(--accent);color:var(--bg)}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}.options{display:grid;gap:10px}.options button{text-align:left;white-space:pre-wrap}
+.flow{font-size:14px;color:var(--muted)}.callout{border-left:3px solid var(--accent);padding-left:14px}.caution{border-left:3px solid var(--warn);padding-left:14px}
+.stem{font-size:18px;font-weight:600;white-space:pre-wrap;line-height:1.7}.scroll{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:14px}td,th{padding:8px;text-align:right;border-bottom:1px solid var(--line);vertical-align:top}td:first-child,th:first-child{text-align:left}td.l,th.l{text-align:left}
+pre{white-space:pre-wrap;word-break:break-word;font-size:12px}#nousSpecJson{max-height:60vh;overflow:auto;border:1px solid var(--line);border-radius:9px;padding:10px}.meter{height:4px;background:var(--line);margin:14px 0}.meter div{height:100%;background:var(--accent)}
+summary{cursor:pointer}label{display:block}fieldset{border:1px solid var(--line);border-radius:12px;margin:14px 0}fieldset label{margin:6px 0}a{color:var(--accent)}ol li,ul li{margin:4px 0}[hidden]{display:none!important}
+.num{white-space:nowrap}.tag{display:inline-block;white-space:nowrap;font-size:12px;border:1px solid var(--line);border-radius:999px;padding:0 8px;margin:0 4px 4px 0}
+.nous-card{border-top:1px solid var(--line);padding:12px 0;margin:8px 0}.nous-card h4{margin:4px 0}#nousSpecPanel{min-width:0}#nousSpecJson{max-height:440px;overflow:auto;white-space:pre;word-break:normal;border:1px solid var(--line);padding:12px;max-width:100%}#nousSpecPanel table td{overflow-wrap:anywhere}#nousSpecPanel table{table-layout:fixed}#nousSpecPanel h4{margin-top:24px}@media(max-width:500px){#nousSpecPanel{padding:14px}#nousSpecPanel table{font-size:12px}#nousSpecPanel td,#nousSpecPanel th{padding:5px}}
+</style><main><h1>NOUS 模擬報告範例</h1><p>使用自製示例題產生的固定模擬；不是真實學生，不含私有題庫內容。此檔只有報告，不包含作答題庫。</p><div id="app"><section><div id="simulationBanner" class="caution" role="note"><h2>模擬數據範例，非真實學生</h2><p>高一；U全對、R混合、T需練習；國文較穩、歷史較弱；高把握但仍不足以診斷校準；兩次快速作答被排除。</p><p>以下仍按真實計分規則更新；不硬填強弱標籤。高把握設定不等於已判定過度自信。</p></div><p class="flow">05 / 初步側寫</p><h2>現在看見的是本次任務，不是你的上限</h2><p class="callout">12 題能力任務已用完（不代表達到精度門檻）。本報告分三部分：學習能力、學科表現、學習方案推薦；三者分開解讀。</p>
+  <h2>一、學習能力評估（理解・推演・遷移）</h2><p class="callout">用一套你沒學過的「星港規則」觀察學新東西的方式。這是學習潛力的探索指標，不是學科成績、IQ 或年級常模；12 題星港題的參數都是未經真人校準的設計假設。</p>
+  <div class="scroll"><table><tbody><tr><th>面向</th><th class="l">結果</th><th>有效題</th><th>平均<br><small>95% 區間</small></th></tr><tr><td class="num">理解力</td><td class="l">初步：本任務暫居中間</td><td>4</td><td class="num">0.880<br><small>-0.7～2.5</small></td></tr><tr><td class="num">推演力</td><td class="l">初步：本任務暫居中間</td><td>4</td><td class="num">-0.168<br><small>-1.9～1.5</small></td></tr><tr><td class="num">遷移力</td><td class="l">初步：本任務暫居中間</td><td>4</td><td class="num">-0.914<br><small>-2.4～0.5</small></td></tr></tbody></table></div>
+  <p><small class="muted">標示規則：有效題少於 2 題→證據不足；後驗 SD &gt; 0.6→加「初步：」，且需 ≥ 70% 後驗機率落在 &gt;0.5（較有把握）或 &lt;−0.5（建議加練）；SD ≤ 0.6→不加「初步」，門檻提高到 80%；其餘為暫居中間。區間是模型內 95% 可信區間，未包含題目參數與效度的不確定性。</small></p>
+  <h3>下一個值得探索的方向：遷移力</h3><p>本次 T3 尚未答對：「新情境：社團規定「每次訂購超過 10 份時，負責人要多付 1 份運費」。這條規定的結構最像星港哪一條規則？」。先看這題，不急著判定為能力弱點。</p><p>建議：先忽略情境名稱，畫出兩個情境的相同關係，再換一題驗證。</p>
+  <h3>初步：信心校準（還不能定型）</h3><p>本次僅 4 筆把握觀測。κ＝0.673、β＝-0.362，仍強烈受先驗影響；不據此說你過度自信或沒有鑑別力。快速作答仍依 mac §11 更新 c，但只作探索。</p>
+  <h3>初步：短延遲再認（記憶），可信度很低</h3><p>2 筆有效觀測中答對 1 題；實際延遲 894–916 秒。只有 2 題、延遲長短取決於你的作答速度與學科題數，沒有受控間隔，且前題曾接觸相同資訊；不能推估長期保留力，也沒有寫入 FSRS 穩定度。</p><h2>二、學科能力評估（目前的學科題表現）</h2><p class="callout">這是你<strong>目前</strong>在這些高一學科題上的表現證據，和上面的「學習能力」分開估計，兩者不在同一量尺、不互相換算。每科只有 3 題，一律標示「初步」；有效題少於 2 題標示證據不足。</p>
+  <h3>目前程度：本次學科題證據</h3><div class="scroll"><table><tbody><tr><th>科目</th><th class="l">結果</th><th>作答／有效／答對</th><th>平均<br><small>95% 區間</small></th></tr><tr><td>國文</td><td class="l">初步：本次學科題暫居中間</td><td class="num">3 / 3 / 3</td><td class="num">0.729<br><small>-1.0～2.4</small></td></tr><tr><td>歷史</td><td class="l">初步：本次學科題暫居中間</td><td class="num">3 / 3 / 0</td><td class="num">-0.913<br><small>-2.5～0.6</small></td></tr><tr><td>地理</td><td class="l">初步：本次學科題暫居中間</td><td class="num">3 / 2 / 2</td><td class="num">0.550<br><small>-1.3～2.3</small></td></tr><tr><td>公民與社會</td><td class="l">初步：本次學科題暫居中間</td><td class="num">3 / 3 / 2</td><td class="num">0.116<br><small>-1.7～1.9</small></td></tr><tr><td>生物</td><td class="l">初步：本次學科題暫居中間</td><td class="num">3 / 2 / 1</td><td class="num">-0.175<br><small>-2.0～1.7</small></td></tr></tbody></table></div><p><small class="muted">標示規則：有效題 ≥ 2 時，需 ≥ 70% 後驗機率落在 &gt;0.5（較穩）或 &lt;−0.5（建議加練），否則暫居中間；不論 SD 大小都不升為確定標示。快速作答或切到背景的題目不採計。95% 區間很寬，代表 3 題的證據有限。</small></p>
+  <h3>學習潛力：補強策略假設，非成績預測</h3><ul><li>國文：未判定：無法從 3 題判定成長速度；先依第三部分的方案練習，再以 D30 回測確認。</li><li>歷史：未判定：無法從 3 題判定成長速度；先依第三部分的方案練習，再以 D30 回測確認。</li><li>地理：未判定：無法從 3 題判定成長速度；先依第三部分的方案練習，再以 D30 回測確認。</li><li>公民與社會：未判定：無法從 3 題判定成長速度；先依第三部分的方案練習，再以 D30 回測確認。</li><li>生物：未判定：無法從 3 題判定成長速度；先依第三部分的方案練習，再以 D30 回測確認。</li></ul><p class="muted">學習能力不加到學科分數，也不代表天賦上限；此處不保證「一定補得起來」。探索訊號的 50% 門檻詳列於第三部分的規則全文。</p><p class="muted"><small>公開版的學科題是為示範而原創的樣題，難度、鑑別度與 35 秒平均作答時間都是未經真人校準的假設，不代表任何正式題庫或年級常模。各科獨立估計，沒有合成總分，也不做跨科排名。</small></p><h2>三、學習方案推薦（初步）</h2><section id="studentPlan" aria-labelledby="studentPlanTitle"><h3 id="studentPlanTitle">A｜給你的學習方案</h3>
+  <p>你已經完成第一步了！這份方案只根據今天的作答，是<strong>起點</strong>，不是你的上限。</p>
+  <p><strong>這週先練：</strong>歷史・示範單元 史料類型、歷史・示範單元 史料推論、歷史・示範單元 史料考證</p>
+  <p><strong>怎麼練：</strong></p><ul><li>先猜答案和理由，再對照解析，看看兩個情境哪裡一樣。</li><li>每題先想「我有多少把握」，再作答。</li><li>第 3、7、30 天，先不看筆記，用 2 分鐘回想重點。</li></ul>
+  <p><strong>花多少時間：</strong>每天 10–15 分鐘，7 天共 90 分鐘。沒做完也沒關係，隔天繼續就好。</p>
+  <p><strong>第 30 天：</strong>用新的題目看看自己往哪個方向進步，不是考試。</p></section><h3>方案細節與規則</h3><p class="caution">依下方<strong>公開規則</strong>，把本次的理解・推演・遷移訊號、信心校準、短延遲再認，以及各科的有效作答整理成一份起步方案。全部標示「初步」：題數很少、題目參數未經校準，<strong>不代表你的潛力上限，也不預測成績</strong>。請和老師或家人一起調整。</p>
+  <h3>方案輸入</h3><div class="scroll"><table><tbody><tr><th>面向</th><th class="l">探索訊號</th><th>P(&gt;0.5) / P(&lt;−0.5)</th></tr><tr><td class="num">理解力</td><td class="l">偏高</td><td class="num">0.66 / 0.04</td></tr><tr><td class="num">推演力</td><td class="l">中間</td><td class="num">0.19 / 0.31</td></tr><tr><td class="num">遷移力</td><td class="l">偏低</td><td class="num">0.02 / 0.68</td></tr></tbody></table></div>
+  <div class="scroll"><table><tbody><tr><th>科目</th><th class="l">本次證據</th><th>有效／未答對</th><th class="l">探索訊號</th><th class="l">探索潛力</th></tr><tr><td>國文</td><td class="l">已測</td><td class="num">3 / 0</td><td class="l">偏高</td><td class="l">未判定</td></tr><tr><td>歷史</td><td class="l">已測</td><td class="num">3 / 3</td><td class="l">偏低</td><td class="l">未判定</td></tr><tr><td>地理</td><td class="l">已測</td><td class="num">2 / 0</td><td class="l">偏高</td><td class="l">未判定</td></tr><tr><td>公民與社會</td><td class="l">已測</td><td class="num">3 / 1</td><td class="l">中間</td><td class="l">未判定</td></tr><tr><td>生物</td><td class="l">已測</td><td class="num">2 / 1</td><td class="l">中間</td><td class="l">未判定</td></tr></tbody></table></div>
+  <p><small class="muted">信心校準：4 筆把握觀測；短延遲再認：2 筆有效、答對 1 題。英文、數學、物理、化學、地球科學本版沒有施測，不列入。</small></p>
+  <h3>初步：優先章節（2–3 個）</h3><p>以下 3 個章節來自你本次<strong>有效作答中未答對</strong>的學科題，依規則排序（初步，不是弱點定論）：</p><ol><li><strong>歷史・示範單元 史料類型</strong><br><small class="muted">依據：本次有效作答中未答對 1 題（示範2-1）；歷史探索訊號偏低。</small></li><li><strong>歷史・示範單元 史料推論</strong><br><small class="muted">依據：本次有效作答中未答對 1 題（示範2-2）；歷史探索訊號偏低。</small></li><li><strong>歷史・示範單元 史料考證</strong><br><small class="muted">依據：本次有效作答中未答對 1 題（示範2-3）；歷史探索訊號偏低。</small></li></ol><p><small class="muted">英文、數學、物理、化學、地球科學未施測，不推薦也不排除。</small></p>
+  <h3>初步：學習模式</h3><p>初步：這個面向的探索訊號偏低（後驗 ≥ 50% 落在 &lt;−0.5），練習時以對應策略為主：</p><ul><li><strong>多樣遷移</strong>：同一個概念換 2–3 種不同情境（生活例子、圖表、新題型）練習，作答前先找出兩個情境的相同結構。</li></ul><p><small class="muted">對應：理解（U）偏低→範例／圖解；推演（R）偏低→步驟拆解；遷移（T）偏低→多樣遷移。探索訊號只是策略提示，不是能力定論。</small></p>
+  <h3>初步：信心校準——作答前先標把握</h3><p>每天練習時，每題<strong>作答前</strong>先寫下把握（用猜的／一半一半／大概會／很有把握），作答後對照。這是要養成的習慣，不是診斷。</p><p><small class="muted">本次 4 筆把握觀測（本版最多 4 筆）。規則：至少 10 筆且後驗 P(β&lt;−0.5) ≥ 0.8 才會提示「可能偏向過度自信」；本次未達最少筆數，不判斷你是否過度自信。</small></p>
+  <h3>初步：記憶與間隔回想</h3><p>短延遲再認有效 2 筆、答對 1 題。只有 2 題、延遲不受控，<strong>不推估長期記憶</strong>。方案用固定的間隔回想：D3、D7、D30。</p><p><small class="muted">這個間隔是固定的起步排程；未來可改由 FSRS 依你的回想紀錄個人化。<strong>目前沒有初始化 FSRS、沒有個人記憶參數，也不保證照做就能記住。</strong></small></p>
+  <h3>7 日起步計畫（每天 10–15 分鐘，共 90 分鐘）</h3><div class="scroll"><table><tbody><tr><th class="num">日</th><th class="num">分鐘</th><th class="l">任務</th></tr><tr><td class="num">D1<br><span class="tag">EA</span></td><td class="num">10</td><td class="l">完成本次初始評估（已完成）。再用 10 分鐘按「看答案與解析」，看 歷史・示範單元 史料類型 的未答對題，寫下「我原本怎麼想、正解差在哪」。</td></tr><tr><td class="num">D2<br><span class="tag">EL</span></td><td class="num">15</td><td class="l">歷史・示範單元 史料類型：用「多樣遷移」複習這一章的核心概念，再做 3–5 題同章節的<strong>新題</strong>（課本或老師提供；本原型不提供題目）。每題作答前先標把握。</td></tr><tr><td class="num">D3<br><span class="tag">EL</span></td><td class="num">10</td><td class="l">開頭 2 分鐘先不看筆記，回想前幾天寫下的重點（間隔回想）。歷史・示範單元 史料推論：用「多樣遷移」複習這一章的核心概念，再做 3–5 題同章節的<strong>新題</strong>（課本或老師提供；本原型不提供題目）。每題作答前先標把握。</td></tr><tr><td class="num">D4<br><span class="tag">EL</span></td><td class="num">15</td><td class="l">歷史・示範單元 史料考證：用「多樣遷移」複習這一章的核心概念，再做 3–5 題同章節的<strong>新題</strong>（課本或老師提供；本原型不提供題目）。每題作答前先標把握。</td></tr><tr><td class="num">D5<br><span class="tag">EL</span></td><td class="num">10</td><td class="l">歷史・示範單元 史料類型：用「多樣遷移」複習這一章的核心概念，再做 3–5 題同章節的<strong>新題</strong>（課本或老師提供；本原型不提供題目）。每題作答前先標把握。</td></tr><tr><td class="num">D6<br><span class="tag">EL</span></td><td class="num">15</td><td class="l">歷史・示範單元 史料推論：用「多樣遷移」複習這一章的核心概念，再做 3–5 題同章節的<strong>新題</strong>（課本或老師提供；本原型不提供題目）。每題作答前先標把握。</td></tr><tr><td class="num">D7<br><span class="tag">EL</span></td><td class="num">15</td><td class="l">開頭 2 分鐘先不看筆記，回想前幾天寫下的重點（間隔回想）。回顧與持續：歷史・示範單元 史料類型、歷史・示範單元 史料推論、歷史・示範單元 史料考證 各做 1–2 題新題，記下本週實際完成幾天、哪天卡住。能持續比單次做很多更重要。</td></tr></tbody></table></div>
+  <p><small class="muted">EA＝初始評估（就是今天這份 D1）；EL＝學習任務；D7 回顧本週並記錄持續情形。沒做完不用補，隔天照排程繼續。</small></p>
+  <h3>D30 進展檢核（EM）</h3><p>第 30 天用約 15 分鐘做檢核：歷史・示範單元 史料類型、歷史・示範單元 史料推論、歷史・示範單元 史料考證 的<strong>平行新題</strong>（同章節、同難度、但不是本次原題），加上星港規則的延遲回想；每題作答前先標把握。不重做原題，避免只是記住答案。</p><p><small class="muted">本原型目前沒有平行題庫，需由老師或下一版提供。D30 結果與 D1 比較時看方向，不看單次分數；仍屬初步。</small></p>
+  <details><summary>規則全文（可自行檢查）</summary><ol>
+  <li>探索訊號：後驗機率 ≥ 0.5 落在 &gt;0.5 為「偏高」、落在 &lt;−0.5 為「偏低」，其餘「中間」；有效題 &lt; 2→「—」。上方顯示的標示仍用 70%／80% 門檻；探索訊號只用來選策略與排序。</li>
+  <li>優先章節：只取「已測且有效題 ≥ 2」科目中<strong>有效作答（非快速作答、未切到背景）且未答對</strong>的題目，依其章節分組。排序：該科探索訊號偏低者優先 → 該科未答對題數多 → 該章節未答對題數多 → 固定科目順序 → 出題順序。最多取 3 個；少於 2 個時明說「證據不足，先蒐集更多證據」。未施測、證據不足的科目和全部答對的科目都不會被列入。</li>
+  <li>探索潛力：只有理解與推演的探索訊號都偏高、且該科探索訊號偏低時，標「初步：可嘗試補強（探索）」，並需 D30 回測；其餘一律「未判定」。</li>
+  <li>學習模式：理解偏低→範例／圖解；推演偏低→步驟拆解；遷移偏低→多樣遷移（多個偏低時依 P(&lt;−0.5) 由大到小輪流）；都不偏低或都證據不足→三種輪流。</li>
+  <li>信心校準：一律建議「作答前先標把握」。只有把握觀測 ≥ 10 筆且 P(β&lt;−0.5) ≥ 0.8 才提示可能過度自信。</li>
+  <li>記憶：只報告再認筆數與答對數；間隔回想固定在 D3、D7、D30，未接 FSRS。</li>
+  <li>時間：D1–D7 依序 10、15、10、15、10、15、15 分鐘；D2–D6 依序輪流優先章節與學習模式；D30 約 15 分鐘。</li></ol></details><section id="nousSpecPanel" aria-labelledby="nousPlanTitle"><h3 id="nousPlanTitle">B｜給 NOUS 的學習方案</h3>
+  <p>從同一份作答產生：優先章節 → 素材挑選 → 互動網頁設計 → D7 EL → D30 EM。<strong>初步規劃，並非效果保證</strong>。Schema：<code>nous.d1.learning_plan/v0</code>。</p>
+  <p class="caution">EL／EM／FSRS 尚未串接；以下是可供下游實作的交接規格。只含自製示例題號，不含私有題庫內容或ID。</p>
+  <h4>1. 優先章節與依據</h4><article class="nous-card"><h4>#1 歷史・示範單元 史料類型</h4><p>有效錯題：1 題；學習潛力：未判定，不保證成長</p><p class="muted"><small>reason_codes：PRI.VALID_WRONG_MEASURED · PRI.ORDER_RULE · PRI.SUBJECT_SIGNAL_DOWN</small></p></article><article class="nous-card"><h4>#2 歷史・示範單元 史料推論</h4><p>有效錯題：1 題；學習潛力：未判定，不保證成長</p><p class="muted"><small>reason_codes：PRI.VALID_WRONG_MEASURED · PRI.ORDER_RULE · PRI.SUBJECT_SIGNAL_DOWN</small></p></article><article class="nous-card"><h4>#3 歷史・示範單元 史料考證</h4><p>有效錯題：1 題；學習潛力：未判定，不保證成長</p><p class="muted"><small>reason_codes：PRI.VALID_WRONG_MEASURED · PRI.ORDER_RULE · PRI.SUBJECT_SIGNAL_DOWN</small></p></article>
+  <h4>2. 素材推薦</h4><article class="nous-card"><h4>mat-1｜變式題</h4><p><strong>歷史・示範單元 史料類型</strong></p><p>歷史「示範單元 史料類型」本次有 1 題有效錯題；遷移力探索訊號偏低，用「多樣遷移」，從略低於目前估計的難度開始。</p><p>鷹架：高：先提供充分提示<br>難度 b：-1.91 ～ -0.41（暫定模型尺度，未校準）。</p><p class="muted"><small>reason_codes：MAT.TYPE_FROM_STRATEGY · MODE.T_LOW_TRANSFER · MAT.B_ANCHOR_SUBJECT_POSTERIOR · MAT.SCAF_HIGH</small></p></article><article class="nous-card"><h4>mat-2｜概念卡</h4><p><strong>歷史・示範單元 史料類型</strong></p><p>把「示範單元 史料類型」的關鍵概念整理成 1 張卡，第 3、7、30 天回想。</p><p>鷹架：高：先提供充分提示<br>難度 b：-1.91 ～ -0.41（暫定模型尺度，未校準）。</p><p class="muted"><small>reason_codes：MAT.CONCEPT_CARD_REVIEW · MAT.B_ANCHOR_SUBJECT_POSTERIOR · MAT.SCAF_HIGH · REV.FIXED_NOT_FSRS</small></p></article><article class="nous-card"><h4>mat-3｜變式題</h4><p><strong>歷史・示範單元 史料推論</strong></p><p>歷史「示範單元 史料推論」本次有 1 題有效錯題；遷移力探索訊號偏低，用「多樣遷移」，從略低於目前估計的難度開始。</p><p>鷹架：高：先提供充分提示<br>難度 b：-1.91 ～ -0.41（暫定模型尺度，未校準）。</p><p class="muted"><small>reason_codes：MAT.TYPE_FROM_STRATEGY · MODE.T_LOW_TRANSFER · MAT.B_ANCHOR_SUBJECT_POSTERIOR · MAT.SCAF_HIGH</small></p></article><article class="nous-card"><h4>mat-4｜概念卡</h4><p><strong>歷史・示範單元 史料推論</strong></p><p>把「示範單元 史料推論」的關鍵概念整理成 1 張卡，第 3、7、30 天回想。</p><p>鷹架：高：先提供充分提示<br>難度 b：-1.91 ～ -0.41（暫定模型尺度，未校準）。</p><p class="muted"><small>reason_codes：MAT.CONCEPT_CARD_REVIEW · MAT.B_ANCHOR_SUBJECT_POSTERIOR · MAT.SCAF_HIGH · REV.FIXED_NOT_FSRS</small></p></article><article class="nous-card"><h4>mat-5｜變式題</h4><p><strong>歷史・示範單元 史料考證</strong></p><p>歷史「示範單元 史料考證」本次有 1 題有效錯題；遷移力探索訊號偏低，用「多樣遷移」，從略低於目前估計的難度開始。</p><p>鷹架：高：先提供充分提示<br>難度 b：-1.91 ～ -0.41（暫定模型尺度，未校準）。</p><p class="muted"><small>reason_codes：MAT.TYPE_FROM_STRATEGY · MODE.T_LOW_TRANSFER · MAT.B_ANCHOR_SUBJECT_POSTERIOR · MAT.SCAF_HIGH</small></p></article><article class="nous-card"><h4>mat-6｜概念卡</h4><p><strong>歷史・示範單元 史料考證</strong></p><p>把「示範單元 史料考證」的關鍵概念整理成 1 張卡，第 3、7、30 天回想。</p><p>鷹架：高：先提供充分提示<br>難度 b：-1.91 ～ -0.41（暫定模型尺度，未校準）。</p><p class="muted"><small>reason_codes：MAT.CONCEPT_CARD_REVIEW · MAT.B_ANCHOR_SUBJECT_POSTERIOR · MAT.SCAF_HIGH · REV.FIXED_NOT_FSRS</small></p></article><h4>3. 互動網頁設計</h4><article class="nous-card"><h4>int-1｜先預測 → 再驗證</h4><p>歷史・示範單元 史料類型、歷史・示範單元 史料推論、歷史・示範單元 史料考證 · 15 分鐘</p><p>遷移力探索訊號偏低，用「多樣遷移」。</p><p>回饋：預測後再回饋<br>提示：預測前不給提示</p><p class="muted"><small>reason_codes：INT.PREDICT_THEN_CHECK · MODE.T_LOW_TRANSFER</small></p></article><article class="nous-card"><h4>int-2｜先估把握 → 再作答</h4><p>全部學習任務 · 10 分鐘</p><p>每題作答前先標把握；本次 4 筆把握觀測，未達 10 筆，只當習慣，不判斷是否過度自信。</p><p>回饋：答後對照把握<br>提示：估把握前不提示</p><p class="muted"><small>reason_codes：INT.CONFIDENCE_BEFORE_ANSWER · CAL.N_BELOW_MIN</small></p></article><article class="nous-card"><h4>int-3｜間隔回想卡</h4><p>間隔回想 · 2 分鐘</p><p>第 3、7、30 天開頭 2 分鐘先不看筆記回想；固定間隔，未接 FSRS。</p><p>回饋：先回想再自我核對<br>提示：先回想再看提示</p><p class="muted"><small>reason_codes：INT.SPACED_RECALL_CARD · REV.FIXED_NOT_FSRS</small></p></article>
+  <h4>4. D7 EL 起步計畫</h4><p>合計 90 分鐘；每日額度不重複累加互動模組時間。</p><div class="scroll"><table><tbody><tr><th>日期／時間</th><th class="l">任務與原因碼</th></tr><tr><td>D1<br>EA · 10分</td><td class="l">歷史・示範單元 史料類型<br><br><small>PLAN.D1_EA_INITIAL</small></td></tr><tr><td>D2<br>EL · 15分</td><td class="l">歷史・示範單元 史料類型<br>先預測 → 再驗證、先估把握 → 再作答<br><small>PLAN.EL_PRACTICE_ROTATION · MODE.T_LOW_TRANSFER</small></td></tr><tr><td>D3<br>EL · 10分</td><td class="l">歷史・示範單元 史料推論<br>先預測 → 再驗證、先估把握 → 再作答、間隔回想卡<br><small>PLAN.EL_PRACTICE_ROTATION · MODE.T_LOW_TRANSFER · PLAN.SPACED_RECALL_DAY</small></td></tr><tr><td>D4<br>EL · 15分</td><td class="l">歷史・示範單元 史料考證<br>先預測 → 再驗證、先估把握 → 再作答<br><small>PLAN.EL_PRACTICE_ROTATION · MODE.T_LOW_TRANSFER</small></td></tr><tr><td>D5<br>EL · 10分</td><td class="l">歷史・示範單元 史料類型<br>先預測 → 再驗證、先估把握 → 再作答<br><small>PLAN.EL_PRACTICE_ROTATION · MODE.T_LOW_TRANSFER</small></td></tr><tr><td>D6<br>EL · 15分</td><td class="l">歷史・示範單元 史料推論<br>先預測 → 再驗證、先估把握 → 再作答<br><small>PLAN.EL_PRACTICE_ROTATION · MODE.T_LOW_TRANSFER</small></td></tr><tr><td>D7<br>EL · 15分</td><td class="l">歷史・示範單元 史料類型、歷史・示範單元 史料推論、歷史・示範單元 史料考證<br>先估把握 → 再作答、間隔回想卡<br><small>PLAN.EL_REVIEW_D7 · PLAN.SPACED_RECALL_DAY</small></td></tr></tbody></table></div>
+  <h4>5. 間隔回想與 D30 EM 檢核</h4><p>回想日：D3、D7、D30；種子卡 5 張；FSRS ready＝false。D30 約 15 分鐘，使用每章 3 題平行新題，禁止重複原題；平行題庫尚未備妥。</p><article class="nous-card"><h4>章節平行新題答對</h4><p>規劃目標（非預測）：≥ 2 / 3 items</p><p>對象：歷史・示範單元 史料類型</p><p class="muted"><small>reason_codes：EM.CRIT_PARALLEL_CORRECT</small></p></article><article class="nous-card"><h4>章節平行新題答對</h4><p>規劃目標（非預測）：≥ 2 / 3 items</p><p>對象：歷史・示範單元 史料推論</p><p class="muted"><small>reason_codes：EM.CRIT_PARALLEL_CORRECT</small></p></article><article class="nous-card"><h4>章節平行新題答對</h4><p>規劃目標（非預測）：≥ 2 / 3 items</p><p>對象：歷史・示範單元 史料考證</p><p class="muted"><small>reason_codes：EM.CRIT_PARALLEL_CORRECT</small></p></article><article class="nous-card"><h4>作答前標把握比例</h4><p>規劃目標（非預測）：≥ 0.9 proportion</p><p>只作追蹤，未驗證的起步標準</p><p class="muted"><small>reason_codes：EM.CRIT_CONFIDENCE_FIRST</small></p></article><article class="nous-card"><h4>完成 EL 天數</h4><p>規劃目標（非預測）：≥ 4 / 6 days</p><p>只作追蹤，未驗證的起步標準</p><p class="muted"><small>reason_codes：EM.CRIT_PERSISTENCE</small></p></article><article class="nous-card"><h4>規則延遲回想答對</h4><p>規劃目標（非預測）：≥ 1 / 2 items</p><p>只作追蹤，未驗證的起步標準</p><p class="muted"><small>reason_codes：EM.CRIT_DELAYED_RECALL</small></p></article>
+  <h4>6. 原因碼對照</h4><div class="scroll"><table><tbody><tr><th>reason_code</th><th class="l">公開規則</th></tr><tr><td class="l"><code>CAL.N_BELOW_MIN</code></td><td class="l">把握觀測 &lt; 10 筆（calib_min_n）→ 只建議作答前標把握，不估計、不判斷過度自信</td></tr><tr><td class="l"><code>CAV.NOT_DIAGNOSIS</code></td><td class="l">不是診斷、分班、選組或潛力上限；不預測成績</td></tr><tr><td class="l"><code>CAV.NO_ENGINE_INTEGRATION</code></td><td class="l">未實際連接任何 EL／EM 引擎或 FSRS；本規格只是交接格式</td></tr><tr><td class="l"><code>CAV.PUBLIC_SAMPLE_ONLY</code></td><td class="l">公開版：只含原創示範題 ID 與示範單元，不含任何題庫文字、題號或 GUID</td></tr><tr><td class="l"><code>CAV.SUBJECT_FEW_ITEMS</code></td><td class="l">每科最多 3 題，學科證據有限</td></tr><tr><td class="l"><code>CAV.TARGETS_NOT_PREDICTIONS</code></td><td class="l">所有建議與成功標準都是規劃目標，不是經驗證的預測</td></tr><tr><td class="l"><code>CAV.UNCALIBRATED</code></td><td class="l">所有題目參數、平均作答時間、b 區間都未經真人校準</td></tr><tr><td class="l"><code>EM.CRIT_CONFIDENCE_FIRST</code></td><td class="l">規劃目標：≥ 90% 題目作答前已標把握</td></tr><tr><td class="l"><code>EM.CRIT_DELAYED_RECALL</code></td><td class="l">規劃目標：星港延遲回想 2 題至少答對 1 題</td></tr><tr><td class="l"><code>EM.CRIT_PARALLEL_CORRECT</code></td><td class="l">規劃目標：每個優先章節平行新題至少答對 2/3（看方向，不是預測）</td></tr><tr><td class="l"><code>EM.CRIT_PERSISTENCE</code></td><td class="l">規劃目標：D2–D7 至少完成 4 天</td></tr><tr><td class="l"><code>EM.NO_PARALLEL_BANK</code></td><td class="l">本原型沒有平行題庫，需老師或下一版提供</td></tr><tr><td class="l"><code>EM.PARALLEL_NEW_ITEMS</code></td><td class="l">D30＝同章節平行新題，不重做原題；加星港延遲回想、作答前標把握</td></tr><tr><td class="l"><code>EVD.SD_TENTATIVE</code></td><td class="l">後驗 SD &gt; 0.6 且有效題 ≥ 2 → 初步（70% 門檻）</td></tr><tr><td class="l"><code>EVD.SUBJECT_TENTATIVE</code></td><td class="l">學科每科僅 3 題：有效題 ≥ 2 一律 初步，不升為確定</td></tr><tr><td class="l"><code>INT.CONFIDENCE_BEFORE_ANSWER</code></td><td class="l">一律：每題作答前先標把握（校準習慣）</td></tr><tr><td class="l"><code>INT.PREDICT_THEN_CHECK</code></td><td class="l">多樣遷移策略 → 先預測再對照</td></tr><tr><td class="l"><code>INT.SPACED_RECALL_CARD</code></td><td class="l">固定間隔回想卡（D3、D7、D30），開頭 2 分鐘</td></tr><tr><td class="l"><code>MAT.B_ANCHOR_SUBJECT_POSTERIOR</code></td><td class="l">建議難度 b 區間＝該科後驗平均 −1.0 至 +0.5（夾在 −4..4），屬暫定模型量尺、未校準</td></tr><tr><td class="l"><code>MAT.CONCEPT_CARD_REVIEW</code></td><td class="l">每個優先章節配 1 張概念卡，供 D3／D7／D30 間隔回想</td></tr><tr><td class="l"><code>MAT.SCAF_HIGH</code></td><td class="l">目標訊號偏低 → 高鷹架（完整示範、逐步提示）</td></tr><tr><td class="l"><code>MAT.TYPE_FROM_STRATEGY</code></td><td class="l">教材型態由學習模式對應：範例／圖解→範例（備選圖解）；步驟拆解→步驟拆解；多樣遷移→變式題</td></tr><tr><td class="l"><code>MODE.T_LOW_TRANSFER</code></td><td class="l">T 探索訊號偏低 → 多樣遷移（變式題）</td></tr><tr><td class="l"><code>PLAN.D1_EA_INITIAL</code></td><td class="l">D1＝EA 初始評估（本次）＋回看第 1 優先章節錯題</td></tr><tr><td class="l"><code>PLAN.EL_PRACTICE_ROTATION</code></td><td class="l">D2–D6＝EL 練習，輪流優先章節與學習模式，做同章節新題</td></tr><tr><td class="l"><code>PLAN.EL_REVIEW_D7</code></td><td class="l">D7＝回顧與持續情形</td></tr><tr><td class="l"><code>PLAN.SPACED_RECALL_DAY</code></td><td class="l">回想日（review_days 內或 D7）開頭 2 分鐘間隔回想</td></tr><tr><td class="l"><code>POT.UNDETERMINED</code></td><td class="l">其餘情況 → 未判定（3 題無法判定成長速度）</td></tr><tr><td class="l"><code>PRI.ORDER_RULE</code></td><td class="l">排序：科目偏低 → 該科錯題數 → 該章錯題數 → 科目順序 → 出題順序；最多 3 個</td></tr><tr><td class="l"><code>PRI.STATUS_OK</code></td><td class="l">2–3 個優先章節</td></tr><tr><td class="l"><code>PRI.SUBJECT_SIGNAL_DOWN</code></td><td class="l">排序第一鍵：該科探索訊號偏低者優先</td></tr><tr><td class="l"><code>PRI.VALID_WRONG_MEASURED</code></td><td class="l">章節來自已測科目中有效（非快速、未切背景）且未答對的題目</td></tr><tr><td class="l"><code>REC.FEW_UNCONTROLLED</code></td><td class="l">短延遲再認最多 2 題、延遲不受控 → 不推估長期記憶、不寫入 FSRS</td></tr><tr><td class="l"><code>REV.FIXED_NOT_FSRS</code></td><td class="l">固定間隔 D3／D7／D30；未初始化 FSRS、沒有個人記憶參數</td></tr><tr><td class="l"><code>REV.SEED_CORE_RULE</code></td><td class="l">種子卡＝星港規則再認題（原創、可公開，只放 ID）</td></tr><tr><td class="l"><code>REV.SEED_PRIORITY_WRONG_ITEM</code></td><td class="l">種子卡＝優先章節的有效錯題（只放 ID）</td></tr><tr><td class="l"><code>SIG.EXPLORE_05</code></td><td class="l">探索訊號：後驗 ≥ 0.5 落在 &gt;0.5＝偏高、&lt;−0.5＝偏低，其餘中間；只用於排序與選策略</td></tr><tr><td class="l"><code>SUB.MEASURED</code></td><td class="l">已勾選且有效題 ≥ 2 → 已測，可作為證據</td></tr><tr><td class="l"><code>SUB.NOT_IN_BANK</code></td><td class="l">英文、數學、物理、化學、地球科學本版無合規題 → 未施測，不推薦也不排除</td></tr></tbody></table></div>
+  <h4>7. 原始 JSON（與下載檔相同）</h4><div class="row"><button id="downloadSpec">NOUS 學習方案 JSON</button></div><pre id="nousSpecJson" tabindex="0">{
+  "schema_version": "nous.d1.learning_plan/v0",
+  "generated_at": "2026-11-07T12:00:00.000Z",
+  "source": {
+    "page_mode": "public",
+    "prototype": "d1-v1",
+    "session_kind": "d1_initial_assessment",
+    "is_simulated": true
+  },
+  "claims_policy": {
+    "contains_validated_predictions": false,
+    "recommendation_claim_type": "planning_target",
+    "estimate_claim_type": "model_estimate_uncalibrated",
+    "note": "建議、優先序、b 區間與成功標準都是依公開規則產生的規劃目標（planning_target），不是經驗證的預測；估計值來自未校準模型。"
+  },
+  "integration": {
+    "el_engine_connected": false,
+    "em_engine_connected": false,
+    "fsrs_connected": false,
+    "note": "本規格只是交接格式；原型未實際連接任何 EL／EM 引擎或 FSRS。"
+  },
+  "privacy": {
+    "contains_identity": false,
+    "contains_item_text": false,
+    "reference_scope": "public_sample_ids",
+    "private_source_protection": "not_applicable",
+    "publish_allowed": true
+  },
+  "student": {
+    "grade": 10,
+    "grade_in_scope": true,
+    "learned_flags": {
+      "國文": true,
+      "歷史": true,
+      "地理": true,
+      "公民與社會": true,
+      "生物": true
+    }
+  },
+  "ability": {
+    "U": {
+      "dimension": "U",
+      "name": "理解力",
+      "valid_n": 4,
+      "posterior": {
+        "mean": 0.8795523520121076,
+        "sd": 0.7996220071307627,
+        "ci95": [
+          -0.7000000000000002,
+          2.5
+        ]
+      },
+      "band": {
+        "code": "mid",
+        "label": "初步：本任務暫居中間",
+        "threshold": 0.7
+      },
+      "evidence": "初步",
+      "signal": "up",
+      "p_high": 0.6649727015922747,
+      "p_low": 0.03665592851453373,
+      "claim_type": "model_estimate_uncalibrated",
+      "reason_codes": [
+        "EVD.SD_TENTATIVE",
+        "SIG.EXPLORE_05"
+      ]
+    },
+    "R": {
+      "dimension": "R",
+      "name": "推演力",
+      "valid_n": 4,
+      "posterior": {
+        "mean": -0.1683164863171989,
+        "sd": 0.8475857292503519,
+        "ci95": [
+          -1.9,
+          1.5
+        ]
+      },
+      "band": {
+        "code": "mid",
+        "label": "初步：本任務暫居中間",
+        "threshold": 0.7
+      },
+      "evidence": "初步",
+      "signal": "flat",
+      "p_high": 0.18981208935078134,
+      "p_low": 0.3129529207224096,
+      "claim_type": "model_estimate_uncalibrated",
+      "reason_codes": [
+        "EVD.SD_TENTATIVE",
+        "SIG.EXPLORE_05"
+      ]
+    },
+    "T": {
+      "dimension": "T",
+      "name": "遷移力",
+      "valid_n": 4,
+      "posterior": {
+        "mean": -0.9136490239274996,
+        "sd": 0.7470517713674464,
+        "ci95": [
+          -2.4,
+          0.5
+        ]
+      },
+      "band": {
+        "code": "mid",
+        "label": "初步：本任務暫居中間",
+        "threshold": 0.7
+      },
+      "evidence": "初步",
+      "signal": "down",
+      "p_high": 0.02057613965506062,
+      "p_low": 0.6813731150202508,
+      "claim_type": "model_estimate_uncalibrated",
+      "reason_codes": [
+        "EVD.SD_TENTATIVE",
+        "SIG.EXPLORE_05"
+      ]
+    }
+  },
+  "calibration": {
+    "observations_n": 4,
+    "min_n": 10,
+    "p_bias_lt_m05": 0.3776404078607439,
+    "threshold": 0.8,
+    "status": "habit",
+    "evidence": "證據不足",
+    "estimate": null,
+    "estimate_withheld": "n_below_min_prior_dominated",
+    "claim_type": "model_estimate_uncalibrated",
+    "reason_codes": [
+      "CAL.N_BELOW_MIN"
+    ]
+  },
+  "recall": {
+    "valid_n": 2,
+    "correct_n": 1,
+    "delay_sec": {
+      "min": 894,
+      "max": 915.5
+    },
+    "delay_controlled": false,
+    "evidence": "證據不足",
+    "retention_estimate": null,
+    "fsrs": {
+      "initialized": false,
+      "parameters": null
+    },
+    "reason_codes": [
+      "REC.FEW_UNCONTROLLED"
+    ]
+  },
+  "subjects": [
+    {
+      "subject": "國文",
+      "status": "measured",
+      "current_level": {
+        "posterior": {
+          "mean": 0.7293372251545328,
+          "sd": 0.849061481901502,
+          "ci95": [
+            -1,
+            2.4000000000000004
+          ]
+        },
+        "band": {
+          "code": "mid",
+          "label": "初步：本次學科題暫居中間"
+        },
+        "signal": "up",
+        "p_high": 0.591024715286165,
+        "p_low": 0.06542077043493402,
+        "evidence": "初步",
+        "claim_type": "model_estimate_uncalibrated",
+        "reason_codes": [
+          "EVD.SUBJECT_TENTATIVE",
+          "SIG.EXPLORE_05"
+        ]
+      },
+      "potential": {
+        "code": "undetermined",
+        "claim_type": "planning_target",
+        "reason_codes": [
+          "POT.UNDETERMINED"
+        ]
+      },
+      "evidence": {
+        "answered": 3,
+        "valid": 3,
+        "correct": 3,
+        "valid_wrong": 0
+      },
+      "weak_chapters": [],
+      "reason_codes": [
+        "SUB.MEASURED"
+      ]
+    },
+    {
+      "subject": "歷史",
+      "status": "measured",
+      "current_level": {
+        "posterior": {
+          "mean": -0.9133016483205645,
+          "sd": 0.7759105795476501,
+          "ci95": [
+            -2.5,
+            0.5999999999999996
+          ]
+        },
+        "band": {
+          "code": "mid",
+          "label": "初步：本次學科題暫居中間"
+        },
+        "signal": "down",
+        "p_high": 0.028230256040821165,
+        "p_low": 0.6818350174478867,
+        "evidence": "初步",
+        "claim_type": "model_estimate_uncalibrated",
+        "reason_codes": [
+          "EVD.SUBJECT_TENTATIVE",
+          "SIG.EXPLORE_05"
+        ]
+      },
+      "potential": {
+        "code": "undetermined",
+        "claim_type": "planning_target",
+        "reason_codes": [
+          "POT.UNDETERMINED"
+        ]
+      },
+      "evidence": {
+        "answered": 3,
+        "valid": 3,
+        "correct": 0,
+        "valid_wrong": 3
+      },
+      "weak_chapters": [
+        {
+          "chapter": {
+            "id": "sample-ch-04",
+            "name": "示範單元 史料類型",
+            "section": null,
+            "section_id": null
+          },
+          "error_item_refs": [
+            {
+              "kind": "public_sample_item_id",
+              "id": "示範2-1"
+            }
+          ],
+          "reason_codes": [
+            "PRI.VALID_WRONG_MEASURED"
+          ]
+        },
+        {
+          "chapter": {
+            "id": "sample-ch-05",
+            "name": "示範單元 史料推論",
+            "section": null,
+            "section_id": null
+          },
+          "error_item_refs": [
+            {
+              "kind": "public_sample_item_id",
+              "id": "示範2-2"
+            }
+          ],
+          "reason_codes": [
+            "PRI.VALID_WRONG_MEASURED"
+          ]
+        },
+        {
+          "chapter": {
+            "id": "sample-ch-06",
+            "name": "示範單元 史料考證",
+            "section": null,
+            "section_id": null
+          },
+          "error_item_refs": [
+            {
+              "kind": "public_sample_item_id",
+              "id": "示範2-3"
+            }
+          ],
+          "reason_codes": [
+            "PRI.VALID_WRONG_MEASURED"
+          ]
+        }
+      ],
+      "reason_codes": [
+        "SUB.MEASURED"
+      ]
+    },
+    {
+      "subject": "地理",
+      "status": "measured",
+      "current_level": {
+        "posterior": {
+          "mean": 0.5503921713067054,
+          "sd": 0.9032961259181378,
+          "ci95": [
+            -1.2999999999999998,
+            2.3
+          ]
+        },
+        "band": {
+          "code": "mid",
+          "label": "初步：本次學科題暫居中間"
+        },
+        "signal": "up",
+        "p_high": 0.508463296217455,
+        "p_low": 0.10921209505257568,
+        "evidence": "初步",
+        "claim_type": "model_estimate_uncalibrated",
+        "reason_codes": [
+          "EVD.SUBJECT_TENTATIVE",
+          "SIG.EXPLORE_05"
+        ]
+      },
+      "potential": {
+        "code": "undetermined",
+        "claim_type": "planning_target",
+        "reason_codes": [
+          "POT.UNDETERMINED"
+        ]
+      },
+      "evidence": {
+        "answered": 3,
+        "valid": 2,
+        "correct": 2,
+        "valid_wrong": 0
+      },
+      "weak_chapters": [],
+      "reason_codes": [
+        "SUB.MEASURED"
+      ]
+    },
+    {
+      "subject": "公民與社會",
+      "status": "measured",
+      "current_level": {
+        "posterior": {
+          "mean": 0.11604254449373808,
+          "sd": 0.8856402877158228,
+          "ci95": [
+            -1.7000000000000002,
+            1.9000000000000004
+          ]
+        },
+        "band": {
+          "code": "mid",
+          "label": "初步：本次學科題暫居中間"
+        },
+        "signal": "flat",
+        "p_high": 0.3058156425198772,
+        "p_low": 0.21736208424949843,
+        "evidence": "初步",
+        "claim_type": "model_estimate_uncalibrated",
+        "reason_codes": [
+          "EVD.SUBJECT_TENTATIVE",
+          "SIG.EXPLORE_05"
+        ]
+      },
+      "potential": {
+        "code": "undetermined",
+        "claim_type": "planning_target",
+        "reason_codes": [
+          "POT.UNDETERMINED"
+        ]
+      },
+      "evidence": {
+        "answered": 3,
+        "valid": 3,
+        "correct": 2,
+        "valid_wrong": 1
+      },
+      "weak_chapters": [
+        {
+          "chapter": {
+            "id": "sample-ch-11",
+            "name": "示範單元 需求與價格",
+            "section": null,
+            "section_id": null
+          },
+          "error_item_refs": [
+            {
+              "kind": "public_sample_item_id",
+              "id": "示範4-2"
+            }
+          ],
+          "reason_codes": [
+            "PRI.VALID_WRONG_MEASURED"
+          ]
+        }
+      ],
+      "reason_codes": [
+        "SUB.MEASURED"
+      ]
+    },
+    {
+      "subject": "生物",
+      "status": "measured",
+      "current_level": {
+        "posterior": {
+          "mean": -0.17455119523011262,
+          "sd": 0.9448187197852633,
+          "ci95": [
+            -2,
+            1.7000000000000002
+          ]
+        },
+        "band": {
+          "code": "mid",
+          "label": "初步：本次學科題暫居中間"
+        },
+        "signal": "flat",
+        "p_high": 0.21528533111772957,
+        "p_low": 0.344602924962798,
+        "evidence": "初步",
+        "claim_type": "model_estimate_uncalibrated",
+        "reason_codes": [
+          "EVD.SUBJECT_TENTATIVE",
+          "SIG.EXPLORE_05"
+        ]
+      },
+      "potential": {
+        "code": "undetermined",
+        "claim_type": "planning_target",
+        "reason_codes": [
+          "POT.UNDETERMINED"
+        ]
+      },
+      "evidence": {
+        "answered": 3,
+        "valid": 2,
+        "correct": 1,
+        "valid_wrong": 1
+      },
+      "weak_chapters": [
+        {
+          "chapter": {
+            "id": "sample-ch-13",
+            "name": "示範單元 細胞構造",
+            "section": null,
+            "section_id": null
+          },
+          "error_item_refs": [
+            {
+              "kind": "public_sample_item_id",
+              "id": "示範5-1"
+            }
+          ],
+          "reason_codes": [
+            "PRI.VALID_WRONG_MEASURED"
+          ]
+        }
+      ],
+      "reason_codes": [
+        "SUB.MEASURED"
+      ]
+    }
+  ],
+  "untested_subjects": [
+    {
+      "subject": "英文",
+      "status": "not_in_bank",
+      "reason_codes": [
+        "SUB.NOT_IN_BANK"
+      ]
+    },
+    {
+      "subject": "數學",
+      "status": "not_in_bank",
+      "reason_codes": [
+        "SUB.NOT_IN_BANK"
+      ]
+    },
+    {
+      "subject": "物理",
+      "status": "not_in_bank",
+      "reason_codes": [
+        "SUB.NOT_IN_BANK"
+      ]
+    },
+    {
+      "subject": "化學",
+      "status": "not_in_bank",
+      "reason_codes": [
+        "SUB.NOT_IN_BANK"
+      ]
+    },
+    {
+      "subject": "地球科學",
+      "status": "not_in_bank",
+      "reason_codes": [
+        "SUB.NOT_IN_BANK"
+      ]
+    }
+  ],
+  "priorities": {
+    "status": "ok",
+    "reason_codes": [
+      "PRI.STATUS_OK"
+    ],
+    "items": [
+      {
+        "rank": 1,
+        "subject": "歷史",
+        "chapter": {
+          "id": "sample-ch-04",
+          "name": "示範單元 史料類型",
+          "section": null,
+          "section_id": null
+        },
+        "error_item_refs": [
+          {
+            "kind": "public_sample_item_id",
+            "id": "示範2-1"
+          }
+        ],
+        "signal": "down",
+        "potential": "undetermined",
+        "claim_type": "planning_target",
+        "reason_codes": [
+          "PRI.VALID_WRONG_MEASURED",
+          "PRI.ORDER_RULE",
+          "PRI.SUBJECT_SIGNAL_DOWN"
+        ],
+        "evidence_refs": [
+          "/subjects/1",
+          "/subjects/1/weak_chapters/0"
+        ]
+      },
+      {
+        "rank": 2,
+        "subject": "歷史",
+        "chapter": {
+          "id": "sample-ch-05",
+          "name": "示範單元 史料推論",
+          "section": null,
+          "section_id": null
+        },
+        "error_item_refs": [
+          {
+            "kind": "public_sample_item_id",
+            "id": "示範2-2"
+          }
+        ],
+        "signal": "down",
+        "potential": "undetermined",
+        "claim_type": "planning_target",
+        "reason_codes": [
+          "PRI.VALID_WRONG_MEASURED",
+          "PRI.ORDER_RULE",
+          "PRI.SUBJECT_SIGNAL_DOWN"
+        ],
+        "evidence_refs": [
+          "/subjects/1",
+          "/subjects/1/weak_chapters/1"
+        ]
+      },
+      {
+        "rank": 3,
+        "subject": "歷史",
+        "chapter": {
+          "id": "sample-ch-06",
+          "name": "示範單元 史料考證",
+          "section": null,
+          "section_id": null
+        },
+        "error_item_refs": [
+          {
+            "kind": "public_sample_item_id",
+            "id": "示範2-3"
+          }
+        ],
+        "signal": "down",
+        "potential": "undetermined",
+        "claim_type": "planning_target",
+        "reason_codes": [
+          "PRI.VALID_WRONG_MEASURED",
+          "PRI.ORDER_RULE",
+          "PRI.SUBJECT_SIGNAL_DOWN"
+        ],
+        "evidence_refs": [
+          "/subjects/1",
+          "/subjects/1/weak_chapters/2"
+        ]
+      }
+    ],
+    "collect_evidence": []
+  },
+  "material_recommendations": [
+    {
+      "id": "mat-1",
+      "target": {
+        "kind": "priority_chapter",
+        "priority_rank": 1,
+        "subject": "歷史",
+        "chapter_id": "sample-ch-04"
+      },
+      "strategy": "transfer",
+      "material_type": "變式題",
+      "alt_material_types": [],
+      "b_range": {
+        "scale": "d1_provisional_theta",
+        "provisional": true,
+        "calibrated": false,
+        "anchor": "subject_posterior_mean",
+        "anchor_value": -0.9133016483205645,
+        "lo": -1.9133016483205645,
+        "hi": -0.4133016483205645
+      },
+      "scaffolding_level": "high",
+      "why": "歷史「示範單元 史料類型」本次有 1 題有效錯題；遷移力探索訊號偏低，用「多樣遷移」，從略低於目前估計的難度開始。",
+      "reason_codes": [
+        "MAT.TYPE_FROM_STRATEGY",
+        "MODE.T_LOW_TRANSFER",
+        "MAT.B_ANCHOR_SUBJECT_POSTERIOR",
+        "MAT.SCAF_HIGH"
+      ],
+      "evidence_refs": [
+        "/priorities/items/0",
+        "/subjects/1/current_level",
+        "/ability/T"
+      ],
+      "claim_type": "planning_target"
+    },
+    {
+      "id": "mat-2",
+      "target": {
+        "kind": "priority_chapter",
+        "priority_rank": 1,
+        "subject": "歷史",
+        "chapter_id": "sample-ch-04"
+      },
+      "strategy": null,
+      "material_type": "概念卡",
+      "alt_material_types": [],
+      "b_range": {
+        "scale": "d1_provisional_theta",
+        "provisional": true,
+        "calibrated": false,
+        "anchor": "subject_posterior_mean",
+        "anchor_value": -0.9133016483205645,
+        "lo": -1.9133016483205645,
+        "hi": -0.4133016483205645
+      },
+      "scaffolding_level": "high",
+      "why": "把「示範單元 史料類型」的關鍵概念整理成 1 張卡，第 3、7、30 天回想。",
+      "reason_codes": [
+        "MAT.CONCEPT_CARD_REVIEW",
+        "MAT.B_ANCHOR_SUBJECT_POSTERIOR",
+        "MAT.SCAF_HIGH",
+        "REV.FIXED_NOT_FSRS"
+      ],
+      "evidence_refs": [
+        "/priorities/items/0",
+        "/subjects/1/current_level",
+        "/review_schedule"
+      ],
+      "claim_type": "planning_target"
+    },
+    {
+      "id": "mat-3",
+      "target": {
+        "kind": "priority_chapter",
+        "priority_rank": 2,
+        "subject": "歷史",
+        "chapter_id": "sample-ch-05"
+      },
+      "strategy": "transfer",
+      "material_type": "變式題",
+      "alt_material_types": [],
+      "b_range": {
+        "scale": "d1_provisional_theta",
+        "provisional": true,
+        "calibrated": false,
+        "anchor": "subject_posterior_mean",
+        "anchor_value": -0.9133016483205645,
+        "lo": -1.9133016483205645,
+        "hi": -0.4133016483205645
+      },
+      "scaffolding_level": "high",
+      "why": "歷史「示範單元 史料推論」本次有 1 題有效錯題；遷移力探索訊號偏低，用「多樣遷移」，從略低於目前估計的難度開始。",
+      "reason_codes": [
+        "MAT.TYPE_FROM_STRATEGY",
+        "MODE.T_LOW_TRANSFER",
+        "MAT.B_ANCHOR_SUBJECT_POSTERIOR",
+        "MAT.SCAF_HIGH"
+      ],
+      "evidence_refs": [
+        "/priorities/items/1",
+        "/subjects/1/current_level",
+        "/ability/T"
+      ],
+      "claim_type": "planning_target"
+    },
+    {
+      "id": "mat-4",
+      "target": {
+        "kind": "priority_chapter",
+        "priority_rank": 2,
+        "subject": "歷史",
+        "chapter_id": "sample-ch-05"
+      },
+      "strategy": null,
+      "material_type": "概念卡",
+      "alt_material_types": [],
+      "b_range": {
+        "scale": "d1_provisional_theta",
+        "provisional": true,
+        "calibrated": false,
+        "anchor": "subject_posterior_mean",
+        "anchor_value": -0.9133016483205645,
+        "lo": -1.9133016483205645,
+        "hi": -0.4133016483205645
+      },
+      "scaffolding_level": "high",
+      "why": "把「示範單元 史料推論」的關鍵概念整理成 1 張卡，第 3、7、30 天回想。",
+      "reason_codes": [
+        "MAT.CONCEPT_CARD_REVIEW",
+        "MAT.B_ANCHOR_SUBJECT_POSTERIOR",
+        "MAT.SCAF_HIGH",
+        "REV.FIXED_NOT_FSRS"
+      ],
+      "evidence_refs": [
+        "/priorities/items/1",
+        "/subjects/1/current_level",
+        "/review_schedule"
+      ],
+      "claim_type": "planning_target"
+    },
+    {
+      "id": "mat-5",
+      "target": {
+        "kind": "priority_chapter",
+        "priority_rank": 3,
+        "subject": "歷史",
+        "chapter_id": "sample-ch-06"
+      },
+      "strategy": "transfer",
+      "material_type": "變式題",
+      "alt_material_types": [],
+      "b_range": {
+        "scale": "d1_provisional_theta",
+        "provisional": true,
+        "calibrated": false,
+        "anchor": "subject_posterior_mean",
+        "anchor_value": -0.9133016483205645,
+        "lo": -1.9133016483205645,
+        "hi": -0.4133016483205645
+      },
+      "scaffolding_level": "high",
+      "why": "歷史「示範單元 史料考證」本次有 1 題有效錯題；遷移力探索訊號偏低，用「多樣遷移」，從略低於目前估計的難度開始。",
+      "reason_codes": [
+        "MAT.TYPE_FROM_STRATEGY",
+        "MODE.T_LOW_TRANSFER",
+        "MAT.B_ANCHOR_SUBJECT_POSTERIOR",
+        "MAT.SCAF_HIGH"
+      ],
+      "evidence_refs": [
+        "/priorities/items/2",
+        "/subjects/1/current_level",
+        "/ability/T"
+      ],
+      "claim_type": "planning_target"
+    },
+    {
+      "id": "mat-6",
+      "target": {
+        "kind": "priority_chapter",
+        "priority_rank": 3,
+        "subject": "歷史",
+        "chapter_id": "sample-ch-06"
+      },
+      "strategy": null,
+      "material_type": "概念卡",
+      "alt_material_types": [],
+      "b_range": {
+        "scale": "d1_provisional_theta",
+        "provisional": true,
+        "calibrated": false,
+        "anchor": "subject_posterior_mean",
+        "anchor_value": -0.9133016483205645,
+        "lo": -1.9133016483205645,
+        "hi": -0.4133016483205645
+      },
+      "scaffolding_level": "high",
+      "why": "把「示範單元 史料考證」的關鍵概念整理成 1 張卡，第 3、7、30 天回想。",
+      "reason_codes": [
+        "MAT.CONCEPT_CARD_REVIEW",
+        "MAT.B_ANCHOR_SUBJECT_POSTERIOR",
+        "MAT.SCAF_HIGH",
+        "REV.FIXED_NOT_FSRS"
+      ],
+      "evidence_refs": [
+        "/priorities/items/2",
+        "/subjects/1/current_level",
+        "/review_schedule"
+      ],
+      "claim_type": "planning_target"
+    }
+  ],
+  "interaction_design": [
+    {
+      "id": "int-1",
+      "pattern": "predict_then_check",
+      "strategy": "transfer",
+      "target": {
+        "kind": "priority_chapters",
+        "priority_ranks": [
+          1,
+          2,
+          3
+        ]
+      },
+      "session_minutes": 15,
+      "feedback_style": "delayed_after_prediction",
+      "hint_policy": "none_until_prediction",
+      "why": "遷移力探索訊號偏低，用「多樣遷移」。",
+      "reason_codes": [
+        "INT.PREDICT_THEN_CHECK",
+        "MODE.T_LOW_TRANSFER"
+      ],
+      "evidence_refs": [
+        "/ability/T"
+      ],
+      "claim_type": "planning_target"
+    },
+    {
+      "id": "int-2",
+      "pattern": "confidence_before_answer",
+      "strategy": null,
+      "target": {
+        "kind": "all_sessions"
+      },
+      "session_minutes": 10,
+      "feedback_style": "compare_confidence_after_answer",
+      "hint_policy": "none_before_confidence",
+      "why": "每題作答前先標把握；本次 4 筆把握觀測，未達 10 筆，只當習慣，不判斷是否過度自信。",
+      "reason_codes": [
+        "INT.CONFIDENCE_BEFORE_ANSWER",
+        "CAL.N_BELOW_MIN"
+      ],
+      "evidence_refs": [
+        "/calibration"
+      ],
+      "claim_type": "planning_target"
+    },
+    {
+      "id": "int-3",
+      "pattern": "spaced_recall_card",
+      "strategy": null,
+      "target": {
+        "kind": "review_schedule"
+      },
+      "session_minutes": 2,
+      "feedback_style": "self_check_against_key",
+      "hint_policy": "none_until_recall_attempt",
+      "why": "第 3、7、30 天開頭 2 分鐘先不看筆記回想；固定間隔，未接 FSRS。",
+      "reason_codes": [
+        "INT.SPACED_RECALL_CARD",
+        "REV.FIXED_NOT_FSRS"
+      ],
+      "evidence_refs": [
+        "/review_schedule",
+        "/recall"
+      ],
+      "claim_type": "planning_target"
+    }
+  ],
+  "review_schedule": {
+    "scheduler": "fixed_intervals",
+    "fsrs_ready": false,
+    "fsrs_parameters": null,
+    "intervals_days": [
+      3,
+      7,
+      30
+    ],
+    "seed_items": [
+      {
+        "ref": {
+          "kind": "public_sample_item_id",
+          "id": "示範2-1"
+        },
+        "card_type": "concept_card",
+        "chapter_id": "sample-ch-04",
+        "due_days": [
+          3,
+          7,
+          30
+        ],
+        "reason_codes": [
+          "REV.SEED_PRIORITY_WRONG_ITEM"
+        ],
+        "evidence_refs": [
+          "/priorities/items/0"
+        ]
+      },
+      {
+        "ref": {
+          "kind": "public_sample_item_id",
+          "id": "示範2-2"
+        },
+        "card_type": "concept_card",
+        "chapter_id": "sample-ch-05",
+        "due_days": [
+          3,
+          7,
+          30
+        ],
+        "reason_codes": [
+          "REV.SEED_PRIORITY_WRONG_ITEM"
+        ],
+        "evidence_refs": [
+          "/priorities/items/1"
+        ]
+      },
+      {
+        "ref": {
+          "kind": "public_sample_item_id",
+          "id": "示範2-3"
+        },
+        "card_type": "concept_card",
+        "chapter_id": "sample-ch-06",
+        "due_days": [
+          3,
+          7,
+          30
+        ],
+        "reason_codes": [
+          "REV.SEED_PRIORITY_WRONG_ITEM"
+        ],
+        "evidence_refs": [
+          "/priorities/items/2"
+        ]
+      },
+      {
+        "ref": {
+          "kind": "core_item_id",
+          "id": "K1"
+        },
+        "card_type": "rule_card",
+        "chapter_id": null,
+        "due_days": [
+          3,
+          7,
+          30
+        ],
+        "reason_codes": [
+          "REV.SEED_CORE_RULE"
+        ],
+        "evidence_refs": [
+          "/recall"
+        ]
+      },
+      {
+        "ref": {
+          "kind": "core_item_id",
+          "id": "K2"
+        },
+        "card_type": "rule_card",
+        "chapter_id": null,
+        "due_days": [
+          3,
+          7,
+          30
+        ],
+        "reason_codes": [
+          "REV.SEED_CORE_RULE"
+        ],
+        "evidence_refs": [
+          "/recall"
+        ]
+      }
+    ],
+    "reason_codes": [
+      "REV.FIXED_NOT_FSRS"
+    ]
+  },
+  "d7_el_plan": {
+    "engine_connected": false,
+    "total_minutes": 90,
+    "days": [
+      {
+        "day": 1,
+        "engine": "EA",
+        "minutes": 10,
+        "task": "initial",
+        "focus_priority_ranks": [
+          1
+        ],
+        "strategy": null,
+        "interaction_patterns": [],
+        "material_ids": [],
+        "spaced_recall": false,
+        "reason_codes": [
+          "PLAN.D1_EA_INITIAL"
+        ]
+      },
+      {
+        "day": 2,
+        "engine": "EL",
+        "minutes": 15,
+        "task": "practice",
+        "focus_priority_ranks": [
+          1
+        ],
+        "strategy": "transfer",
+        "interaction_patterns": [
+          "predict_then_check",
+          "confidence_before_answer"
+        ],
+        "material_ids": [
+          "mat-1"
+        ],
+        "spaced_recall": false,
+        "reason_codes": [
+          "PLAN.EL_PRACTICE_ROTATION",
+          "MODE.T_LOW_TRANSFER"
+        ]
+      },
+      {
+        "day": 3,
+        "engine": "EL",
+        "minutes": 10,
+        "task": "practice",
+        "focus_priority_ranks": [
+          2
+        ],
+        "strategy": "transfer",
+        "interaction_patterns": [
+          "predict_then_check",
+          "confidence_before_answer",
+          "spaced_recall_card"
+        ],
+        "material_ids": [
+          "mat-3"
+        ],
+        "spaced_recall": true,
+        "reason_codes": [
+          "PLAN.EL_PRACTICE_ROTATION",
+          "MODE.T_LOW_TRANSFER",
+          "PLAN.SPACED_RECALL_DAY"
+        ]
+      },
+      {
+        "day": 4,
+        "engine": "EL",
+        "minutes": 15,
+        "task": "practice",
+        "focus_priority_ranks": [
+          3
+        ],
+        "strategy": "transfer",
+        "interaction_patterns": [
+          "predict_then_check",
+          "confidence_before_answer"
+        ],
+        "material_ids": [
+          "mat-5"
+        ],
+        "spaced_recall": false,
+        "reason_codes": [
+          "PLAN.EL_PRACTICE_ROTATION",
+          "MODE.T_LOW_TRANSFER"
+        ]
+      },
+      {
+        "day": 5,
+        "engine": "EL",
+        "minutes": 10,
+        "task": "practice",
+        "focus_priority_ranks": [
+          1
+        ],
+        "strategy": "transfer",
+        "interaction_patterns": [
+          "predict_then_check",
+          "confidence_before_answer"
+        ],
+        "material_ids": [
+          "mat-1"
+        ],
+        "spaced_recall": false,
+        "reason_codes": [
+          "PLAN.EL_PRACTICE_ROTATION",
+          "MODE.T_LOW_TRANSFER"
+        ]
+      },
+      {
+        "day": 6,
+        "engine": "EL",
+        "minutes": 15,
+        "task": "practice",
+        "focus_priority_ranks": [
+          2
+        ],
+        "strategy": "transfer",
+        "interaction_patterns": [
+          "predict_then_check",
+          "confidence_before_answer"
+        ],
+        "material_ids": [
+          "mat-3"
+        ],
+        "spaced_recall": false,
+        "reason_codes": [
+          "PLAN.EL_PRACTICE_ROTATION",
+          "MODE.T_LOW_TRANSFER"
+        ]
+      },
+      {
+        "day": 7,
+        "engine": "EL",
+        "minutes": 15,
+        "task": "review",
+        "focus_priority_ranks": [
+          1,
+          2,
+          3
+        ],
+        "strategy": null,
+        "interaction_patterns": [
+          "confidence_before_answer",
+          "spaced_recall_card"
+        ],
+        "material_ids": [
+          "mat-2",
+          "mat-4",
+          "mat-6"
+        ],
+        "spaced_recall": true,
+        "reason_codes": [
+          "PLAN.EL_REVIEW_D7",
+          "PLAN.SPACED_RECALL_DAY"
+        ]
+      }
+    ]
+  },
+  "d30_em_check": {
+    "day": 30,
+    "engine": "EM",
+    "engine_connected": false,
+    "minutes": 15,
+    "focus_priority_ranks": [
+      1,
+      2,
+      3
+    ],
+    "parallel_items": {
+      "required": true,
+      "available": false,
+      "per_chapter": 3,
+      "reuse_original_items": false,
+      "source": "teacher_or_next_version"
+    },
+    "delayed_recall": true,
+    "confidence_first": true,
+    "compare_to_d1": "direction_only",
+    "success_criteria": [
+      {
+        "id": "crit-1",
+        "metric": "parallel_items_correct",
+        "target": {
+          "op": "&gt;=",
+          "value": 2,
+          "of": 3,
+          "unit": "items"
+        },
+        "scope": {
+          "kind": "priority_chapter",
+          "priority_rank": 1,
+          "chapter_id": "sample-ch-04"
+        },
+        "claim_type": "planning_target",
+        "validated": false,
+        "reason_codes": [
+          "EM.CRIT_PARALLEL_CORRECT"
+        ],
+        "evidence_refs": [
+          "/priorities/items/0"
+        ]
+      },
+      {
+        "id": "crit-2",
+        "metric": "parallel_items_correct",
+        "target": {
+          "op": "&gt;=",
+          "value": 2,
+          "of": 3,
+          "unit": "items"
+        },
+        "scope": {
+          "kind": "priority_chapter",
+          "priority_rank": 2,
+          "chapter_id": "sample-ch-05"
+        },
+        "claim_type": "planning_target",
+        "validated": false,
+        "reason_codes": [
+          "EM.CRIT_PARALLEL_CORRECT"
+        ],
+        "evidence_refs": [
+          "/priorities/items/1"
+        ]
+      },
+      {
+        "id": "crit-3",
+        "metric": "parallel_items_correct",
+        "target": {
+          "op": "&gt;=",
+          "value": 2,
+          "of": 3,
+          "unit": "items"
+        },
+        "scope": {
+          "kind": "priority_chapter",
+          "priority_rank": 3,
+          "chapter_id": "sample-ch-06"
+        },
+        "claim_type": "planning_target",
+        "validated": false,
+        "reason_codes": [
+          "EM.CRIT_PARALLEL_CORRECT"
+        ],
+        "evidence_refs": [
+          "/priorities/items/2"
+        ]
+      },
+      {
+        "id": "crit-4",
+        "metric": "confidence_marked_before_answer_rate",
+        "target": {
+          "op": "&gt;=",
+          "value": 0.9,
+          "of": null,
+          "unit": "proportion"
+        },
+        "scope": {
+          "kind": "all_d30_items"
+        },
+        "claim_type": "planning_target",
+        "validated": false,
+        "reason_codes": [
+          "EM.CRIT_CONFIDENCE_FIRST"
+        ],
+        "evidence_refs": [
+          "/calibration"
+        ]
+      },
+      {
+        "id": "crit-5",
+        "metric": "el_days_completed",
+        "target": {
+          "op": "&gt;=",
+          "value": 4,
+          "of": 6,
+          "unit": "days"
+        },
+        "scope": {
+          "kind": "d7_el_plan"
+        },
+        "claim_type": "planning_target",
+        "validated": false,
+        "reason_codes": [
+          "EM.CRIT_PERSISTENCE"
+        ],
+        "evidence_refs": [
+          "/d7_el_plan"
+        ]
+      },
+      {
+        "id": "crit-6",
+        "metric": "star_port_delayed_recall_correct",
+        "target": {
+          "op": "&gt;=",
+          "value": 1,
+          "of": 2,
+          "unit": "items"
+        },
+        "scope": {
+          "kind": "core_recall"
+        },
+        "claim_type": "planning_target",
+        "validated": false,
+        "reason_codes": [
+          "EM.CRIT_DELAYED_RECALL"
+        ],
+        "evidence_refs": [
+          "/recall"
+        ]
+      }
+    ],
+    "reason_codes": [
+      "EM.PARALLEL_NEW_ITEMS",
+      "EM.NO_PARALLEL_BANK"
+    ]
+  },
+  "constraints": [
+    {
+      "code": "CAV.UNCALIBRATED",
+      "text": "所有題目參數、平均作答時間、b 區間都未經真人校準"
+    },
+    {
+      "code": "CAV.NOT_DIAGNOSIS",
+      "text": "不是診斷、分班、選組或潛力上限；不預測成績"
+    },
+    {
+      "code": "CAV.TARGETS_NOT_PREDICTIONS",
+      "text": "所有建議與成功標準都是規劃目標，不是經驗證的預測"
+    },
+    {
+      "code": "CAV.NO_ENGINE_INTEGRATION",
+      "text": "未實際連接任何 EL／EM 引擎或 FSRS；本規格只是交接格式"
+    },
+    {
+      "code": "CAV.SUBJECT_FEW_ITEMS",
+      "text": "每科最多 3 題，學科證據有限"
+    },
+    {
+      "code": "CAV.PUBLIC_SAMPLE_ONLY",
+      "text": "公開版：只含原創示範題 ID 與示範單元，不含任何題庫文字、題號或 GUID"
+    }
+  ],
+  "model_versions": {
+    "mac": "mac-3.0-compatible-subset",
+    "prototype": "d1-v1",
+    "learning_plan_rules": "learningPlan d1-v1 (unchanged)",
+    "reason_code_registry": "nous.d1.reason_codes/v0",
+    "schema": "nous.d1.learning_plan/v0",
+    "item_parameters": "uncalibrated design assumptions",
+    "fsrs": "not_initialized"
+  },
+  "reason_code_registry": {
+    "id": "nous.d1.reason_codes/v0",
+    "used": {
+      "CAL.N_BELOW_MIN": "把握觀測 &lt; 10 筆（calib_min_n）→ 只建議作答前標把握，不估計、不判斷過度自信",
+      "CAV.NOT_DIAGNOSIS": "不是診斷、分班、選組或潛力上限；不預測成績",
+      "CAV.NO_ENGINE_INTEGRATION": "未實際連接任何 EL／EM 引擎或 FSRS；本規格只是交接格式",
+      "CAV.PUBLIC_SAMPLE_ONLY": "公開版：只含原創示範題 ID 與示範單元，不含任何題庫文字、題號或 GUID",
+      "CAV.SUBJECT_FEW_ITEMS": "每科最多 3 題，學科證據有限",
+      "CAV.TARGETS_NOT_PREDICTIONS": "所有建議與成功標準都是規劃目標，不是經驗證的預測",
+      "CAV.UNCALIBRATED": "所有題目參數、平均作答時間、b 區間都未經真人校準",
+      "EM.CRIT_CONFIDENCE_FIRST": "規劃目標：≥ 90% 題目作答前已標把握",
+      "EM.CRIT_DELAYED_RECALL": "規劃目標：星港延遲回想 2 題至少答對 1 題",
+      "EM.CRIT_PARALLEL_CORRECT": "規劃目標：每個優先章節平行新題至少答對 2/3（看方向，不是預測）",
+      "EM.CRIT_PERSISTENCE": "規劃目標：D2–D7 至少完成 4 天",
+      "EM.NO_PARALLEL_BANK": "本原型沒有平行題庫，需老師或下一版提供",
+      "EM.PARALLEL_NEW_ITEMS": "D30＝同章節平行新題，不重做原題；加星港延遲回想、作答前標把握",
+      "EVD.SD_TENTATIVE": "後驗 SD &gt; 0.6 且有效題 ≥ 2 → 初步（70% 門檻）",
+      "EVD.SUBJECT_TENTATIVE": "學科每科僅 3 題：有效題 ≥ 2 一律 初步，不升為確定",
+      "INT.CONFIDENCE_BEFORE_ANSWER": "一律：每題作答前先標把握（校準習慣）",
+      "INT.PREDICT_THEN_CHECK": "多樣遷移策略 → 先預測再對照",
+      "INT.SPACED_RECALL_CARD": "固定間隔回想卡（D3、D7、D30），開頭 2 分鐘",
+      "MAT.B_ANCHOR_SUBJECT_POSTERIOR": "建議難度 b 區間＝該科後驗平均 −1.0 至 +0.5（夾在 −4..4），屬暫定模型量尺、未校準",
+      "MAT.CONCEPT_CARD_REVIEW": "每個優先章節配 1 張概念卡，供 D3／D7／D30 間隔回想",
+      "MAT.SCAF_HIGH": "目標訊號偏低 → 高鷹架（完整示範、逐步提示）",
+      "MAT.TYPE_FROM_STRATEGY": "教材型態由學習模式對應：範例／圖解→範例（備選圖解）；步驟拆解→步驟拆解；多樣遷移→變式題",
+      "MODE.T_LOW_TRANSFER": "T 探索訊號偏低 → 多樣遷移（變式題）",
+      "PLAN.D1_EA_INITIAL": "D1＝EA 初始評估（本次）＋回看第 1 優先章節錯題",
+      "PLAN.EL_PRACTICE_ROTATION": "D2–D6＝EL 練習，輪流優先章節與學習模式，做同章節新題",
+      "PLAN.EL_REVIEW_D7": "D7＝回顧與持續情形",
+      "PLAN.SPACED_RECALL_DAY": "回想日（review_days 內或 D7）開頭 2 分鐘間隔回想",
+      "POT.UNDETERMINED": "其餘情況 → 未判定（3 題無法判定成長速度）",
+      "PRI.ORDER_RULE": "排序：科目偏低 → 該科錯題數 → 該章錯題數 → 科目順序 → 出題順序；最多 3 個",
+      "PRI.STATUS_OK": "2–3 個優先章節",
+      "PRI.SUBJECT_SIGNAL_DOWN": "排序第一鍵：該科探索訊號偏低者優先",
+      "PRI.VALID_WRONG_MEASURED": "章節來自已測科目中有效（非快速、未切背景）且未答對的題目",
+      "REC.FEW_UNCONTROLLED": "短延遲再認最多 2 題、延遲不受控 → 不推估長期記憶、不寫入 FSRS",
+      "REV.FIXED_NOT_FSRS": "固定間隔 D3／D7／D30；未初始化 FSRS、沒有個人記憶參數",
+      "REV.SEED_CORE_RULE": "種子卡＝星港規則再認題（原創、可公開，只放 ID）",
+      "REV.SEED_PRIORITY_WRONG_ITEM": "種子卡＝優先章節的有效錯題（只放 ID）",
+      "SIG.EXPLORE_05": "探索訊號：後驗 ≥ 0.5 落在 &gt;0.5＝偏高、&lt;−0.5＝偏低，其餘中間；只用於排序與選策略",
+      "SUB.MEASURED": "已勾選且有效題 ≥ 2 → 已測，可作為證據",
+      "SUB.NOT_IN_BANK": "英文、數學、物理、化學、地球科學本版無合規題 → 未施測，不推薦也不排除"
+    }
+  }
+}</pre></section>
+  <p class="muted">學科題未做 IRT 校準，也未與星港任務量尺等化；同材料多題可能有局部依賴。這份結果不能作正式升學、分班、選組或人格判定。</p><div class="row"></div></section></div></main><script type="application/json" id="sampleSpec">{
+  "schema_version": "nous.d1.learning_plan/v0",
+  "generated_at": "2026-11-07T12:00:00.000Z",
+  "source": {
+    "page_mode": "public",
+    "prototype": "d1-v1",
+    "session_kind": "d1_initial_assessment",
+    "is_simulated": true
+  },
+  "claims_policy": {
+    "contains_validated_predictions": false,
+    "recommendation_claim_type": "planning_target",
+    "estimate_claim_type": "model_estimate_uncalibrated",
+    "note": "建議、優先序、b 區間與成功標準都是依公開規則產生的規劃目標（planning_target），不是經驗證的預測；估計值來自未校準模型。"
+  },
+  "integration": {
+    "el_engine_connected": false,
+    "em_engine_connected": false,
+    "fsrs_connected": false,
+    "note": "本規格只是交接格式；原型未實際連接任何 EL／EM 引擎或 FSRS。"
+  },
+  "privacy": {
+    "contains_identity": false,
+    "contains_item_text": false,
+    "reference_scope": "public_sample_ids",
+    "private_source_protection": "not_applicable",
+    "publish_allowed": true
+  },
+  "student": {
+    "grade": 10,
+    "grade_in_scope": true,
+    "learned_flags": {
+      "國文": true,
+      "歷史": true,
+      "地理": true,
+      "公民與社會": true,
+      "生物": true
+    }
+  },
+  "ability": {
+    "U": {
+      "dimension": "U",
+      "name": "理解力",
+      "valid_n": 4,
+      "posterior": {
+        "mean": 0.8795523520121076,
+        "sd": 0.7996220071307627,
+        "ci95": [
+          -0.7000000000000002,
+          2.5
+        ]
+      },
+      "band": {
+        "code": "mid",
+        "label": "初步：本任務暫居中間",
+        "threshold": 0.7
+      },
+      "evidence": "初步",
+      "signal": "up",
+      "p_high": 0.6649727015922747,
+      "p_low": 0.03665592851453373,
+      "claim_type": "model_estimate_uncalibrated",
+      "reason_codes": [
+        "EVD.SD_TENTATIVE",
+        "SIG.EXPLORE_05"
+      ]
+    },
+    "R": {
+      "dimension": "R",
+      "name": "推演力",
+      "valid_n": 4,
+      "posterior": {
+        "mean": -0.1683164863171989,
+        "sd": 0.8475857292503519,
+        "ci95": [
+          -1.9,
+          1.5
+        ]
+      },
+      "band": {
+        "code": "mid",
+        "label": "初步：本任務暫居中間",
+        "threshold": 0.7
+      },
+      "evidence": "初步",
+      "signal": "flat",
+      "p_high": 0.18981208935078134,
+      "p_low": 0.3129529207224096,
+      "claim_type": "model_estimate_uncalibrated",
+      "reason_codes": [
+        "EVD.SD_TENTATIVE",
+        "SIG.EXPLORE_05"
+      ]
+    },
+    "T": {
+      "dimension": "T",
+      "name": "遷移力",
+      "valid_n": 4,
+      "posterior": {
+        "mean": -0.9136490239274996,
+        "sd": 0.7470517713674464,
+        "ci95": [
+          -2.4,
+          0.5
+        ]
+      },
+      "band": {
+        "code": "mid",
+        "label": "初步：本任務暫居中間",
+        "threshold": 0.7
+      },
+      "evidence": "初步",
+      "signal": "down",
+      "p_high": 0.02057613965506062,
+      "p_low": 0.6813731150202508,
+      "claim_type": "model_estimate_uncalibrated",
+      "reason_codes": [
+        "EVD.SD_TENTATIVE",
+        "SIG.EXPLORE_05"
+      ]
+    }
+  },
+  "calibration": {
+    "observations_n": 4,
+    "min_n": 10,
+    "p_bias_lt_m05": 0.3776404078607439,
+    "threshold": 0.8,
+    "status": "habit",
+    "evidence": "證據不足",
+    "estimate": null,
+    "estimate_withheld": "n_below_min_prior_dominated",
+    "claim_type": "model_estimate_uncalibrated",
+    "reason_codes": [
+      "CAL.N_BELOW_MIN"
+    ]
+  },
+  "recall": {
+    "valid_n": 2,
+    "correct_n": 1,
+    "delay_sec": {
+      "min": 894,
+      "max": 915.5
+    },
+    "delay_controlled": false,
+    "evidence": "證據不足",
+    "retention_estimate": null,
+    "fsrs": {
+      "initialized": false,
+      "parameters": null
+    },
+    "reason_codes": [
+      "REC.FEW_UNCONTROLLED"
+    ]
+  },
+  "subjects": [
+    {
+      "subject": "國文",
+      "status": "measured",
+      "current_level": {
+        "posterior": {
+          "mean": 0.7293372251545328,
+          "sd": 0.849061481901502,
+          "ci95": [
+            -1,
+            2.4000000000000004
+          ]
+        },
+        "band": {
+          "code": "mid",
+          "label": "初步：本次學科題暫居中間"
+        },
+        "signal": "up",
+        "p_high": 0.591024715286165,
+        "p_low": 0.06542077043493402,
+        "evidence": "初步",
+        "claim_type": "model_estimate_uncalibrated",
+        "reason_codes": [
+          "EVD.SUBJECT_TENTATIVE",
+          "SIG.EXPLORE_05"
+        ]
+      },
+      "potential": {
+        "code": "undetermined",
+        "claim_type": "planning_target",
+        "reason_codes": [
+          "POT.UNDETERMINED"
+        ]
+      },
+      "evidence": {
+        "answered": 3,
+        "valid": 3,
+        "correct": 3,
+        "valid_wrong": 0
+      },
+      "weak_chapters": [],
+      "reason_codes": [
+        "SUB.MEASURED"
+      ]
+    },
+    {
+      "subject": "歷史",
+      "status": "measured",
+      "current_level": {
+        "posterior": {
+          "mean": -0.9133016483205645,
+          "sd": 0.7759105795476501,
+          "ci95": [
+            -2.5,
+            0.5999999999999996
+          ]
+        },
+        "band": {
+          "code": "mid",
+          "label": "初步：本次學科題暫居中間"
+        },
+        "signal": "down",
+        "p_high": 0.028230256040821165,
+        "p_low": 0.6818350174478867,
+        "evidence": "初步",
+        "claim_type": "model_estimate_uncalibrated",
+        "reason_codes": [
+          "EVD.SUBJECT_TENTATIVE",
+          "SIG.EXPLORE_05"
+        ]
+      },
+      "potential": {
+        "code": "undetermined",
+        "claim_type": "planning_target",
+        "reason_codes": [
+          "POT.UNDETERMINED"
+        ]
+      },
+      "evidence": {
+        "answered": 3,
+        "valid": 3,
+        "correct": 0,
+        "valid_wrong": 3
+      },
+      "weak_chapters": [
+        {
+          "chapter": {
+            "id": "sample-ch-04",
+            "name": "示範單元 史料類型",
+            "section": null,
+            "section_id": null
+          },
+          "error_item_refs": [
+            {
+              "kind": "public_sample_item_id",
+              "id": "示範2-1"
+            }
+          ],
+          "reason_codes": [
+            "PRI.VALID_WRONG_MEASURED"
+          ]
+        },
+        {
+          "chapter": {
+            "id": "sample-ch-05",
+            "name": "示範單元 史料推論",
+            "section": null,
+            "section_id": null
+          },
+          "error_item_refs": [
+            {
+              "kind": "public_sample_item_id",
+              "id": "示範2-2"
+            }
+          ],
+          "reason_codes": [
+            "PRI.VALID_WRONG_MEASURED"
+          ]
+        },
+        {
+          "chapter": {
+            "id": "sample-ch-06",
+            "name": "示範單元 史料考證",
+            "section": null,
+            "section_id": null
+          },
+          "error_item_refs": [
+            {
+              "kind": "public_sample_item_id",
+              "id": "示範2-3"
+            }
+          ],
+          "reason_codes": [
+            "PRI.VALID_WRONG_MEASURED"
+          ]
+        }
+      ],
+      "reason_codes": [
+        "SUB.MEASURED"
+      ]
+    },
+    {
+      "subject": "地理",
+      "status": "measured",
+      "current_level": {
+        "posterior": {
+          "mean": 0.5503921713067054,
+          "sd": 0.9032961259181378,
+          "ci95": [
+            -1.2999999999999998,
+            2.3
+          ]
+        },
+        "band": {
+          "code": "mid",
+          "label": "初步：本次學科題暫居中間"
+        },
+        "signal": "up",
+        "p_high": 0.508463296217455,
+        "p_low": 0.10921209505257568,
+        "evidence": "初步",
+        "claim_type": "model_estimate_uncalibrated",
+        "reason_codes": [
+          "EVD.SUBJECT_TENTATIVE",
+          "SIG.EXPLORE_05"
+        ]
+      },
+      "potential": {
+        "code": "undetermined",
+        "claim_type": "planning_target",
+        "reason_codes": [
+          "POT.UNDETERMINED"
+        ]
+      },
+      "evidence": {
+        "answered": 3,
+        "valid": 2,
+        "correct": 2,
+        "valid_wrong": 0
+      },
+      "weak_chapters": [],
+      "reason_codes": [
+        "SUB.MEASURED"
+      ]
+    },
+    {
+      "subject": "公民與社會",
+      "status": "measured",
+      "current_level": {
+        "posterior": {
+          "mean": 0.11604254449373808,
+          "sd": 0.8856402877158228,
+          "ci95": [
+            -1.7000000000000002,
+            1.9000000000000004
+          ]
+        },
+        "band": {
+          "code": "mid",
+          "label": "初步：本次學科題暫居中間"
+        },
+        "signal": "flat",
+        "p_high": 0.3058156425198772,
+        "p_low": 0.21736208424949843,
+        "evidence": "初步",
+        "claim_type": "model_estimate_uncalibrated",
+        "reason_codes": [
+          "EVD.SUBJECT_TENTATIVE",
+          "SIG.EXPLORE_05"
+        ]
+      },
+      "potential": {
+        "code": "undetermined",
+        "claim_type": "planning_target",
+        "reason_codes": [
+          "POT.UNDETERMINED"
+        ]
+      },
+      "evidence": {
+        "answered": 3,
+        "valid": 3,
+        "correct": 2,
+        "valid_wrong": 1
+      },
+      "weak_chapters": [
+        {
+          "chapter": {
+            "id": "sample-ch-11",
+            "name": "示範單元 需求與價格",
+            "section": null,
+            "section_id": null
+          },
+          "error_item_refs": [
+            {
+              "kind": "public_sample_item_id",
+              "id": "示範4-2"
+            }
+          ],
+          "reason_codes": [
+            "PRI.VALID_WRONG_MEASURED"
+          ]
+        }
+      ],
+      "reason_codes": [
+        "SUB.MEASURED"
+      ]
+    },
+    {
+      "subject": "生物",
+      "status": "measured",
+      "current_level": {
+        "posterior": {
+          "mean": -0.17455119523011262,
+          "sd": 0.9448187197852633,
+          "ci95": [
+            -2,
+            1.7000000000000002
+          ]
+        },
+        "band": {
+          "code": "mid",
+          "label": "初步：本次學科題暫居中間"
+        },
+        "signal": "flat",
+        "p_high": 0.21528533111772957,
+        "p_low": 0.344602924962798,
+        "evidence": "初步",
+        "claim_type": "model_estimate_uncalibrated",
+        "reason_codes": [
+          "EVD.SUBJECT_TENTATIVE",
+          "SIG.EXPLORE_05"
+        ]
+      },
+      "potential": {
+        "code": "undetermined",
+        "claim_type": "planning_target",
+        "reason_codes": [
+          "POT.UNDETERMINED"
+        ]
+      },
+      "evidence": {
+        "answered": 3,
+        "valid": 2,
+        "correct": 1,
+        "valid_wrong": 1
+      },
+      "weak_chapters": [
+        {
+          "chapter": {
+            "id": "sample-ch-13",
+            "name": "示範單元 細胞構造",
+            "section": null,
+            "section_id": null
+          },
+          "error_item_refs": [
+            {
+              "kind": "public_sample_item_id",
+              "id": "示範5-1"
+            }
+          ],
+          "reason_codes": [
+            "PRI.VALID_WRONG_MEASURED"
+          ]
+        }
+      ],
+      "reason_codes": [
+        "SUB.MEASURED"
+      ]
+    }
+  ],
+  "untested_subjects": [
+    {
+      "subject": "英文",
+      "status": "not_in_bank",
+      "reason_codes": [
+        "SUB.NOT_IN_BANK"
+      ]
+    },
+    {
+      "subject": "數學",
+      "status": "not_in_bank",
+      "reason_codes": [
+        "SUB.NOT_IN_BANK"
+      ]
+    },
+    {
+      "subject": "物理",
+      "status": "not_in_bank",
+      "reason_codes": [
+        "SUB.NOT_IN_BANK"
+      ]
+    },
+    {
+      "subject": "化學",
+      "status": "not_in_bank",
+      "reason_codes": [
+        "SUB.NOT_IN_BANK"
+      ]
+    },
+    {
+      "subject": "地球科學",
+      "status": "not_in_bank",
+      "reason_codes": [
+        "SUB.NOT_IN_BANK"
+      ]
+    }
+  ],
+  "priorities": {
+    "status": "ok",
+    "reason_codes": [
+      "PRI.STATUS_OK"
+    ],
+    "items": [
+      {
+        "rank": 1,
+        "subject": "歷史",
+        "chapter": {
+          "id": "sample-ch-04",
+          "name": "示範單元 史料類型",
+          "section": null,
+          "section_id": null
+        },
+        "error_item_refs": [
+          {
+            "kind": "public_sample_item_id",
+            "id": "示範2-1"
+          }
+        ],
+        "signal": "down",
+        "potential": "undetermined",
+        "claim_type": "planning_target",
+        "reason_codes": [
+          "PRI.VALID_WRONG_MEASURED",
+          "PRI.ORDER_RULE",
+          "PRI.SUBJECT_SIGNAL_DOWN"
+        ],
+        "evidence_refs": [
+          "/subjects/1",
+          "/subjects/1/weak_chapters/0"
+        ]
+      },
+      {
+        "rank": 2,
+        "subject": "歷史",
+        "chapter": {
+          "id": "sample-ch-05",
+          "name": "示範單元 史料推論",
+          "section": null,
+          "section_id": null
+        },
+        "error_item_refs": [
+          {
+            "kind": "public_sample_item_id",
+            "id": "示範2-2"
+          }
+        ],
+        "signal": "down",
+        "potential": "undetermined",
+        "claim_type": "planning_target",
+        "reason_codes": [
+          "PRI.VALID_WRONG_MEASURED",
+          "PRI.ORDER_RULE",
+          "PRI.SUBJECT_SIGNAL_DOWN"
+        ],
+        "evidence_refs": [
+          "/subjects/1",
+          "/subjects/1/weak_chapters/1"
+        ]
+      },
+      {
+        "rank": 3,
+        "subject": "歷史",
+        "chapter": {
+          "id": "sample-ch-06",
+          "name": "示範單元 史料考證",
+          "section": null,
+          "section_id": null
+        },
+        "error_item_refs": [
+          {
+            "kind": "public_sample_item_id",
+            "id": "示範2-3"
+          }
+        ],
+        "signal": "down",
+        "potential": "undetermined",
+        "claim_type": "planning_target",
+        "reason_codes": [
+          "PRI.VALID_WRONG_MEASURED",
+          "PRI.ORDER_RULE",
+          "PRI.SUBJECT_SIGNAL_DOWN"
+        ],
+        "evidence_refs": [
+          "/subjects/1",
+          "/subjects/1/weak_chapters/2"
+        ]
+      }
+    ],
+    "collect_evidence": []
+  },
+  "material_recommendations": [
+    {
+      "id": "mat-1",
+      "target": {
+        "kind": "priority_chapter",
+        "priority_rank": 1,
+        "subject": "歷史",
+        "chapter_id": "sample-ch-04"
+      },
+      "strategy": "transfer",
+      "material_type": "變式題",
+      "alt_material_types": [],
+      "b_range": {
+        "scale": "d1_provisional_theta",
+        "provisional": true,
+        "calibrated": false,
+        "anchor": "subject_posterior_mean",
+        "anchor_value": -0.9133016483205645,
+        "lo": -1.9133016483205645,
+        "hi": -0.4133016483205645
+      },
+      "scaffolding_level": "high",
+      "why": "歷史「示範單元 史料類型」本次有 1 題有效錯題；遷移力探索訊號偏低，用「多樣遷移」，從略低於目前估計的難度開始。",
+      "reason_codes": [
+        "MAT.TYPE_FROM_STRATEGY",
+        "MODE.T_LOW_TRANSFER",
+        "MAT.B_ANCHOR_SUBJECT_POSTERIOR",
+        "MAT.SCAF_HIGH"
+      ],
+      "evidence_refs": [
+        "/priorities/items/0",
+        "/subjects/1/current_level",
+        "/ability/T"
+      ],
+      "claim_type": "planning_target"
+    },
+    {
+      "id": "mat-2",
+      "target": {
+        "kind": "priority_chapter",
+        "priority_rank": 1,
+        "subject": "歷史",
+        "chapter_id": "sample-ch-04"
+      },
+      "strategy": null,
+      "material_type": "概念卡",
+      "alt_material_types": [],
+      "b_range": {
+        "scale": "d1_provisional_theta",
+        "provisional": true,
+        "calibrated": false,
+        "anchor": "subject_posterior_mean",
+        "anchor_value": -0.9133016483205645,
+        "lo": -1.9133016483205645,
+        "hi": -0.4133016483205645
+      },
+      "scaffolding_level": "high",
+      "why": "把「示範單元 史料類型」的關鍵概念整理成 1 張卡，第 3、7、30 天回想。",
+      "reason_codes": [
+        "MAT.CONCEPT_CARD_REVIEW",
+        "MAT.B_ANCHOR_SUBJECT_POSTERIOR",
+        "MAT.SCAF_HIGH",
+        "REV.FIXED_NOT_FSRS"
+      ],
+      "evidence_refs": [
+        "/priorities/items/0",
+        "/subjects/1/current_level",
+        "/review_schedule"
+      ],
+      "claim_type": "planning_target"
+    },
+    {
+      "id": "mat-3",
+      "target": {
+        "kind": "priority_chapter",
+        "priority_rank": 2,
+        "subject": "歷史",
+        "chapter_id": "sample-ch-05"
+      },
+      "strategy": "transfer",
+      "material_type": "變式題",
+      "alt_material_types": [],
+      "b_range": {
+        "scale": "d1_provisional_theta",
+        "provisional": true,
+        "calibrated": false,
+        "anchor": "subject_posterior_mean",
+        "anchor_value": -0.9133016483205645,
+        "lo": -1.9133016483205645,
+        "hi": -0.4133016483205645
+      },
+      "scaffolding_level": "high",
+      "why": "歷史「示範單元 史料推論」本次有 1 題有效錯題；遷移力探索訊號偏低，用「多樣遷移」，從略低於目前估計的難度開始。",
+      "reason_codes": [
+        "MAT.TYPE_FROM_STRATEGY",
+        "MODE.T_LOW_TRANSFER",
+        "MAT.B_ANCHOR_SUBJECT_POSTERIOR",
+        "MAT.SCAF_HIGH"
+      ],
+      "evidence_refs": [
+        "/priorities/items/1",
+        "/subjects/1/current_level",
+        "/ability/T"
+      ],
+      "claim_type": "planning_target"
+    },
+    {
+      "id": "mat-4",
+      "target": {
+        "kind": "priority_chapter",
+        "priority_rank": 2,
+        "subject": "歷史",
+        "chapter_id": "sample-ch-05"
+      },
+      "strategy": null,
+      "material_type": "概念卡",
+      "alt_material_types": [],
+      "b_range": {
+        "scale": "d1_provisional_theta",
+        "provisional": true,
+        "calibrated": false,
+        "anchor": "subject_posterior_mean",
+        "anchor_value": -0.9133016483205645,
+        "lo": -1.9133016483205645,
+        "hi": -0.4133016483205645
+      },
+      "scaffolding_level": "high",
+      "why": "把「示範單元 史料推論」的關鍵概念整理成 1 張卡，第 3、7、30 天回想。",
+      "reason_codes": [
+        "MAT.CONCEPT_CARD_REVIEW",
+        "MAT.B_ANCHOR_SUBJECT_POSTERIOR",
+        "MAT.SCAF_HIGH",
+        "REV.FIXED_NOT_FSRS"
+      ],
+      "evidence_refs": [
+        "/priorities/items/1",
+        "/subjects/1/current_level",
+        "/review_schedule"
+      ],
+      "claim_type": "planning_target"
+    },
+    {
+      "id": "mat-5",
+      "target": {
+        "kind": "priority_chapter",
+        "priority_rank": 3,
+        "subject": "歷史",
+        "chapter_id": "sample-ch-06"
+      },
+      "strategy": "transfer",
+      "material_type": "變式題",
+      "alt_material_types": [],
+      "b_range": {
+        "scale": "d1_provisional_theta",
+        "provisional": true,
+        "calibrated": false,
+        "anchor": "subject_posterior_mean",
+        "anchor_value": -0.9133016483205645,
+        "lo": -1.9133016483205645,
+        "hi": -0.4133016483205645
+      },
+      "scaffolding_level": "high",
+      "why": "歷史「示範單元 史料考證」本次有 1 題有效錯題；遷移力探索訊號偏低，用「多樣遷移」，從略低於目前估計的難度開始。",
+      "reason_codes": [
+        "MAT.TYPE_FROM_STRATEGY",
+        "MODE.T_LOW_TRANSFER",
+        "MAT.B_ANCHOR_SUBJECT_POSTERIOR",
+        "MAT.SCAF_HIGH"
+      ],
+      "evidence_refs": [
+        "/priorities/items/2",
+        "/subjects/1/current_level",
+        "/ability/T"
+      ],
+      "claim_type": "planning_target"
+    },
+    {
+      "id": "mat-6",
+      "target": {
+        "kind": "priority_chapter",
+        "priority_rank": 3,
+        "subject": "歷史",
+        "chapter_id": "sample-ch-06"
+      },
+      "strategy": null,
+      "material_type": "概念卡",
+      "alt_material_types": [],
+      "b_range": {
+        "scale": "d1_provisional_theta",
+        "provisional": true,
+        "calibrated": false,
+        "anchor": "subject_posterior_mean",
+        "anchor_value": -0.9133016483205645,
+        "lo": -1.9133016483205645,
+        "hi": -0.4133016483205645
+      },
+      "scaffolding_level": "high",
+      "why": "把「示範單元 史料考證」的關鍵概念整理成 1 張卡，第 3、7、30 天回想。",
+      "reason_codes": [
+        "MAT.CONCEPT_CARD_REVIEW",
+        "MAT.B_ANCHOR_SUBJECT_POSTERIOR",
+        "MAT.SCAF_HIGH",
+        "REV.FIXED_NOT_FSRS"
+      ],
+      "evidence_refs": [
+        "/priorities/items/2",
+        "/subjects/1/current_level",
+        "/review_schedule"
+      ],
+      "claim_type": "planning_target"
+    }
+  ],
+  "interaction_design": [
+    {
+      "id": "int-1",
+      "pattern": "predict_then_check",
+      "strategy": "transfer",
+      "target": {
+        "kind": "priority_chapters",
+        "priority_ranks": [
+          1,
+          2,
+          3
+        ]
+      },
+      "session_minutes": 15,
+      "feedback_style": "delayed_after_prediction",
+      "hint_policy": "none_until_prediction",
+      "why": "遷移力探索訊號偏低，用「多樣遷移」。",
+      "reason_codes": [
+        "INT.PREDICT_THEN_CHECK",
+        "MODE.T_LOW_TRANSFER"
+      ],
+      "evidence_refs": [
+        "/ability/T"
+      ],
+      "claim_type": "planning_target"
+    },
+    {
+      "id": "int-2",
+      "pattern": "confidence_before_answer",
+      "strategy": null,
+      "target": {
+        "kind": "all_sessions"
+      },
+      "session_minutes": 10,
+      "feedback_style": "compare_confidence_after_answer",
+      "hint_policy": "none_before_confidence",
+      "why": "每題作答前先標把握；本次 4 筆把握觀測，未達 10 筆，只當習慣，不判斷是否過度自信。",
+      "reason_codes": [
+        "INT.CONFIDENCE_BEFORE_ANSWER",
+        "CAL.N_BELOW_MIN"
+      ],
+      "evidence_refs": [
+        "/calibration"
+      ],
+      "claim_type": "planning_target"
+    },
+    {
+      "id": "int-3",
+      "pattern": "spaced_recall_card",
+      "strategy": null,
+      "target": {
+        "kind": "review_schedule"
+      },
+      "session_minutes": 2,
+      "feedback_style": "self_check_against_key",
+      "hint_policy": "none_until_recall_attempt",
+      "why": "第 3、7、30 天開頭 2 分鐘先不看筆記回想；固定間隔，未接 FSRS。",
+      "reason_codes": [
+        "INT.SPACED_RECALL_CARD",
+        "REV.FIXED_NOT_FSRS"
+      ],
+      "evidence_refs": [
+        "/review_schedule",
+        "/recall"
+      ],
+      "claim_type": "planning_target"
+    }
+  ],
+  "review_schedule": {
+    "scheduler": "fixed_intervals",
+    "fsrs_ready": false,
+    "fsrs_parameters": null,
+    "intervals_days": [
+      3,
+      7,
+      30
+    ],
+    "seed_items": [
+      {
+        "ref": {
+          "kind": "public_sample_item_id",
+          "id": "示範2-1"
+        },
+        "card_type": "concept_card",
+        "chapter_id": "sample-ch-04",
+        "due_days": [
+          3,
+          7,
+          30
+        ],
+        "reason_codes": [
+          "REV.SEED_PRIORITY_WRONG_ITEM"
+        ],
+        "evidence_refs": [
+          "/priorities/items/0"
+        ]
+      },
+      {
+        "ref": {
+          "kind": "public_sample_item_id",
+          "id": "示範2-2"
+        },
+        "card_type": "concept_card",
+        "chapter_id": "sample-ch-05",
+        "due_days": [
+          3,
+          7,
+          30
+        ],
+        "reason_codes": [
+          "REV.SEED_PRIORITY_WRONG_ITEM"
+        ],
+        "evidence_refs": [
+          "/priorities/items/1"
+        ]
+      },
+      {
+        "ref": {
+          "kind": "public_sample_item_id",
+          "id": "示範2-3"
+        },
+        "card_type": "concept_card",
+        "chapter_id": "sample-ch-06",
+        "due_days": [
+          3,
+          7,
+          30
+        ],
+        "reason_codes": [
+          "REV.SEED_PRIORITY_WRONG_ITEM"
+        ],
+        "evidence_refs": [
+          "/priorities/items/2"
+        ]
+      },
+      {
+        "ref": {
+          "kind": "core_item_id",
+          "id": "K1"
+        },
+        "card_type": "rule_card",
+        "chapter_id": null,
+        "due_days": [
+          3,
+          7,
+          30
+        ],
+        "reason_codes": [
+          "REV.SEED_CORE_RULE"
+        ],
+        "evidence_refs": [
+          "/recall"
+        ]
+      },
+      {
+        "ref": {
+          "kind": "core_item_id",
+          "id": "K2"
+        },
+        "card_type": "rule_card",
+        "chapter_id": null,
+        "due_days": [
+          3,
+          7,
+          30
+        ],
+        "reason_codes": [
+          "REV.SEED_CORE_RULE"
+        ],
+        "evidence_refs": [
+          "/recall"
+        ]
+      }
+    ],
+    "reason_codes": [
+      "REV.FIXED_NOT_FSRS"
+    ]
+  },
+  "d7_el_plan": {
+    "engine_connected": false,
+    "total_minutes": 90,
+    "days": [
+      {
+        "day": 1,
+        "engine": "EA",
+        "minutes": 10,
+        "task": "initial",
+        "focus_priority_ranks": [
+          1
+        ],
+        "strategy": null,
+        "interaction_patterns": [],
+        "material_ids": [],
+        "spaced_recall": false,
+        "reason_codes": [
+          "PLAN.D1_EA_INITIAL"
+        ]
+      },
+      {
+        "day": 2,
+        "engine": "EL",
+        "minutes": 15,
+        "task": "practice",
+        "focus_priority_ranks": [
+          1
+        ],
+        "strategy": "transfer",
+        "interaction_patterns": [
+          "predict_then_check",
+          "confidence_before_answer"
+        ],
+        "material_ids": [
+          "mat-1"
+        ],
+        "spaced_recall": false,
+        "reason_codes": [
+          "PLAN.EL_PRACTICE_ROTATION",
+          "MODE.T_LOW_TRANSFER"
+        ]
+      },
+      {
+        "day": 3,
+        "engine": "EL",
+        "minutes": 10,
+        "task": "practice",
+        "focus_priority_ranks": [
+          2
+        ],
+        "strategy": "transfer",
+        "interaction_patterns": [
+          "predict_then_check",
+          "confidence_before_answer",
+          "spaced_recall_card"
+        ],
+        "material_ids": [
+          "mat-3"
+        ],
+        "spaced_recall": true,
+        "reason_codes": [
+          "PLAN.EL_PRACTICE_ROTATION",
+          "MODE.T_LOW_TRANSFER",
+          "PLAN.SPACED_RECALL_DAY"
+        ]
+      },
+      {
+        "day": 4,
+        "engine": "EL",
+        "minutes": 15,
+        "task": "practice",
+        "focus_priority_ranks": [
+          3
+        ],
+        "strategy": "transfer",
+        "interaction_patterns": [
+          "predict_then_check",
+          "confidence_before_answer"
+        ],
+        "material_ids": [
+          "mat-5"
+        ],
+        "spaced_recall": false,
+        "reason_codes": [
+          "PLAN.EL_PRACTICE_ROTATION",
+          "MODE.T_LOW_TRANSFER"
+        ]
+      },
+      {
+        "day": 5,
+        "engine": "EL",
+        "minutes": 10,
+        "task": "practice",
+        "focus_priority_ranks": [
+          1
+        ],
+        "strategy": "transfer",
+        "interaction_patterns": [
+          "predict_then_check",
+          "confidence_before_answer"
+        ],
+        "material_ids": [
+          "mat-1"
+        ],
+        "spaced_recall": false,
+        "reason_codes": [
+          "PLAN.EL_PRACTICE_ROTATION",
+          "MODE.T_LOW_TRANSFER"
+        ]
+      },
+      {
+        "day": 6,
+        "engine": "EL",
+        "minutes": 15,
+        "task": "practice",
+        "focus_priority_ranks": [
+          2
+        ],
+        "strategy": "transfer",
+        "interaction_patterns": [
+          "predict_then_check",
+          "confidence_before_answer"
+        ],
+        "material_ids": [
+          "mat-3"
+        ],
+        "spaced_recall": false,
+        "reason_codes": [
+          "PLAN.EL_PRACTICE_ROTATION",
+          "MODE.T_LOW_TRANSFER"
+        ]
+      },
+      {
+        "day": 7,
+        "engine": "EL",
+        "minutes": 15,
+        "task": "review",
+        "focus_priority_ranks": [
+          1,
+          2,
+          3
+        ],
+        "strategy": null,
+        "interaction_patterns": [
+          "confidence_before_answer",
+          "spaced_recall_card"
+        ],
+        "material_ids": [
+          "mat-2",
+          "mat-4",
+          "mat-6"
+        ],
+        "spaced_recall": true,
+        "reason_codes": [
+          "PLAN.EL_REVIEW_D7",
+          "PLAN.SPACED_RECALL_DAY"
+        ]
+      }
+    ]
+  },
+  "d30_em_check": {
+    "day": 30,
+    "engine": "EM",
+    "engine_connected": false,
+    "minutes": 15,
+    "focus_priority_ranks": [
+      1,
+      2,
+      3
+    ],
+    "parallel_items": {
+      "required": true,
+      "available": false,
+      "per_chapter": 3,
+      "reuse_original_items": false,
+      "source": "teacher_or_next_version"
+    },
+    "delayed_recall": true,
+    "confidence_first": true,
+    "compare_to_d1": "direction_only",
+    "success_criteria": [
+      {
+        "id": "crit-1",
+        "metric": "parallel_items_correct",
+        "target": {
+          "op": ">=",
+          "value": 2,
+          "of": 3,
+          "unit": "items"
+        },
+        "scope": {
+          "kind": "priority_chapter",
+          "priority_rank": 1,
+          "chapter_id": "sample-ch-04"
+        },
+        "claim_type": "planning_target",
+        "validated": false,
+        "reason_codes": [
+          "EM.CRIT_PARALLEL_CORRECT"
+        ],
+        "evidence_refs": [
+          "/priorities/items/0"
+        ]
+      },
+      {
+        "id": "crit-2",
+        "metric": "parallel_items_correct",
+        "target": {
+          "op": ">=",
+          "value": 2,
+          "of": 3,
+          "unit": "items"
+        },
+        "scope": {
+          "kind": "priority_chapter",
+          "priority_rank": 2,
+          "chapter_id": "sample-ch-05"
+        },
+        "claim_type": "planning_target",
+        "validated": false,
+        "reason_codes": [
+          "EM.CRIT_PARALLEL_CORRECT"
+        ],
+        "evidence_refs": [
+          "/priorities/items/1"
+        ]
+      },
+      {
+        "id": "crit-3",
+        "metric": "parallel_items_correct",
+        "target": {
+          "op": ">=",
+          "value": 2,
+          "of": 3,
+          "unit": "items"
+        },
+        "scope": {
+          "kind": "priority_chapter",
+          "priority_rank": 3,
+          "chapter_id": "sample-ch-06"
+        },
+        "claim_type": "planning_target",
+        "validated": false,
+        "reason_codes": [
+          "EM.CRIT_PARALLEL_CORRECT"
+        ],
+        "evidence_refs": [
+          "/priorities/items/2"
+        ]
+      },
+      {
+        "id": "crit-4",
+        "metric": "confidence_marked_before_answer_rate",
+        "target": {
+          "op": ">=",
+          "value": 0.9,
+          "of": null,
+          "unit": "proportion"
+        },
+        "scope": {
+          "kind": "all_d30_items"
+        },
+        "claim_type": "planning_target",
+        "validated": false,
+        "reason_codes": [
+          "EM.CRIT_CONFIDENCE_FIRST"
+        ],
+        "evidence_refs": [
+          "/calibration"
+        ]
+      },
+      {
+        "id": "crit-5",
+        "metric": "el_days_completed",
+        "target": {
+          "op": ">=",
+          "value": 4,
+          "of": 6,
+          "unit": "days"
+        },
+        "scope": {
+          "kind": "d7_el_plan"
+        },
+        "claim_type": "planning_target",
+        "validated": false,
+        "reason_codes": [
+          "EM.CRIT_PERSISTENCE"
+        ],
+        "evidence_refs": [
+          "/d7_el_plan"
+        ]
+      },
+      {
+        "id": "crit-6",
+        "metric": "star_port_delayed_recall_correct",
+        "target": {
+          "op": ">=",
+          "value": 1,
+          "of": 2,
+          "unit": "items"
+        },
+        "scope": {
+          "kind": "core_recall"
+        },
+        "claim_type": "planning_target",
+        "validated": false,
+        "reason_codes": [
+          "EM.CRIT_DELAYED_RECALL"
+        ],
+        "evidence_refs": [
+          "/recall"
+        ]
+      }
+    ],
+    "reason_codes": [
+      "EM.PARALLEL_NEW_ITEMS",
+      "EM.NO_PARALLEL_BANK"
+    ]
+  },
+  "constraints": [
+    {
+      "code": "CAV.UNCALIBRATED",
+      "text": "所有題目參數、平均作答時間、b 區間都未經真人校準"
+    },
+    {
+      "code": "CAV.NOT_DIAGNOSIS",
+      "text": "不是診斷、分班、選組或潛力上限；不預測成績"
+    },
+    {
+      "code": "CAV.TARGETS_NOT_PREDICTIONS",
+      "text": "所有建議與成功標準都是規劃目標，不是經驗證的預測"
+    },
+    {
+      "code": "CAV.NO_ENGINE_INTEGRATION",
+      "text": "未實際連接任何 EL／EM 引擎或 FSRS；本規格只是交接格式"
+    },
+    {
+      "code": "CAV.SUBJECT_FEW_ITEMS",
+      "text": "每科最多 3 題，學科證據有限"
+    },
+    {
+      "code": "CAV.PUBLIC_SAMPLE_ONLY",
+      "text": "公開版：只含原創示範題 ID 與示範單元，不含任何題庫文字、題號或 GUID"
+    }
+  ],
+  "model_versions": {
+    "mac": "mac-3.0-compatible-subset",
+    "prototype": "d1-v1",
+    "learning_plan_rules": "learningPlan d1-v1 (unchanged)",
+    "reason_code_registry": "nous.d1.reason_codes/v0",
+    "schema": "nous.d1.learning_plan/v0",
+    "item_parameters": "uncalibrated design assumptions",
+    "fsrs": "not_initialized"
+  },
+  "reason_code_registry": {
+    "id": "nous.d1.reason_codes/v0",
+    "used": {
+      "CAL.N_BELOW_MIN": "把握觀測 < 10 筆（calib_min_n）→ 只建議作答前標把握，不估計、不判斷過度自信",
+      "CAV.NOT_DIAGNOSIS": "不是診斷、分班、選組或潛力上限；不預測成績",
+      "CAV.NO_ENGINE_INTEGRATION": "未實際連接任何 EL／EM 引擎或 FSRS；本規格只是交接格式",
+      "CAV.PUBLIC_SAMPLE_ONLY": "公開版：只含原創示範題 ID 與示範單元，不含任何題庫文字、題號或 GUID",
+      "CAV.SUBJECT_FEW_ITEMS": "每科最多 3 題，學科證據有限",
+      "CAV.TARGETS_NOT_PREDICTIONS": "所有建議與成功標準都是規劃目標，不是經驗證的預測",
+      "CAV.UNCALIBRATED": "所有題目參數、平均作答時間、b 區間都未經真人校準",
+      "EM.CRIT_CONFIDENCE_FIRST": "規劃目標：≥ 90% 題目作答前已標把握",
+      "EM.CRIT_DELAYED_RECALL": "規劃目標：星港延遲回想 2 題至少答對 1 題",
+      "EM.CRIT_PARALLEL_CORRECT": "規劃目標：每個優先章節平行新題至少答對 2/3（看方向，不是預測）",
+      "EM.CRIT_PERSISTENCE": "規劃目標：D2–D7 至少完成 4 天",
+      "EM.NO_PARALLEL_BANK": "本原型沒有平行題庫，需老師或下一版提供",
+      "EM.PARALLEL_NEW_ITEMS": "D30＝同章節平行新題，不重做原題；加星港延遲回想、作答前標把握",
+      "EVD.SD_TENTATIVE": "後驗 SD > 0.6 且有效題 ≥ 2 → 初步（70% 門檻）",
+      "EVD.SUBJECT_TENTATIVE": "學科每科僅 3 題：有效題 ≥ 2 一律 初步，不升為確定",
+      "INT.CONFIDENCE_BEFORE_ANSWER": "一律：每題作答前先標把握（校準習慣）",
+      "INT.PREDICT_THEN_CHECK": "多樣遷移策略 → 先預測再對照",
+      "INT.SPACED_RECALL_CARD": "固定間隔回想卡（D3、D7、D30），開頭 2 分鐘",
+      "MAT.B_ANCHOR_SUBJECT_POSTERIOR": "建議難度 b 區間＝該科後驗平均 −1.0 至 +0.5（夾在 −4..4），屬暫定模型量尺、未校準",
+      "MAT.CONCEPT_CARD_REVIEW": "每個優先章節配 1 張概念卡，供 D3／D7／D30 間隔回想",
+      "MAT.SCAF_HIGH": "目標訊號偏低 → 高鷹架（完整示範、逐步提示）",
+      "MAT.TYPE_FROM_STRATEGY": "教材型態由學習模式對應：範例／圖解→範例（備選圖解）；步驟拆解→步驟拆解；多樣遷移→變式題",
+      "MODE.T_LOW_TRANSFER": "T 探索訊號偏低 → 多樣遷移（變式題）",
+      "PLAN.D1_EA_INITIAL": "D1＝EA 初始評估（本次）＋回看第 1 優先章節錯題",
+      "PLAN.EL_PRACTICE_ROTATION": "D2–D6＝EL 練習，輪流優先章節與學習模式，做同章節新題",
+      "PLAN.EL_REVIEW_D7": "D7＝回顧與持續情形",
+      "PLAN.SPACED_RECALL_DAY": "回想日（review_days 內或 D7）開頭 2 分鐘間隔回想",
+      "POT.UNDETERMINED": "其餘情況 → 未判定（3 題無法判定成長速度）",
+      "PRI.ORDER_RULE": "排序：科目偏低 → 該科錯題數 → 該章錯題數 → 科目順序 → 出題順序；最多 3 個",
+      "PRI.STATUS_OK": "2–3 個優先章節",
+      "PRI.SUBJECT_SIGNAL_DOWN": "排序第一鍵：該科探索訊號偏低者優先",
+      "PRI.VALID_WRONG_MEASURED": "章節來自已測科目中有效（非快速、未切背景）且未答對的題目",
+      "REC.FEW_UNCONTROLLED": "短延遲再認最多 2 題、延遲不受控 → 不推估長期記憶、不寫入 FSRS",
+      "REV.FIXED_NOT_FSRS": "固定間隔 D3／D7／D30；未初始化 FSRS、沒有個人記憶參數",
+      "REV.SEED_CORE_RULE": "種子卡＝星港規則再認題（原創、可公開，只放 ID）",
+      "REV.SEED_PRIORITY_WRONG_ITEM": "種子卡＝優先章節的有效錯題（只放 ID）",
+      "SIG.EXPLORE_05": "探索訊號：後驗 ≥ 0.5 落在 >0.5＝偏高、<−0.5＝偏低，其餘中間；只用於排序與選策略",
+      "SUB.MEASURED": "已勾選且有效題 ≥ 2 → 已測，可作為證據",
+      "SUB.NOT_IN_BANK": "英文、數學、物理、化學、地球科學本版無合規題 → 未施測，不推薦也不排除"
+    }
+  }
+}</script><script>document.getElementById("downloadSpec").onclick=()=>{const blob=new Blob([document.getElementById("sampleSpec").textContent],{type:"application/json"}),u=URL.createObjectURL(blob),a=document.createElement("a");a.href=u;a.download="nous-simulated-learning-plan.json";a.click();URL.revokeObjectURL(u)};</script></html>
