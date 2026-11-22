@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>學習健檢｜玩 10 分鐘，看見你怎麼學</title>
+<title>學習健檢｜玩三款小遊戲，看見你怎麼學</title>
 <style>
 :root{
   --sky:#5ec8f2; --sea:#1fb5c4; --sea-d:#0d8797; --sand:#fff7e8; --sand2:#ffe8c2;
@@ -194,8 +194,6 @@ h2.ptitle{font-size:26px;margin:0 170px 6px 0;line-height:1.25}
 .psum{padding:12px 18px}.psum p{font-size:17px;line-height:1.6}
 .plab{font-size:13px;font-weight:800;color:var(--sea-d);margin-bottom:4px}
 .pnum{margin-top:6px!important;font-size:15px!important;color:#7a4b00;background:#fff6db;border-radius:10px;padding:4px 10px}
-.pcount{text-align:center;padding:10px}.pcount .v{font-size:40px;font-weight:900;color:var(--coral-d);line-height:1.1}
-.pcount .t{font-weight:800;font-size:15px}.pcount .d{font-size:13px;color:var(--ink2)}
 .pdoi{display:block;margin-top:10px;padding:8px 12px;border-radius:14px;background:#fff;border:2px solid #d5f0fb;color:#13698f;font-weight:800;font-size:13.5px;text-decoration:none;word-break:break-all}
 .puse{margin-top:10px;background:#e9f9ef;border-left:5px solid var(--leaf);border-radius:12px;padding:8px 14px;font-size:16px;line-height:1.5}
 .psrc{margin-top:8px!important;font-size:13.5px;color:var(--ink2);line-height:1.45}
@@ -302,22 +300,86 @@ body.mobile .pgrid{grid-template-columns:1fr}
 body.mobile h2.ptitle{font-size:20px;margin-right:0;margin-top:34px}
 body.mobile .pback{position:absolute;top:14px;right:14px}
 body.mobile .demo-msg{min-height:0}
+/* ===== v2 additions ===== */
+.lead b{color:var(--coral-d)}
+.journey{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:2px}
+.journey .step{padding:14px}
+.journey .step h4{font-size:19px}
+.journey .step p{font-size:15.5px}
+.journey .step:not(:last-child)::after{content:"➜";position:absolute;right:-13px;top:18px;color:var(--sun);font-weight:900;font-size:18px;z-index:2}
+.side3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:16px}
+.side3 .card{padding:12px 16px;font-size:16px;line-height:1.5}
+.side3 .card b{display:block;font-size:17px;color:var(--sea-d);margin-bottom:2px}
+.demo-lab{display:inline-block;background:#ffe2dc;color:#c2412d;font-weight:900;border-radius:999px;padding:1px 10px;font-size:14px;margin-left:6px;vertical-align:middle}
+/* worked example */
+.ex{display:grid;grid-template-columns:1.15fr 1fr;gap:20px;flex:1;min-height:0}
+.chain{display:flex;flex-direction:column;gap:8px}
+.ch{background:#fff;border-radius:16px;padding:9px 14px;box-shadow:0 3px 0 rgba(0,0,0,.05);display:grid;grid-template-columns:96px 1fr;gap:10px;font-size:15.5px;line-height:1.5;align-items:start}
+.ch .lb{font-size:14px;font-weight:900;color:#fff;border-radius:10px;padding:3px 0;text-align:center}
+.ch.warn{background:#fff6f3;border:2px dashed #f5b7a8}
+.outs{display:flex;flex-direction:column;gap:8px}
+.out{background:#fff;border-radius:16px;padding:9px 14px;box-shadow:var(--shadow);font-size:15.5px;line-height:1.5}
+.out h4{margin:0 0 2px;font-size:17px}
+.out.st{background:linear-gradient(160deg,#e9fbff,#fff)}
+.out.pa{background:linear-gradient(160deg,#fff4e0,#fff)}
+.out.pl{background:linear-gradient(160deg,#eefbe9,#fff)}
+.fn{font-size:13.5px;color:var(--ink2);line-height:1.45;margin-top:8px}
+/* maturity tiers */
+.tiers{display:flex;flex-direction:column;gap:8px}
+.tier{display:grid;grid-template-columns:200px 1fr;gap:14px;align-items:center;background:#fff;border-radius:16px;padding:9px 16px;box-shadow:0 3px 0 rgba(0,0,0,.05);border-left:8px solid var(--sea);font-size:16px;line-height:1.5}
+.tier h4{margin:0;font-size:19px}
+.tier.t0{border-left-color:#b8aa9b;background:#f6f3ee}
+.tier.t1{border-left-color:var(--leaf)}
+.tier.t2{border-left-color:var(--sun)}
+.tier.t3{border-left-color:var(--lilac);border-style:dashed;border-top:0;border-right:0;border-bottom:0}
+.clues{margin-top:12px;background:#fff6f3;border:2px dashed #f5b7a8;border-radius:18px;padding:10px 16px}
+.clues .hd{font-weight:900;color:var(--coral-d);font-size:17px;margin-bottom:6px}
+.clues .cl{display:inline-block;background:#fff;border-radius:10px;padding:3px 10px;margin:0 6px 6px 0;font-size:15px;font-weight:700;box-shadow:0 2px 0 rgba(0,0,0,.05)}
+.clues .cl.q{color:var(--ink2);font-weight:600}
+/* evidence */
+.ev{display:grid;grid-template-columns:.95fr .95fr 1.3fr;gap:16px;flex:1;min-height:0}
+.evc{background:#fff;border-radius:20px;padding:12px 16px;box-shadow:var(--shadow);border-top:7px solid var(--leaf);display:flex;flex-direction:column;gap:6px}
+.evc h3{margin:0 0 2px;font-size:21px}
+.evc p,.evc li{font-size:14.5px;line-height:1.5;color:var(--ink)}
+.evc ul{margin:0;padding-left:18px}
+.evc li{margin:0 0 5px}
+.evc.no{border-top-color:var(--coral)}
+.evc.m1{border-top-color:var(--sea)}
+.evc .gate1{display:grid;grid-template-columns:24px 1fr;gap:6px;font-size:14.5px;line-height:1.48}
+.evc .gate1 .k{width:22px;height:22px;border-radius:50%;background:var(--sea);color:#fff;font-weight:900;font-size:13px;display:flex;align-items:center;justify-content:center;margin-top:1px}
+/* close */
+.close2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+/* paper: three labeled blocks + footnote count */
+.pthree{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:10px}
+.pblk{background:#fff;border-radius:14px;padding:8px 12px;box-shadow:0 3px 0 rgba(0,0,0,.05);border-top:5px solid var(--leaf)}
+.pblk.no{border-top-color:var(--coral)}
+.pblk.lim{border-top-color:var(--sun)}
+.pblk .plab{font-size:14px}
+.pblk p{font-size:15px;line-height:1.55}
+.pfoot{margin-top:10px!important;font-size:13px;color:var(--ink2);display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center}
+.pcount .v{font-weight:800;color:var(--ink2)}
+.pcount .d{color:#9b8a7e}
+.pfoot .pdoi{display:inline;margin:0;padding:0;border:0;background:none;font-size:13px}
+table.pidx td.num{font-size:13px;font-weight:500;color:var(--ink2)}
+body.mobile .journey,body.mobile .side3,body.mobile .ex,body.mobile .ev,body.mobile .close2,body.mobile .pthree{grid-template-columns:1fr!important}
+body.mobile .journey .step::after{display:none}
+body.mobile .tier,body.mobile .ch{grid-template-columns:1fr}
 </style>
 </head>
 <body>
 <div id="viewport">
 <div id="stage">
 
-<!-- ========== 1 TITLE ========== -->
+
+<!-- ========== 1 封面 ========== -->
 <section class="slide" data-title="封面">
   <div class="title-wrap">
     <div>
-      <div class="kicker"><span class="dot"></span>NOUS 學習健檢 · 內部研發討論</div>
+      <div class="kicker"><span class="dot"></span>NOUS 學習健檢 · 研究提案</div>
       <h1>學習<span>健檢</span></h1>
-      <div class="hook">玩 10 分鐘，看見你怎麼學</div>
-      <p class="lead">三款島嶼小遊戲量出一張「學習健檢表」，<br>再由 EK 依健檢結果開「學習處方」。</p>
-      <div class="meta">給：龍騰文化 NOUS 同仁、林教授<br>
-        AiRDC／Engine A · 2026-11-22<br>
+      <div class="hook">玩三款小遊戲，看見你怎麼學</div>
+      <p class="lead">學習表現線索（示範）。<b>無臨床或醫療意義。</b><br>三款島嶼小遊戲，各約 10 分鐘，一場約三十分鐘。</p>
+      <div class="meta">給：龍騰文化／NOUS／AiRDC · 2026-11-23<br>
         依據：學習健檢系統 v0.2.1、三款小遊戲 v0.4（研究提案）</div>
     </div>
     <div class="collage">
@@ -328,114 +390,79 @@ body.mobile .demo-msg{min-height:0}
   </div>
 </section>
 
-<!-- ========== 2 ANALOGY ========== -->
-<section class="slide" data-title="核心比喻">
-  <div class="kicker"><span class="dot"></span>林教授的比喻</div>
-  <h2 class="hl">學習健檢就像身體健檢：<em>先有尺，才有處方</em></h2>
+<!-- ========== 2 先說清楚 ========== -->
+<section class="slide" data-title="先說清楚">
+  <div class="kicker"><span class="dot"></span>先說清楚</div>
+  <h2 class="hl">這是<em>學習表現線索</em>，不是健檢報告</h2>
   <div class="body">
-    <div class="big2">
-      <div class="bigcard ea">
-        <div class="who" style="color:var(--sea-d)">EA（Engine A，量測）</div>
-        <h3>給「健檢表」</h3>
-        <ul>
-          <li>玩遊戲，量出看得懂的學習數值</li>
-          <li>標出需要再確認的「紅字」</li>
-          <li>先證明這把尺<b class="k">量得穩、量得對、會變動</b></li>
-        </ul>
-      </div>
-      <div class="arrow">➜</div>
-      <div class="bigcard ek">
-        <div class="who" style="color:var(--coral-d)">EK（敬欽，處方）</div>
-        <h3>開「處方」</h3>
-        <ul>
-          <li>依數值決定練哪些關、照什麼順序</li>
-          <li>決定什麼時候複習</li>
-          <li>處方後再量一次，看有沒有更健康</li>
-        </ul>
-      </div>
-    </div>
-    <div class="quote">量血壓時不會讓人邊跑步邊量：<b>量測關不給提示、不給幫忙</b>，EK 的幫忙都放在練習時間。</div>
-  </div>
-</section>
-
-<!-- ========== 3 TABLE ========== -->
-<section class="slide" data-title="身體健檢 vs 學習健檢">
-  <div class="kicker"><span class="dot"></span>一張對照表</div>
-  <h2 class="hl">身體健檢 vs 學習健檢</h2>
-  <div class="body">
-    <table class="cmp">
-      <tr><th>身體健檢</th><th></th><th>學習健檢</th><th>誰負責</th></tr>
-      <tr><td><span class="ico" style="background:#eef5e9">📏</span>基本資料：身高、體重</td><td class="mid">→</td><td><b>IQ（短推理）＋ 工作記憶</b>：只當基本資料，不是分數、不開處方 <a class="cite" href="#p-Chierchia2019" data-cite="Chierchia2019" title="The matrix reasoning item bank (MaRs-IB): novel, open-access abstract reasoning items for adolescents and adults">[MaRs-IB 2019]</a></td><td>EA</td></tr>
-      <tr><td><span class="ico" style="background:#e6f8fb">🩺</span>檢查項目</td><td class="mid">→</td><td><b>三款小遊戲</b>，每款裡有教學關與計分關</td><td>EA</td></tr>
-      <tr><td><span class="ico" style="background:#fff0d6">🧪</span>檢驗數值</td><td class="mid">→</td><td><b>LQ 指標</b>：學科理解、學科推演、用得出、記得住、自知準、學得動（候選）<br><span class="note">LQ（學商）＝內部對這組指標的稱呼，不對外使用</span></td><td>EA</td></tr>
-      <tr><td><span class="ico" style="background:#ffe2dc">❗</span>參考範圍、紅字</td><td class="mid">→</td><td><b>「待確認」提醒</b>，例如「規矩沒讀懂」「隔天就忘」；給本人只跟自己上次比</td><td>EA 標<br>EK 讀</td></tr>
-      <tr><td><span class="ico" style="background:#fbe8ff">💊</span>醫師處方</td><td class="mid">→</td><td><b>EK</b>：挑關卡、排順序、決定何時複習</td><td>EK</td></tr>
-      <tr><td><span class="ico" style="background:#e3f7ec">🔁</span>回診複檢</td><td class="mid">→</td><td><b>處方後再量一次</b>（複檢場 T2），看紅字有沒有轉綠</td><td>EA 量<br>EK 看</td></tr>
+    <p class="lead" style="font-size:19px;margin-bottom:6px">我們借「身體健檢」當比喻：先量，再依結果安排練習。<b>這只是為了好懂</b>——本系統沒有臨床或醫療意義，也不做任何診斷。</p>
+    <table class="cmp" style="font-size:17px">
+      <tr><th>比喻裡的</th><th></th><th>在這裡其實是</th><th>誰負責</th></tr>
+      <tr><td>基本資料</td><td class="mid">→</td><td><b>短推理＋工作記憶</b>：不是分數，不開計畫</td><td>EA</td></tr>
+      <tr><td>檢查項目</td><td class="mid">→</td><td><b>三款小遊戲</b>，各約 10 分鐘</td><td>EA</td></tr>
+      <tr><td>檢驗數值</td><td class="mid">→</td><td><b>學習表現線索</b>，都帶著誤差範圍</td><td>EA</td></tr>
+      <tr><td>紅字</td><td class="mid">→</td><td><b>待查線索</b>：還要再查證，不是診斷</td><td>EA 標、EK 讀</td></tr>
+      <tr><td>處方</td><td class="mid">→</td><td><b>學習計畫</b>：練哪些關、什麼順序、何時複習</td><td>EK</td></tr>
+      <tr><td>複檢</td><td class="mid">→</td><td><b>之後再量一次</b>，看線索有沒有變</td><td>EA 量、EK 看</td></tr>
     </table>
+    <div class="quote" style="margin-top:8px">EA 負責量，EK 負責學習計畫。<b>量測關不給提示、不給幫忙</b>；幫忙都放在練習時間。</div>
   </div>
 </section>
 
-<!-- ========== 4 FLOW ========== -->
-<section class="slide" data-title="一場健檢怎麼走">
-  <div class="kicker"><span class="dot"></span>流程</div>
-  <h2 class="hl">一場健檢怎麼走</h2>
+<!-- ========== 3 示範：小安的一場 ========== -->
+<section class="slide" data-title="示範：小安的一場">
+  <div class="kicker"><span class="dot"></span>一場怎麼走 <span class="demo-lab">示範／虛構</span></div>
+  <h2 class="hl">示範學生<em>小安</em>，一場怎麼走完</h2>
   <div class="body">
-    <div class="flow">
-      <div class="step"><div class="n" style="background:#a99a8c">1</div><h4>基本資料</h4><p>另排時段，用另一款遊戲量短推理與工作記憶。</p><div class="hc">＝量身高體重</div></div>
-      <div class="step"><div class="n">2</div><h4>健檢場 T1</h4><p>三款小遊戲，各約 10 分鐘；最多可分 3 次玩。</p><div class="hc">＝各站檢查</div></div>
-      <div class="step"><div class="n">3</div><h4>回島挑戰</h4><p>1–3 天後回來約 4 分鐘：燈籠節，三個新問題。</p><div class="hc">＝隔幾天再驗一次</div></div>
-      <div class="step"><div class="n" style="background:var(--coral)">4</div><h4>處方期</h4><p>EK 依數值挑關卡、排順序與複習時機。</p><div class="hc">＝照處方調養</div></div>
-      <div class="step"><div class="n" style="background:var(--leaf)">5</div><h4>複檢 T2</h4><p>換一套新規矩再量一次，看紅字有沒有轉綠。</p><div class="hc">＝回診複檢</div></div>
+    <div class="journey">
+      <div class="step"><div class="n">1</div><h4>玩三款小遊戲</h4><p>海風小館、港口調度站、棧道工坊，各約 10 分鐘，可以分次玩。</p></div>
+      <div class="step"><div class="n">2</div><h4>留下紀錄</h4><p>只記每關<b>第一次送出</b>的結果，和送出前的把握。重玩不計分。</p></div>
+      <div class="step"><div class="n">3</div><h4>模型估計</h4><p>把紀錄換成估計，並附上誤差範圍。關卡少，範圍就寬。</p></div>
+      <div class="step"><div class="n" style="background:var(--sun);color:#6e4524">4</div><h4>學習表現線索</h4><p>例如「懂了規矩，但還推不出下一步」。</p></div>
+      <div class="step"><div class="n" style="background:var(--coral)">5</div><h4>三份說明</h4><p>給小安（未成年人看不到數字）、給家長的成長報告、給 NOUS 的學習計畫。</p></div>
     </div>
-    <div class="inner">
-      <b>每款遊戲裡：</b>
-      <span class="chip">操作教學</span><span class="sep">›</span>
-      <span class="chip">規矩教學（示範＋帶玩）</span><span class="sep">›</span>
-      <span class="chip s">理解 2 關</span><span class="sep">›</span>
-      <span class="chip s">推演 2 關</span><span class="sep">›</span>
-      <span class="chip s">換情境關</span><span class="sep">›</span>
-      <span class="chip s">記憶基準</span>
+    <div class="side3">
+      <div class="card"><b>另排時段</b>量短推理與工作記憶。只當基本資料：不計分、不開計畫。</div>
+      <div class="card"><b>1–3 天後：回島挑戰</b>約 4 分鐘，三個新問題，看規矩還記不記得住。</div>
+      <div class="card"><b>練習一段時間後</b>之後再量一次：換一套新規矩，看線索有沒有變。</div>
     </div>
-    <p class="note" style="margin-top:12px">綠色的是計分關：每關都是新地圖或新數字、同一條規矩，<b>只算第一次送出</b>。要放幾關，等試玩看完成時間與誤觸率再決定 <span class="tag t-cal">假設</span></p>
+    <p class="note" style="margin-top:14px">小安是虛構的示範學生。後面〈小安的換算例子〉會拿她的一條規矩，把這條路完整走一遍。</p>
   </div>
 </section>
 
-<!-- ========== 5 STATIONS ========== -->
+<!-- ========== 4 三個檢查站 ========== -->
 <section class="slide" data-title="三個檢查站">
-  <div class="kicker"><span class="dot"></span>檢查項目</div>
-  <h2 class="hl">三款小遊戲＝三個檢查站</h2>
+  <div class="kicker"><span class="dot"></span>三款小遊戲</div>
+  <h2 class="hl">三款小遊戲，各看一件事</h2>
   <div class="body">
     <div class="cols c3">
       <div class="card station">
         <div class="img img-hf"></div>
         <h3>海風小館 <span class="tag t-int">經營</span></h3>
-        <div class="an">視力站：看得夠不夠遠</div>
-        <p>看潮汐月曆分幾天經營：換錢、備料、擺桌，開店後看客人反應。</p>
-        <div class="meas">主場規矩：星露換潮貝（比例＋條件）</div>
+        <p style="margin-top:6px">看潮汐月曆分幾天經營：換錢、備料、擺桌，開店後看客人反應。</p>
+        <div class="meas">主場規矩：<b>星露換潮貝</b>（比例＋條件）</div>
       </div>
       <div class="card station">
         <div class="img img-gk"></div>
         <h3>港口調度站 <span class="tag t-int">線路</span></h3>
-        <div class="an">心電圖站：訊號走對路了嗎</div>
-        <p>鋪輸送帶、放閘門、安排合流，放行後看貨物跑到船上還是木箱。</p>
-        <div class="meas">主場規矩：共用木箱（門檻＋例外）</div>
+        <p style="margin-top:6px">鋪輸送帶、放閘門、安排合流，放行後看貨物跑到船上還是木箱。</p>
+        <div class="meas">主場規矩：<b>共用木箱</b>（門檻＋例外）</div>
       </div>
       <div class="card station">
         <div class="img img-zd"></div>
         <h3>棧道工坊 <span class="tag t-int">建造</span></h3>
-        <div class="an">X 光站：骨架撐不撐得住</div>
-        <p>用施工清單排好修哪裡、照什麼順序修，試走看島民能不能走過去。</p>
-        <div class="meas">主場規矩：棧道修補（條件＋順序）</div>
+        <p style="margin-top:6px">用施工清單排好修哪裡、照什麼順序修，試走看島民能不能走過去。</p>
+        <div class="meas">主場規矩：<b>棧道修補</b>（條件＋順序）</div>
       </div>
     </div>
     <div class="base" style="margin-top:16px;background:#fff;border-style:solid;border-color:#d5f0fb">
-      <b style="color:var(--sea-d);white-space:nowrap">每站都量：</b>
-      <span>學科理解・學科推演・用得出（換情境關）・記得住（當天基準）・自知準 <span class="tag t-cand">候選</span>。三條自創規矩輪流放進三款遊戲，玩法不變。<a class="cite" href="#p-Shute2013" data-cite="Shute2013" title="Assessment and Learning of Qualitative Physics in Newton&#x27;s Playground">[Shute 2013]</a><a class="cite" href="#p-Mislevy2003" data-cite="Mislevy2003" title="A Brief Introduction to Evidence-Centered Design">[Mislevy 2003]</a></span>
+      <b style="color:var(--sea-d);white-space:nowrap">每站都看：</b>
+      <span>懂不懂、推不推得出、換個地方會不會用、隔幾天記不記得，以及自知偏差 <span class="tag t-cand">候選</span>。三條自創規矩輪流放進三款遊戲，玩法不變。<a class="cite" href="#p-Shute2013" data-cite="Shute2013" title="Assessment and Learning of Qualitative Physics in Newton&#x27;s Playground">[Shute 2013]</a><a class="cite" href="#p-Mislevy2003" data-cite="Mislevy2003" title="A Brief Introduction to Evidence-Centered Design">[Mislevy 2003]</a></span>
     </div>
   </div>
 </section>
 
-<!-- ========== 6 DEMO HAIFENG ========== -->
+<!-- ========== 5 試玩 海風小館 ========== -->
 <section class="slide" data-title="試玩：海風小館">
   <div class="kicker"><span class="dot"></span>試玩 1／3 · 新編教學關（不是正式關卡）</div>
   <h2 class="hl">試玩：海風小館，看潮汐月曆換潮貝</h2>
@@ -483,7 +510,7 @@ body.mobile .demo-msg{min-height:0}
   </div>
 </section>
 
-<!-- ========== 7 DEMO GANGKOU ========== -->
+<!-- ========== 6 試玩 港口調度站 ========== -->
 <section class="slide" data-title="試玩：港口調度站">
   <div class="kicker"><span class="dot"></span>試玩 2／3 · 新編教學關（不是正式關卡）</div>
   <h2 class="hl">試玩：港口調度站，放閘門分貨</h2>
@@ -504,7 +531,7 @@ body.mobile .demo-msg{min-height:0}
   </div>
 </section>
 
-<!-- ========== 8 DEMO ZHANDAO ========== -->
+<!-- ========== 7 試玩 棧道工坊 ========== -->
 <section class="slide" data-title="試玩：棧道工坊">
   <div class="kicker"><span class="dot"></span>試玩 3／3 · 新編教學關（不是正式關卡）</div>
   <h2 class="hl">試玩：棧道工坊，排好兩天的施工清單</h2>
@@ -531,138 +558,109 @@ body.mobile .demo-msg{min-height:0}
   </div>
 </section>
 
-<!-- ========== 9 INDICATORS OVERVIEW ========== -->
-<section class="slide" data-title="檢驗數值一覽">
-  <div class="kicker"><span class="dot"></span>檢驗數值（LQ 指標）</div>
-  <h2 class="hl">健檢表上有哪些數值</h2>
-  <div class="body">
-    <div class="base"><span style="font-size:30px">📏</span><div><b>基本資料（不是分數）：IQ 短推理＋工作記憶</b><br><span class="small muted">像身高體重：只用來證明下面的數值「超過 IQ」<a class="cite" href="#p-Chierchia2019" data-cite="Chierchia2019" title="The matrix reasoning item bank (MaRs-IB): novel, open-access abstract reasoning items for adolescents and adults">[MaRs-IB 2019]</a><a class="cite" href="#p-Zerr2018" data-cite="Zerr2018" title="Learning Efficiency: Identifying Individual Differences in Learning Rate and Retention in Healthy Adults">[Zerr 2018]</a>。不開處方、不交給 EK、不給任何人看。</span></div></div>
-    <div class="ind-grid">
-      <div class="ind"><h4>學科理解</h4><div class="an">聽力檢查：說明聽懂了沒</div><p>剛教的規矩，真的懂了嗎？</p></div>
-      <div class="ind"><h4>學科推演</h4><div class="an">肺活量：一口氣能推多遠</div><p>用剛學的規矩，推出規矩上沒寫的新結論。</p></div>
-      <div class="ind"><h4>用得出</h4><div class="an">平衡感：換了場地還站得穩</div><p>換一個情境，還會用同一條規矩嗎？</p></div>
-      <div class="ind"><h4>記得住</h4><div class="an">骨密度：存得住、不流失</div><p>隔 1–3 天回來，還記得嗎？</p></div>
-      <div class="ind" style="border-top-color:var(--sun)"><h4>自知準 <span class="tag t-cal">只看偏差</span></h4><div class="an">自覺健康 vs 檢驗結果</div><p>覺得自己會，和真的會，差多少？不併入摘要。</p></div>
-      <div class="ind" style="border-top-color:var(--lilac)"><h4>學得動 <span class="tag t-cand">候選・研究用</span></h4><div class="an">體能訓練：練幾次就上手</div><p>要練幾次才學到剛好？</p></div>
-    </div>
-    <p class="note" style="margin-top:12px">每個數值有兩種讀法：<b>單一規矩的讀數</b>（變得快，給 EK 當治療目標）和<b>個人趨勢</b>（跨規矩彙整，變得慢，研究用摘要）。</p>
-  </div>
-</section>
-
-<!-- ========== 10 COMP + INFER ========== -->
-<section class="slide" data-title="學科理解、學科推演">
-  <div class="kicker"><span class="dot"></span>檢驗數值 1–2</div>
-  <h2 class="hl">懂不懂、推不推得出</h2>
-  <div class="cols c2" style="flex:1;min-height:0">
-    <div class="icard">
-      <div class="top"><div class="badge" style="background:#e6f8fb;font-size:28px">👂</div><div><h3>學科理解</h3><div class="an">像聽力檢查：說明聽懂了沒</div></div></div>
-      <div class="row"><span class="lb m">白話</span><div>剛教的規矩真的懂了嗎？</div></div>
-      <div class="row"><span class="lb h">怎麼量</span><div>每條規矩 2 個<b>理解關</b>（規矩教學之後）。只看<b>第一次送出</b>過不過；重玩不計分。三條規矩共 6 關 <span class="tag t-cal">假設</span></div></div>
-      <div class="row"><span class="lb f">變成數字</span><div><span class="formula">過關機會 ≈ 你的理解力 − 這關的難度</span><br>用各關「過／沒過」反推理解力，同時給一個誤差範圍。亂猜也會過的機會，先用程式窮舉的上限值代入。</div></div>
-    </div>
-    <div class="icard">
-      <div class="top"><div class="badge" style="background:#fff0d6;font-size:28px">🫁</div><div><h3>學科推演</h3><div class="an">像肺活量：一口氣能推多遠</div></div></div>
-      <div class="row"><span class="lb m">白話</span><div>在<b>同一個情境</b>，串起規矩推出新結論（例如要提前一天先換好）。</div></div>
-      <div class="row"><span class="lb h">怎麼量</span><div>每條規矩 2 個<b>推演關</b>，只看第一次送出。只會「眼前要用才處理」的玩法過不了。</div></div>
-      <div class="row"><span class="lb f">變成數字</span><div><span class="formula">推演力 ＝ 扣掉「你懂多少」之後，多推出來的部分</span><br>避免和理解重算。若和 IQ 太像（相關上界達 .85），個人趨勢降為研究用 <span class="tag t-cal">假設</span></div></div>
-    </div>
-  </div>
-</section>
-
-<!-- ========== 11 TRANSFER + RETAIN ========== -->
-<section class="slide" data-title="用得出、記得住">
-  <div class="kicker"><span class="dot"></span>檢驗數值 3–4</div>
-  <h2 class="hl">換個地方會用嗎、隔幾天還記得嗎</h2>
-  <div class="cols c2" style="flex:1;min-height:0">
-    <div class="icard">
-      <div class="top"><div class="badge" style="background:#e3f7ec;font-size:28px">🤸</div><div><h3>用得出</h3><div class="an">像平衡感：換了場地還站得穩</div></div></div>
-      <div class="row"><span class="lb m">白話</span><div>換了情境，還會用同一條規矩嗎？</div></div>
-      <div class="row"><span class="lb h">怎麼量</span><div><b>換情境關</b>的第一次送出：近＝同款遊戲新地圖；中、遠＝換到別款遊戲（例如小館的換錢規矩，在港口變成拆箱）。</div></div>
-      <div class="row"><span class="lb f">變成數字</span><div><span class="formula">用得出 ＝ 實際過關 − 依你的推演力預估會過的機會</span><br>比預期多過，就是比較會「搬過去用」。這一場只看群體，不出個人數字。</div></div>
-    </div>
-    <div class="icard">
-      <div class="top"><div class="badge" style="background:#f3ecff;font-size:28px">🦴</div><div><h3>記得住</h3><div class="an">像骨密度：存得住、不流失</div></div></div>
-      <div class="row"><span class="lb m">白話</span><div>隔 1–3 天回來，規矩還記得嗎？</div></div>
-      <div class="row"><span class="lb h">怎麼量</span><div>每款最後一關是當天的<b>記憶基準</b>；回島挑戰再出同一條規矩的新關卡，對照兩者。</div></div>
-      <div class="row"><span class="lb f">變成數字</span><div><span class="formula">拿一條標準遺忘曲線當參考，看你忘得比它慢還是快</span><br>曲線參數先用成人預設值 <span class="tag t-cal">待校準</span>；只看群體。回島完成率低於 70% 就不出個人讀數 <span class="tag t-cal">假設</span></div></div>
-    </div>
-  </div>
-</section>
-
-<!-- ========== 12 CALIB + LEARN ========== -->
-<section class="slide" data-title="自知準、學得動">
-  <div class="kicker"><span class="dot"></span>檢驗數值 5–6</div>
-  <h2 class="hl">有沒有自知之明、練幾次能上手</h2>
-  <div class="cols c2" style="flex:1;min-height:0">
-    <div class="icard">
-      <div class="top"><div class="badge" style="background:#fff3c9;font-size:28px">🪞</div><div><h3>自知準 <span class="tag t-cal">只看偏差</span></h3><div class="an">像「自覺健康」對照「檢驗結果」</div></div></div>
-      <div class="row"><span class="lb m">白話</span><div>覺得自己會的程度，和真的會的程度，差多少？</div></div>
-      <div class="row"><span class="lb h">怎麼量</span><div>每次第一次送出前的把握：三級把握，或押注（不押／押小／押大）<span class="tag t-cand">候選</span>。押注若對好玩和量測都沒幫助，就拿掉。</div></div>
-      <div class="row"><span class="lb f">變成數字</span><div><span class="formula">偏差 ＝ 平均把握 − 平均過關率</span><br>正值＝太有自信，負值＝太沒自信 <a class="cite" href="#p-FlemingLau2014" data-cite="FlemingLau2014" title="How to measure metacognition">[Fleming &amp; Lau 2014]</a>。不併入 LQ 摘要；目前沒有已知能改變它的教法，「會變動」證據較弱。</div></div>
-    </div>
-    <div class="icard" style="border:2px dashed #cdbdf2">
-      <div class="top"><div class="badge" style="background:#ece4ff;font-size:28px">🏃</div><div><h3>學得動 <span class="tag t-cand">候選・研究用</span></h3><div class="an">像體能訓練：練幾次就上手</div></div></div>
-      <div class="row"><span class="lb m">白話</span><div>要練幾次，才學到剛好？</div></div>
-      <div class="row"><span class="lb h">怎麼量</span><div>練到「連續兩次獨立做對」（學到剛好）<a class="cite" href="#p-Zerr2018" data-cite="Zerr2018" title="Learning Efficiency: Identifying Individual Differences in Learning Rate and Retention in Healthy Adults">[Zerr 2018]</a>用了幾次機會、幾級提示 <a class="cite" href="#p-Caffrey2008" data-cite="Caffrey2008" title="The Predictive Validity of Dynamic Assessment: A Review">[Caffrey 2008]</a>。</div></div>
-      <div class="row"><span class="lb f">變成數字</span><div><span class="formula">每練一次，從「不會」變「會」的機會</span><br>起點先設 20% <span class="tag t-cal">假設</span>。每場只有 3 條規矩，只做群體分析、不出個人報告；研究顯示學生的學習速度可能都差不多 <a class="cite" href="#p-Koedinger2023" data-cite="Koedinger2023" title="An astonishing regularity in student learning rate">[Koedinger 2023]</a>。</div></div>
-    </div>
-  </div>
-</section>
-
-<!-- ========== 13 RED FLAGS ========== -->
-<section class="slide" data-title="紅字＝待確認">
-  <div class="kicker"><span class="dot"></span>參考範圍與紅字</div>
-  <h2 class="hl">紅字是「待確認」，<em>不是診斷</em></h2>
-  <div class="body">
-    <div class="flags">
-      <div class="flag"><div class="fi">1</div><div><b>規矩沒讀懂</b><span>兩個理解關都沒過 → 換一種說法重講</span></div></div>
-      <div class="flag"><div class="fi">2</div><div><b>懂了但推不出來</b><span>理解關都過、推演關都沒過 → 拆步驟</span></div></div>
-      <div class="flag"><div class="fi">3</div><div><b>很有把握卻做錯</b><span>同一規矩 2 次以上 → 先問卡在哪一步</span></div></div>
-      <div class="flag"><div class="fi">4</div><div><b>隔天就忘</b><span>當天理解已過、回島都沒過 → 縮短複習間隔</span></div></div>
-      <div class="flag"><div class="fi">5</div><div><b>換情境就不會</b><span>理解、推演已過，近、中換情境關都沒過 → 給不同情境的配對範例</span></div></div>
-      <div class="flag" style="opacity:.85"><div class="fi" style="background:#eef1f4;color:#56677a">?</div><div><b>亂猜（資料品質）</b><span>太快送出 → 不當成「不會」，提醒慢下來</span></div></div>
-    </div>
-    <div class="cols c3" style="margin-top:14px;gap:14px">
-      <div class="card small"><b>一律標「待確認」</b><br>第一場的紅字不能直接決定個人處方。</div>
-      <div class="card small"><b>要 2 個新證據才算數</b><br>EK 在處方期再拿到 2 個獨立、方向一致的證據，才轉「確定」。</div>
-      <div class="card small"><b>紅字準不準，下一次驗</b><br>用下一次獨立的檢查關驗，不用原本那幾關。門檻 <span class="tag t-cal">假設</span></div>
-    </div>
-  </div>
-</section>
-
-<!-- ========== 14 REPORT ========== -->
-<section class="slide" data-title="報告長什麼樣">
-  <div class="kicker"><span class="dot"></span>健檢報告</div>
-  <h2 class="hl">報告長什麼樣：<em>不給未成年人看數字</em></h2>
-  <div class="cols" style="grid-template-columns:1fr 1fr 1.1fr;gap:20px;flex:1;min-height:0">
-    <div class="card">
-      <h3 style="margin:0 0 6px;font-size:22px">🧒 學生看到</h3>
+<!-- ========== 8 這不是智力測驗 ========== -->
+<section class="slide" data-title="這不是智力測驗">
+  <div class="kicker"><span class="dot"></span>常被問：這是不是包了遊戲外殼的 IQ 測驗？</div>
+  <h2 class="hl">這量的，不是<em>智商測驗</em>量得到的東西</h2>
+  <div class="cols" style="grid-template-columns:1fr 1.15fr;gap:20px">
+    <div class="card" style="background:#f6f3ee;border:2px dashed #d9cdb9;box-shadow:none">
+      <h3 style="margin:0 0 6px;font-size:22px">📏 短推理（IQ 基線）只當基本資料</h3>
       <ul class="clean small">
-        <li><span class="b">✓</span>島上越來越熱鬧、港口越來越大、棧道越來越長</li>
+        <li><span class="b" style="background:#eee8df;color:#6f5d52">✕</span>不計分、不開學習計畫、不交給 EK</li>
+        <li><span class="b" style="background:#eee8df;color:#6f5d52">?</span>它的用途是之後檢查：遊戲線索有沒有說出比短推理更多的東西 <a class="cite" href="#p-Chierchia2019" data-cite="Chierchia2019" title="The matrix reasoning item bank (MaRs-IB): novel, open-access abstract reasoning items for adolescents and adults">[MaRs-IB 2019]</a><a class="cite" href="#p-Zerr2018" data-cite="Zerr2018" title="Learning Efficiency: Identifying Individual Differences in Learning Rate and Retention in Healthy Adults">[Zerr 2018]</a></li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3 style="margin:0 0 6px;font-size:22px">🎮 遊戲要看的是</h3>
+      <ul class="clean small">
+        <li><span class="b">1</span>剛學的規矩，懂了沒</li>
+        <li><span class="b">2</span>能不能推出說明裡沒寫的下一步</li>
+        <li><span class="b">3</span>換了場景，還會不會用</li>
+        <li><span class="b">4</span>隔幾天，還記不記得</li>
+        <li><span class="b">5</span>自己覺得的，和實際做到的差多少</li>
+      </ul>
+      <p class="note" style="margin-top:4px">這些不是一份短推理測驗在量的東西。</p>
+    </div>
+  </div>
+  <div class="card" style="margin-top:14px;padding:10px 18px;font-size:16.5px;line-height:1.55">
+    <b>公平的玩法：</b>每個人玩同一組計分關；只算第一次送出，重玩包裝成「隔天再來」、不計分；不倒數、不考手速；規矩全部自創，誰都沒先學過。<a class="cite" href="#p-ShuteMoore2017" data-cite="ShuteMoore2017" title="Consistency and Validity in Game-Based Stealth Assessment">[Shute &amp; Moore 2017]</a>
+  </div>
+  <div class="quote" style="margin-top:12px">是不是「拿掉計分還想玩」，要靠真人試玩來答。這是 M1 的一部分（通過標準見〈證明到哪〉），<b>現在還沒有實測</b>。</div>
+</section>
+
+<!-- ========== 9 小安的換算例子 ========== -->
+<section class="slide" data-title="小安的換算例子">
+  <div class="kicker"><span class="dot"></span>小安在「星露換潮貝」這條規矩 <span class="demo-lab">示範／示意</span></div>
+  <h2 class="hl">從一次作答，到<em>一則建議</em></h2>
+  <div class="ex">
+    <div class="chain">
+      <div class="ch"><span class="lb" style="background:#a99a8c">原始紀錄</span><div>理解關 2 關：第一次送出<b>都過</b>。推演關 2 關：第一次送出<b>都沒過</b>（都把星露留到漲潮當天才換）。送出前把握選「還算有把握」。</div></div>
+      <div class="ch"><span class="lb" style="background:var(--sea)">模型估計</span><div>理解偏向「懂了」，但只有兩關，<b>誤差範圍還寬</b>，不能當成精確分數。扣掉「她已經懂了」之後，推演偏低。<span class="tag t-int">示意</span></div></div>
+      <div class="ch"><span class="lb" style="background:var(--leaf)">線索</span><div>聽懂了價錢規矩，但還沒推出「要提前在平日換」。</div></div>
+      <div class="ch warn" style="background:#fff6f3;border:2px dashed #f5b7a8"><span class="lb" style="background:var(--coral)">待查線索</span><div>「懂了但推不出來」。<b>這不是診斷。</b>第一場不能直接決定個人學習計畫；要再有 2 個獨立、方向一致的新證據，才會成為行動依據。</div></div>
+    </div>
+    <div class="outs">
+      <div class="out st"><h4>🧒 給小安（沒有數字）</h4>「小館的換錢規矩你聽懂了。換到『要不要提前換』時還會卡住。下一回我們把步驟拆開練。」</div>
+      <div class="out pa"><h4>👪 給家長</h4>只跟孩子自己比；這場還不夠穩，先寫「還無法判定有沒有變化」；不給分數、名次或星星數。</div>
+      <div class="out pl"><h4>🧭 給 NOUS 的學習計畫</h4>這條規矩先拆步驟練「提前一天安排」；不把短推理或工作記憶交給處方。</div>
+    </div>
+  </div>
+  <p class="fn">正式公式在附錄 A（理解關過關機會 ≈ 理解 − 關卡難度；推演是扣掉理解之後多推出來的部分）。</p>
+</section>
+
+<!-- ========== 10 線索怎麼分層 ========== -->
+<section class="slide" data-title="線索怎麼分層">
+  <div class="kicker"><span class="dot"></span>線索的成熟度</div>
+  <h2 class="hl">六種線索，<em>成熟度不一樣</em></h2>
+  <div class="body">
+    <div class="tiers">
+      <div class="tier t0"><div><h4>基本資料</h4><span class="tag" style="background:#eee8df;color:#6f5d52">不計分</span></div><div><b>短推理、工作記憶。</b>只用來之後檢驗「這些線索有沒有超過智商」；不開計畫、不交給 EK、不給學生或家長看。</div></div>
+      <div class="tier t1"><div><h4>核心</h4><span class="tag t-ok">要在 M1 證明</span></div><div><b>學科理解、學科推演、用得出、記得住。</b>用得出與記得住這一場先看群體、不出個人數字（記得住還要看回島完成率；個人讀數要等校準）。</div></div>
+      <div class="tier t2"><div><h4>自知準</h4><span class="tag t-cal">只看偏差</span></div><div>平均把握 − 平均過關率：正值＝偏高、負值＝偏低。不併入摘要。<a class="cite" href="#p-FlemingLau2014" data-cite="FlemingLau2014" title="How to measure metacognition">[Fleming &amp; Lau 2014]</a></div></div>
+      <div class="tier t3"><div><h4>學得動</h4><span class="tag t-cand">候選・只做群體</span></div><div>研究顯示學生每次練習的進步幅度可能很相近，所以現在不當個人分數。<a class="cite" href="#p-Koedinger2023" data-cite="Koedinger2023" title="An astonishing regularity in student learning rate">[Koedinger 2023]</a><a class="cite" href="#p-Zerr2018" data-cite="Zerr2018" title="Learning Efficiency: Identifying Individual Differences in Learning Rate and Retention in Healthy Adults">[Zerr 2018]</a><a class="cite" href="#p-Caffrey2008" data-cite="Caffrey2008" title="The Predictive Validity of Dynamic Assessment: A Review">[Caffrey 2008]</a></div></div>
+    </div>
+    <div class="clues">
+      <div class="hd">待查線索（不是診斷，要再查證）</div>
+      <span class="cl">規矩沒讀懂</span><span class="cl">懂了但推不出來</span><span class="cl">很有把握卻做錯</span><span class="cl">隔天就忘</span><span class="cl">換情境就不會</span><span class="cl q">太快送出：只當資料品質問題，不當成「不會」</span>
+      <p class="note" style="font-size:14px">第一場只標「待查」；要再有 2 個獨立、方向一致的新證據才行動。查證用之後另一次獨立的檢查，不用原本計分的那幾關。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 11 三份說明 ========== -->
+<section class="slide" data-title="三份說明">
+  <div class="kicker"><span class="dot"></span>三份說明</div>
+  <h2 class="hl">學生、家長、學習計畫，<em>看到的不一樣</em></h2>
+  <div class="cols" style="grid-template-columns:1fr 1fr 1fr 236px;gap:16px;flex:1;min-height:0">
+    <div class="card">
+      <h3 style="margin:0 0 6px;font-size:21px">🧒 學生（未成年人）</h3>
+      <ul class="clean small">
+        <li><span class="b">✓</span>島上越來越熱鬧、港口變大、棧道變長</li>
         <li><span class="b">✓</span>故事化的描述，和「解開了」的紀錄</li>
-        <li><span class="b" style="background:#ffe2dc;color:#c2412d">✕</span>沒有成績、星星總數、排名</li>
-      </ul>
-      <h3 style="margin:14px 0 6px;font-size:22px">🔬 EK 與研究團隊</h3>
-      <ul class="clean small">
-        <li><span class="b" style="background:#dcf2ff;color:#13698f">i</span>每條規矩的讀數與「待確認」紅字</li>
-        <li><span class="b" style="background:#dcf2ff;color:#13698f">i</span>IQ 基本資料不交給 EK</li>
+        <li><span class="b" style="background:#ffe2dc;color:#c2412d">✕</span>沒有成績、星星總數、排名或任何數字</li>
       </ul>
     </div>
     <div class="card">
-      <h3 style="margin:0 0 6px;font-size:22px">👪 家長看到：成長報告 <span class="tag t-tent">暫定</span></h3>
+      <h3 style="margin:0 0 6px;font-size:21px">👪 家長：成長報告 <span class="tag t-tent">暫定</span></h3>
       <ul class="clean small">
         <li><span class="b">1</span>只跟孩子自己上次比，不跟別人比</li>
-        <li><span class="b">2</span>數值夠穩定（量兩次一致性 ≥ .80）才給</li>
-        <li><span class="b">3</span>改變超過量測誤差才寫「有變化」，其餘寫「維持」</li>
-        <li><span class="b">4</span>預期第一場證據還不夠：只給粗略的「學科掌握」描述，或寫「無法判定」</li>
+        <li><span class="b">2</span>數值夠穩定才給</li>
+        <li><span class="b">3</span>改變要超過量測誤差才寫「有變化」，否則寫「維持」</li>
+        <li><span class="b">4</span>第一場預期常常是「還無法判定」</li>
       </ul>
-      <p class="note" style="margin-top:8px">Claude 審查意見：這階段傾向完全不報個人改變。待正一確認。</p>
+    </div>
+    <div class="card">
+      <h3 style="margin:0 0 6px;font-size:21px">🧭 NOUS／EK</h3>
+      <ul class="clean small">
+        <li><span class="b" style="background:#dcf2ff;color:#13698f">i</span>每條規矩的線索與待查線索</li>
+        <li><span class="b" style="background:#dcf2ff;color:#13698f">i</span>待查線索要再查證，才進學習計畫</li>
+        <li><span class="b" style="background:#dcf2ff;color:#13698f">✕</span>短推理與工作記憶不交給 EK</li>
+      </ul>
     </div>
     <div style="display:flex;align-items:center">
-      <div class="phone"><div class="scr">
+      <div class="phone" style="width:232px"><div class="scr" style="min-height:280px">
         <div style="font-weight:900;font-size:16px;margin-bottom:6px">小島成長報告 <span class="tag t-int">示意</span></div>
-        <div style="background:#fff;border-radius:12px;padding:8px 10px;margin-bottom:8px"><b>學科掌握</b><br>和上次比：<b style="color:#2f7d22">有變化 ↑</b></div>
-        <div style="background:#fff;border-radius:12px;padding:8px 10px;margin-bottom:8px"><b>自知準</b><br>和上次比：維持</div>
+        <div style="background:#fff;border-radius:12px;padding:8px 10px;margin-bottom:8px"><b>學科掌握</b><br>和上次比：<b style="color:#8a5b00">還無法判定</b><br><span style="font-size:12.5px;color:#9b8a7e">第一場，證據還不夠穩</span></div>
         <div style="background:#fff;border-radius:12px;padding:8px 10px;color:var(--ink2)">這次在棧道工坊，把「木樁要先插」的規矩解開了。</div>
         <div style="font-size:12px;color:#9b8a7e;margin-top:8px">不顯示分數、名次或星星數</div>
       </div></div>
@@ -670,99 +668,69 @@ body.mobile .demo-msg{min-height:0}
   </div>
 </section>
 
-<!-- ========== 15 PROOF ========== -->
-<section class="slide" data-title="怎麼證明它有效">
-  <div class="kicker"><span class="dot"></span>先驗尺，再看藥</div>
-  <h2 class="hl">怎麼證明它有效：三關都要過 <a class="cite" href="#p-Mokkink2010" data-cite="Mokkink2010" title="The COSMIN study reached international consensus on taxonomy, terminology, and definitions of measurement properties for health-related patient-reported outcomes">[Mokkink 2010]</a></h2>
-  <div class="body">
-    <div class="proof">
-      <div class="pf"><div class="no">1</div><h3>量得穩</h3><div class="q">量兩次，結果差不多嗎？</div>
-        <p>同一場的兩個平行關要一致；對照組在 T1、T2 各量一次。</p>
-        <p>門檻：研究用 ≥ .60；給家長看 ≥ .80 <span class="tag t-cal">假設</span></p></div>
-      <div class="pf"><div class="no">2</div><h3>量得對</h3><div class="q">能預測真實學習，而且超過 IQ 嗎？</div>
-        <p>先放 IQ、工作記憶、閱讀，再看 LQ 指標能多預測多少：處方期末、一個月後的保留，和「學新規則」小任務。</p>
-        <p>門檻：多解釋 ≥ 3% <span class="tag t-cal">假設</span> <a class="cite" href="#p-Zerr2018" data-cite="Zerr2018" title="Learning Efficiency: Identifying Individual Differences in Learning Rate and Retention in Healthy Adults">[Zerr 2018]</a><a class="cite" href="#p-Caffrey2008" data-cite="Caffrey2008" title="The Predictive Validity of Dynamic Assessment: A Review">[Caffrey 2008]</a></p></div>
-      <div class="pf"><div class="no">3</div><h3>會變動</h3><div class="q">好的教法會讓數值動嗎？</div>
-        <p><b>3a 先驗尺：</b>已知有效的做法要分得出來，例如「標準講解」勝過「只讀條文」、「提取練習」勝過「重讀」。</p>
-        <p><b>3b 再看藥：</b>EK 處方組勝過對照組。</p></div>
-    </div>
-    <div class="quote" style="margin-top:16px">順序不能反：<b>3a 不過，3b 就不解讀</b>（分不出是尺不靈還是藥沒效）。自知準目前沒有已知有效的教法，只能靠 3b，證據較弱。</div>
-  </div>
-</section>
-
-<!-- ========== 16 PILOT ========== -->
-<section class="slide" data-title="合併試點（暫定）">
-  <div class="kicker"><span class="dot"></span>試點設計 <span class="tag t-tent">暫定（待正一確認）</span></div>
-  <h2 class="hl">一個寒假、一份同意書、回答兩個問題</h2>
-  <div class="body">
-    <p class="lead" style="margin-bottom:10px">問題一：這把尺準不準？　問題二：EK 的處方有沒有效？</p>
-    <div class="tl">
-      <div class="ph"><span class="d">T1 之前</span><b>隨機分組</b><span>處方組／對照組</span></div>
-      <div class="ph"><span class="d">1/21–1/22</span><b>健檢場 T1</b><span>三款遊戲，不開 EK</span></div>
-      <div class="ph"><span class="d">1–3 天後</span><b>回島挑戰 1</b><span>約 4 分鐘</span></div>
-      <div class="ph key"><span class="d">1/24–1/30</span><b>處方期</b><span>5 次、每次約 10 分鐘</span></div>
-      <div class="ph key"><span class="d">1/31</span><b>複檢 T2</b><span>開場 6 個確認關</span></div>
-      <div class="ph"><span class="d">約 2/19</span><b>一個月追蹤</b><span>10 分鐘線上</span></div>
-    </div>
-    <div class="arms">
-      <div class="arm" style="background:#ffeede"><b style="color:var(--coral-d)">處方組：開 EK</b><br>EK 只決定挑哪些關、什麼順序、什麼時候複習。</div>
-      <div class="arm" style="background:#e9f6fb"><b style="color:var(--sea-d)">對照組：固定流程</b><br>同一個關卡池、同樣關卡數與提示；一個月追蹤後也開 EK <span class="tag t-tent">暫定</span></div>
-    </div>
-    <p class="note" style="margin-top:12px">主要結果：T2 開場的確認關（處方期碰不到）兩組通過比例差；差距要明顯大於 0 才說有效，事先設定「有意義」＝10 個百分點。規模約 600 人 <span class="tag t-cal">假設</span>　<b style="color:var(--coral-d)">日期還沒解決：</b>回島 2 可能超出寒假窗口一天。</p>
-  </div>
-</section>
-
-<!-- ========== 17 FAIR & FUN ========== -->
-<section class="slide" data-title="公平又好玩">
-  <div class="kicker"><span class="dot"></span>公平又好玩</div>
-  <h2 class="hl">為什麼公平，又好玩</h2>
-  <div class="cols" style="grid-template-columns:1fr 1.05fr;gap:24px;flex:1;min-height:0">
-    <div>
-      <ul class="clean">
-        <li><span class="b">⚡</span><div><b>按下去，馬上看到結果</b>：貨物沿帶子跑、島民走上棧道、客人有反應。</div></li>
-        <li><span class="b">🗺</span><div><b>每關都是獨立新關</b>：新地圖或新數字、同一條規矩；每個人玩同一組計分關 <a class="cite" href="#p-ShuteMoore2017" data-cite="ShuteMoore2017" title="Consistency and Validity in Game-Based Stealth Assessment">[Shute &amp; Moore 2017]</a></div></li>
-        <li><span class="b">1</span><div><b>只算第一次送出</b>；重玩包裝成「隔天再來」，不計分。失敗的痕跡留在島上當裝飾。</div></li>
-        <li><span class="b">⏸</span><div><b>不倒數、不考手速</b>；規矩全部自創，誰都沒先學過。</div></li>
+<!-- ========== 12 證明到哪 ========== -->
+<section class="slide" data-title="證明到哪">
+  <div class="kicker"><span class="dot"></span>證據的界線</div>
+  <h2 class="hl">現在證明到哪，<em>還沒證明什麼</em></h2>
+  <div class="ev">
+    <div class="evc">
+      <h3>✓ 已經有的</h3>
+      <ul>
+        <li>文獻只支持「<b>可以這樣設計</b>一把尺」，不支持「這把尺<b>已經量準</b>」：量測性質分類 <a class="cite" href="#p-Mokkink2010" data-cite="Mokkink2010" title="The COSMIN study reached international consensus on taxonomy, terminology, and definitions of measurement properties for health-related patient-reported outcomes">[Mokkink 2010]</a>、證據中心設計 <a class="cite" href="#p-Mislevy2003" data-cite="Mislevy2003" title="A Brief Introduction to Evidence-Centered Design">[Mislevy 2003]</a>、遊戲內評量 <a class="cite" href="#p-Shute2013" data-cite="Shute2013" title="Assessment and Learning of Qualitative Physics in Newton&#x27;s Playground">[Shute 2013]</a><a class="cite" href="#p-ShuteMoore2017" data-cite="ShuteMoore2017" title="Consistency and Validity in Game-Based Stealth Assessment">[Shute &amp; Moore 2017]</a>。</li>
+        <li>工程檢查：<b>18 關完成解空間檢查</b>（每關只有一種解；不懂規矩的第一次通過率 ≤ .10，細節見附錄 B）。<b>這不是真人效度。</b></li>
       </ul>
     </div>
-    <div>
-      <div class="card" style="padding:14px 18px">
-        <b style="font-size:18px">程式窮舉：沒學規矩就過不了關</b>
-        <div class="stats" style="margin-top:10px">
-          <div class="stat"><div class="v">18</div><div class="t">關都窮舉過<br>所有可能的送出</div></div>
-          <div class="stat"><div class="v">1</div><div class="t">每關都<br>只有一種解</div></div>
-          <div class="stat"><div class="v">≤ .10</div><div class="t">沒學規矩的假玩家<br>第一次就過的機率</div></div>
-        </div>
-        <p class="note" style="margin-top:10px">「全部都放」的玩法通過率＝0；只看眼前的玩法在推演關也是 0。</p>
-      </div>
-      <div class="card" style="margin-top:12px;padding:12px 18px">
-        <b>還要真人試玩驗兩件事</b>
-        <p class="small muted" style="margin-top:4px">① 拿掉量測還值得玩嗎？自願再玩一關 ≥ 50% <span class="tag t-cal">假設</span><br>② 跳過規矩教學的人，推演關通過率上界 ≤ .25 <span class="tag t-cal">假設</span></p>
-      </div>
+    <div class="evc no">
+      <h3>✕ 還沒證明</h3>
+      <ul>
+        <li>還沒有自己的學生資料，證明這些線索能預測真實學習，而且超過短推理與工作記憶。</li>
+        <li>還沒證明量兩次會穩、好的教法會讓線索變動、拿掉計分後學生還想玩。</li>
+        <li>自知準目前沒有已知有效的教法，「會變動」的證據會較弱。</li>
+      </ul>
+    </div>
+    <div class="evc m1">
+      <h3>→ M1 要過的三關 <span class="tag t-cal">門檻皆假設</span></h3>
+      <div class="gate1"><span class="k">1</span><div><b>量得穩：</b>同一場平行關要一致；對照組 T1、T2 各量一次。研究用 ≥ .60；給家長看 ≥ .80。</div></div>
+      <div class="gate1"><span class="k">2</span><div><b>量得對、且超過 IQ：</b>先放入短推理、工作記憶、閱讀，再看核心線索能多解釋多少（學習計畫期末、一個月後保留、學新規則小任務）。多解釋 ≥ 3%。<a class="cite" href="#p-Zerr2018" data-cite="Zerr2018" title="Learning Efficiency: Identifying Individual Differences in Learning Rate and Retention in Healthy Adults">[Zerr 2018]</a><a class="cite" href="#p-Caffrey2008" data-cite="Caffrey2008" title="The Predictive Validity of Dynamic Assessment: A Review">[Caffrey 2008]</a></div></div>
+      <div class="gate1"><span class="k">3</span><div><b>會變動：</b>先做 3a（已知有效的做法要分得出來，例如標準講解勝過只讀條文、提取練習勝過重讀），再做 3b（學習計畫組勝過對照組）。<b>3a 不過，3b 就不解讀。</b></div></div>
+      <div class="gate1"><span class="k" style="background:var(--sun);color:#6e4524">+</span><div><b>真人試玩：</b>自願再玩一關（不計分）≥ 50%；跳過規矩教學的人，推演關通過率上界 ≤ .25。</div></div>
     </div>
   </div>
+  <p class="note" style="margin-top:10px;font-size:14.5px"><b>寒假試點（規劃）：</b>一場先量；中間一組依學習計畫練習、一組走固定流程；之後再量一次。主要看後面那次獨立確認關的通過差。細節見附錄 B。</p>
 </section>
 
-<!-- ========== 18 NEXT ========== -->
+<!-- ========== 13 下一步 ========== -->
 <section class="slide" data-title="下一步">
-  <div class="kicker"><span class="dot"></span>工作目標</div>
-  <h2 class="hl">下一步</h2>
+  <div class="kicker"><span class="dot"></span>下一步</div>
+  <h2 class="hl">下一步，是<em>去證明</em>，不是把話說滿</h2>
   <div class="body">
-    <div class="goals">
-      <div class="goal"><div class="when">11/29 前</div><div>和敬欽對齊 EA–EK 介面與「檢查關凍結」規則；確認 IQ 短版的授權</div></div>
-      <div class="goal"><div class="when p">先做</div><div>垂直切片：<b>港口調度站 × 共用木箱</b>從教學做到回島關，12–15 人試玩</div></div>
-      <div class="goal"><div class="when">12/13 前</div><div>第 8 輪模擬：新設計下的信度、偏差與檢定力</div></div>
-      <div class="goal"><div class="when p">補齊</div><div>近遷移、記憶基準、回島關的盤面，用同一支窮舉程式驗收</div></div>
-      <div class="goal"><div class="when">12/20 前</div><div>事先登錄三關的假設與分析計畫，打凍結標籤</div></div>
-      <div class="goal"><div class="when">12/27 前</div><div>凍結檢查關時程，完成 30–50 人流程試用</div></div>
+    <div class="close2">
+      <div class="bigcard ea">
+        <div class="who" style="color:var(--sea-d)">第一步</div>
+        <h3>真人試玩</h3>
+        <ul>
+          <li>學生看不看得懂規矩、玩不玩得下去</li>
+          <li>拿掉計分，還想不想再玩一關</li>
+          <li>跳過教學的人，是不是真的過不了推演關</li>
+        </ul>
+      </div>
+      <div class="bigcard ek">
+        <div class="who" style="color:var(--coral-d)">第二步</div>
+        <h3>M1 三關驗證</h3>
+        <ul>
+          <li>量得穩：量兩次差不多</li>
+          <li>量得對：能預測學習，而且超過智商</li>
+          <li>會變動：好的教法會讓線索動</li>
+        </ul>
+      </div>
     </div>
-    <div class="quote" style="margin-top:16px"><b>待決定：</b>合併試點當主軸、對照組一個月後開 EK、家長報告門檻（三項皆<span class="tag t-tent">暫定</span>）；回島 2 的日期。</div>
+    <div class="quote" style="margin-top:20px;font-size:20px">三關通過前，線索只當「待查」，不替任何一位學生下結論。<b>承認還沒證明完，比把話說滿更有說服力。</b></div>
   </div>
 </section>
 
-<!-- ========== 19 APPENDIX A ========== -->
+<!-- ========== 附錄 A ========== -->
 <section class="slide" data-title="附錄 A：指標公式">
-  <div class="kicker"><span class="dot"></span>附錄 A · 對齊 mac v3.1</div>
+  <div class="kicker"><span class="dot"></span>附錄 A · 正式公式</div>
   <h2 class="hl" style="font-size:30px;margin-bottom:10px">附錄 A：指標的原始公式</h2>
   <div class="ap-wrap">
   <table class="ap">
@@ -773,7 +741,7 @@ body.mobile .demo-msg{min-height:0}
     <tr><td>記得住 ρ<sub>i</sub></td><td class="f">R<sub>i</sub>(t) = (1 + F·t / (S<sub>k</sub>·e<sup>ρ<sub>i</sub></sup>))<sup>−w20</sup>；P(回島過) = g + (1−g−s)·R<sub>i</sub>(t)</td><td>FSRS-6：w20 = 0.1542、F ≈ 0.9803，成人預設 <span class="tag t-cal">待校準</span>；ρ<sub>i</sub> 先驗 N(0, 0.5²)</td></tr>
     <tr><td>自知準</td><td class="f">bias<sub>i</sub> = 平均把握 − 平均正確率</td><td>正值＝偏高；κ、AUROC2、meta-d′ 只做研究 <a class="cite" href="#p-FlemingLau2014" data-cite="FlemingLau2014" title="How to measure metacognition">[Fleming &amp; Lau 2014]</a></td></tr>
     <tr><td>學得動 ℓ<sub>i</sub> <span class="tag t-cand">候選</span></td><td class="f">P(會)′ = P(會) + (1 − P(會))·ℓ；logit ℓ<sub>i</sub> ~ N(logit 0.20, 0.8²)</td><td><a class="cite" href="#p-Koedinger2023" data-cite="Koedinger2023" title="An astonishing regularity in student learning rate">[Koedinger 2023]</a> 對照 iAFM；T1、T2 重測 ≥ .60 才考慮升正式</td></tr>
-    <tr><td>作答模型</td><td class="f">P(y=1|θ) = g + (1−g−s)·σ(a(w·θ − b))</td><td>遊戲版：只用獨立計分關第一次送出 X<sub>pass</sub>；猜中機率 g 固定為窮舉的「不懂規矩」上界 <a class="cite" href="#p-Mislevy2003" data-cite="Mislevy2003" title="A Brief Introduction to Evidence-Centered Design">[Mislevy 2003]</a></td></tr>
+    <tr><td>作答模型</td><td class="f">P(y=1|θ) = g + (1−g−s)·σ(a(w·θ − b))</td><td>遊戲版：只用獨立計分關第一次送出 X<sub>pass</sub>；猜中機率 g 固定為解空間檢查得到的「不懂規矩」上界 <a class="cite" href="#p-Mislevy2003" data-cite="Mislevy2003" title="A Brief Introduction to Evidence-Centered Design">[Mislevy 2003]</a></td></tr>
     <tr><td>基本資料</td><td class="f">z<sub>WM</sub> = (廣度 − 5) / 1.2</td><td>倒序廣度 <span class="tag t-cal">假設，需高中生常模</span>；短推理 MaRs-IB（ICAR 備案）<a class="cite" href="#p-Chierchia2019" data-cite="Chierchia2019" title="The matrix reasoning item bank (MaRs-IB): novel, open-access abstract reasoning items for adolescents and adults">[MaRs-IB 2019]</a></td></tr>
     <tr><td>量得對</td><td class="f">ΔR² = R²(基線＋核心) − R²(基線) ≥ .03</td><td>結構方程模型；區辨：與 g<sub>IQ</sub> 潛在相關上界 &lt; .85 <span class="tag t-cal">假設</span></td></tr>
     <tr><td>量得穩</td><td class="f">SDC = 1.96·√2·SEM</td><td>個人報告：一致性 ≥ .80；改變 &gt; SDC 或後驗機率 ≥ .90 才寫「有變化」<a class="cite" href="#p-Mokkink2010" data-cite="Mokkink2010" title="The COSMIN study reached international consensus on taxonomy, terminology, and definitions of measurement properties for health-related patient-reported outcomes">[Mokkink 2010]</a></td></tr>
@@ -782,10 +750,10 @@ body.mobile .demo-msg{min-height:0}
   <p class="note" style="margin-top:8px">每關的「過不過」只算進一個指標；把握另外算進自知準。參數標〔假設〕者皆待試點校準。</p>
 </section>
 
-<!-- ========== 20 APPENDIX B ========== -->
+<!-- ========== 附錄 B ========== -->
 <section class="slide" data-title="附錄 B：關卡與試點">
   <div class="kicker"><span class="dot"></span>附錄 B · 遊戲 v0.4 附錄 A、C、E</div>
-  <h2 class="hl" style="font-size:30px;margin-bottom:10px">附錄 B：18 個計分關、窮舉門檻、試點判讀</h2>
+  <h2 class="hl" style="font-size:30px;margin-bottom:10px">附錄 B：18 個計分關、解空間檢查、試點設計</h2>
   <div class="cols" style="grid-template-columns:1.25fr 1fr;gap:16px;flex:1;min-height:0">
     <div class="ap-wrap">
     <table class="ap">
@@ -795,21 +763,23 @@ body.mobile .demo-msg{min-height:0}
       <tr><td><b>棧道修補</b><br>條件＋順序</td><td>起霧、工人多於靠岸壞格</td><td>多天霧晴＋木樁奇偶限制；常見習慣全部失敗</td><td>小館掛燈、港口蓋章</td></tr>
     </table>
     <table class="ap" style="margin-top:8px">
-      <tr><th colspan="2">窮舉驗收門檻（事先登錄，已全部通過）</th></tr>
+      <tr><th colspan="2">18 關完成解空間檢查（門檻事先登錄，已全部通過）</th></tr>
       <tr><td>每個計分關</td><td>解＝1；不懂規矩最高 ≤ .10；全部都放＝0</td></tr>
       <tr><td>隨機亂選</td><td>理解、遷移關 ≤ .15；推演關 ≤ .05</td></tr>
-      <tr><td>推演關</td><td>貪婪＝0；同規矩兩關同時被同一策略通過 ≤ .02（實測 A1 &lt;.001、A2 .003、A3 .001）</td></tr>
+      <tr><td>推演關</td><td>只看眼前＝0；同規矩兩關同時被同一策略通過 ≤ .02（實測 A1 &lt;.001、A2 .003、A3 .001）</td></tr>
+      <tr><td>注意</td><td>這是關卡設計的工程檢查，不是真人效度證據</td></tr>
     </table>
     </div>
     <div class="ap-wrap">
     <table class="ap">
-      <tr><th colspan="2">EK 試點（凍結版）</th></tr>
-      <tr><td>主要結果</td><td>T2 開場 P1–P3 各 2 個固定確認關，共 6 關</td></tr>
-      <tr><td>估計</td><td>處方組 − 對照組通過比例差與 95% 區間（混合邏輯斯 → g-computation）</td></tr>
+      <tr><th colspan="2">寒假試點（規劃，暫定）</th></tr>
+      <tr><td>流程</td><td>隨機分組 → T1 三款遊戲 → 回島挑戰 → 練習期 5 次（學習計畫組／固定流程組）→ T2 再量 → 約一個月追蹤</td></tr>
+      <tr><td>主要結果</td><td>T2 開場各規矩 2 個固定確認關，共 6 關（練習期碰不到）</td></tr>
+      <tr><td>估計</td><td>兩組通過比例差與 95% 區間（混合邏輯斯 → g-computation）</td></tr>
       <tr><td>判讀</td><td>下界 &gt; 0：有效；全在 ±10 點內：可忽略；上界 &lt; 0：有害；其他：無法判定</td></tr>
       <tr><td>缺失</td><td>多重插補 20 組；delta 0、0.5、1.0 敏感度分析</td></tr>
       <tr><td>樣本</td><td>約 600 人，兩組各約 300；流失 15% 後偵測 d = .25 檢定力約 .80 <span class="tag t-cal">假設</span></td></tr>
-      <tr><th colspan="2">紅字判定（每條規矩）</th></tr>
+      <tr><th colspan="2">待查線索判定（每條規矩）</th></tr>
       <tr><td>規矩沒讀懂</td><td>兩個理解關都沒過</td></tr>
       <tr><td>懂了推不出</td><td>理解都過、推演都沒過</td></tr>
       <tr><td>很有把握卻錯</td><td>≥ 2 次「很有把握」且錯</td></tr>
@@ -817,17 +787,18 @@ body.mobile .demo-msg{min-height:0}
     </table>
     </div>
   </div>
+  <p class="note" style="margin-top:6px;font-size:13.5px">註：第二次回島挑戰的日期可能超出寒假一天，排程尚未定案。</p>
 </section>
 
 <!-- ========== APPENDIX C: PAPERS (generated by build.py) ========== -->
 
 <section class="slide" id="p-index" data-title="附錄 C：引用論文總覽">
   <div class="kicker"><span class="dot"></span>附錄 C · 研究依據</div>
-  <h2 class="hl" style="font-size:30px;margin-bottom:10px">附錄 C：這份健檢引用的 9 篇論文</h2>
+  <h2 class="hl" style="font-size:30px;margin-bottom:10px">附錄 C：這份簡報引用的 9 篇論文</h2>
   <div class="ap-wrap">
   <table class="ap pidx">
-    <tr><th style="width:5%">#</th><th style="width:26%">論文（點了跳到該頁）</th><th>支撐什麼</th><th style="width:20%">被引用次數<br><span style="font-weight:500">OpenAlex 2026-11-22 查詢</span></th></tr>
-    <tr><td>1</td><td><a class="cite" href="#p-Mokkink2010" data-cite="Mokkink2010" title="The COSMIN study reached international consensus on taxonomy, terminology, and definitions of measurement properties for health-related patient-reported outcomes">[Mokkink 2010]</a></td><td>量測性質的分類、名稱與定義（COSMIN）</td><td class="num">5,200</td></tr><tr><td>2</td><td><a class="cite" href="#p-Chierchia2019" data-cite="Chierchia2019" title="The matrix reasoning item bank (MaRs-IB): novel, open-access abstract reasoning items for adolescents and adults">[MaRs-IB 2019]</a></td><td>IQ 基線：短推理題庫</td><td class="num">137</td></tr><tr><td>3</td><td><a class="cite" href="#p-Zerr2018" data-cite="Zerr2018" title="Learning Efficiency: Identifying Individual Differences in Learning Rate and Retention in Healthy Adults">[Zerr 2018]</a></td><td>學習效率：學得快的人也記得久</td><td class="num">63</td></tr><tr><td>4</td><td><a class="cite" href="#p-Koedinger2023" data-cite="Koedinger2023" title="An astonishing regularity in student learning rate">[Koedinger 2023]</a></td><td>學生的學習速度驚人地相近</td><td class="num">127</td></tr><tr><td>5</td><td><a class="cite" href="#p-Caffrey2008" data-cite="Caffrey2008" title="The Predictive Validity of Dynamic Assessment: A Review">[Caffrey 2008]</a></td><td>動態評量（看提示後的表現）的預測力</td><td class="num">193</td></tr><tr><td>6</td><td><a class="cite" href="#p-FlemingLau2014" data-cite="FlemingLau2014" title="How to measure metacognition">[Fleming &amp; Lau 2014]</a></td><td>怎麼量後設認知（自知之明）</td><td class="num">1,596</td></tr><tr><td>7</td><td><a class="cite" href="#p-Shute2013" data-cite="Shute2013" title="Assessment and Learning of Qualitative Physics in Newton&#x27;s Playground">[Shute 2013]</a></td><td>用物理遊戲同時評量與學習</td><td class="num">215</td></tr><tr><td>8</td><td><a class="cite" href="#p-ShuteMoore2017" data-cite="ShuteMoore2017" title="Consistency and Validity in Game-Based Stealth Assessment">[Shute &amp; Moore 2017]</a></td><td>遊戲內隱形評量的一致性與效度</td><td class="num">32</td></tr><tr><td>9</td><td><a class="cite" href="#p-Mislevy2003" data-cite="Mislevy2003" title="A Brief Introduction to Evidence-Centered Design">[Mislevy 2003]</a></td><td>證據中心設計（ECD）入門</td><td class="num">645</td></tr>
+    <tr><th style="width:5%">#</th><th style="width:26%">論文（點了跳到該頁）</th><th>主題</th><th style="width:20%;font-weight:600;font-size:12.5px">被引用次數（OpenAlex 2026-11-22 查詢，僅供參考）</th></tr>
+    <tr><td>1</td><td><a class="cite" href="#p-Mokkink2010" data-cite="Mokkink2010" title="The COSMIN study reached international consensus on taxonomy, terminology, and definitions of measurement properties for health-related patient-reported outcomes">[Mokkink 2010]</a></td><td>量測性質的分類、名稱與定義（COSMIN）</td><td class="num">5,200</td></tr><tr><td>2</td><td><a class="cite" href="#p-Chierchia2019" data-cite="Chierchia2019" title="The matrix reasoning item bank (MaRs-IB): novel, open-access abstract reasoning items for adolescents and adults">[MaRs-IB 2019]</a></td><td>智商基線：短推理題庫</td><td class="num">137</td></tr><tr><td>3</td><td><a class="cite" href="#p-Zerr2018" data-cite="Zerr2018" title="Learning Efficiency: Identifying Individual Differences in Learning Rate and Retention in Healthy Adults">[Zerr 2018]</a></td><td>學習效率：學得快的人也記得久</td><td class="num">63</td></tr><tr><td>4</td><td><a class="cite" href="#p-Koedinger2023" data-cite="Koedinger2023" title="An astonishing regularity in student learning rate">[Koedinger 2023]</a></td><td>學生每次練習的進步幅度相近</td><td class="num">127</td></tr><tr><td>5</td><td><a class="cite" href="#p-Caffrey2008" data-cite="Caffrey2008" title="The Predictive Validity of Dynamic Assessment: A Review">[Caffrey 2008]</a></td><td>動態評量（看提示後的表現）的預測力</td><td class="num">193</td></tr><tr><td>6</td><td><a class="cite" href="#p-FlemingLau2014" data-cite="FlemingLau2014" title="How to measure metacognition">[Fleming &amp; Lau 2014]</a></td><td>怎麼量後設認知（自知之明）</td><td class="num">1,596</td></tr><tr><td>7</td><td><a class="cite" href="#p-Shute2013" data-cite="Shute2013" title="Assessment and Learning of Qualitative Physics in Newton&#x27;s Playground">[Shute 2013]</a></td><td>用物理遊戲同時評量與學習</td><td class="num">215</td></tr><tr><td>8</td><td><a class="cite" href="#p-ShuteMoore2017" data-cite="ShuteMoore2017" title="Consistency and Validity in Game-Based Stealth Assessment">[Shute &amp; Moore 2017]</a></td><td>遊戲內隱形評量的一致性與效度</td><td class="num">32</td></tr><tr><td>9</td><td><a class="cite" href="#p-Mislevy2003" data-cite="Mislevy2003" title="A Brief Introduction to Evidence-Centered Design">[Mislevy 2003]</a></td><td>證據中心設計（ECD）入門</td><td class="num">645</td></tr>
   </table>
   </div>
   <p class="note" style="margin-top:8px">正文中的小標籤（例如 <a class="cite" href="#p-Zerr2018" data-cite="Zerr2018" title="Learning Efficiency: Identifying Individual Differences in Learning Rate and Retention in Healthy Adults">[Zerr 2018]</a>）都會跳到對應論文頁；論文頁右上角「↩ 回上一頁」回到原本那一頁。</p>
@@ -837,29 +808,27 @@ body.mobile .demo-msg{min-height:0}
   <div class="kicker"><span class="dot"></span>附錄 C · 論文 1／9 · 量測性質的分類、名稱與定義（COSMIN）</div>
   <h2 class="hl ptitle">The COSMIN study reached international consensus on taxonomy, terminology, and definitions of measurement properties for health-related patient-reported outcomes</h2>
   <div class="pmeta">Mokkink, L. B., Terwee, C. B., Patrick, D. L., Alonso, J., Stratford, P. W., Knol, D. L., Bouter, L. M., &amp; de Vet, H. C. W.（2010）· <i>Journal of Clinical Epidemiology</i></div>
-  <div class="pgrid">
-    <div class="card psum"><div class="plab">白話摘要（依 OpenAlex 摘要改寫）</div><p>過去對量測性質的分類、名稱和定義各說各話，常讓人搞不清楚該看哪些性質。作者用四輪書面德菲法（Delphi）請國際專家表態：91 位受邀、57 位同意、實際參與 43 位，至少 67% 同意才算共識。最後在量測性質的分類、名稱和定義上都達成共識，讓文獻用詞更一致。</p></div>
-    <div class="pside">
-      <div class="card pcount"><div class="v">5,200</div><div class="t">被引用次數</div><div class="d">OpenAlex 2026-11-22 查詢</div></div>
-      <a class="pdoi" href="https://doi.org/10.1016/j.jclinepi.2010.02.006" target="_blank" rel="noopener noreferrer">DOI ↗ 10.1016/j.jclinepi.2010.02.006</a>
-    </div>
+  <div class="card psum"><div class="plab">白話摘要（依 OpenAlex 摘要改寫）</div><p>過去對量測性質的分類、名稱和定義各說各話，常讓人搞不清楚該看哪些性質。作者用四輪書面德菲法（Delphi）請國際專家表態：91 位受邀、57 位同意、實際參與 43 位，至少 67% 同意才算共識。最後在量測性質的分類、名稱和定義上都達成共識，讓文獻用詞更一致。</p></div>
+  <div class="pthree">
+    <div class="pblk"><div class="plab">支持什麼</div><p>量測性質可以分成信度、效度、反應性等，並有共同定義；本系統「量得穩／量得對／會變動」是借用這套分類。</p></div>
+    <div class="pblk no"><div class="plab">不支持什麼</div><p>不能證明本系統已經量得穩或量得對。這是方法學共識，不是這三款遊戲的實證。</p></div>
+    <div class="pblk lim"><div class="plab">限制</div><p>原本為健康自陳量表設計；專家共識不是效度資料。</p></div>
   </div>
-  <div class="puse"><b>在本系統用在哪裡：</b>三關「量得穩、量得對、會變動」的分法；量測誤差（SEM／SDC）；3a 用事先寫好的假設檢定看「會變動」。原本為健康自陳量表設計，NOUS 屬借用。</div>
+  <p class="pfoot"><span class="pcount">被引用 <span class="v">5,200</span> 次 <span class="d">OpenAlex 2026-11-22 查詢</span></span><a class="pdoi" href="https://doi.org/10.1016/j.jclinepi.2010.02.006" target="_blank" rel="noopener noreferrer">DOI ↗ 10.1016/j.jclinepi.2010.02.006</a></p>
   <div class="why"><b>為什麼引用數可參考、但不等於正確？</b>引用數表示有多少後續論文提到它，可以看出影響力、被檢驗的機會多不多。但被引用也可能是被反駁；醫學等大領域、發表越久的論文，引用數天生就高。所以它只當參考，證據強不強仍要看研究設計、樣本，以及有沒有被別人重複驗證。</div>
 </section>
 <section class="slide paper" id="p-Chierchia2019" data-paper="Chierchia2019" data-title="附錄 C-2：MaRs-IB 2019">
   <button class="pback" type="button">↩ 回上一頁</button>
-  <div class="kicker"><span class="dot"></span>附錄 C · 論文 2／9 · IQ 基線：短推理題庫</div>
+  <div class="kicker"><span class="dot"></span>附錄 C · 論文 2／9 · 智商基線：短推理題庫</div>
   <h2 class="hl ptitle">The matrix reasoning item bank (MaRs-IB): novel, open-access abstract reasoning items for adolescents and adults</h2>
   <div class="pmeta">Chierchia, G., Fuhrmann, D., Knoll, L. J., Piera Pi-Sunyer, B., Sakhardande, A., &amp; Blakemore, S.-J.（2019）· <i>Royal Society Open Science</i></div>
-  <div class="pgrid">
-    <div class="card psum"><div class="plab">白話摘要（依 OpenAlex 摘要改寫）</div><p>市面上的非語文推理測驗多半有版權，不能自由改編或放上電腦。作者公開 80 題抽象圖形推理題（MaRs-IB），附線上版本和 659 位 11–33 歲受試者的逐題資料。答對率在青少年期上升、成年早期趨穩，顯示題庫能反映年齡差異；作者也建議再做更多心理計量驗證。</p></div>
-    <div class="pside">
-      <div class="card pcount"><div class="v">137</div><div class="t">被引用次數</div><div class="d">OpenAlex 2026-11-22 查詢</div></div>
-      <a class="pdoi" href="https://doi.org/10.1098/rsos.190232" target="_blank" rel="noopener noreferrer">DOI ↗ 10.1098/rsos.190232</a>
-    </div>
+  <div class="card psum"><div class="plab">白話摘要（依 OpenAlex 摘要改寫）</div><p>市面上的非語文推理測驗多半有版權，不能自由改編或放上電腦。作者公開 80 題抽象圖形推理題（MaRs-IB），附線上版本和 659 位 11–33 歲受試者的逐題資料。答對率在青少年期上升、成年早期趨穩，顯示題庫能反映年齡差異；作者也建議再做更多心理計量驗證。</p></div>
+  <div class="pthree">
+    <div class="pblk"><div class="plab">支持什麼</div><p>有一套可公開使用的短圖形推理題庫，適合作為智商基線。</p></div>
+    <div class="pblk no"><div class="plab">不支持什麼</div><p>不能把本系統的學習線索直接說成「已經超過智商」。</p></div>
+    <div class="pblk lim"><div class="plab">限制</div><p>作者也建議再做更多心理計量驗證；授權與使用方式還要再確認。</p></div>
   </div>
-  <div class="puse"><b>在本系統用在哪裡：</b>基本資料層的「短推理」（ICAR 備案）。只用來證明 LQ 指標「超過 IQ」，不開處方、不交給 EK；授權與使用方式在 11/29 前確認。</div>
+  <p class="pfoot"><span class="pcount">被引用 <span class="v">137</span> 次 <span class="d">OpenAlex 2026-11-22 查詢</span></span><a class="pdoi" href="https://doi.org/10.1098/rsos.190232" target="_blank" rel="noopener noreferrer">DOI ↗ 10.1098/rsos.190232</a></p>
   
 </section>
 <section class="slide paper" id="p-Zerr2018" data-paper="Zerr2018" data-title="附錄 C-3：Zerr 2018">
@@ -867,29 +836,27 @@ body.mobile .demo-msg{min-height:0}
   <div class="kicker"><span class="dot"></span>附錄 C · 論文 3／9 · 學習效率：學得快的人也記得久</div>
   <h2 class="hl ptitle">Learning Efficiency: Identifying Individual Differences in Learning Rate and Retention in Healthy Adults</h2>
   <div class="pmeta">Zerr, C. L., Berg, J. J., Nelson, S. M., Fishell, A. K., Savalia, N. K., &amp; McDermott, K. B.（2018）· <i>Psychological Science</i></div>
-  <div class="pgrid">
-    <div class="card psum"><div class="plab">白話摘要（依 OpenAlex 摘要改寫）</div><p>作者用外語配對聯想的「學習效率作業」，在健康成人身上看學習速度和保留的個人差異。結果：學得快的人，雖然讀得比較短，隔一段時間後反而記得比較多。這個量法在研究 1（N = 281）隔 30 小時、研究 2（N = 92，追蹤 46 人）隔 3 年都穩定。</p><p class="pnum">來源文件核對原文：隔 30 小時重測綜合分數 r = .68；和智力測驗（WASI-II）相關 r = .43——有關聯但不等同。</p></div>
-    <div class="pside">
-      <div class="card pcount"><div class="v">63</div><div class="t">被引用次數</div><div class="d">OpenAlex 2026-11-22 查詢</div></div>
-      <a class="pdoi" href="https://doi.org/10.1177/0956797618772540" target="_blank" rel="noopener noreferrer">DOI ↗ 10.1177/0956797618772540</a>
-    </div>
+  <div class="card psum"><div class="plab">白話摘要（依 OpenAlex 摘要改寫）</div><p>作者用外語配對聯想的「學習效率作業」，在健康成人身上看學習速度和保留的個人差異。結果：學得快的人，雖然讀得比較短，隔一段時間後反而記得比較多。這個量法在研究 1（N = 281）隔 30 小時、研究 2（N = 92，追蹤 46 人）隔 3 年都穩定。</p><p class="pnum">來源文件核對原文：隔 30 小時重測綜合分數 r = .68；和智力測驗（WASI-II）相關 r = .43——有關聯但不等同。</p></div>
+  <div class="pthree">
+    <div class="pblk"><div class="plab">支持什麼</div><p>學習效率（學到剛好再測保留）和智商有關但不相等，這是把短推理放進基線、要求增額解釋力的理由。</p></div>
+    <div class="pblk no"><div class="plab">不支持什麼</div><p>不能直接說本遊戲的「學得動」或「記得住」已有同樣的穩定度。</p></div>
+    <div class="pblk lim"><div class="plab">限制</div><p>樣本是健康成人，作業是外語配對聯想，不是高中學科遊戲。</p></div>
   </div>
-  <div class="puse"><b>在本系統用在哪裡：</b>「學到剛好再測保留」的做法；學習效率和 IQ 有關但不相等，是把 IQ 放進基線、要求 LQ 證明增額的理由。</div>
+  <p class="pfoot"><span class="pcount">被引用 <span class="v">63</span> 次 <span class="d">OpenAlex 2026-11-22 查詢</span></span><a class="pdoi" href="https://doi.org/10.1177/0956797618772540" target="_blank" rel="noopener noreferrer">DOI ↗ 10.1177/0956797618772540</a></p>
   
 </section>
 <section class="slide paper" id="p-Koedinger2023" data-paper="Koedinger2023" data-title="附錄 C-4：Koedinger 2023">
   <button class="pback" type="button">↩ 回上一頁</button>
-  <div class="kicker"><span class="dot"></span>附錄 C · 論文 4／9 · 學生的學習速度驚人地相近</div>
+  <div class="kicker"><span class="dot"></span>附錄 C · 論文 4／9 · 學生每次練習的進步幅度相近</div>
   <h2 class="hl ptitle">An astonishing regularity in student learning rate</h2>
   <div class="pmeta">Koedinger, K. R., Carvalho, P. F., Liu, R., &amp; McLaughlin, E. A.（2023）· <i>Proceedings of the National Academy of Sciences</i></div>
-  <div class="pgrid">
-    <div class="card psum"><div class="plab">白話摘要（依 OpenAlex 摘要改寫）</div><p>分析 27 個線上練習系統資料集、約 130 萬筆作答（國小到大學的數學、科學、語言）。同一門課裡，學生的起點差很多：下半約 55% 答對、上半約 75%。但每多練一次進步的幅度卻非常相近，大約都是 0.1 log odds（約 2.5 個百分點）。</p></div>
-    <div class="pside">
-      <div class="card pcount"><div class="v">127</div><div class="t">被引用次數</div><div class="d">OpenAlex 2026-11-22 查詢</div></div>
-      <a class="pdoi" href="https://doi.org/10.1073/pnas.2221311120" target="_blank" rel="noopener noreferrer">DOI ↗ 10.1073/pnas.2221311120</a>
-    </div>
+  <div class="card psum"><div class="plab">白話摘要（依 OpenAlex 摘要改寫）</div><p>分析 27 個線上練習系統資料集、約 130 萬筆作答（國小到大學的數學、科學、語言）。同一門課裡，學生的起點差很多：下半約 55% 答對、上半約 75%。但每多練一次進步的幅度卻非常相近，大約都是 0.1 log odds（約 2.5 個百分點）。</p></div>
+  <div class="pthree">
+    <div class="pblk"><div class="plab">支持什麼</div><p>大規模練習資料裡，學生起點差很多，但每次練習的進步幅度很相近，因此「學得動」不宜當個人分數。</p></div>
+    <div class="pblk no"><div class="plab">不支持什麼</div><p>不能推論本系統的三條自創規矩也會得到同樣模式。</p></div>
+    <div class="pblk lim"><div class="plab">限制</div><p>資料來自線上練習系統，不是遊戲情境；講的是群體規律。</p></div>
   </div>
-  <div class="puse"><b>在本系統用在哪裡：</b>「學得動」降為候選、只做群體分析；先分開知識點難度再估個人速度。也給 EK 正向訊息：差距多半來自練習機會，處方可以補。</div>
+  <p class="pfoot"><span class="pcount">被引用 <span class="v">127</span> 次 <span class="d">OpenAlex 2026-11-22 查詢</span></span><a class="pdoi" href="https://doi.org/10.1073/pnas.2221311120" target="_blank" rel="noopener noreferrer">DOI ↗ 10.1073/pnas.2221311120</a></p>
   
 </section>
 <section class="slide paper" id="p-Caffrey2008" data-paper="Caffrey2008" data-title="附錄 C-5：Caffrey 2008">
@@ -897,14 +864,13 @@ body.mobile .demo-msg{min-height:0}
   <div class="kicker"><span class="dot"></span>附錄 C · 論文 5／9 · 動態評量（看提示後的表現）的預測力</div>
   <h2 class="hl ptitle">The Predictive Validity of Dynamic Assessment: A Review</h2>
   <div class="pmeta">Caffrey, E., Fuchs, D., &amp; Fuchs, L. S.（2008）· <i>The Journal of Special Education</i></div>
-  <div class="pgrid">
-    <div class="card psum"><div class="plab">白話摘要（依 OpenAlex 摘要改寫）</div><p>回顧 24 篇研究（其中 15 篇可做相關係數量化分析），比較動態評量和傳統測驗預測學業成就的能力。動態評量在「提示不依學生回答而變」、對象是身心障礙學生、以及結果用獨立的效標參照測驗時，預測力較好。</p><p class="pnum">來源文件：動態評量與成就平均相關 .49，傳統測驗 .41；數字取自典藏版本，期刊全文未開，正式引用前再核對。</p></div>
-    <div class="pside">
-      <div class="card pcount"><div class="v">193</div><div class="t">被引用次數</div><div class="d">OpenAlex 2026-11-22 查詢</div></div>
-      <a class="pdoi" href="https://doi.org/10.1177/0022466907310366" target="_blank" rel="noopener noreferrer">DOI ↗ 10.1177/0022466907310366</a>
-    </div>
+  <div class="card psum"><div class="plab">白話摘要（依 OpenAlex 摘要改寫）</div><p>回顧 24 篇研究（其中 15 篇可做相關係數量化分析），比較動態評量和傳統測驗預測學業成就的能力。動態評量在「提示不依學生回答而變」、對象是身心障礙學生、以及結果用獨立的效標參照測驗時，預測力較好。</p><p class="pnum">來源文件：動態評量與成就平均相關 .49，傳統測驗 .41；數字取自典藏版本，期刊全文未開，正式引用前再核對。</p></div>
+  <div class="pthree">
+    <div class="pblk"><div class="plab">支持什麼</div><p>動態評量的預測力要看設計；提示應固定，而且增額價值還未確立，所以「量得對」必須做增額檢定。</p></div>
+    <div class="pblk no"><div class="plab">不支持什麼</div><p>不能說本系統的提示設計已經被證明有效。</p></div>
+    <div class="pblk lim"><div class="plab">限制</div><p>這是回顧研究，樣本與作業和我們不同；部分數字正式引用前還要再核對原文。</p></div>
   </div>
-  <div class="puse"><b>在本系統用在哪裡：</b>練習段提示梯要固定，「看了提示才會」才值得當研究指標；動態評量的增額價值還沒建立，所以「量得對」一定要做增額檢定。</div>
+  <p class="pfoot"><span class="pcount">被引用 <span class="v">193</span> 次 <span class="d">OpenAlex 2026-11-22 查詢</span></span><a class="pdoi" href="https://doi.org/10.1177/0022466907310366" target="_blank" rel="noopener noreferrer">DOI ↗ 10.1177/0022466907310366</a></p>
   
 </section>
 <section class="slide paper" id="p-FlemingLau2014" data-paper="FlemingLau2014" data-title="附錄 C-6：Fleming &amp; Lau 2014">
@@ -912,14 +878,13 @@ body.mobile .demo-msg{min-height:0}
   <div class="kicker"><span class="dot"></span>附錄 C · 論文 6／9 · 怎麼量後設認知（自知之明）</div>
   <h2 class="hl ptitle">How to measure metacognition</h2>
   <div class="pmeta">Fleming, S. M., &amp; Lau, H. C.（2014）· <i>Frontiers in Human Neuroscience</i></div>
-  <div class="pgrid">
-    <div class="card psum"><div class="plab">白話摘要（依 OpenAlex 摘要改寫）</div><p>後設認知可以看「有把握時是不是比較常答對」。直接算把握和對錯的相關（如 Pearson r）會被作答偏好汙染，作者介紹以訊號偵測理論為基礎、不受偏差影響的量法。文中分開三件事：整體把握偏高或偏低（偏差）、分得出自己對錯（敏感度），以及在同樣正確率下的敏感度（效率）。</p></div>
-    <div class="pside">
-      <div class="card pcount"><div class="v">1,596</div><div class="t">被引用次數</div><div class="d">OpenAlex 2026-11-22 查詢</div></div>
-      <a class="pdoi" href="https://doi.org/10.3389/fnhum.2014.00443" target="_blank" rel="noopener noreferrer">DOI ↗ 10.3389/fnhum.2014.00443</a>
-    </div>
+  <div class="card psum"><div class="plab">白話摘要（依 OpenAlex 摘要改寫）</div><p>後設認知可以看「有把握時是不是比較常答對」。直接算把握和對錯的相關（如 Pearson r）會被作答偏好汙染，作者介紹以訊號偵測理論為基礎、不受偏差影響的量法。文中分開三件事：整體把握偏高或偏低（偏差）、分得出自己對錯（敏感度），以及在同樣正確率下的敏感度（效率）。</p></div>
+  <div class="pthree">
+    <div class="pblk"><div class="plab">支持什麼</div><p>後設認知應把「偏差」和「分得出自己對錯」分開；本系統「自知準」只報偏差。</p></div>
+    <div class="pblk no"><div class="plab">不支持什麼</div><p>不能說偏差改變就等於自知變好，也不能說已有穩定有效的教法。</p></div>
+    <div class="pblk lim"><div class="plab">限制</div><p>這是方法論文，不是介入研究。</p></div>
   </div>
-  <div class="puse"><b>在本系統用在哪裡：</b>「自知準」核心只放偏差（平均把握 − 平均過關率）；敏感度類指標（AUROC2、meta-d′）只做研究。</div>
+  <p class="pfoot"><span class="pcount">被引用 <span class="v">1,596</span> 次 <span class="d">OpenAlex 2026-11-22 查詢</span></span><a class="pdoi" href="https://doi.org/10.3389/fnhum.2014.00443" target="_blank" rel="noopener noreferrer">DOI ↗ 10.3389/fnhum.2014.00443</a></p>
   
 </section>
 <section class="slide paper" id="p-Shute2013" data-paper="Shute2013" data-title="附錄 C-7：Shute 2013">
@@ -927,14 +892,13 @@ body.mobile .demo-msg{min-height:0}
   <div class="kicker"><span class="dot"></span>附錄 C · 論文 7／9 · 用物理遊戲同時評量與學習</div>
   <h2 class="hl ptitle">Assessment and Learning of Qualitative Physics in Newton&#x27;s Playground</h2>
   <div class="pmeta">Shute, V. J., Ventura, M., &amp; Kim, Y. J.（2013）· <i>The Journal of Educational Research</i></div>
-  <div class="pgrid">
-    <div class="card psum"><div class="plab">白話摘要（依 OpenAlex 摘要改寫）</div><p>作者自製物理遊戲《Newton&#x27;s Playground》，讓 167 位 8、9 年級學生在一週半內玩約 4 小時。學生的物理前後測有顯著進步，遊戲內的表現指標也和學習結果顯著相關。</p><p class="pnum">來源文件核對原文：遊戲內「金盃」數和物理前測相關 r = .22–.40。</p></div>
-    <div class="pside">
-      <div class="card pcount"><div class="v">215</div><div class="t">被引用次數</div><div class="d">OpenAlex 2026-11-22 查詢</div></div>
-      <a class="pdoi" href="https://doi.org/10.1080/00220671.2013.832970" target="_blank" rel="noopener noreferrer">DOI ↗ 10.1080/00220671.2013.832970</a>
-    </div>
+  <div class="card psum"><div class="plab">白話摘要（依 OpenAlex 摘要改寫）</div><p>作者自製物理遊戲《Newton&#x27;s Playground》，讓 167 位 8、9 年級學生在一週半內玩約 4 小時。學生的物理前後測有顯著進步，遊戲內的表現指標也和學習結果顯著相關。</p><p class="pnum">來源文件核對原文：遊戲內「金盃」數和物理前測相關 r = .22–.40。</p></div>
+  <div class="pthree">
+    <div class="pblk"><div class="plab">支持什麼</div><p>遊戲內表現可以和學科學習結果相關，遊戲能同時用來評量和學習。</p></div>
+    <div class="pblk no"><div class="plab">不支持什麼</div><p>不能把他們約 4 小時物理遊戲的相關，直接當成我們約 30 分鐘場次的證據。</p></div>
+    <div class="pblk lim"><div class="plab">限制</div><p>167 位 8、9 年級學生；遊戲內指標與前測相關只是中低程度。</p></div>
   </div>
-  <div class="puse"><b>在本系統用在哪裡：</b>類型熟悉度當共變項、檢查性別差異、自動判讀要和人工比對。要小心：他們玩約 4 小時，我們一場只有 30 分鐘。</div>
+  <p class="pfoot"><span class="pcount">被引用 <span class="v">215</span> 次 <span class="d">OpenAlex 2026-11-22 查詢</span></span><a class="pdoi" href="https://doi.org/10.1080/00220671.2013.832970" target="_blank" rel="noopener noreferrer">DOI ↗ 10.1080/00220671.2013.832970</a></p>
   
 </section>
 <section class="slide paper" id="p-ShuteMoore2017" data-paper="ShuteMoore2017" data-title="附錄 C-8：Shute &amp; Moore 2017">
@@ -942,14 +906,13 @@ body.mobile .demo-msg{min-height:0}
   <div class="kicker"><span class="dot"></span>附錄 C · 論文 8／9 · 遊戲內隱形評量的一致性與效度</div>
   <h2 class="hl ptitle">Consistency and Validity in Game-Based Stealth Assessment</h2>
   <div class="pmeta">Shute, V. J., &amp; Moore, G. R.（2017）· <i>Technology Enhanced Innovative Assessment（專書章節，頁 31–51）</i></div>
-  <div class="pgrid">
-    <div class="card psum"><div class="plab">白話摘要（依 OpenAlex 摘要改寫）</div><p>「隱形評量」把評量不著痕跡地放進遊戲裡，從操作紀錄推論能力。作者主張：照證據中心設計（ECD）建評量、用貝氏網路累積遊戲證據，就能兼顧信度與效度。信度可用因素分析與相關來看，效度則拿外部同構念測驗來比。</p></div>
-    <div class="pside">
-      <div class="card pcount"><div class="v">32</div><div class="t">被引用次數</div><div class="d">OpenAlex 2026-11-22 查詢</div></div>
-      <a class="pdoi" href="https://doi.org/10.1108/978-1-68123-931-620251003" target="_blank" rel="noopener noreferrer">DOI ↗ 10.1108/978-1-68123-931-620251003</a>
-    </div>
+  <div class="card psum"><div class="plab">白話摘要（依 OpenAlex 摘要改寫）</div><p>「隱形評量」把評量不著痕跡地放進遊戲裡，從操作紀錄推論能力。作者主張：照證據中心設計（ECD）建評量、用貝氏網路累積遊戲證據，就能兼顧信度與效度。信度可用因素分析與相關來看，效度則拿外部同構念測驗來比。</p></div>
+  <div class="pthree">
+    <div class="pblk"><div class="plab">支持什麼</div><p>隱形評量可以依證據中心設計來做；讓每個人玩同一組任務，才方便估計信度。</p></div>
+    <div class="pblk no"><div class="plab">不支持什麼</div><p>不能證明本遊戲已經有信度或效度。</p></div>
+    <div class="pblk lim"><div class="plab">限制</div><p>專書章節、全文未開；這是方法主張，不是本系統的實證。</p></div>
   </div>
-  <div class="puse"><b>在本系統用在哪裡：</b>每個人玩同一組計分關（只輪換順序和配對），所以可以直接估信度。</div>
+  <p class="pfoot"><span class="pcount">被引用 <span class="v">32</span> 次 <span class="d">OpenAlex 2026-11-22 查詢</span></span><a class="pdoi" href="https://doi.org/10.1108/978-1-68123-931-620251003" target="_blank" rel="noopener noreferrer">DOI ↗ 10.1108/978-1-68123-931-620251003</a></p>
   <p class="psrc warn">來源註記：papers_openalex.json 的 DOI 由 Emerald 於 2025 年補登，看起來像重印版。已查：Crossref 記載書名 Technology Enhanced Innovative Assessment、2017-10-30 出版、頁 31–51；OpenAlex 搜尋只有這一筆，標題、作者、年份相符，判定為原 2017 章節。全文未開。</p>
 </section>
 <section class="slide paper" id="p-Mislevy2003" data-paper="Mislevy2003" data-title="附錄 C-9：Mislevy 2003">
@@ -957,20 +920,19 @@ body.mobile .demo-msg{min-height:0}
   <div class="kicker"><span class="dot"></span>附錄 C · 論文 9／9 · 證據中心設計（ECD）入門</div>
   <h2 class="hl ptitle">A Brief Introduction to Evidence-Centered Design</h2>
   <div class="pmeta">Mislevy, R. J., Almond, R. G., &amp; Lukas, J. F.（2003）· <i>ETS Research Report Series (RR-03-16)</i></div>
-  <div class="pgrid">
-    <div class="card psum"><div class="plab">白話摘要（依 OpenAlex 摘要改寫）</div><p>證據中心設計（ECD）把評量看成一套「用證據說理」的論證。這份報告介紹 ECD 的基本想法和用語，包括概念評量架構（CAF）和施測系統的四流程架構。重點是用機率推理把多個任務的表現累積起來，推論看不見的知識與能力，並以 GRE 這類大型測驗為例說明。</p></div>
-    <div class="pside">
-      <div class="card pcount"><div class="v">645</div><div class="t">被引用次數</div><div class="d">OpenAlex 2026-11-22 查詢</div></div>
-      <a class="pdoi" href="https://doi.org/10.1002/j.2333-8504.2003.tb01908.x" target="_blank" rel="noopener noreferrer">DOI ↗ 10.1002/j.2333-8504.2003.tb01908.x</a>
-    </div>
+  <div class="card psum"><div class="plab">白話摘要（依 OpenAlex 摘要改寫）</div><p>證據中心設計（ECD）把評量看成一套「用證據說理」的論證。這份報告介紹 ECD 的基本想法和用語，包括概念評量架構（CAF）和施測系統的四流程架構。重點是用機率推理把多個任務的表現累積起來，推論看不見的知識與能力，並以 GRE 這類大型測驗為例說明。</p></div>
+  <div class="pthree">
+    <div class="pblk"><div class="plab">支持什麼</div><p>評量應先說清楚要量什麼、證據是什麼、任務怎麼設計。</p></div>
+    <div class="pblk no"><div class="plab">不支持什麼</div><p>這份入門報告不提供本遊戲的效度數據。</p></div>
+    <div class="pblk lim"><div class="plab">限制</div><p>文中例子是大型測驗，不是教育遊戲。</p></div>
   </div>
-  <div class="puse"><b>在本系統用在哪裡：</b>遊戲文件附錄 B 的三種模型（要量的能力、證據怎麼來、關卡怎麼設計），也是 Shute &amp; Moore 隱形評量的設計基礎。</div>
+  <p class="pfoot"><span class="pcount">被引用 <span class="v">645</span> 次 <span class="d">OpenAlex 2026-11-22 查詢</span></span><a class="pdoi" href="https://doi.org/10.1002/j.2333-8504.2003.tb01908.x" target="_blank" rel="noopener noreferrer">DOI ↗ 10.1002/j.2333-8504.2003.tb01908.x</a></p>
   
 </section>
 
 <div class="edge l" title="上一頁"></div><div class="edge r" title="下一頁"></div>
 <div id="hint">← → 換頁</div>
-<div id="nav"><button id="prev" aria-label="上一頁">‹</button><span id="counter">1 / 20</span><button id="next" aria-label="下一頁">›</button></div>
+<div id="nav"><button id="prev" aria-label="上一頁">‹</button><span id="counter">1 / 25</span><button id="next" aria-label="下一頁">›</button></div>
 <div id="progress"></div>
 </div>
 </div>
