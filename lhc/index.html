@@ -469,9 +469,9 @@ body.mobile .wgrid{grid-template-columns:1fr!important}
     <tr><th style="width:16%"></th><th style="width:42%">D1 產品版（給每位學生）</th><th>M1 驗證版（研究試點）</th></tr>
     <tr><td><b>時間</b></td><td>≤ 10 分鐘，一次玩完</td><td>三款各約 10 分鐘＋隔幾天再玩＋另排對照與學科題</td></tr>
     <tr><td><b>遊戲數</b></td><td><b>一款</b>（建議港口調度站）；另兩款放進 D7 任務</td><td>三款＋短推理、短期記憶對照＋學科題</td></tr>
-    <tr><td><b>產出</b></td><td>學習方式畫像（描述、不打分）＋一個行動；給 NOUS 一份學習計畫起點</td><td>研究報告：量得穩、量得對、會不會隨練習改變</td></tr>
+    <tr><td><b>產出</b></td><td>行為描述＋一個行動建議，不判定個人能力；給 NOUS 一份學習計畫起點</td><td>研究報告：兩個指數量得穩嗎、用 LQ 的個人化有沒有贏</td></tr>
     <tr><td><b>目的</b></td><td>學生覺得「被說中」、願意回來進 D7</td><td>證明畫像可信，決定哪些卡點能寫進 D1</td></tr>
-    <tr><td><b>看什麼指標</b></td><td>完成率、願意再玩比例、「說中了」比例</td><td>重測一致、扣掉對照後的增量、沒練過的新規則與學科題進步</td></tr>
+    <tr><td><b>看什麼指標</b></td><td>完成率、願意再玩比例、「說中了」比例</td><td>三組比較：C（用 LQ）贏 B（不用 LQ）；重測一致、扣掉對照後的增量</td></tr>
   </table>
   </div>
   <div class="quote" style="margin-top:14px">D1 的使用紀錄幫 M1 校準關卡；M1 證明量得穩的卡點，才寫進 D1 的畫像。</div>
@@ -496,7 +496,7 @@ body.mobile .wgrid{grid-template-columns:1fr!important}
       <div class="abox"><b>作答</b><span>只算每關第一次送出</span></div>
       <div class="abox"><b>時間</b><span>停留紀錄；不考手速</span></div>
       <div class="abox"><b>重試</b><span>可重玩，不計分，只供研究</span></div>
-      <div class="abox conf"><b>信心</b><span>送出揭曉前的把握</span></div>
+      <div class="abox conf"><b>信心</b><span>送出前的把握；只給 EK 內部參考</span></div>
     </div>
     <div class="acol">
       <div class="ahd"><span class="an">C</span>檢測引擎 EA</div>
@@ -504,9 +504,9 @@ body.mobile .wgrid{grid-template-columns:1fr!important}
     </div>
     <div class="acol">
       <div class="ahd"><span class="an">D</span>畫像內容</div>
-      <div class="abox l-core"><b>核心 <i class="gd hf"></i><i class="gd gk"></i><i class="gd zd"></i></b><span>新規則理解、新規則推演、用得出、記得住</span><span class="from">記得住：看隔幾天再玩一次</span></div>
-      <div class="abox l-meta"><b>自我判斷準不準</b><span>覺得會 vs. 實際做到</span><span class="from">來自：信心</span></div>
-      <div class="abox l-cand"><b>練習後的進步</b><span>先看整體，不評個人</span></div>
+      <div class="abox l-core"><b>① 規則掌握 <i class="gd hf"></i><i class="gd gk"></i><i class="gd zd"></i></b><span>剛學的規則能照著用，也能用到說明沒寫的情況</span><span class="from">D1 起：每場 4 關、約 12–16 個決策點</span></div>
+      <div class="abox l-core"><b>② 記得住</b><span>隔幾天還能不能用出來</span><span class="from">D7 起才有：看隔幾天再玩一次</span></div>
+      <div class="abox l-cand"><b>研究用／EK 內部訊號（不列指數）</b><span>提示後修正、錯誤類型 → EK 挑素材；用得出、練習後進步 → M1</span></div>
       <div class="abox l-base"><b>對照資料（不計分）</b><span>短推理、短期記憶</span><span class="from">只作對照，不進畫像、不進學習計畫</span></div>
     </div>
     <div class="acol">
@@ -517,7 +517,25 @@ body.mobile .wgrid{grid-template-columns:1fr!important}
       <div class="anote">對照資料不進這一欄</div>
     </div>
   </div>
-  <p class="fn" style="margin-top:6px"><b>EA（檢測引擎）</b>：從遊戲紀錄看出學生卡在哪、怎麼學。<b>EK（配對引擎）</b>：依學生狀態挑學習素材、排 D7 任務。D1 只玩港口調度站；另兩款與再玩一次放進 D7 累積。</p>
+  <p class="fn" style="margin-top:6px">打個比方：像先量身高體重，再依結果安排練習，只是為了好懂。<b>EA（檢測引擎）</b>：從遊戲紀錄看出學生卡在哪、怎麼學。<b>EK（配對引擎）</b>：依學生狀態挑學習素材、排 D7 任務。D1 只玩港口調度站；另兩款與再玩一次放進 D7 累積。</p>
+</section>
+
+
+<!-- ========== 指數與教學決策 ========== -->
+<section class="slide" data-title="每個指數改變什麼教學決策">
+  <div class="kicker"><span class="dot"></span>學商 LQ · 只留兩個指數</div>
+  <h2 class="hl">每個指數，<em>改變什麼教學決策</em></h2>
+  <div class="ap-wrap">
+  <table class="ap" style="font-size:17px">
+    <tr><th style="width:20%">指數</th><th style="width:22%">什麼時候有</th><th style="width:29%">低的時候，EK 怎麼做</th><th>高的時候，EK 怎麼做</th></tr>
+    <tr><td><b>① 規則掌握</b><br><span class="note">原理解＋推演合併</span></td><td>D1 起；每場 4 個計分關、每關 3–4 個決策點，約 12–16 筆</td><td>先給完整範例、逐步引導，再讓學生自己練</td><td>跳過範例直接練，提早放邊界題</td></tr>
+    <tr><td><b>② 記得住</b></td><td>D7 起才有（隔 2–3 天回來玩新關）</td><td>排間隔複習，用「回想」而不是重讀</td><td>拉長複習間隔</td></tr>
+  </table>
+  </div>
+  <div class="cols" style="grid-template-columns:1fr 1fr;gap:16px;margin-top:14px">
+    <div class="card" style="padding:12px 18px;font-size:16px;line-height:1.6"><b>D1 只給行為描述＋行動建議</b>，不判定個人能力。同一關的決策點彼此相關，資訊量少於同數量的獨立題，需真人試玩驗證。</div>
+    <div class="card" style="padding:12px 18px;font-size:16px;line-height:1.6"><b>不列指數：</b>提示後修正、錯誤類型＝EK 內部訊號；用得出、練習後進步、短推理、短期記憶＝M1 研究用；自我判斷已移除。</div>
+  </div>
 </section>
 
 
@@ -530,8 +548,9 @@ body.mobile .wgrid{grid-template-columns:1fr!important}
     <tr><th style="width:15%"></th><th style="width:28%"><i class="gd hf"></i> 海風小館</th><th style="width:28%"><i class="gd gk"></i> 港口調度站</th><th><i class="gd zd"></i> 棧道工坊</th></tr>
     <tr><td><b>怎麼玩</b></td><td>分幾天經營小館：換錢、備料、擺桌</td><td>鋪輸送帶、放閘門，讓貨物送對地方</td><td>排好修哪裡、照什麼順序修，讓島民走到燈塔</td></tr>
     <tr><td><b>主要新規則</b></td><td>換錢規則（比例＋條件）</td><td>木箱規則（門檻＋例外）</td><td>修補規則（條件＋順序）</td></tr>
-    <tr><td><b>測什麼</b></td><td>聽懂規則？能不能想到「要提前換」？</td><td>聽懂門檻？能不能處理「剛好卡在門檻」的情況？</td><td>聽懂限制？能不能排出說明沒寫的施工順序？</td></tr>
-    <tr><td><b>為什麼可以測</b></td><td colspan="3">規則全部自創、進遊戲才教，減少先備知識的影響；只算第一次送出；不懂規則就很難過關（每關事先檢查過）；三條規則也會換個場景放進另外兩款，看能不能用出來。<a class="cite" href="#p-Shute2013" data-cite="Shute2013" title="Assessment and Learning of Qualitative Physics in Newton&#x27;s Playground">[Shute 2013]</a><a class="cite" href="#p-ShuteMoore2017" data-cite="ShuteMoore2017" title="Consistency and Validity in Game-Based Stealth Assessment">[Shute &amp; Moore 2017]</a></td></tr>
+    <tr><td><b>看哪個指數</b></td><td>① 規則掌握：會照規則換，也想得到「要提前換」</td><td>① 規則掌握：懂門檻，也處理得了「剛好卡在門檻」；D1 首場</td><td>① 規則掌握：懂限制，也排得出說明沒寫的順序</td></tr>
+    <tr><td><b>D7 再玩</b></td><td colspan="3">② 記得住：隔 2–3 天回來玩新關，和上次同類決策點對照。錯在哪一類（邊界、例外、順序）只當 <b>EK 內部訊號</b>挑素材，不列指數。</td></tr>
+    <tr><td><b>為什麼可以測</b></td><td colspan="3">規則全部自創、進遊戲才教，減少先備知識的影響；只算第一次送出；不懂規則就很難過關（每關事先檢查過）；三條規則換場景放進另外兩款，只作 M1 群體研究，不列個人指數。<a class="cite" href="#p-Shute2013" data-cite="Shute2013" title="Assessment and Learning of Qualitative Physics in Newton&#x27;s Playground">[Shute 2013]</a><a class="cite" href="#p-ShuteMoore2017" data-cite="ShuteMoore2017" title="Consistency and Validity in Game-Based Stealth Assessment">[Shute &amp; Moore 2017]</a></td></tr>
     <tr><td><b>還沒證明的</b></td><td colspan="3">還沒有真實學生資料證明：量到的結果穩不穩、能不能預測真實學習、能不能<b>遷移到數學、物理等學科</b>（待驗證，M1 另用學科題檢查）、拿掉計分後學生還想不想玩。</td></tr>
   </table>
   </div>
@@ -658,55 +677,35 @@ body.mobile .wgrid{grid-template-columns:1fr!important}
 </section>
 
 
-<section class="slide" data-title="從畫像到 NOUS 學習計畫">
-  <div class="kicker"><span class="dot"></span>接上 NOUS 學習計畫 <span class="demo-lab">設計假設</span></div>
-  <h2 class="hl">從畫像到<em>NOUS 學習計畫</em></h2>
-  <div class="ap-wrap">
-  <table class="ap map3" style="font-size:17px">
-    <tr><th style="width:28%">遊戲看到的卡點</th><th style="width:26%">對應的學科學習行為</th><th>NOUS 的 D7 任務與素材類型（由配對引擎挑）</th></tr>
-    <tr><td><b>規則一講就懂，但不會往前多想一步</b><br><span class="note"><i class="gd hf"></i> 海風小館</span></td><td>多步驟應用題，算到一半才發現漏條件</td><td>素材：解題步驟拆解、階梯式引導<br>任務：每天 1 題「先列步驟再算」</td></tr>
-    <tr><td><b>容易忽略門檻與例外</b><br><span class="note"><i class="gd gk"></i> 港口調度站</span></td><td>定義域、反應條件等邊界，常粗心失分</td><td>素材：易錯提示、條件判斷小練習<br>任務：看到「大於／至少」先畫底線</td></tr>
-    <tr><td><b>信心高但實際答錯</b><br><span class="note">自我判斷偏差（三款都看）</span></td><td>以為會寫，對答案才發現錯</td><td>素材：送出前自檢清單、同觀念變形題<br>任務：作答前先猜「有幾成把握」</td></tr>
-  </table>
-  </div>
-  <div class="cols" style="grid-template-columns:1fr 1fr;gap:16px;margin-top:14px">
-    <div class="card" style="padding:12px 18px;font-size:16.5px;line-height:1.6"><b>📋 學習計畫內容：</b>觀察到的卡點、把握程度、建議素材類型、互動方式、D7 任務、D30 方向。交給配對引擎挑素材。</div>
-    <div class="card" style="padding:12px 18px;font-size:16.5px;line-height:1.6"><b>⚠ 對應關係是設計假設，</b>M1 會用學科題驗證；D7 的實際成效也會回頭修正這張表。</div>
-  </div>
-</section>
+
 
 
 
 
 <section class="slide" data-title="我們怎麼證明">
   <div class="kicker"><span class="dot"></span>M1 驗證版 · 研究提案階段</div>
-  <h2 class="hl">我們怎麼<em>證明</em></h2>
-  <p class="lead" style="font-size:17px;margin:0 0 10px"><b>已經有的：</b>三款遊戲、18 個正式關卡，每關都檢查過「不懂規則就很難過」；設計方法有研究支持 <a class="cite" href="#p-Mislevy2003" data-cite="Mislevy2003" title="A Brief Introduction to Evidence-Centered Design">[Mislevy 2003]</a><a class="cite" href="#p-Shute2013" data-cite="Shute2013" title="Assessment and Learning of Qualitative Physics in Newton&#x27;s Playground">[Shute 2013]</a>。<b>還沒有的：</b>真實學生資料，所以 M1 之前畫像只當參考描述。</p>
-  <div class="cols" style="grid-template-columns:1fr 1fr 1fr;gap:16px">
+  <h2 class="hl">我們怎麼<em>證明</em>：M1 三組比較</h2>
+  <p class="lead" style="font-size:16.5px;margin:0 0 10px"><b>已經有的：</b>三款遊戲、18 個正式關卡，每關都檢查過「不懂規則就很難過」<a class="cite" href="#p-Mislevy2003" data-cite="Mislevy2003" title="A Brief Introduction to Evidence-Centered Design">[Mislevy 2003]</a><a class="cite" href="#p-Shute2013" data-cite="Shute2013" title="Assessment and Learning of Qualitative Physics in Newton&#x27;s Playground">[Shute 2013]</a>。<b>還沒有的：</b>真實學生資料，所以 M1 之前只給行為描述。</p>
+  <div class="cols" style="grid-template-columns:1fr 1fr 1fr;gap:14px">
     <div class="evc m1">
-      <h3>① 量得穩嗎？</h3>
-      <ul>
-        <li>同一個學生隔幾天再玩，畫像要差不多才算數 <a class="cite" href="#p-Mokkink2010" data-cite="Mokkink2010" title="The COSMIN study reached international consensus on taxonomy, terminology, and definitions of measurement properties for health-related patient-reported outcomes">[Mokkink 2010]</a></li>
-        <li>D1 只寫進量得穩的卡點</li>
-      </ul>
+      <h3>A 一般教學</h3>
+      <ul><li>不個人化，所有人同一套練習</li></ul>
     </div>
     <div class="evc m1">
-      <h3>② 量得對嗎？</h3>
-      <ul>
-        <li>另量短推理、短期記憶當對照 <a class="cite" href="#p-Chierchia2019" data-cite="Chierchia2019" title="The matrix reasoning item bank (MaRs-IB): novel, open-access abstract reasoning items for adolescents and adults">[MaRs-IB 2019]</a>，扣掉後<b>還能多說明多少</b> <a class="cite" href="#p-Zerr2018" data-cite="Zerr2018" title="Learning Efficiency: Identifying Individual Differences in Learning Rate and Retention in Healthy Adults">[Zerr 2018]</a></li>
-        <li>遊戲卡點在<b>數學、物理題</b>上也看得到嗎</li>
-      </ul>
+      <h3>B 個人化（不用 LQ）</h3>
+      <ul><li>由 EK 設計，依答錯題、章節配素材</li><li>要和 C 組一樣用心設計，比較才公平</li></ul>
     </div>
     <div class="evc m1">
-      <h3>③ 會隨練習改變嗎？</h3>
-      <ul>
-        <li>主要看<b>沒練過的新規則</b>與<b>學科題</b>有沒有進步</li>
-        <li>自我判斷能練得更準嗎 <a class="cite" href="#p-FlemingLau2014" data-cite="FlemingLau2014" title="How to measure metacognition">[Fleming &amp; Lau 2014]</a>；進步速度可能很接近 <a class="cite" href="#p-Koedinger2023" data-cite="Koedinger2023" title="An astonishing regularity in student learning rate">[Koedinger 2023]</a><a class="cite" href="#p-Caffrey2008" data-cite="Caffrey2008" title="The Predictive Validity of Dynamic Assessment: A Review">[Caffrey 2008]</a>，先看整體再看個人</li>
-      </ul>
+      <h3>C 個人化＋LQ</h3>
+      <ul><li>在 B 之上，再依規則掌握、記得住調整：先範例或直接練、排不排間隔複習</li></ul>
     </div>
   </div>
-  <p class="note" style="margin-top:12px;font-size:17px"><b>時程（規劃）：</b>① 小規模真人試玩（D1 與 M1 共用）→ ② 寒假試點：隨機分組，照計畫練習 vs. 固定流程，前後各檢測一次 → ③ 一個月追蹤、分析後回報。細節見附錄。</p>
-  <div class="quote" style="margin-top:10px">答案出來之前，<b>不替任何一位學生下結論</b>，也不對外宣稱有效。</div>
+  <div class="card" style="padding:10px 18px;font-size:16px;line-height:1.6;margin-top:12px">
+    <b>判定標準：</b>三組練習次數、時間相同。主要看<b>沒練過的新規則關</b>與<b>學科題</b>。<b>C 要贏 B</b>，差距的 95% 區間下界要超過最小有意義差異，暫定 <b>10 個百分點</b>（第 8 輪模擬後再調）。B − A 另報，確認個人化本身有效 <a class="cite" href="#p-Koedinger2023" data-cite="Koedinger2023" title="An astonishing regularity in student learning rate">[Koedinger 2023]</a><a class="cite" href="#p-Caffrey2008" data-cite="Caffrey2008" title="The Predictive Validity of Dynamic Assessment: A Review">[Caffrey 2008]</a>。<br>
+    <b>另外檢驗：</b>隔幾天重玩量得穩嗎 <a class="cite" href="#p-Mokkink2010" data-cite="Mokkink2010" title="The COSMIN study reached international consensus on taxonomy, terminology, and definitions of measurement properties for health-related patient-reported outcomes">[Mokkink 2010]</a>；扣掉短推理、短期記憶對照後還能多說明多少 <a class="cite" href="#p-Chierchia2019" data-cite="Chierchia2019" title="The matrix reasoning item bank (MaRs-IB): novel, open-access abstract reasoning items for adolescents and adults">[MaRs-IB 2019]</a><a class="cite" href="#p-Zerr2018" data-cite="Zerr2018" title="Learning Efficiency: Identifying Individual Differences in Learning Rate and Retention in Healthy Adults">[Zerr 2018]</a>；信心資料只供研究 <a class="cite" href="#p-FlemingLau2014" data-cite="FlemingLau2014" title="How to measure metacognition">[Fleming &amp; Lau 2014]</a>。
+  </div>
+  <p class="note" style="margin-top:10px;font-size:16px"><b>時程（規劃）：</b>① 小規模真人試玩（含 D1 決策點計分驗證）→ ② 寒假試點三組隨機分派 → ③ 一個月追蹤、分析後回報。人數待模擬。</p>
+  <div class="quote" style="margin-top:8px">C 沒贏 B 之前，<b>不給學商分數</b>，也不對外宣稱有效。</div>
 </section>
 
 
@@ -725,7 +724,7 @@ body.mobile .wgrid{grid-template-columns:1fr!important}
   <div class="cols" style="grid-template-columns:1.25fr 1fr;gap:16px;flex:1;min-height:0">
     <div class="ap-wrap">
     <table class="ap" style="font-size:15px">
-      <tr><th>新規則</th><th>理解關</th><th>推演關</th><th>換場景</th></tr>
+      <tr><th>新規則</th><th>照規則用（規則掌握）</th><th>用到沒寫的情況（規則掌握）</th><th>換場景（M1 研究用）</th></tr>
       <tr><td><b>換錢規則</b><br>比例＋條件</td><td>兩種換率都要用到</td><td>要想到「提前換」</td><td>放進港口、棧道</td></tr>
       <tr><td><b>木箱規則</b><br>門檻＋例外</td><td>先看門檻與例外</td><td>處理剛好卡門檻、合流</td><td>放進棧道、小館</td></tr>
       <tr><td><b>修補規則</b><br>條件＋順序</td><td>同時用到兩個限制</td><td>多天排程，常見習慣會失敗</td><td>放進小館、港口</td></tr>
@@ -740,13 +739,30 @@ body.mobile .wgrid{grid-template-columns:1fr!important}
     <div class="ap-wrap">
     <table class="ap" style="font-size:15px">
       <tr><th colspan="2">寒假試點（規劃，暫定）</th></tr>
-      <tr><td>流程</td><td>隨機分組 → 第一次檢測 → 幾次練習（照學習計畫／照固定流程）→ 第二次檢測 → 約一個月後追蹤</td></tr>
-      <tr><td>主要結果</td><td>第二次檢測時，<b>沒練過的新規則</b>關卡，和另外安排的<b>學科題</b>，兩組差多少</td></tr>
+      <tr><td>流程</td><td>隨機分三組（一般教學／不用 LQ 的個人化／用 LQ 的個人化）→ 第一次檢測 → 5 次練習（次數、時間相同）→ 第二次檢測 → 約一個月後追蹤</td></tr>
+      <tr><td>主要結果</td><td>第二次檢測時，<b>沒練過的新規則</b>關卡，和另外安排的<b>學科題</b>；C 要贏 B 至少 10 個百分點（暫定）</td></tr>
       <tr><td>次要結果</td><td>練過的同一套規則有沒有進步（只當輔助，不單獨證明有效）</td></tr>
       <tr><td>估算原則</td><td>第一場只估少數幾項；其餘等多場累積、資料夠了才估</td></tr>
       <tr><td>對照</td><td>另排時間量短推理、短期記憶，只當對照</td></tr>
     </table>
     </div>
+  </div>
+</section>
+
+<section class="slide" data-title="附錄 A2：卡點與 EK 素材建議">
+  <div class="kicker"><span class="dot"></span>附錄 A2 · 接上 NOUS 學習計畫 <span class="demo-lab">設計假設</span></div>
+  <h2 class="hl">從畫像到<em>NOUS 學習計畫</em></h2>
+  <div class="ap-wrap">
+  <table class="ap map3" style="font-size:17px">
+    <tr><th style="width:28%">遊戲看到的卡點</th><th style="width:26%">對應的學科學習行為</th><th>NOUS 的 D7 任務與素材類型（由配對引擎挑）</th></tr>
+    <tr><td><b>規則一講就懂，但不會往前多想一步</b><br><span class="note"><i class="gd hf"></i> 海風小館</span></td><td>多步驟應用題，算到一半才發現漏條件</td><td>素材：解題步驟拆解、階梯式引導<br>任務：每天 1 題「先列步驟再算」</td></tr>
+    <tr><td><b>容易忽略門檻與例外</b><br><span class="note"><i class="gd gk"></i> 港口調度站</span></td><td>定義域、反應條件等邊界，常粗心失分</td><td>素材：易錯提示、條件判斷小練習<br>任務：看到「大於／至少」先畫底線</td></tr>
+    <tr><td><b>信心高但實際答錯</b><br><span class="note">EK 素材建議（不算指數）</span></td><td>以為會寫，對答案才發現錯</td><td>素材：送出前自檢清單、同觀念變形題<br>任務：作答前先猜「有幾成把握」</td></tr>
+  </table>
+  </div>
+  <div class="cols" style="grid-template-columns:1fr 1fr;gap:16px;margin-top:14px">
+    <div class="card" style="padding:12px 18px;font-size:16.5px;line-height:1.6"><b>📋 學習計畫內容：</b>觀察到的卡點、把握程度、建議素材類型、互動方式、D7 任務、D30 方向。交給配對引擎挑素材。</div>
+    <div class="card" style="padding:12px 18px;font-size:16.5px;line-height:1.6"><b>⚠ 對應關係是設計假設，</b>M1 會用學科題驗證；D7 的實際成效也會回頭修正這張表。</div>
   </div>
 </section>
 
@@ -758,12 +774,12 @@ body.mobile .wgrid{grid-template-columns:1fr!important}
     <div class="bigcard ea" style="padding:18px 22px">
       <div class="who" style="color:var(--sea-d)">M1 要證明什麼</div>
       <ul style="font-size:17px;line-height:1.6">
-        <li><b>主要：</b>練習之後，學生在<b>沒練過的新規則</b>和<b>學科題</b>上有沒有進步</li>
+        <li><b>主要（教學介入成效）：</b>用 LQ 的個人化，在<b>沒練過的新規則</b>和<b>學科題</b>上有沒有贏不用 LQ 的個人化</li>
         <li><b>次要：</b>同一套規則有沒有進步（練過的會進步是預期中的事，不能單獨證明有效）</li>
-        <li>畫像穩不穩；扣掉智商、短期記憶後還多說明多少</li>
+        <li>規則掌握、記得住穩不穩；扣掉短推理、短期記憶後還多說明多少</li>
         <li>學生願不願意自己再玩；每次 10 分鐘短任務是否可行</li>
       </ul>
-      <p class="note" style="margin-top:6px"><b>時程（規劃）：</b>① 小規模真人試玩 → ② 寒假試點：一組照學習計畫練習、一組照固定流程，前後各檢測一次 → ③ 分析後回報。</p>
+      <p class="note" style="margin-top:6px"><b>時程（規劃）：</b>① 小規模真人試玩 → ② 寒假試點：三組隨機分派，前後各檢測一次 → ③ 分析後回報。</p>
     </div>
     <div class="bigcard ek" style="padding:18px 22px">
       <div class="who" style="color:var(--coral-d)">需要的決定與資源</div>
@@ -771,6 +787,7 @@ body.mobile .wgrid{grid-template-columns:1fr!important}
         <li>是否支持進行 M1 寒假試點</li>
         <li>合作學校與學生（暫估數百人，需家長同意）</li>
         <li>學科題：數學、物理等題目，用來檢查遷移（來源待定）</li>
+        <li>B 組「不用 LQ 的個人化」規則，需與 EK 對齊</li>
         <li>產品名稱「學習方式檢測」是否定案</li>
         <li>NOUS 學習計畫欄位與素材配對的介面</li>
       </ul>
