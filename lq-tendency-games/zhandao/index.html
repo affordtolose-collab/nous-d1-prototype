@@ -1,0 +1,479 @@
+<!doctype html>
+<html lang="zh-Hant"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>棧道工坊｜試玩原型</title>
+<style>
+:root{
+  --sky:#5ec8f2; --sea:#1fb5c4; --sea-d:#0d8797; --sand:#fff7e8; --sand2:#ffe8c2;
+  --coral:#ff7a66; --coral-d:#d94f3a; --sun:#ffc63d; --leaf:#5cbf4a; --leaf-d:#3a9a2c;
+  --wood:#a86d3c; --wood-d:#6e4524; --ink:#3a2c25; --ink2:#6f5d52; --lilac:#8f6ee0;
+  --card:#fff; --line:#f0dfc4;
+  --shadow:0 5px 0 rgba(110,69,36,.10), 0 10px 22px rgba(58,44,37,.10);
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{font-family:"PingFang TC","Noto Sans TC","Microsoft JhengHei","Heiti TC",system-ui,sans-serif;
+  background:linear-gradient(180deg,var(--sky) 0,#bfe9f7 140px,var(--sand) 300px);color:var(--ink);
+  min-height:100vh;line-height:1.55;font-size:16px;-webkit-text-size-adjust:100%}
+.wrap{max-width:860px;margin:0 auto;padding:14px 14px 60px}
+header.top{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+header.top h1{font-size:22px;margin:0;color:#fff;text-shadow:0 2px 0 var(--sea-d)}
+header.top .sp{flex:1}
+a.back{color:#fff;background:var(--sea-d);padding:6px 12px;border-radius:999px;text-decoration:none;font-size:14px}
+.card{background:var(--card);border-radius:18px;box-shadow:var(--shadow);padding:16px;margin:12px 0;border:2px solid var(--line)}
+.card h2{margin:0 0 8px;font-size:20px}
+.card h3{margin:10px 0 6px;font-size:17px}
+.muted{color:var(--ink2);font-size:14px}
+.btn{appearance:none;border:0;border-radius:14px;padding:12px 18px;font-size:17px;font-weight:700;cursor:pointer;
+  background:var(--sun);color:var(--ink);box-shadow:0 4px 0 #d9a21d;min-height:48px;margin:4px 4px 4px 0;font-family:inherit}
+.btn:active{transform:translateY(2px);box-shadow:0 2px 0 #d9a21d}
+.btn.sea{background:var(--sea);color:#fff;box-shadow:0 4px 0 var(--sea-d)}
+.btn.coral{background:var(--coral);color:#fff;box-shadow:0 4px 0 var(--coral-d)}
+.btn.leaf{background:var(--leaf);color:#fff;box-shadow:0 4px 0 var(--leaf-d)}
+.btn.ghost{background:#fff;border:2px solid var(--line);box-shadow:none}
+.btn.small{padding:6px 10px;font-size:15px;min-height:40px;border-radius:10px}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
+.big-title{font-size:30px;margin:6px 0}
+.rule{background:var(--sand2);border-radius:12px;padding:10px 12px;margin:8px 0;font-size:15px}
+.goal{border-left:6px solid var(--sea);padding:8px 12px;background:#eefafc;border-radius:8px;margin:8px 0}
+.pills{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0}
+.pill{border-radius:999px;padding:6px 12px;font-size:14px;background:#fff;border:2px solid var(--line);cursor:pointer;font-weight:700;min-height:36px;font-family:inherit;color:var(--ink)}
+.pill.on{background:var(--sea);color:#fff;border-color:var(--sea-d)}
+.pill.done::after{content:" ✓";}
+.pill[disabled]{opacity:.4;cursor:not-allowed}
+.fb{border-radius:14px;padding:12px 14px;margin:10px 0;font-size:16px}
+.fb.ok{background:#e7f7e2;border:2px solid var(--leaf)}
+.fb.no{background:#fff0ec;border:2px solid var(--coral)}
+.fb ul{margin:6px 0 0;padding-left:20px}
+.tag{display:inline-block;border-radius:8px;padding:1px 8px;font-size:13px;font-weight:700;background:var(--sand2);color:var(--wood-d);margin-right:4px}
+.tag.tide{background:var(--lilac);color:#fff}
+.tag.fog{background:#9aa6ad;color:#fff}
+.tag.glow{background:var(--sun);color:var(--ink)}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.counter{display:inline-flex;align-items:center;gap:6px;background:var(--sand);border-radius:12px;padding:6px 10px;font-weight:700}
+table.res{border-collapse:collapse;width:100%;font-size:15px}
+table.res td,table.res th{border-bottom:1px solid var(--line);padding:6px 4px;text-align:left;vertical-align:top}
+.okc{color:var(--leaf-d);font-weight:700}.noc{color:var(--coral-d);font-weight:700}
+.hidden{display:none!important}
+.xy{font-size:20px;font-weight:800;background:var(--sand2);border-radius:12px;padding:10px 12px;margin:8px 0}
+@media (max-width:520px){
+  .wrap{padding:10px 10px 50px}
+  .big-title{font-size:26px}
+  .btn{width:100%;margin:5px 0}
+  .btn.small{width:auto;margin:2px}
+}
+table.res{table-layout:fixed;word-break:break-word}
+table.res th:first-child{width:28%}
+.card{overflow-wrap:anywhere}
+
+.dayhead{font-weight:800;font-size:18px;margin:6px 0}
+.dayhead.fog{color:#5d6b72}
+.track{display:flex;align-items:stretch;gap:6px;flex-wrap:wrap;background:linear-gradient(90deg,var(--sand2),#bfeef3);border-radius:14px;padding:8px;margin:8px 0}
+.track .lab{align-self:center;font-weight:700;font-size:14px}
+.half{flex:1;min-width:150px}
+.half .hl{font-size:13px;font-weight:700;color:var(--ink2)}
+.half.sea .hl{color:var(--sea-d)}
+.cells{display:flex;gap:4px}
+.cell{flex:1;min-width:0;min-height:56px;border-radius:10px;border:2px solid var(--wood);background:#d8b48a;font-family:inherit;color:var(--ink);display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;padding:2px}
+.cell small{font-size:11px}
+.cell.good{background:var(--wood);color:#fff;opacity:.85;cursor:default}
+.cell.broken{background:#fff;border-style:dashed;border-color:var(--coral);color:var(--coral-d)}
+.cell.sched{background:var(--sun);border-color:#d9a21d;cursor:default}
+.half.sea .cell.good{background:var(--sea-d)}
+.list{background:var(--sand);border-radius:12px;padding:8px;margin-top:8px}
+.step{display:flex;align-items:center;gap:6px;background:#fff;border:2px solid var(--line);border-radius:10px;padding:4px 6px;margin:4px 0}
+.step .no{font-weight:800;width:22px;text-align:center;color:var(--ink2)}
+.step .what{flex:1;font-weight:700}
+.step .btn.small{min-width:40px;padding:4px 8px}
+@media (max-width:520px){.track{flex-direction:column}.track .lab{align-self:flex-start}}
+
+</style></head><body><div class="wrap" id="app"></div>
+<script>
+// ===== 棧道工坊：規則 A3 棧道修補（條件＋順序） =====
+(function(){
+function mk(id, role, shore, sea, fog, cap, K, goal, ans, stakes){
+  const cells = [1,2,3,4,5].map(i => 'S' + i).concat([1,2,3,4,5].map(i => 'X' + i));
+  return {id, role, cells, broken: shore.map(i => 'S' + i).concat(sea.map(i => 'X' + i)), fog, cap, K, goal, ans, stakes};
+}
+// 盤面與 enumerate_levels.py 的 A3L(...) 相同
+const LEVELS = [
+  mk('L1','理解',[1,3,4],[2,4],[1],[4],2,'today',[[3,0]],2),
+  mk('L2','理解',[1,2,4,5],[1,3],[1],[5],3,'today',[[4,0]],2),
+  mk('L3','推演',[1,2,3,5],[1,3,5],[1,0,1],[3,3,3],4,'all',[[2,0],[0,3],[2,0]],4),
+  mk('L4','推演',[2,3,5],[1,2,4],[1,0],[4,4],3,'all',[[2,0],[1,3]],3),
+];
+const isSea = c => c[0] === 'X';
+const cname = c => (isSea(c) ? '靠海 ' : '靠岸 ') + c.slice(1);
+const dayName = (L, d) => `第 ${d + 1} 天（${L.fog[d] ? '起霧' : '晴天'}）`;
+LEVELS.forEach(L => {
+  const nd = L.fog.length;
+  const bs = L.broken.filter(c => !isSea(c)).map(c => c.slice(1)).join('、');
+  const bx = L.broken.filter(isSea).map(c => c.slice(1)).join('、');
+  const goal = L.goal === 'today' ? '今天能修的都修好（只有今天一天）。' : `${nd} 天內把所有壞掉的格子都修好，棧道才接通。`;
+  L.goalHtml = `<b>目標：${goal}</b><br>天氣：${L.fog.map((f, d) => dayName(L, d)).join('、')}。<br>壞掉的格子：靠岸 ${bs}；靠海 ${bx}。<br>限制：每天 ${L.cap[0]} 位工人（每天最多修 ${L.cap[0]} 格）；木樁一共 ${L.K} 根。`;
+  L.passNote = '島民順利走過棧道。';
+});
+// 與 enumerate_levels.py a3_day 相同（可選擇忽略起霧或順序，用來判斷決策點）
+function dayOk(L, q, d, ignoreFog, ignoreOrder, ignoreCap){
+  let cred = 0, planks = 0;
+  for (const t of q) {
+    if (t === 'K') { if (cred > 0 && !ignoreOrder) return false; cred = 2; }
+    else {
+      if (L.fog[d] && isSea(t) && !ignoreFog) return false;
+      if (cred === 0 && !ignoreOrder) return false;
+      cred = Math.max(0, cred - 1); planks++;
+    }
+  }
+  return ignoreCap || planks <= L.cap[d];
+}
+function target(L){ return (L.goal === 'all' ? L.broken.slice() : L.broken.filter(c => !isSea(c))).sort(); }
+function a3pass(L, days){
+  const built = [].concat.apply([], days).filter(t => t !== 'K');
+  if (new Set(built).size !== built.length || built.slice().sort().join() !== target(L).join()) return false;
+  if (days.reduce((s, q) => s + q.filter(t => t === 'K').length, 0) > L.K) return false;
+  return days.every((q, d) => dayOk(L, q, d));
+}
+const cnt = q => [q.filter(t => t !== 'K' && !isSea(t)).length, q.filter(t => t !== 'K' && isSea(t)).length];
+const stakesOf = days => days.reduce((s, q) => s + q.filter(t => t === 'K').length, 0);
+const P = (id, type, label, f) => ({id, type, label, f, desc:[type]});
+const fogNoSea = ds => days => ds.every(d => cnt(days[d])[1] === 0);
+const dayIs = (d, s, x) => days => { const c = cnt(days[d]); return c[0] === s && c[1] === x; };
+const orderOk = (L, k) => days => days.every((q, d) => dayOk(L, q, d, true, false, true)) && stakesOf(days) === k;
+const POINTS = {
+  L1:[P('L1-條件','條件','起霧時沒有修任何靠海格', fogNoSea([0])), P('L1-目標','照著用','修好 3 格壞掉的靠岸', days => cnt(days[0])[0] === 3), P('L1-順序','順序','木樁與木板順序合法，用了 2 根樁', orderOk(LEVELS[0], 2))],
+  L2:[P('L2-條件','條件','起霧時沒有修任何靠海格', fogNoSea([0])), P('L2-目標','照著用','修好 4 格壞掉的靠岸', days => cnt(days[0])[0] === 4), P('L2-順序','順序','順序合法，用了 2 根樁（第 3 根備用不動）', orderOk(LEVELS[1], 2))],
+  L3:[P('L3-條件','條件','兩個霧天都沒修靠海', fogNoSea([0, 2])), P('L3-日1','提前規劃','第 1 天（霧）修 2 格靠岸（不是 3）', dayIs(0, 2, 0)), P('L3-日2','照著用','第 2 天（晴）修 3 格靠海', dayIs(1, 0, 3)), P('L3-日3','提前規劃','第 3 天（霧）修剩下 2 格靠岸', dayIs(2, 2, 0)), P('L3-順序','順序','各天順序合法，總共用 4 根樁', orderOk(LEVELS[2], 4))],
+  L4:[P('L4-條件','條件','霧天（第 1 天）沒修靠海', fogNoSea([0])), P('L4-日1','提前規劃','第 1 天只修 2 格靠岸', dayIs(0, 2, 0)), P('L4-日2','提前規劃','第 2 天修 1 格靠岸＋3 格靠海', dayIs(1, 1, 3)), P('L4-順序','順序','各天順序合法，總共用 3 根樁', orderOk(LEVELS[3], 3))],
+};
+function newBoard(L){ return {days: L.fog.map(() => []), cur:0, msg:''}; }
+function where(b, c){ for (let d = 0; d < b.days.length; d++) if (b.days[d].indexOf(c) >= 0) return d; return -1; }
+function credOf(q){ let cred = 0; q.forEach(t => { if (t === 'K') cred = 2; else cred = Math.max(0, cred - 1); }); return cred; }
+function draw(root, L, b, locked, rerender){
+  const d = b.cur, q = b.days[d];
+  const planks = q.filter(t => t !== 'K').length;
+  const kLeft = L.K - stakesOf(b.days);
+  let h = '';
+  if (L.fog.length > 1) h += '<div class="pills">' + L.fog.map((f, i) => `<button class="pill ${i === d ? 'on' : ''}" data-day="${i}">${dayName(L, i)}${f ? ' 🌫️' : ' ☀️'}</button>`).join('') + '</div>';
+  h += `<div class="dayhead ${L.fog[d] ? 'fog' : ''}">${dayName(L, d)} ${L.fog[d] ? '<span class="tag fog">🌫️ 今天起霧</span>' : '<span class="tag">☀️ 晴天</span>'}</div>`;
+  h += `<div class="row" style="margin:6px 0"><span class="counter">👷 今天工人剩 ${L.cap[d] - planks}</span><span class="counter">🪵 木樁剩 ${kLeft}</span><span class="counter">📏 目前額度：還能管 ${credOf(q)} 片</span></div>`;
+  // 棧道
+  h += '<div class="track"><div class="lab">🏖️ 岸邊</div>';
+  ['S', 'X'].forEach(side => {
+    h += `<div class="half ${side === 'X' ? 'sea' : 'shore'}"><div class="hl">${side === 'X' ? '靠海' : '靠岸'}</div><div class="cells">`;
+    L.cells.filter(c => c[0] === side).forEach(c => {
+      const br = L.broken.indexOf(c) >= 0, w = where(b, c);
+      const cls = !br ? 'good' : w >= 0 ? 'sched' : 'broken';
+      const lbl = !br ? '好' : w >= 0 ? `第${w + 1}天` : '壞';
+      const can = !locked && br && w < 0;
+      h += `<button class="cell ${cls}" data-cell="${c}" ${can ? '' : 'disabled'} title="${cname(c)}"><b>${c.slice(1)}</b><small>${lbl}</small></button>`;
+    });
+    h += '</div></div>';
+  });
+  h += '<div class="lab">🗼 燈塔</div></div>';
+  if (!locked) h += `<div class="row"><button class="btn small" data-act="stake">＋ 插樁</button><span class="muted">點上面「壞」的格子＝把「修那一格」加進今天的清單。</span></div>`;
+  if (b.msg) h += `<p class="muted">${b.msg}</p>`;
+  h += `<div class="list"><div class="muted">${dayName(L, d)} 施工清單（由上往下做）：</div>`;
+  if (!q.length) h += '<div class="muted">（空）</div>';
+  q.forEach((t, i) => {
+    h += `<div class="step"><span class="no">${i + 1}</span><span class="what">${t === 'K' ? '🪵 插樁' : '🔨 修 ' + cname(t)}</span>` +
+      (locked ? '' : `<button class="btn small ghost" data-act="up" data-i="${i}" ${i ? '' : 'disabled'} aria-label="上移">↑</button><button class="btn small ghost" data-act="down" data-i="${i}" ${i < q.length - 1 ? '' : 'disabled'} aria-label="下移">↓</button><button class="btn small ghost" data-act="del" data-i="${i}" aria-label="撤銷">✕</button>`) + '</div>';
+  });
+  h += '</div>';
+  root.innerHTML = h;
+  root.querySelectorAll('[data-day]').forEach(x => x.onclick = () => { b.cur = +x.dataset.day; b.msg = ''; rerender(); });
+  if (locked) return;
+  root.querySelectorAll('[data-cell]').forEach(x => x.onclick = () => {
+    if (planks >= L.cap[d]) { b.msg = '今天的工人都排滿了。'; rerender(); return; }
+    q.push(x.dataset.cell); b.msg = ''; rerender();
+  });
+  root.querySelectorAll('[data-act]').forEach(x => x.onclick = () => {
+    const a = x.dataset.act, i = +x.dataset.i;
+    b.msg = '';
+    if (a === 'stake') { if (kLeft <= 0) b.msg = '木樁用完了。'; else q.push('K'); }
+    else if (a === 'up' && i > 0) { const t = q[i]; q[i] = q[i - 1]; q[i - 1] = t; }
+    else if (a === 'down' && i < q.length - 1) { const t = q[i]; q[i] = q[i + 1]; q[i + 1] = t; }
+    else if (a === 'del') q.splice(i, 1);
+    rerender();
+  });
+}
+function canon(cells){ const q = []; cells.forEach((c, i) => { if (i % 2 === 0) q.push('K'); q.push(c); }); return q; }
+window.G_DEF = {
+  id:'zhandao', name:'棧道工坊', submitLabel:'試走',
+  oneRule:'起霧日只能修靠岸；1 根木樁管接下來 2 片木板，額度用完才能插新的，收工就作廢。',
+  ruleHtml:'<b>棧道修補</b>：棧道是一條直線，前半靠岸、後半靠海；壞的格子全部修好才接通。<b>起霧日只能修靠岸</b>。每天最多修幾格＝當天工人數。<br><b>木樁</b>：1 根木樁管接下來的 2 片木板；上一根的 2 片沒用完，不能插新的；<b>收工時沒用完的額度作廢</b>。木樁總數有限。',
+  levels: LEVELS, points: POINTS,
+  typeOrder:['照著用','條件','順序','提前規劃'],
+  short:{
+    '條件':'起霧日只能修靠岸，靠海的格子要等晴天。',
+    '照著用':'該修的格子要修好、不多修。',
+    '順序':'木板前要有可用的木樁；上一根的 2 片沒用完不能插新的，也別多插用不到的樁。',
+    '提前規劃':'木樁額度收工就作廢，先按天分配：每天修偶數格最省樁。',
+  },
+  describe:{
+    '條件':'條件錯過：起霧時你修了靠海的格子。',
+    '照著用':'照著用錯過：該修的格子沒有照目標修好（少修或多修）。',
+    '順序':'順序錯過：木板前沒有可用的木樁，或上一根額度還沒用完就插了新樁。',
+    '提前規劃':'提前規劃錯過：你把木樁額度在前一天用完或浪費了，後面的天不夠用。常見情形是第 1 天修了奇數格。',
+  },
+  allOk:'這次起霧只能修靠岸、木樁要先插，以及額度不能隔夜，你都有處理到。這只說明這一條規則、這一場的做法。',
+  advice:'有「今天能做／不能做」和「工具隔天作廢」時，先按天數分配額度，再排當天的順序。',
+  measureHow:`<p>本款有 4 個計分關：第 1、2 關（理解：起霧的一天，今天能修的都修）、第 3、4 關（推演：好幾天、木樁有限，要先按天分配）。關鍵決策點共 15 個，分成：<b>照著用</b>、<b>條件</b>（起霧只修靠岸）、<b>順序</b>（樁、板、板）、<b>提前規劃</b>（每天修幾格）。同一類格子選了哪一號、同一天內合法的先後差異，都算同一種做法。</p>`,
+  newBoard,
+  setPlan(L, plan){
+    const b = newBoard(L);
+    const days = Array.isArray(plan) ? plan : (plan && plan.days) || [];
+    const used = {};
+    days.forEach((x, d) => {
+      if (d >= L.fog.length || !x) return;
+      if (Array.isArray(x.list) || Array.isArray(x)) {
+        (Array.isArray(x) ? x : x.list).forEach(t => { if (t === 'K' || (L.broken.indexOf(t) >= 0 && !used[t])) { if (t !== 'K') used[t] = 1; b.days[d].push(t); } });
+        return;
+      }
+      const pick = (side, n) => {
+        const out = [];
+        L.broken.filter(c => c[0] === side && !used[c]).slice(0, Math.max(0, n | 0)).forEach(c => { used[c] = 1; out.push(c); });
+        return out;
+      };
+      b.days[d] = canon(pick('S', x.shore).concat(pick('X', x.sea)));
+    });
+    return b;
+  },
+  canSubmit(L, b){ return b.days.every(q => !q.length) ? '施工清單是空的。' : null; },
+  evaluate(L, b){
+    const days = b.days;
+    const pass = a3pass(L, days);
+    const points = {};
+    POINTS[L.id].forEach(p => points[p.id] = p.f(days) ? 1 : 0);
+    const notes = [];
+    days.forEach((q, d) => {
+      if (L.fog[d] && q.some(t => t !== 'K' && isSea(t))) notes.push(`${dayName(L, d)}修了靠海的格子，霧裡工人沒辦法施工。`);
+      if (!dayOk(L, q, d, true, false, true)) notes.push(`${dayName(L, d)}的清單裡，有木板前面沒有可用的木樁，或額度還沒用完就插了新樁。`);
+    });
+    const built = [].concat.apply([], days).filter(t => t !== 'K');
+    const miss = target(L).filter(c => built.indexOf(c) < 0);
+    const extra = built.filter(c => target(L).indexOf(c) < 0);
+    if (miss.length) notes.push(L.goal === 'all' ? `還有 ${miss.length} 格壞的沒修，棧道沒接通。` : `今天能修的還有 ${miss.length} 格沒修。`);
+    if (extra.length && L.goal === 'today') notes.push('清單裡有今天其實不能修的格子。');
+    if (stakesOf(days) > L.K) notes.push('木樁用超過了。');
+    return {pass, points, notes};
+  },
+  renderBoard(root, L, b, locked, rerender){ draw(root, L, b, locked, rerender); },
+  renderTeach(root){
+    const L = {cells:['S1','S2','S3','S4','S5','X1','X2','X3','X4','X5'], broken:['S2','S4'], fog:[0], cap:[3], K:2, goal:'all'};
+    let b = newBoard(L), msg = '';
+    const paint = () => {
+      root.innerHTML = `<p><b>帶玩</b>：晴天，靠岸壞了 2 格。先「插樁」，再點兩格壞的去修：<b>樁、板、板</b>。排好後按「試走」。</p><div id="tb"></div>
+        <div class="row"><button class="btn sea small" id="chk">試走</button><button class="btn ghost small" id="demo">看示範</button></div><div id="tm">${msg}</div>`;
+      draw(root.querySelector('#tb'), L, b, false, paint);
+      root.querySelector('#demo').onclick = () => { b.days[0] = ['K', 'S2', 'S4']; msg = '<p>示範：插樁 → 修靠岸 2 → 修靠岸 4。1 根木樁剛好管這 2 片木板。按「試走」看看。</p>'; paint(); };
+      root.querySelector('#chk').onclick = () => {
+        const q = b.days[0];
+        if (a3pass(L, b.days) && q.filter(t => t === 'K').length === 1) {
+          msg = `<p>✅ 島民走過去了！樁、板、板：1 根木樁管接下來 2 片木板。</p>
+            <p><b>還要記得兩件事</b>：</p><ul>
+            <li>🌫️ <b>起霧日只能修靠岸</b>，靠海的格子要等晴天。</li>
+            <li>🪵 <b>額度隔天作廢</b>：插了樁只修 1 片就收工，剩下那 1 片額度不能留到明天。上一根的 2 片沒用完也不能插新的。</li></ul>`;
+        } else if (!dayOk(L, q, 0, false, false, true)) msg = '<p>❌ 木板前面要先有木樁（或額度還沒用完就插了新樁）。再試一次。</p>';
+        else msg = '<p>❌ 兩格壞的都要修好，而且 1 根樁就夠了。再試一次。</p>';
+        paint();
+      };
+    };
+    paint();
+  },
+};
+})();
+
+</script>
+<script>
+// ===== 共用流程（每款 index.html 內嵌同一份） =====
+(function(){
+const G = window.G_DEF;
+const BACK = location.pathname.indexOf('lq-tendency-games') >= 0 ? '../../lq-tendency/' : '../../LQ學習傾向驗證簡報_v2.html';
+const LIDS = G.levels.map(l => l.id);
+LIDS.forEach(id => G.points[id].forEach(p => p.lv = id));
+const Y = LIDS.reduce((s, id) => s + G.points[id].length, 0);
+let S;
+function fresh(){
+  S = {phase:'title', li:0, first:{}, boards:{}, locked:{}, fb:{}, teachDone:false};
+  LIDS.forEach((id, i) => { S.boards[id] = G.newBoard(G.levels[i]); S.locked[id] = false; });
+}
+fresh();
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+G.esc = esc;
+function lv(){ return G.levels[S.li]; }
+function lid(){ return LIDS[S.li]; }
+function allFirst(){ return LIDS.every(id => S.first[id]); }
+function xCount(){
+  let x = 0;
+  LIDS.forEach(id => { const f = S.first[id]; if (f) for (const k in f.points) x += f.points[k]; });
+  return x;
+}
+function app(){ return $('#app'); }
+function shell(inner){
+  return `<header class="top"><h1>${esc(G.name)}</h1><span class="sp"></span>
+  <a class="back" href="${BACK}">回簡報</a></header>${inner}`;
+}
+function render(){
+  const a = app();
+  if (S.phase === 'title') {
+    a.innerHTML = shell(`<div class="card"><div class="big-title">${esc(G.name)}</div>
+      <p style="font-size:18px">${G.oneRule}</p>
+      <p class="muted">先有一段短教學（不計分），接著是 4 個關卡。每關只看第一次送出；之後可以「隔天再來」重玩。</p>
+      <button class="btn sea" id="go">開始</button></div>`);
+    $('#go').onclick = () => { S.phase = 'teach'; render(); };
+  } else if (S.phase === 'teach') {
+    a.innerHTML = shell(`<div class="card"><h2>教學（不計分）</h2><div class="rule">${G.ruleHtml}</div><div id="teach"></div></div>
+      <div class="card"><button class="btn leaf" id="toL1">開始第 1 關</button>
+      <span class="muted">（教學裡的操作都不計入）</span></div>`);
+    G.renderTeach($('#teach'));
+    $('#toL1').onclick = () => { startLevels(); };
+  } else if (S.phase === 'level') {
+    renderLevel();
+  } else if (S.phase === 'results') {
+    renderResults();
+  }
+  window.scrollTo && window.scrollTo(0, 0);
+}
+function startLevels(){ S.teachDone = true; S.phase = 'level'; S.li = 0; render(); }
+function unlocked(i){ return i === 0 || !!S.first[LIDS[i - 1]]; }
+function renderLevel(){
+  const L = lv(), id = lid();
+  const pills = G.levels.map((l, i) => `<button class="pill ${i === S.li ? 'on' : ''} ${S.first[l.id] ? 'done' : ''}" data-i="${i}" ${unlocked(i) ? '' : 'disabled'}>第 ${i + 1} 關</button>`).join('');
+  const fb = S.fb[id];
+  const fbHtml = fb ? `<div class="fb ${fb.pass ? 'ok' : 'no'}" id="fb">${fb.html}</div>` : '';
+  let nav = '';
+  if (S.locked[id]) {
+    nav = `<button class="btn ghost" id="replay">隔天再來（重玩，不計分）</button>`;
+    if (S.li < LIDS.length - 1) nav += `<button class="btn sea" id="next">下一關</button>`;
+    if (allFirst()) nav += `<button class="btn leaf" id="res">看結果</button>`;
+  }
+  app().innerHTML = shell(`<div class="pills">${pills}</div>
+    <div class="card"><h2>第 ${S.li + 1} 關 <span class="muted">${S.locked[id] ? '（已送出）' : S.first[id] ? '（隔天再來：重玩中，不計分）' : ''}</span></h2>
+      <div class="goal">${L.goalHtml}</div>
+      <details class="rule"><summary>規則提醒</summary>${G.ruleHtml}</details>
+      <div id="board"></div>
+      <div class="row" style="margin-top:10px">${S.locked[id] ? '' : `<button class="btn coral" id="submit">${esc(G.submitLabel)}</button>`}<span id="msg" class="muted"></span></div>
+      ${fbHtml}
+      <div class="row">${nav}</div>
+    </div>`);
+  app().querySelectorAll('.pill').forEach(b => b.onclick = () => { const i = +b.dataset.i; if (unlocked(i)) { S.li = i; render(); } });
+  G.renderBoard($('#board'), L, S.boards[id], S.locked[id], () => renderLevel());
+  const sb = $('#submit'); if (sb) sb.onclick = () => { const r = doSubmit(); if (r.blocked) $('#msg').textContent = r.feedback; };
+  const rp = $('#replay'); if (rp) rp.onclick = () => doReplay();
+  const nx = $('#next'); if (nx) nx.onclick = () => { S.li++; render(); };
+  const rs = $('#res'); if (rs) rs.onclick = () => gotoResults();
+  if (fb) { const f = $('#fb'); f && f.scrollIntoView && f.scrollIntoView({block:'nearest'}); }
+}
+function fbHtml(L, ev, scored, first){
+  let h = `<b>${ev.pass ? '過關了。' : '這次沒過。'}</b>`;
+  if (!scored) h += ` <span class="muted">（重玩，不計分）</span>`;
+  const lines = [];
+  ev.notes.forEach(n => lines.push(n));
+  if (!ev.pass) {
+    const missed = [];
+    G.points[L.id].forEach(p => { if (!ev.points[p.id]) p.desc.forEach(d => { if (missed.indexOf(d) < 0) missed.push(d); }); });
+    missed.forEach(d => lines.push(`錯在「${d}」：${G.short[d]}`));
+  }
+  if (lines.length) h += '<ul>' + lines.map(l => `<li>${l}</li>`).join('') + '</ul>';
+  if (ev.pass) h += `<div class="muted">${esc(L.passNote || '')}</div>`;
+  return h;
+}
+function doSubmit(){
+  if (S.phase !== 'level') return {pass:false, first:false, scored:false, feedback:'目前不在關卡畫面', blocked:true};
+  const L = lv(), id = lid(), b = S.boards[id];
+  const block = G.canSubmit ? G.canSubmit(L, b) : null;
+  if (block) return {pass:false, first:false, scored:false, feedback:block, blocked:true};
+  const ev = G.evaluate(L, b);
+  const first = !S.first[id];
+  if (first) S.first[id] = {pass: ev.pass, points: Object.assign({}, ev.points)};
+  const html = fbHtml(L, ev, first, first);
+  S.fb[id] = {pass: ev.pass, html};
+  S.locked[id] = true;
+  renderLevel();
+  const tmp = document.createElement('div'); tmp.innerHTML = html;
+  return {pass: ev.pass, first, scored: first, feedback: tmp.textContent.trim()};
+}
+function doReplay(){
+  if (S.phase !== 'level') return false;
+  const id = lid();
+  S.boards[id] = G.newBoard(lv()); S.locked[id] = false; S.fb[id] = null;
+  renderLevel();
+  return true;
+}
+function gotoResults(){
+  if (!allFirst()) return false;
+  S.phase = 'results'; render(); return true;
+}
+function renderResults(){
+  const x = xCount();
+  const byType = {};
+  G.typeOrder.forEach(t => byType[t] = {ok:[], no:[]});
+  const missedDesc = [];
+  LIDS.forEach(id => G.points[id].forEach(p => {
+    const v = S.first[id].points[p.id];
+    if (!byType[p.type]) byType[p.type] = {ok:[], no:[]};
+    byType[p.type][v ? 'ok' : 'no'].push(p);
+    if (!v) p.desc.forEach(d => { if (missedDesc.indexOf(d) < 0) missedDesc.push(d); });
+  }));
+  const rows = Object.keys(byType).filter(t => byType[t].ok.length + byType[t].no.length).map(t => {
+    const o = byType[t];
+    return `<tr><td><b>${esc(t)}</b></td><td class="okc">對 ${o.ok.length}</td><td class="noc">錯 ${o.no.length}</td>
+      <td class="muted">${o.no.length ? '錯過：' + o.no.map(p => '第 ' + (LIDS.indexOf(p.lv) + 1) + ' 關 ' + esc(p.label)).join('；') : '—'}</td></tr>`;
+  }).join('');
+  const detail = LIDS.map((id, i) => `<tr><td>第 ${i + 1} 關</td><td>${S.first[id].pass ? '第一次就過' : '第一次沒過'}</td><td class="muted">${
+    G.points[id].map(p => `${S.first[id].points[p.id] ? '✓' : '✗'} ${esc(p.label)}`).join('<br>')}</td></tr>`).join('');
+  const descHtml = missedDesc.length
+    ? '<ul>' + missedDesc.map(d => `<li>${esc(G.describe[d])}</li>`).join('') + '</ul>'
+    : `<p>${esc(G.allOk)}</p>`;
+  app().innerHTML = shell(`<div class="card"><h2>${esc(G.name)}：這一場的結果說明</h2>
+    <h3>1. 量什麼</h3>
+    <p>這一場看的是「規則掌握」：剛教的規則，能不能照著用，也能用到說明沒直接寫的情況（邊界、例外、要提前準備的安排）。</p>
+    <p><b>記得住</b>：這一場量不到。要隔幾天用新關再量，而且這一輪只看群體。</p>
+    <h3>2. 怎麼量</h3>
+    ${G.measureHow}
+    <p>只算每關的<b>第一次送出</b>；教學與重玩不算；送出前改了幾次、用了多久，也都不算。</p>
+    <h3>3. 怎麼換算</h3>
+    <div class="xy">你在 ${Y} 個關鍵決策點裡，第一次做對了 ${x} 個。</div>
+    <p class="muted">這個 ${x}/${Y} 是這一次的證據摘要：不是分數、不是等級，也不是排名。</p>
+    <table class="res"><tr><th>類型</th><th></th><th></th><th>說明</th></tr>${rows}</table>
+    <details style="margin-top:8px"><summary>每關的決策點</summary><table class="res">${detail}</table></details>
+    <h3>描述</h3>${descHtml}
+    <h3>一個建議</h3><p>${esc(G.advice)}</p>
+    <h3>下一步</h3><p>隔幾天再回來，用新關卡看看還記不記得這條規則；或先去玩另外一款，看同樣的做法換了規則還在不在。</p>
+    <p class="muted">要出現個人分數，還需要：換遊戲換規則也量得穩、跟遊戲外的新規則短測對得上，並且證明它不只是推理或工作記憶。這些都不在這個原型裡完成。</p>
+    <div class="row"><button class="btn sea" id="again">再玩一次</button><a class="btn ghost" href="${BACK}" style="text-decoration:none">回簡報</a></div>
+  </div>`);
+  $('#again').onclick = () => { fresh(); render(); };
+}
+window.GAME = {
+  id: G.id,
+  skipTeach(){ if (S.phase === 'title' || S.phase === 'teach') startLevels(); else if (S.phase === 'level') {} return true; },
+  setPlan(plan){
+    if (S.phase !== 'level') return false;
+    const id = lid();
+    if (S.locked[id]) {
+      // 已送出：若下一關還沒做，就前往下一關；否則視為「隔天再來」重玩本關
+      if (S.li < LIDS.length - 1 && !S.first[LIDS[S.li + 1]]) S.li++;
+      else { S.boards[id] = G.newBoard(lv()); S.locked[id] = false; S.fb[id] = null; }
+    }
+    S.boards[lid()] = G.setPlan(lv(), plan);
+    render(); return true;
+  },
+  submit(){ const r = doSubmit(); delete r.blocked; return r; },
+  replay(){ return doReplay(); },
+  gotoResults,
+  goto(i){ if (S.phase === 'level' && unlocked(i)) { S.li = i; render(); return true; } return false; },
+  next(){ if (S.phase === 'level' && S.li < LIDS.length - 1 && unlocked(S.li + 1)) { S.li++; render(); return true; } return false; },
+  reset(){ fresh(); render(); return true; },
+  state(){
+    const first = {};
+    LIDS.forEach(id => { if (S.first[id]) first[id] = {pass: S.first[id].pass, points: Object.assign({}, S.first[id].points)}; });
+    return {phase: S.phase, levelId: S.phase === 'level' ? lid() : null, first, x: xCount(), y: Y, onResults: S.phase === 'results'};
+  }
+};
+render();
+})();
+
+</script>
+</body></html>
