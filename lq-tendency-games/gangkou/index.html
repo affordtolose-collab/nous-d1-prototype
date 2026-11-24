@@ -1,0 +1,446 @@
+<!doctype html>
+<html lang="zh-Hant"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>港口調度站｜試玩原型</title>
+<style>
+:root{
+  --sky:#5ec8f2; --sea:#1fb5c4; --sea-d:#0d8797; --sand:#fff7e8; --sand2:#ffe8c2;
+  --coral:#ff7a66; --coral-d:#d94f3a; --sun:#ffc63d; --leaf:#5cbf4a; --leaf-d:#3a9a2c;
+  --wood:#a86d3c; --wood-d:#6e4524; --ink:#3a2c25; --ink2:#6f5d52; --lilac:#8f6ee0;
+  --card:#fff; --line:#f0dfc4;
+  --shadow:0 5px 0 rgba(110,69,36,.10), 0 10px 22px rgba(58,44,37,.10);
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{font-family:"PingFang TC","Noto Sans TC","Microsoft JhengHei","Heiti TC",system-ui,sans-serif;
+  background:linear-gradient(180deg,var(--sky) 0,#bfe9f7 140px,var(--sand) 300px);color:var(--ink);
+  min-height:100vh;line-height:1.55;font-size:16px;-webkit-text-size-adjust:100%}
+.wrap{max-width:860px;margin:0 auto;padding:14px 14px 60px}
+header.top{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+header.top h1{font-size:22px;margin:0;color:#fff;text-shadow:0 2px 0 var(--sea-d)}
+header.top .sp{flex:1}
+a.back{color:#fff;background:var(--sea-d);padding:6px 12px;border-radius:999px;text-decoration:none;font-size:14px}
+.card{background:var(--card);border-radius:18px;box-shadow:var(--shadow);padding:16px;margin:12px 0;border:2px solid var(--line)}
+.card h2{margin:0 0 8px;font-size:20px}
+.card h3{margin:10px 0 6px;font-size:17px}
+.muted{color:var(--ink2);font-size:14px}
+.btn{appearance:none;border:0;border-radius:14px;padding:12px 18px;font-size:17px;font-weight:700;cursor:pointer;
+  background:var(--sun);color:var(--ink);box-shadow:0 4px 0 #d9a21d;min-height:48px;margin:4px 4px 4px 0;font-family:inherit}
+.btn:active{transform:translateY(2px);box-shadow:0 2px 0 #d9a21d}
+.btn.sea{background:var(--sea);color:#fff;box-shadow:0 4px 0 var(--sea-d)}
+.btn.coral{background:var(--coral);color:#fff;box-shadow:0 4px 0 var(--coral-d)}
+.btn.leaf{background:var(--leaf);color:#fff;box-shadow:0 4px 0 var(--leaf-d)}
+.btn.ghost{background:#fff;border:2px solid var(--line);box-shadow:none}
+.btn.small{padding:6px 10px;font-size:15px;min-height:40px;border-radius:10px}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
+.big-title{font-size:30px;margin:6px 0}
+.rule{background:var(--sand2);border-radius:12px;padding:10px 12px;margin:8px 0;font-size:15px}
+.goal{border-left:6px solid var(--sea);padding:8px 12px;background:#eefafc;border-radius:8px;margin:8px 0}
+.pills{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0}
+.pill{border-radius:999px;padding:6px 12px;font-size:14px;background:#fff;border:2px solid var(--line);cursor:pointer;font-weight:700;min-height:36px;font-family:inherit;color:var(--ink)}
+.pill.on{background:var(--sea);color:#fff;border-color:var(--sea-d)}
+.pill.done::after{content:" ✓";}
+.pill[disabled]{opacity:.4;cursor:not-allowed}
+.fb{border-radius:14px;padding:12px 14px;margin:10px 0;font-size:16px}
+.fb.ok{background:#e7f7e2;border:2px solid var(--leaf)}
+.fb.no{background:#fff0ec;border:2px solid var(--coral)}
+.fb ul{margin:6px 0 0;padding-left:20px}
+.tag{display:inline-block;border-radius:8px;padding:1px 8px;font-size:13px;font-weight:700;background:var(--sand2);color:var(--wood-d);margin-right:4px}
+.tag.tide{background:var(--lilac);color:#fff}
+.tag.fog{background:#9aa6ad;color:#fff}
+.tag.glow{background:var(--sun);color:var(--ink)}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.counter{display:inline-flex;align-items:center;gap:6px;background:var(--sand);border-radius:12px;padding:6px 10px;font-weight:700}
+table.res{border-collapse:collapse;width:100%;font-size:15px}
+table.res td,table.res th{border-bottom:1px solid var(--line);padding:6px 4px;text-align:left;vertical-align:top}
+.okc{color:var(--leaf-d);font-weight:700}.noc{color:var(--coral-d);font-weight:700}
+.hidden{display:none!important}
+.xy{font-size:20px;font-weight:800;background:var(--sand2);border-radius:12px;padding:10px 12px;margin:8px 0}
+@media (max-width:520px){
+  .wrap{padding:10px 10px 50px}
+  .big-title{font-size:26px}
+  .btn{width:100%;margin:5px 0}
+  .btn.small{width:auto;margin:2px}
+}
+table.res{table-layout:fixed;word-break:break-word}
+table.res th:first-child{width:28%}
+.card{overflow-wrap:anywhere}
+
+.items{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px}
+.bundle{background:var(--sand);border:2px solid var(--line);border-radius:14px;padding:8px;text-align:center}
+.bundle.pair{grid-column:span 2;border:3px dashed var(--wood)}
+.bundle.toship{border-color:var(--sea)}
+.bundle.tocrate{border-color:var(--wood)}
+.cards{display:flex;justify-content:center;align-items:center;gap:6px}
+.item{background:#fff;border:2px solid var(--line);border-radius:12px;padding:6px 10px;min-width:72px}
+.item.glow{background:#fff6d4;border-color:var(--sun);box-shadow:0 0 12px var(--sun)}
+.item .val{font-size:28px;font-weight:800;line-height:1.1}
+.item .tag{margin:2px 0}
+.tag.nomerge{background:var(--coral);color:#fff}
+.plus{font-weight:800;font-size:20px}
+.dest{display:flex;gap:4px;justify-content:center;flex-wrap:wrap;margin-top:6px}
+@media (max-width:520px){.items{grid-template-columns:1fr 1fr}.bundle.pair{grid-column:span 2}.item{min-width:60px}}
+
+</style></head><body><div class="wrap" id="app"></div>
+<script>
+// ===== 港口調度站：規則 A2 共用木箱（門檻＋例外，合流成包） =====
+(function(){
+const BIG = 99;
+// 件號 0-based，與 enumerate_levels.py A2 同順序；item = [價值, 是否發光]
+const LEVELS = [
+  {id:'L1', role:'理解', items:[[11,0],[10,0],[2,1]], merge:[], cap_s:BIG, cap_c:BIG},
+  {id:'L2', role:'理解', items:[[13,0],[8,0],[10,0],[6,1]], merge:[], cap_s:BIG, cap_c:BIG},
+  {id:'L3', role:'推演', items:[[6,0],[4,0],[7,0],[3,0],[12,0],[2,1]], merge:[0,1,2,3], cap_s:2, cap_c:2},
+  {id:'L4', role:'推演', items:[[9,0],[6,0],[4,0],[1,1],[13,0],[5,0]], merge:[0,1,2,3], cap_s:2, cap_c:2},
+];
+const canPair = (L, a, b) => a !== b && L.merge.indexOf(a) >= 0 && L.merge.indexOf(b) >= 0;
+// 與 enumerate_levels.py rule() 相同：超過 10 才入箱；有一件發光整包算發光
+const ruleDest = (L, pk) => {
+  const v = pk.reduce((s, i) => s + L.items[i][0], 0);
+  const g = pk.some(i => L.items[i][1]);
+  return (v > 10 || g) ? 1 : 0;
+};
+const itemName = (L, i) => (L.items[i][1] ? '發光 ' : '') + L.items[i][0];
+LEVELS.forEach((L, k) => {
+  const list = L.items.map((it, i) => itemName(L, i)).join('、');
+  let lim = L.cap_s >= BIG ? '船與木箱的格數不限；這關不能合流。' : `船最多 ${L.cap_s} 包、木箱 ${L.cap_c} 格；只有${k === 2 ? '前 4 件' : '標「可合流」的 4 件'}能兩兩綁成一包${k === 3 ? '（13 與 5 不能跟任何人合流）' : ''}。`;
+  L.goalHtml = `<b>目標：每件貨都送到對的地方。</b><br>貨物（價值）：${list}。<br>限制：${lim}`;
+  L.passNote = '每一件（每一包）都送對了。';
+});
+const P = (id, type, label, items, dest) => ({id, type, label, items, dest, desc:({'照著用':['照著用'],'門檻邊界':['門檻邊界'],'例外':['例外'],'提前規劃（合流）':['合流'],'例外＋合流':['例外','合流']})[type]});
+const POINTS = {
+  L1:[P('L1-放11','照著用','11 入箱',[0],1), P('L1-邊界10','門檻邊界','10 上船（剛好 10 不入）',[1],0), P('L1-例外','例外','發光 2 入箱',[2],1)],
+  L2:[P('L2-放13','照著用','13 入箱',[0],1), P('L2-放8','照著用','8 上船',[1],0), P('L2-邊界10','門檻邊界','10 上船',[2],0), P('L2-例外','例外','發光 6 入箱',[3],1)],
+  L3:[P('L3-合流64','提前規劃（合流）','6 與 4 綁成一包並上船',[0,1],0), P('L3-合流73','提前規劃（合流）','7 與 3 綁成一包並上船',[2,3],0), P('L3-放12','照著用','12 入箱',[4],1), P('L3-例外','例外','發光 2 入箱',[5],1)],
+  L4:[P('L4-例外合流','例外＋合流','發光 1 與 9 綁成一包並入箱',[0,3],1), P('L4-放13','照著用','13 單獨入箱',[4],1), P('L4-合流64','提前規劃（合流）','6 與 4 綁成一包並上船',[1,2],0), P('L4-放5','照著用','5 單獨上船',[5],0)],
+};
+const sameSet = (a, b) => a.length === b.length && a.slice().sort().join() === b.slice().sort().join();
+function newBoard(L){ return {bundles: L.items.map((_, i) => ({items:[i], dest:null})), sel:null}; }
+function counts(b){
+  let s = 0, c = 0;
+  b.bundles.forEach(x => { if (x.dest === 0) s++; if (x.dest === 1) c++; });
+  return {s, c};
+}
+function capText(L, b){
+  const n = counts(b);
+  const f = (cap, used) => cap >= BIG ? '不限' : (used > cap ? `超出 ${used - cap}` : `剩 ${cap - used} 格`);
+  return `<div class="row" style="margin:6px 0"><span class="counter">🚢 船：${f(L.cap_s, n.s)}</span><span class="counter">📦 木箱：${f(L.cap_c, n.c)}</span></div>`;
+}
+function cardHtml(L, i){
+  const [v, g] = L.items[i];
+  const merge = L.merge.length ? (L.merge.indexOf(i) >= 0 ? '<span class="tag">可合流</span>' : '<span class="tag nomerge">⛔ 不能合流</span>') : '';
+  return `<div class="item ${g ? 'glow' : ''}"><div class="val">${v}</div><div class="muted">枚</div>${g ? '<span class="tag glow">✨ 發光</span>' : ''}${merge}</div>`;
+}
+function draw(root, L, b, locked, rerender){
+  let h = capText(L, b);
+  if (b.sel !== null) h += `<p class="muted">選好了「${itemName(L, b.sel)}」，再點另一件可合流的貨的「綁到這裡」。<button class="btn small ghost" data-act="cancel">取消</button></p>`;
+  h += '<div class="items">';
+  b.bundles.forEach((x, bi) => {
+    const isPair = x.items.length === 2;
+    h += `<div class="bundle ${isPair ? 'pair' : ''} ${x.dest === 1 ? 'tocrate' : x.dest === 0 ? 'toship' : ''}">
+      <div class="cards">${x.items.map(i => cardHtml(L, i)).join(isPair ? '<div class="plus">＋</div>' : '')}</div>
+      ${isPair ? '<div class="muted">綁成一包</div>' : ''}
+      <div class="dest"><button class="btn small ${x.dest === 0 ? 'sea' : 'ghost'}" data-act="ship" data-b="${bi}" ${locked ? 'disabled' : ''}>🚢 上船</button>
+      <button class="btn small ${x.dest === 1 ? 'sea' : 'ghost'}" data-act="crate" data-b="${bi}" ${locked ? 'disabled' : ''}>📦 入箱</button></div>`;
+    if (!locked && L.merge.length) {
+      if (isPair) h += `<button class="btn small ghost" data-act="split" data-b="${bi}">拆開</button>`;
+      else if (L.merge.indexOf(x.items[0]) >= 0) {
+        const i = x.items[0];
+        if (b.sel === null) h += `<button class="btn small ghost" data-act="pick" data-b="${bi}">🔗 綁</button>`;
+        else if (b.sel !== i && canPair(L, b.sel, i)) h += `<button class="btn small" data-act="join" data-b="${bi}">🔗 綁到這裡</button>`;
+      }
+    }
+    h += '</div>';
+  });
+  h += '</div>';
+  root.innerHTML = h;
+  if (locked) return;
+  root.querySelectorAll('[data-act]').forEach(btn => btn.onclick = () => {
+    const act = btn.dataset.act, bi = +btn.dataset.b;
+    if (act === 'ship') b.bundles[bi].dest = 0;
+    else if (act === 'crate') b.bundles[bi].dest = 1;
+    else if (act === 'cancel') b.sel = null;
+    else if (act === 'pick') b.sel = b.bundles[bi].items[0];
+    else if (act === 'join') {
+      const a = b.sel, j = b.bundles[bi].items[0];
+      b.bundles = b.bundles.filter(x => !(x.items.length === 1 && (x.items[0] === a || x.items[0] === j)));
+      b.bundles.push({items:[a, j].sort((p, q) => p - q), dest:null});
+      b.bundles.sort((p, q) => Math.min.apply(null, p.items) - Math.min.apply(null, q.items));
+      b.sel = null;
+    } else if (act === 'split') {
+      const x = b.bundles.splice(bi, 1)[0];
+      x.items.forEach(i => b.bundles.push({items:[i], dest:null}));
+      b.bundles.sort((p, q) => Math.min.apply(null, p.items) - Math.min.apply(null, q.items));
+    }
+    rerender();
+  });
+}
+window.G_DEF = {
+  id:'gangkou', name:'港口調度站', submitLabel:'放行',
+  oneRule:'價值超過 10 枚的貨入箱（剛好 10 不入）；發光的貨一律入箱；其他上船。',
+  ruleHtml:'<b>共用木箱</b>：價值<b>超過</b> 10 枚的貨入箱（<b>剛好 10 不入</b>）；<b>發光</b>的貨不管價值都入箱；其他上船。<br>合流時兩件綁成一包：價值相加；有一件發光，整包算發光。一包最多 2 件，包不能再合流。',
+  levels: LEVELS, points: POINTS,
+  typeOrder:['照著用','門檻邊界','例外','提前規劃（合流）','例外＋合流'],
+  short:{
+    '照著用':'超過 10 的入箱；沒超過、也不發光的上船。',
+    '門檻邊界':'「超過 10」不含剛好 10，剛好 10 的貨或包要上船。',
+    '例外':'發光的貨（或綁到發光的那一包）不管價值都入箱。',
+    '合流':'該綁在一起的兩件要綁成一包，再看整包的價值送對邊；也要注意船和木箱的格數。',
+  },
+  describe:{
+    '照著用':'照著用錯過：價值超過 10 的貨沒有入箱，或沒超過、也不發光的貨進了箱子。',
+    '門檻邊界':'門檻邊界錯過：價值剛好 10 的貨或包，你放進了箱子。',
+    '例外':'例外錯過：發光的貨（或綁到發光的那一包）你沒有入箱。',
+    '合流':'合流錯過：該綁在一起的兩件沒綁，或綁對了但送錯邊。',
+  },
+  allOk:'這次門檻、剛好等於門檻、還有發光的例外，你都有處理到。這只說明這一條規則、這一場的做法。',
+  advice:'看到「大於／超過／至少／不超過」，先確認等號算不算進去；有例外條款就先把例外標出來再分類。',
+  measureHow:`<p>本款有 4 個計分關：第 1、2 關（理解：不能合流，看門檻、剛好 10、發光）、第 3、4 關（推演：船和木箱格數有限，要先決定誰跟誰綁成一包）。關鍵決策點共 15 個，分成：<b>照著用</b>、<b>門檻邊界</b>（剛好 10）、<b>例外</b>（發光）、<b>提前規劃（合流）</b>、<b>例外＋合流</b>。合流和目的地寫在同一點時，兩件事都對才算對。第 3 關兩個「合計剛好 10」的包也是門檻邊界，但只照合流決策算一次，不重複。</p>`,
+  newBoard,
+  setPlan(L, plan){
+    const b = {bundles:[], sel:null}, used = {};
+    ((plan && plan.bundles) || []).forEach(x => {
+      const it = (x.items || []).map(Number).filter(i => i >= 0 && i < L.items.length && !used[i]);
+      if (!it.length) return;
+      if (it.length > 2 || (it.length === 2 && !canPair(L, it[0], it[1]))) { it.forEach(i => { used[i] = 1; b.bundles.push({items:[i], dest: x.dest === 'crate' ? 1 : x.dest === 'ship' ? 0 : null}); }); return; }
+      it.forEach(i => used[i] = 1);
+      b.bundles.push({items: it.sort((p, q) => p - q), dest: x.dest === 'crate' ? 1 : x.dest === 'ship' ? 0 : null});
+    });
+    L.items.forEach((_, i) => { if (!used[i]) b.bundles.push({items:[i], dest:null}); });
+    b.bundles.sort((p, q) => Math.min.apply(null, p.items) - Math.min.apply(null, q.items));
+    return b;
+  },
+  canSubmit(L, b){ return b.bundles.some(x => x.dest === null) ? '還有貨沒選上船或入箱。' : null; },
+  evaluate(L, b){
+    const n = counts(b);
+    const capOk = n.s <= L.cap_s && n.c <= L.cap_c;
+    const allRight = b.bundles.every(x => x.dest === ruleDest(L, x.items));
+    const pass = allRight && capOk;
+    const points = {};
+    POINTS[L.id].forEach(p => points[p.id] = b.bundles.some(x => sameSet(x.items, p.items) && x.dest === p.dest) ? 1 : 0);
+    const notes = [];
+    if (n.s > L.cap_s) notes.push(`上船的有 ${n.s} 包，船只能載 ${L.cap_s} 包，多的掉進海裡。`);
+    if (n.c > L.cap_c) notes.push(`入箱的有 ${n.c} 包，木箱只有 ${L.cap_c} 格，多的擠不進去。`);
+    const wrong = b.bundles.filter(x => x.dest !== ruleDest(L, x.items));
+    if (wrong.length) notes.push('送錯邊的：' + wrong.map(x => x.items.map(i => itemName(L, i)).join('＋') + (x.dest ? '（進了木箱）' : '（上了船）')).join('、') + '。');
+    return {pass, points, notes};
+  },
+  renderBoard(root, L, b, locked, rerender){ draw(root, L, b, locked, rerender); },
+  renderTeach(root){
+    const L = {items:[[12,0],[10,0],[3,1]], merge:[], cap_s:BIG, cap_c:BIG};
+    let b = newBoard(L), msg = '';
+    const paint = () => {
+      root.innerHTML = `<p><b>帶玩</b>：三件貨：12、10、發光 3。每件選上船或入箱，再按「試放行」。</p><div id="tb"></div>
+        <div class="row"><button class="btn sea small" id="chk">試放行</button><button class="btn ghost small" id="demo">看示範</button></div><div id="tm">${msg}</div>`;
+      draw(root.querySelector('#tb'), L, b, false, paint);
+      root.querySelector('#demo').onclick = () => { b.bundles[0].dest = 1; b.bundles[1].dest = 0; b.bundles[2].dest = 1; msg = '<p>示範：12 入箱、10 上船、發光 3 入箱。按「試放行」看看。</p>'; paint(); };
+      root.querySelector('#chk').onclick = () => {
+        if (b.bundles.some(x => x.dest === null)) { msg = '<p>還有貨沒選。</p>'; paint(); return; }
+        const lines = [
+          b.bundles[0].dest === 1 ? '✅ 12 超過 10 → 入箱。' : '❌ 12 超過 10，要入箱。',
+          b.bundles[1].dest === 0 ? '✅ 10 剛好 10，不算「超過」→ 上船。' : '❌ 10 剛好 10，不算「超過」，要上船。',
+          b.bundles[2].dest === 1 ? '✅ 發光 3：發光的貨不管價值都入箱。' : '❌ 發光 3：發光的貨不管價值都要入箱。',
+        ];
+        msg = '<p>' + lines.join('<br>') + '</p><p class="muted">記得：「超過」不含剛好 10；發光是例外，一律入箱。</p>';
+        paint();
+      };
+    };
+    paint();
+  },
+};
+})();
+
+</script>
+<script>
+// ===== 共用流程（每款 index.html 內嵌同一份） =====
+(function(){
+const G = window.G_DEF;
+const BACK = location.pathname.indexOf('lq-tendency-games') >= 0 ? '../../lq-tendency/' : '../../LQ學習傾向驗證簡報_v2.html';
+const LIDS = G.levels.map(l => l.id);
+LIDS.forEach(id => G.points[id].forEach(p => p.lv = id));
+const Y = LIDS.reduce((s, id) => s + G.points[id].length, 0);
+let S;
+function fresh(){
+  S = {phase:'title', li:0, first:{}, boards:{}, locked:{}, fb:{}, teachDone:false};
+  LIDS.forEach((id, i) => { S.boards[id] = G.newBoard(G.levels[i]); S.locked[id] = false; });
+}
+fresh();
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+G.esc = esc;
+function lv(){ return G.levels[S.li]; }
+function lid(){ return LIDS[S.li]; }
+function allFirst(){ return LIDS.every(id => S.first[id]); }
+function xCount(){
+  let x = 0;
+  LIDS.forEach(id => { const f = S.first[id]; if (f) for (const k in f.points) x += f.points[k]; });
+  return x;
+}
+function app(){ return $('#app'); }
+function shell(inner){
+  return `<header class="top"><h1>${esc(G.name)}</h1><span class="sp"></span>
+  <a class="back" href="${BACK}">回簡報</a></header>${inner}`;
+}
+function render(){
+  const a = app();
+  if (S.phase === 'title') {
+    a.innerHTML = shell(`<div class="card"><div class="big-title">${esc(G.name)}</div>
+      <p style="font-size:18px">${G.oneRule}</p>
+      <p class="muted">先有一段短教學（不計分），接著是 4 個關卡。每關只看第一次送出；之後可以「隔天再來」重玩。</p>
+      <button class="btn sea" id="go">開始</button></div>`);
+    $('#go').onclick = () => { S.phase = 'teach'; render(); };
+  } else if (S.phase === 'teach') {
+    a.innerHTML = shell(`<div class="card"><h2>教學（不計分）</h2><div class="rule">${G.ruleHtml}</div><div id="teach"></div></div>
+      <div class="card"><button class="btn leaf" id="toL1">開始第 1 關</button>
+      <span class="muted">（教學裡的操作都不計入）</span></div>`);
+    G.renderTeach($('#teach'));
+    $('#toL1').onclick = () => { startLevels(); };
+  } else if (S.phase === 'level') {
+    renderLevel();
+  } else if (S.phase === 'results') {
+    renderResults();
+  }
+  window.scrollTo && window.scrollTo(0, 0);
+}
+function startLevels(){ S.teachDone = true; S.phase = 'level'; S.li = 0; render(); }
+function unlocked(i){ return i === 0 || !!S.first[LIDS[i - 1]]; }
+function renderLevel(){
+  const L = lv(), id = lid();
+  const pills = G.levels.map((l, i) => `<button class="pill ${i === S.li ? 'on' : ''} ${S.first[l.id] ? 'done' : ''}" data-i="${i}" ${unlocked(i) ? '' : 'disabled'}>第 ${i + 1} 關</button>`).join('');
+  const fb = S.fb[id];
+  const fbHtml = fb ? `<div class="fb ${fb.pass ? 'ok' : 'no'}" id="fb">${fb.html}</div>` : '';
+  let nav = '';
+  if (S.locked[id]) {
+    nav = `<button class="btn ghost" id="replay">隔天再來（重玩，不計分）</button>`;
+    if (S.li < LIDS.length - 1) nav += `<button class="btn sea" id="next">下一關</button>`;
+    if (allFirst()) nav += `<button class="btn leaf" id="res">看結果</button>`;
+  }
+  app().innerHTML = shell(`<div class="pills">${pills}</div>
+    <div class="card"><h2>第 ${S.li + 1} 關 <span class="muted">${S.locked[id] ? '（已送出）' : S.first[id] ? '（隔天再來：重玩中，不計分）' : ''}</span></h2>
+      <div class="goal">${L.goalHtml}</div>
+      <details class="rule"><summary>規則提醒</summary>${G.ruleHtml}</details>
+      <div id="board"></div>
+      <div class="row" style="margin-top:10px">${S.locked[id] ? '' : `<button class="btn coral" id="submit">${esc(G.submitLabel)}</button>`}<span id="msg" class="muted"></span></div>
+      ${fbHtml}
+      <div class="row">${nav}</div>
+    </div>`);
+  app().querySelectorAll('.pill').forEach(b => b.onclick = () => { const i = +b.dataset.i; if (unlocked(i)) { S.li = i; render(); } });
+  G.renderBoard($('#board'), L, S.boards[id], S.locked[id], () => renderLevel());
+  const sb = $('#submit'); if (sb) sb.onclick = () => { const r = doSubmit(); if (r.blocked) $('#msg').textContent = r.feedback; };
+  const rp = $('#replay'); if (rp) rp.onclick = () => doReplay();
+  const nx = $('#next'); if (nx) nx.onclick = () => { S.li++; render(); };
+  const rs = $('#res'); if (rs) rs.onclick = () => gotoResults();
+  if (fb) { const f = $('#fb'); f && f.scrollIntoView && f.scrollIntoView({block:'nearest'}); }
+}
+function fbHtml(L, ev, scored, first){
+  let h = `<b>${ev.pass ? '過關了。' : '這次沒過。'}</b>`;
+  if (!scored) h += ` <span class="muted">（重玩，不計分）</span>`;
+  const lines = [];
+  ev.notes.forEach(n => lines.push(n));
+  if (!ev.pass) {
+    const missed = [];
+    G.points[L.id].forEach(p => { if (!ev.points[p.id]) p.desc.forEach(d => { if (missed.indexOf(d) < 0) missed.push(d); }); });
+    missed.forEach(d => lines.push(`錯在「${d}」：${G.short[d]}`));
+  }
+  if (lines.length) h += '<ul>' + lines.map(l => `<li>${l}</li>`).join('') + '</ul>';
+  if (ev.pass) h += `<div class="muted">${esc(L.passNote || '')}</div>`;
+  return h;
+}
+function doSubmit(){
+  if (S.phase !== 'level') return {pass:false, first:false, scored:false, feedback:'目前不在關卡畫面', blocked:true};
+  const L = lv(), id = lid(), b = S.boards[id];
+  const block = G.canSubmit ? G.canSubmit(L, b) : null;
+  if (block) return {pass:false, first:false, scored:false, feedback:block, blocked:true};
+  const ev = G.evaluate(L, b);
+  const first = !S.first[id];
+  if (first) S.first[id] = {pass: ev.pass, points: Object.assign({}, ev.points)};
+  const html = fbHtml(L, ev, first, first);
+  S.fb[id] = {pass: ev.pass, html};
+  S.locked[id] = true;
+  renderLevel();
+  const tmp = document.createElement('div'); tmp.innerHTML = html;
+  return {pass: ev.pass, first, scored: first, feedback: tmp.textContent.trim()};
+}
+function doReplay(){
+  if (S.phase !== 'level') return false;
+  const id = lid();
+  S.boards[id] = G.newBoard(lv()); S.locked[id] = false; S.fb[id] = null;
+  renderLevel();
+  return true;
+}
+function gotoResults(){
+  if (!allFirst()) return false;
+  S.phase = 'results'; render(); return true;
+}
+function renderResults(){
+  const x = xCount();
+  const byType = {};
+  G.typeOrder.forEach(t => byType[t] = {ok:[], no:[]});
+  const missedDesc = [];
+  LIDS.forEach(id => G.points[id].forEach(p => {
+    const v = S.first[id].points[p.id];
+    if (!byType[p.type]) byType[p.type] = {ok:[], no:[]};
+    byType[p.type][v ? 'ok' : 'no'].push(p);
+    if (!v) p.desc.forEach(d => { if (missedDesc.indexOf(d) < 0) missedDesc.push(d); });
+  }));
+  const rows = Object.keys(byType).filter(t => byType[t].ok.length + byType[t].no.length).map(t => {
+    const o = byType[t];
+    return `<tr><td><b>${esc(t)}</b></td><td class="okc">對 ${o.ok.length}</td><td class="noc">錯 ${o.no.length}</td>
+      <td class="muted">${o.no.length ? '錯過：' + o.no.map(p => '第 ' + (LIDS.indexOf(p.lv) + 1) + ' 關 ' + esc(p.label)).join('；') : '—'}</td></tr>`;
+  }).join('');
+  const detail = LIDS.map((id, i) => `<tr><td>第 ${i + 1} 關</td><td>${S.first[id].pass ? '第一次就過' : '第一次沒過'}</td><td class="muted">${
+    G.points[id].map(p => `${S.first[id].points[p.id] ? '✓' : '✗'} ${esc(p.label)}`).join('<br>')}</td></tr>`).join('');
+  const descHtml = missedDesc.length
+    ? '<ul>' + missedDesc.map(d => `<li>${esc(G.describe[d])}</li>`).join('') + '</ul>'
+    : `<p>${esc(G.allOk)}</p>`;
+  app().innerHTML = shell(`<div class="card"><h2>${esc(G.name)}：這一場的結果說明</h2>
+    <h3>1. 量什麼</h3>
+    <p>這一場看的是「規則掌握」：剛教的規則，能不能照著用，也能用到說明沒直接寫的情況（邊界、例外、要提前準備的安排）。</p>
+    <p><b>記得住</b>：這一場量不到。要隔幾天用新關再量，而且這一輪只看群體。</p>
+    <h3>2. 怎麼量</h3>
+    ${G.measureHow}
+    <p>只算每關的<b>第一次送出</b>；教學與重玩不算；送出前改了幾次、用了多久，也都不算。</p>
+    <h3>3. 怎麼換算</h3>
+    <div class="xy">你在 ${Y} 個關鍵決策點裡，第一次做對了 ${x} 個。</div>
+    <p class="muted">這個 ${x}/${Y} 是這一次的證據摘要：不是分數、不是等級，也不是排名。</p>
+    <table class="res"><tr><th>類型</th><th></th><th></th><th>說明</th></tr>${rows}</table>
+    <details style="margin-top:8px"><summary>每關的決策點</summary><table class="res">${detail}</table></details>
+    <h3>描述</h3>${descHtml}
+    <h3>一個建議</h3><p>${esc(G.advice)}</p>
+    <h3>下一步</h3><p>隔幾天再回來，用新關卡看看還記不記得這條規則；或先去玩另外一款，看同樣的做法換了規則還在不在。</p>
+    <p class="muted">要出現個人分數，還需要：換遊戲換規則也量得穩、跟遊戲外的新規則短測對得上，並且證明它不只是推理或工作記憶。這些都不在這個原型裡完成。</p>
+    <div class="row"><button class="btn sea" id="again">再玩一次</button><a class="btn ghost" href="${BACK}" style="text-decoration:none">回簡報</a></div>
+  </div>`);
+  $('#again').onclick = () => { fresh(); render(); };
+}
+window.GAME = {
+  id: G.id,
+  skipTeach(){ if (S.phase === 'title' || S.phase === 'teach') startLevels(); else if (S.phase === 'level') {} return true; },
+  setPlan(plan){
+    if (S.phase !== 'level') return false;
+    const id = lid();
+    if (S.locked[id]) {
+      // 已送出：若下一關還沒做，就前往下一關；否則視為「隔天再來」重玩本關
+      if (S.li < LIDS.length - 1 && !S.first[LIDS[S.li + 1]]) S.li++;
+      else { S.boards[id] = G.newBoard(lv()); S.locked[id] = false; S.fb[id] = null; }
+    }
+    S.boards[lid()] = G.setPlan(lv(), plan);
+    render(); return true;
+  },
+  submit(){ const r = doSubmit(); delete r.blocked; return r; },
+  replay(){ return doReplay(); },
+  gotoResults,
+  goto(i){ if (S.phase === 'level' && unlocked(i)) { S.li = i; render(); return true; } return false; },
+  next(){ if (S.phase === 'level' && S.li < LIDS.length - 1 && unlocked(S.li + 1)) { S.li++; render(); return true; } return false; },
+  reset(){ fresh(); render(); return true; },
+  state(){
+    const first = {};
+    LIDS.forEach(id => { if (S.first[id]) first[id] = {pass: S.first[id].pass, points: Object.assign({}, S.first[id].points)}; });
+    return {phase: S.phase, levelId: S.phase === 'level' ? lid() : null, first, x: xCount(), y: Y, onResults: S.phase === 'results'};
+  }
+};
+render();
+})();
+
+</script>
+</body></html>
