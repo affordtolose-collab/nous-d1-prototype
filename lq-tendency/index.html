@@ -63,7 +63,7 @@ b.k{color:var(--sea-d)}
 
 /* title */
 .title-wrap{display:grid;grid-template-columns:1.05fr 1fr;gap:34px;align-items:center;height:100%}
-.title-wrap h1{font-size:76px;margin:6px 0 8px;font-weight:900;letter-spacing:.04em;color:var(--ink)}
+.title-wrap h1{font-size:54px;margin:6px 0 8px;font-weight:900;letter-spacing:.02em;color:var(--ink)}
 .title-wrap h1 span{color:var(--sea-d)}
 .hook{font-size:34px;font-weight:900;color:var(--coral-d);margin-bottom:18px}
 .collage{position:relative;height:470px}
@@ -283,7 +283,7 @@ body.mobile .proof,body.mobile .flags,body.mobile .goals,body.mobile .arms,body.
 body.mobile .flow{grid-template-columns:1fr 1fr}
 body.mobile .stats{grid-template-columns:1fr 1fr 1fr}
 body.mobile .arrow{transform:rotate(90deg);height:50px}
-body.mobile .title-wrap h1{font-size:48px}
+body.mobile .title-wrap h1{font-size:32px}
 body.mobile .hook{font-size:24px}
 body.mobile .collage{height:auto;display:grid;gap:10px}
 body.mobile .collage .img{position:static;transform:none;width:100%;height:180px}
@@ -525,6 +525,11 @@ body.mobile .tq-r3,body.mobile .tq-facts,body.mobile .tq-ek,body.mobile .tq-ekgr
 body.mobile .tq-ek .st::after{display:none}
 body.mobile .tq-adj{top:6px;right:10px}
 body.mobile .tq-nrow{grid-template-columns:110px 1fr 54px}
+body.mobile .tq-num{gap:10px;padding:14px 16px}
+body.mobile .tq-chg{padding:14px 16px}
+body.mobile .tq-chg ul{font-size:16px;line-height:1.45}
+body.mobile .tq-chg li{margin-bottom:6px}
+body.mobile .tq-facts{margin-top:10px}
 </style>
 </head>
 <body>
@@ -538,9 +543,9 @@ body.mobile .tq-nrow{grid-template-columns:110px 1fr 54px}
   <div class="title-wrap">
     <div>
       <div class="kicker"><span class="dot"></span>內部實驗提案 · 第一關</div>
-      <h1><span>LQ</span> 能不能<br>描述一個人的<br>學習傾向？</h1>
-      <div class="hook">換遊戲、換規則、隔一場，還是同一個人。</div>
-      <p class="lead">這份提案只談一件事：怎麼用實驗確認 LQ 看到的是「這個人學新規則的樣子」，而不是某一款遊戲、某一題的運氣。</p>
+      <h1><span style="white-space:nowrap">學習商數（LQ）</span><br>能不能描述<br>一個人的學習傾向？</h1>
+      <div class="hook">換遊戲、換規則、隔一場，<span style="white-space:nowrap">還是同一個人。</span></div>
+      <p class="lead">學習商數（LQ）是一組讀數，想描述一個人學新規則時通常的樣子：教完之後進步多少、隔幾天還記不記得。這份提案只談一件事：怎麼用實驗確認 LQ 看到的真的是「這個人」，而不是某一款遊戲、某一題的運氣。</p>
       <div class="meta">EA 研究組 · 2026-11-24 · 給同事討論的實驗設計</div>
     </div>
     <div class="collage">
@@ -570,7 +575,7 @@ body.mobile .tq-nrow{grid-template-columns:110px 1fr 54px}
       <div class="tq-box later">
         <h3>下一關才問</h3>
         <p>用 LQ 安排教法，學生有沒有學得比較好。</p>
-        <p class="small" style="margin-top:8px">那一關另有分組比較的設計，最後一頁帶到；本關不拿它當證明，也不拿本關結果替它過關。</p>
+        <p class="small" style="margin-top:8px">那一關另有分組比較的設計，後面會帶到；本關不拿它當證明，也不拿本關結果替它過關。</p>
       </div>
     </div>
   </div>
@@ -603,7 +608,7 @@ body.mobile .tq-nrow{grid-template-columns:110px 1fr 54px}
       </div>
       <div class="tq-curve">
         <h3>② 記得住</h3>
-        <p class="note">隔幾天回來，換一關新的，還能不能用？本輪只看群體：哪一類規則比較容易忘 <a class="cite" href="#p-Zerr2018" data-cite="Zerr2018" title="Learning Efficiency: Identifying Individual Differences in Learning Rate and Retention in Healthy Adults">[Zerr 2018]</a>。</p>
+        <p class="note">隔幾天回來，換一關新的，還能不能用？這一關只看群體：哪一類規則比較容易忘 <a class="cite" href="#p-Zerr2018" data-cite="Zerr2018" title="Learning Efficiency: Identifying Individual Differences in Learning Rate and Retention in Healthy Adults">[Zerr 2018]</a>。</p>
         <svg viewBox="0 0 520 200" aria-label="當天與隔幾天">
           <line x1="50" y1="170" x2="500" y2="170" stroke="#d9cdb9" stroke-width="2"/>
           <rect x="90" y="60" width="90" height="110" rx="12" fill="#1fb5c4"/>
@@ -646,7 +651,7 @@ body.mobile .tq-nrow{grid-template-columns:110px 1fr 54px}
         <div class="lv">第三步 · 安排後續</div>
         <h3>依結果決定接下來</h3>
         <p>確定了，才排之後要做什麼。</p>
-        <div class="lq">LQ：讀數站得住，才交給 EK 決定怎麼教（那是下一關）。</div>
+        <div class="lq">LQ：讀數站得住，才交給內容組（EK）決定怎麼教（那是下一關）。</div>
       </div>
     </div>
     <div class="tq-rail">
@@ -673,7 +678,7 @@ body.mobile .tq-nrow{grid-template-columns:110px 1fr 54px}
       <div class="tq-lane">
         <div class="nm" style="background:var(--sea)">① 規則掌握</div>
         <div class="tq-cells">
-          <div class="tq-cell">獨立計分關第一次送出，拆成決策點：照著用、邊界、例外</div>
+          <div class="tq-cell">計分關只算第一次送出，拆成決策點（關卡裡要作的關鍵選擇）：照著用、邊界、例外</div>
           <div class="tq-cell">跨款、跨規則累積，才看得出「這個人」的樣子</div>
           <div class="tq-cell">平行版再量一次，看穩不穩</div>
         </div>
@@ -683,19 +688,19 @@ body.mobile .tq-nrow{grid-template-columns:110px 1fr 54px}
         <div class="tq-cells">
           <div class="tq-cell off">當天量不到</div>
           <div class="tq-cell off">當天量不到</div>
-          <div class="tq-cell">新的獨立關，跟當天比；本輪只看群體</div>
+          <div class="tq-cell">新的獨立關，跟當天比；這一關只看群體</div>
         </div>
       </div>
       <div class="tq-lane">
         <div class="nm" style="background:var(--wood)">誰在用</div>
         <div class="tq-cells">
           <div class="tq-cell" style="background:#fffbe9;border-color:#f3d37a">學生：這次在哪卡住＋一個建議</div>
-          <div class="tq-cell" style="background:#fffbe9;border-color:#f3d37a">EK：先範例再練，還是直接練</div>
+          <div class="tq-cell" style="background:#fffbe9;border-color:#f3d37a">內容組（EK）：先範例再練，還是直接練</div>
           <div class="tq-cell" style="background:#fffbe9;border-color:#f3d37a">研究組：哪類規則比較會忘</div>
         </div>
       </div>
     </div>
-    <p class="note" style="margin-top:12px">本輪不碰：遷移、自我調整、提示後修正、錯誤類型（留在研究層或 EK 內部）。計分只算第一次送出，在遊戲裡收證據 <a class="cite" href="#p-Shute2013" data-cite="Shute2013" title="Assessment and Learning of Qualitative Physics in Newton&#x27;s Playground">[Shute 2013]</a>。</p>
+    <p class="note" style="margin-top:12px">計分只算第一次送出；作答時間、修改次數、錯誤類型會記下來當過程訊號，這一關不當獨立指數。證據都在遊戲裡收 <a class="cite" href="#p-Shute2013" data-cite="Shute2013" title="Assessment and Learning of Qualitative Physics in Newton&#x27;s Playground">[Shute 2013]</a>。</p>
   </div>
 </section>
 
@@ -744,15 +749,14 @@ body.mobile .tq-nrow{grid-template-columns:110px 1fr 54px}
         <ul><li>對象是「人」：跨內容還在的樣子</li><li>決定怎麼教：先範例再練，還是直接練</li></ul>
       </div>
     </div>
-    <p class="note" style="margin-top:12px">本關不改 mac。只確認 LQ 這一層站不站得住，之後再談兩者怎麼一起給 EK 用。</p>
+    <p class="note" style="margin-top:12px">這一關只確認 LQ，知識點模型維持原樣；LQ 站得住之後，再談兩者怎麼一起給 EK 用。</p>
   </div>
 </section>
 
 <!-- ========== 7 三款遊戲 ========== -->
 <section class="slide" data-title="這一關用的三款遊戲">
-  <span class="tq-adj">已依模擬調整</span>
   <div class="kicker"><span class="dot"></span>材料</div>
-  <h2 class="hl">沿用<em>三款遊戲、三條自創規則</em>，不新做遊戲</h2>
+  <h2 class="hl">用<em>三款小遊戲、三條自創規則</em>來量</h2>
   <div class="body">
     <div class="tq-games">
       <div class="tq-g">
@@ -777,7 +781,7 @@ body.mobile .tq-nrow{grid-template-columns:110px 1fr 54px}
         <a class="tq-play" href="https://affordtolose-collab.github.io/nous-d1-prototype/lq-tendency-games/zhandao/" target="_blank" rel="noopener">試玩</a>
       </div>
     </div>
-    <p class="note" style="margin-top:10px">每款都有輕量試玩：短教學＋6 個計分關（理解 2 關、推演 4 關），結束後說明量什麼、怎麼量、怎麼換算。只算第一次送出；重玩不算。另記作答時間、修改次數、錯誤類型、把握。<a class="cite" href="#p-ShuteMoore2017" data-cite="ShuteMoore2017" title="Consistency and Validity in Game-Based Stealth Assessment">[Shute &amp; Moore 2017]</a> <a class="cite" href="#p-Mislevy2003" data-cite="Mislevy2003" title="A Brief Introduction to Evidence-Centered Design">[Mislevy 2003]</a></p>
+    <p class="note" style="margin-top:10px">每款都有輕量試玩：短教學＋6 個計分關（理解 2 關、推演 4 關），結束後說明量什麼、怎麼量、怎麼換算。只算第一次送出；重玩不算。後期關＝教完、練過之後用來看出進步的關。另記作答時間、修改次數、錯誤類型、把握。<a class="cite" href="#p-ShuteMoore2017" data-cite="ShuteMoore2017" title="Consistency and Validity in Game-Based Stealth Assessment">[Shute &amp; Moore 2017]</a> <a class="cite" href="#p-Mislevy2003" data-cite="Mislevy2003" title="A Brief Introduction to Evidence-Centered Design">[Mislevy 2003]</a></p>
   </div>
 </section>
 
@@ -790,8 +794,8 @@ body.mobile .tq-nrow{grid-template-columns:110px 1fr 54px}
       <div class="tq-gate">
         <div class="no">第 0 關</div>
         <h3>量得穩</h3>
-        <p>同一個人、同一條規則，玩兩套平行版。兩次讀數差不多嗎？</p>
-        <span class="ev">證據：T2 平行版重測 <a class="cite" href="#p-Mokkink2010" data-cite="Mokkink2010" title="The COSMIN study reached international consensus on taxonomy, terminology, and definitions of measurement properties for health-related patient-reported outcomes">[Mokkink 2010]</a></span>
+        <p>同一個人、同一條規則：第一場（T1）玩一套，第二場（T2，用平行版再測）再玩一套。兩次讀數差不多嗎？</p>
+        <span class="ev">證據：T1／T2 重測 <a class="cite" href="#p-Mokkink2010" data-cite="Mokkink2010" title="The COSMIN study reached international consensus on taxonomy, terminology, and definitions of measurement properties for health-related patient-reported outcomes">[Mokkink 2010]</a></span>
       </div>
       <div class="tq-gate" style="border-top-color:var(--leaf)">
         <div class="no">第 1 關</div>
@@ -818,33 +822,33 @@ body.mobile .tq-nrow{grid-template-columns:110px 1fr 54px}
 </section>
 
 
-<!-- ========== 9 依模擬調整 ========== -->
-<section class="slide" data-title="依模擬調整：加訊號、加後期關">
-  <span class="tq-adj">已依模擬調整</span>
-  <div class="kicker"><span class="dot"></span>第 0 關 · 模擬之後</div>
-  <h2 class="hl">加訊號、加後期關：重測從 .38 到 <em>.68／.47</em></h2>
+<!-- ========== 9 上線前模擬 ========== -->
+<section class="slide" data-title="上線前先模擬：這套設計量得穩嗎">
+  <div class="kicker"><span class="dot"></span>第 0 關 · 上線前模擬</div>
+  <h2 class="hl">上線前先模擬：這套設計<em>量得穩嗎</em></h2>
   <div class="body">
     <div class="tq-r3">
       <div class="tq-num">
-        <h3>T1–T2 重測 r　<span class="sim">〔模擬〕最好情況</span></h3>
-        <div class="tq-nrow"><div class="lb">原本 41 點<small>只看對錯</small></div><div class="bar"><i style="width:38%"></i><span class="m" style="left:60%"></span></div><div class="v">.38</div></div>
-        <div class="tq-nrow"><div class="lb">68 點＋訊號<small>樂觀假設</small></div><div class="bar"><i class="o" style="width:68%"></i><span class="m" style="left:60%"></span></div><div class="v" style="color:var(--sea-d)">.68</div></div>
-        <div class="tq-nrow"><div class="lb">68 點＋訊號<small>悲觀假設</small></div><div class="bar"><i class="p" style="width:47%"></i><span class="m" style="left:60%"></span></div><div class="v" style="color:var(--coral-d)">.47</div></div>
-        <p class="note" style="font-size:14px">虛線＝研究級 .60。合成＝改變分數＋作答時間、極短答錯、錯誤類型、修改次數。2000 位虛擬學生完全照模型作答，真實學生只會更低。</p>
+        <h3>T1／T2 重測 r，兩種計分方案　<span class="sim">〔模擬〕最好情況</span></h3>
+        <div class="tq-nrow"><div class="lb">只看對錯<small>68 點的改變分數</small></div><div class="bar"><i style="width:49%"></i><span class="m" style="left:60%"></span></div><div class="v">.49</div></div>
+        <div class="tq-nrow"><div class="lb">加上過程訊號<small>樂觀假設</small></div><div class="bar"><i class="o" style="width:68%"></i><span class="m" style="left:60%"></span></div><div class="v" style="color:var(--sea-d)">.68</div></div>
+        <div class="tq-nrow"><div class="lb">加上過程訊號<small>悲觀假設</small></div><div class="bar"><i class="p" style="width:47%"></i><span class="m" style="left:60%"></span></div><div class="v" style="color:var(--coral-d)">.47</div></div>
+        <p class="note" style="font-size:14px">虛線＝研究級 .60。過程訊號＝作答時間、極短答錯、錯誤類型、修改次數。2000 位虛擬學生完全照模型作答，真實學生只會更低。</p>
       </div>
       <div class="tq-chg">
-        <h3>我們改了</h3>
+        <h3>設計本身</h3>
         <ul>
-          <li>每款加 <b>2 個後期關</b>（L5、L6）：決策點 41 → 68</li>
-          <li>每個決策點記<b>作答時間、修改次數、錯誤類型、把握</b></li>
+          <li>三款遊戲、各 <b>6 個計分關</b>，共 <b>68 個決策點</b></li>
+          <li>每個決策點記<b>作答時間、修改次數、錯誤類型</b></li>
           <li><b>把握先只記不算</b>；重開規則只當品管</li>
+          <li>只看對錯量不穩：用<b>前期／後期</b>看出教完後的進步，<span style="white-space:nowrap">並加上<b>過程訊號</b></span></li>
         </ul>
       </div>
     </div>
     <div class="tq-facts">
       <div class="tq-fact"><b>規則掌握與起始能力分得開</b>合成與起始能力的相關 −.02／−.03 <span class="sim">〔模擬〕最好情況</span></div>
       <div class="tq-fact"><b>.80 不是這一階段目標</b>這一階段瞄準研究級 .60；第 0 關實測決定落在樂觀或悲觀 <span class="sim">〔模擬〕最好情況</span></div>
-      <div class="tq-fact"><b>人數</b>重測 300+、交叉／短測 250+、正控制每組約 45 <span class="sim">〔模擬〕最好情況</span></div>
+      <div class="tq-fact"><b>人數</b>重測 300+、交叉／短測 250+、教學強度對照每組約 45 <span class="sim">〔模擬〕最好情況</span></div>
     </div>
   </div>
 </section>
@@ -854,7 +858,7 @@ body.mobile .tq-nrow{grid-template-columns:110px 1fr 54px}
   <div class="kicker"><span class="dot"></span>旁線 · 正控制</div>
   <h2 class="hl">先確認尺<em>會動</em>：教得多，讀數該跟著高</h2>
   <div class="body">
-    <p class="lead" style="margin-bottom:14px">同一條規則，不同人隨機分到三種教學強度。方向事先寫死：「只讀條文」那組規則掌握應該最低。</p>
+    <p class="lead" style="margin-bottom:14px">教學強度對照（正控制）：同一條規則，不同人隨機分到三種教學強度。方向事先寫死：「只讀條文」那組規則掌握應該最低。</p>
     <div class="tq-arms">
       <div class="tq-arm">
         <span class="tag t-cal">弱</span>
@@ -885,7 +889,6 @@ body.mobile .tq-nrow{grid-template-columns:110px 1fr 54px}
 
 <!-- ========== 10 怎麼跑 ========== -->
 <section class="slide" data-title="怎麼跑：場次安排">
-  <span class="tq-adj">已依模擬調整</span>
   <div class="kicker"><span class="dot"></span>場次</div>
   <h2 class="hl">怎麼跑：<em>每場只做一件主要的事</em></h2>
   <div class="body">
@@ -908,7 +911,7 @@ body.mobile .tq-nrow{grid-template-columns:110px 1fr 54px}
       <div class="tq-day">
         <span class="d">T2</span>
         <h4>平行版重測</h4>
-        <p>只用不開 EK 的人；A／B 版順序對半平衡。</p>
+        <p>只用不套用個人化教法的人；A／B 版順序對半平衡。</p>
       </div>
       <div class="tq-day side">
         <span class="d">另一組人</span>
@@ -917,7 +920,7 @@ body.mobile .tq-nrow{grid-template-columns:110px 1fr 54px}
       </div>
     </div>
     <div class="tq-n"><b>人數</b><span class="pill">T2 重測 300+</span><span class="pill">交叉子樣本 250+</span><span class="pill">獨立短測 250+</span><span class="pill">正控制每組約 45</span><span class="sim">〔模擬〕最好情況</span></div>
-    <p class="note" style="margin-top:8px">先試玩（三款 v2，每款 6 關，表格與短測試做一次，不判過關），再進寒假研究試點。回島的資料只用來看群體「記得住」，不當重測。</p>
+    <p class="note" style="margin-top:8px">先試玩（三款遊戲、每款 6 關，表格與短測試做一次，不判過關），再進寒假研究試點。隔幾天回來再玩（回島）的資料只用來看群體「記得住」，不當重測。</p>
     <div class="tq-fixed">
       <div class="tq-fx"><b>已定 ① 短測</b>EA 起草、EK 審後凍結；放基線時段，不夠另開短場。</div>
       <div class="tq-fx"><b>已定 ② T1 與重測</b>T1 拆兩段（2+1 款）；重測放 T2，不夠再開專場。</div>
@@ -929,7 +932,6 @@ body.mobile .tq-nrow{grid-template-columns:110px 1fr 54px}
 
 <!-- ========== 11 過了或沒過 ========== -->
 <section class="slide" data-title="過了或沒過代表什麼">
-  <span class="tq-adj">已依模擬調整</span>
   <div class="kicker"><span class="dot"></span>結果怎麼讀</div>
   <h2 class="hl">每種結果都<em>有用</em>：過了能說什麼、沒過退到哪</h2>
   <div class="body">
@@ -960,15 +962,15 @@ body.mobile .tq-nrow{grid-template-columns:110px 1fr 54px}
       <div class="tq-rung r5"><div class="lv">5</div><div><b>＋第 3 關＋正控制</b></div><div class="say">不只是推理、尺會動；可以開始用「LQ」描述規則掌握</div></div>
     </div>
     <div class="cols c2" style="margin-top:10px">
-      <div class="tq-rung mem" style="grid-template-columns:62px 1fr"><div class="lv" style="background:var(--lilac)">0</div><div><b>記得住：本輪停在 0 級</b>，只報群體；回來答對可能是想起來，也可能是當場重推。</div></div>
-      <div class="card small" style="line-height:1.55;padding:10px 16px">門檻暫定，交第 8 輪模擬後凍結。<b>出分數要等下一關也過。</b></div>
+      <div class="tq-rung mem" style="grid-template-columns:62px 1fr"><div class="lv" style="background:var(--lilac)">0</div><div><b>記得住：這一關停在 0 級</b>，只報群體；回來答對可能是想起來，也可能是當場重推。</div></div>
+      <div class="card small" style="line-height:1.55;padding:10px 16px">門檻暫定，正式收資料前凍結。<b>出分數要等下一關也過。</b></div>
     </div>
   </div>
 </section>
 
 <!-- ========== 13 下一關 ========== -->
 <section class="slide" data-title="下一關：用 LQ 決定怎麼教">
-  <div class="kicker"><span class="dot"></span>下一關（本輪不做）</div>
+  <div class="kicker"><span class="dot"></span>下一關（不在這次範圍）</div>
   <h2 class="hl">下一關才問<em>有沒有效</em></h2>
   <div class="body">
     <div class="tq-goal1">用 LQ 決定怎麼教，學生是不是<em>學得比較好</em>？</div>
@@ -1006,7 +1008,7 @@ body.mobile .tq-nrow{grid-template-columns:110px 1fr 54px}
       <div>
         <div class="tq-own">
           <div class="r"><span class="who">擁有者</span><span><b>Engine A／正一</b>：提供指標＋不確定度</span></div>
-          <div class="r"><span class="who ek">擁有者</span><span><b>EK</b>：設計教學變體與內容</span></div>
+          <div class="r"><span class="who ek">擁有者</span><span><b>EK</b>（內容組，負責設計教學內容的組別）：設計教學變體與內容</span></div>
         </div>
         <table class="tq-map">
           <tr><th>指標（規則對照表）</th><th>下一輪怎麼教</th></tr>
@@ -1024,7 +1026,7 @@ body.mobile .tq-nrow{grid-template-columns:110px 1fr 54px}
           <ul><li>解法</li><li>易錯點</li><li>講解順序</li></ul>
           <p style="margin-top:4px">再依教案產出下一輪的影片與練習版本。</p>
         </div>
-        <div class="tq-who2"><b>分工</b>：這一輪提供指標與不確定度；效力驗證（下一關：照指標分流是否學得更好）由 EK 負責。</div>
+        <div class="tq-who2"><b>分工</b>：這一關提供指標與不確定度；效力驗證（下一關：照指標分流是否學得更好）由 EK 負責。</div>
       </div>
     </div>
   </div>
@@ -1032,7 +1034,6 @@ body.mobile .tq-nrow{grid-template-columns:110px 1fr 54px}
 
 <!-- ========== 15 下一步工作目標 ========== -->
 <section class="slide" data-title="下一步工作目標">
-  <span class="tq-adj">已依模擬調整</span>
   <div class="kicker"><span class="dot"></span>下一步</div>
   <h2 class="hl">下一步：<em>交得出來的東西</em></h2>
   <div class="body">
@@ -1041,11 +1042,11 @@ body.mobile .tq-nrow{grid-template-columns:110px 1fr 54px}
       <div class="goal"><span class="when p">EK</span><div><b>凍結版短測</b>：審完草案後凍結</div></div>
       <div class="goal"><span class="when">EA</span><div><b>主用合成與備案事前登錄</b>：改變分數＋作答時間、極短答錯、錯誤類型、修改次數；訊號偏弱時改用改變分數＋修改次數</div></div>
       <div class="goal"><span class="when">EA</span><div><b>預先登記表一頁</b>：每關效標、算法、判讀；把握只記不算；收資料前凍結</div></div>
-      <div class="goal"><span class="when">EA</span><div><b>第 0 關訊號判讀</b>：實測重測對照模擬的 .68（樂觀）／.47（悲觀），決定要不要再加後期關</div></div>
+      <div class="goal"><span class="when">EA</span><div><b>第 0 關訊號判讀</b>：實測重測對照模擬的 .68（樂觀）／.47（悲觀），判斷後期關數量夠不夠</div></div>
       <div class="goal"><span class="when p">研究組</span><div><b>場次表初版</b>：T2 重測 300+、交叉與短測 250+、正控制每組約 45；短測場次與時間估計</div></div>
       <div class="goal"><span class="when p">研究組</span><div><b>編碼表＋三種教學稿</b>：出聲思考、結構觀察、正控制教學稿初版</div></div>
       <div class="goal"><span class="when">EA</span><div><b>基準工具選定</b>：工作記憶測驗、短推理題數與授權、學科題來源</div></div>
-      <div class="goal"><span class="when" style="background:var(--leaf)">遊戲組</span><div><b>三款 v2 → 平行版</b>：每款 6 關已記過程訊號；下一步做平行版 A／B、跳過教學版</div></div>
+      <div class="goal"><span class="when" style="background:var(--leaf)">遊戲組</span><div><b>為三款遊戲做平行版</b>：每款 6 關會記過程訊號；再做 A／B 與跳過教學版</div></div>
       <div class="goal"><span class="when p">EK</span><div><b>規則對照表初版</b>：五種指標狀態各配一個教學變體與先備課教案</div></div>
     </div>
   </div>
@@ -1053,7 +1054,6 @@ body.mobile .tq-nrow{grid-template-columns:110px 1fr 54px}
 
 <!-- ========== 附錄 A ========== -->
 <section class="slide" data-title="附錄 A：設計細節">
-  <span class="tq-adj">已依模擬調整</span>
   <div class="kicker"><span class="dot"></span>附錄 A · 設計細節</div>
   <h2 class="hl" style="font-size:30px;margin-bottom:12px">附錄 A：交叉子樣本、短測流程、場次負荷、已定四項</h2>
   <div class="body">
@@ -1081,7 +1081,7 @@ body.mobile .tq-nrow{grid-template-columns:110px 1fr 54px}
             <tr><td>T1 第一段</td><td>主樣本</td><td>前 2 款</td><td>第 1 關</td></tr>
             <tr><td>T1 第二段</td><td>主樣本</td><td>第 3 款；交叉加一場</td><td>第 1 關</td></tr>
             <tr><td>正控制</td><td>另一組人</td><td>三種教學強度</td><td>正控制</td></tr>
-            <tr><td>T2</td><td>不開 EK 的人</td><td>平行版重測</td><td>第 0 關</td></tr>
+            <tr><td>T2</td><td>不套用個人化教法的人</td><td>平行版重測</td><td>第 0 關</td></tr>
             <tr><td>回島</td><td>有回來的人</td><td>記得住；提取 vs 重讀</td><td>群體</td></tr>
           </table>
         </div>
@@ -1089,50 +1089,47 @@ body.mobile .tq-nrow{grid-template-columns:110px 1fr 54px}
           <b class="k">已定四項</b>
           <ol style="margin:4px 0 0;padding-left:20px">
             <li>短測 EA 起草、EK 審後凍結；放基線時段，不夠另開短場。</li>
-            <li>T1 拆兩段（2+1 款）；重測放 T2 不開 EK 的人，不夠再開專場。</li>
+            <li>T1 拆兩段（2+1 款）；重測放 T2、只用不套用個人化教法的人，不夠再開專場。</li>
             <li>正控制主用受試者間教學強度；跳過教學只當試玩檢查；另找一組人。</li>
             <li>交叉子樣本併入 T1 第二段；不夠另開專場。</li>
           </ol>
         </div>
       </div>
     </div>
-    <p class="note" style="margin-top:8px">T1 拆兩段：三款加交叉場一次做完會疲勞。門檻（第 0 關研究／個人級）為暫定，其餘未定，全部交模擬後凍結。</p>
+    <p class="note" style="margin-top:8px">T1 拆兩段：三款加交叉場一次做完會疲勞。門檻（第 0 關研究／個人級）暫定，正式收資料前凍結。</p>
   </div>
 </section>
 
 
-<!-- ========== 附錄 A-2 三輪模擬 ========== -->
-<section class="slide" data-title="附錄 A-2：三輪模擬數字">
-  <span class="tq-adj">已依模擬調整</span>
+<!-- ========== 附錄 A-2 模擬方法與結果 ========== -->
+<section class="slide" data-title="附錄 A-2：模擬方法與結果">
   <div class="kicker"><span class="dot"></span>附錄 A · 模擬</div>
-  <h2 class="hl" style="font-size:30px;margin-bottom:10px">附錄 A-2：三輪模擬數字與剝離 <span class="sim">〔模擬〕最好情況</span></h2>
+  <h2 class="hl" style="font-size:30px;margin-bottom:10px">附錄 A-2：模擬方法與結果 <span class="sim">〔模擬〕最好情況</span></h2>
   <div class="body">
     <div class="ap-wrap">
     <table class="ap">
-      <tr><th style="width:9%">輪次</th><th style="width:17%">結構</th><th>分數</th><th style="width:13%">重測 r</th><th style="width:13%">回復 r</th><th style="width:13%">與起始能力</th><th style="width:11%">與速度</th></tr>
-      <tr><td>第 1 輪</td><td>41 點</td><td>只用改變分數</td><td class="num">.38</td><td class="num">.54</td><td class="num">.02</td><td class="num">.00</td></tr>
-      <tr><td>第 2 輪</td><td>41 點＋訊號</td><td>合成（含把握、重開規則）</td><td class="num">.51／.34</td><td class="num">.58／.39</td><td class="num">−.06／−.07</td><td class="num">.01／.01</td></tr>
-      <tr><td>第 3 輪</td><td>68 點（v2 遊戲）</td><td>只用改變分數</td><td class="num">.49</td><td class="num">.60</td><td class="num">.01</td><td class="num">.01</td></tr>
-      <tr><td>第 3 輪</td><td>68 點（v2 遊戲）</td><td><b>主用合成</b></td><td class="num">.68／.47</td><td class="num">.72／.58</td><td class="num">−.02／−.03</td><td class="num">.01／.02</td></tr>
-      <tr><td>第 3 輪</td><td>68 點（v2 遊戲）</td><td>第 2 輪合成（對照）</td><td class="num">.62／.46</td><td class="num">.63／.45</td><td class="num">−.07／−.08</td><td class="num">.00／.01</td></tr>
+      <tr><th style="width:15%">計分方案</th><th>用了哪些訊號（68 點）</th><th style="width:12%">重測 r</th><th style="width:12%">回復 r</th><th style="width:13%">與起始能力</th><th style="width:10%">與速度</th></tr>
+      <tr><td>只看對錯</td><td>只用改變分數</td><td class="num">.49</td><td class="num">.60</td><td class="num">.01</td><td class="num">.01</td></tr>
+      <tr><td><b>主用合成</b></td><td>改變分數＋作答時間、極短答錯、錯誤類型、修改次數</td><td class="num">.68／.47</td><td class="num">.72／.58</td><td class="num">−.02／−.03</td><td class="num">.01／.02</td></tr>
+      <tr><td>對照</td><td>主用合成，再把把握與重開規則算進去</td><td class="num">.62／.46</td><td class="num">.63／.45</td><td class="num">−.07／−.08</td><td class="num">.00／.01</td></tr>
     </table>
     </div>
     <div class="cols c2" style="gap:16px;margin-top:10px">
       <div class="ap-wrap">
       <table class="ap">
-        <tr><th>第 3 輪剝離（68 點，主用合成）</th><th>重測 r</th><th>回復 r</th><th>與起始能力</th></tr>
+        <tr><th>從主用方案拿掉／加入某訊號</th><th>重測 r</th><th>回復 r</th><th>與起始能力</th></tr>
         <tr><td>拿掉作答時間</td><td class="num">.60／.47</td><td class="num">.64／.58</td><td class="num">−.02／−.03</td></tr>
         <tr><td>拿掉極短答錯</td><td class="num">.66／.42</td><td class="num">.73／.51</td><td class="num">−.03／−.03</td></tr>
         <tr><td>拿掉錯誤類型</td><td class="num">.64／.50</td><td class="num">.68／.59</td><td class="num">−.02／−.03</td></tr>
         <tr><td>拿掉修改次數</td><td class="num">.63／.40</td><td class="num">.69／.53</td><td class="num">.00／.00</td></tr>
-        <tr><td>加回重開規則</td><td class="num">.68／.49</td><td class="num">.72／.59</td><td class="num">−.03／−.04</td></tr>
-        <tr><td>加回把握</td><td class="num">.61／.46</td><td class="num">.61／.42</td><td class="num">−.07／−.07</td></tr>
+        <tr><td>加入重開規則</td><td class="num">.68／.49</td><td class="num">.72／.59</td><td class="num">−.03／−.04</td></tr>
+        <tr><td>加入把握</td><td class="num">.61／.46</td><td class="num">.61／.42</td><td class="num">−.07／−.07</td></tr>
       </table>
       </div>
       <div class="card small" style="line-height:1.55;padding:10px 16px">
-        <b class="k">怎麼讀</b>　「／」左邊樂觀、右邊悲觀假設；只用改變分數兩種假設相同。回復 r＝與真的規則掌握的相關。
-        <p style="margin-top:6px">樂觀時四種訊號各有貢獻；悲觀時<b>修改次數</b>最重要，錯誤類型反而拖累。加回把握：回復下降、與起始能力的相關升高，所以先只記不算。</p>
-        <p style="margin-top:6px">第 2 輪：41 點＋訊號；第 3 輪：v2 遊戲實際 68 點（前期 17、後期 51）。N＝2000 虛擬學生，跑兩次結果相同。</p>
+        <b class="k">方法</b>　N＝2000 虛擬學生，完全照模型作答（最好情況）；訊號強弱用樂觀／悲觀兩套假設；68 點＝前期 17＋後期 51。跑兩次結果相同。
+        <p style="margin-top:6px"><b class="k">怎麼讀</b>　「／」左邊樂觀、右邊悲觀；只看對錯時兩種假設相同。回復 r＝與真的規則掌握的相關。</p>
+        <p style="margin-top:6px">樂觀時四種訊號各有貢獻；悲觀時<b>修改次數</b>最重要，錯誤類型反而拖累。加入把握：回復下降、與起始能力的相關升高，所以先只記不算。</p>
       </div>
     </div>
   </div>
@@ -1149,7 +1146,7 @@ body.mobile .tq-nrow{grid-template-columns:110px 1fr 54px}
     <tr><td>1</td><td><a class="cite" href="#p-Mokkink2010" data-cite="Mokkink2010" title="The COSMIN study reached international consensus on taxonomy, terminology, and definitions of measurement properties for health-related patient-reported outcomes">[Mokkink 2010]</a></td><td>量測性質的分類、名稱與定義（COSMIN）</td><td class="num">5,200</td></tr><tr><td>2</td><td><a class="cite" href="#p-Chierchia2019" data-cite="Chierchia2019" title="The matrix reasoning item bank (MaRs-IB): novel, open-access abstract reasoning items for adolescents and adults">[MaRs-IB 2019]</a></td><td>智商基線：短推理題庫</td><td class="num">137</td></tr><tr><td>3</td><td><a class="cite" href="#p-Zerr2018" data-cite="Zerr2018" title="Learning Efficiency: Identifying Individual Differences in Learning Rate and Retention in Healthy Adults">[Zerr 2018]</a></td><td>學習效率：學得快的人也記得久</td><td class="num">63</td></tr><tr><td>4</td><td><a class="cite" href="#p-Koedinger2023" data-cite="Koedinger2023" title="An astonishing regularity in student learning rate">[Koedinger 2023]</a></td><td>學生每次練習的進步幅度相近</td><td class="num">127</td></tr><tr><td>5</td><td><a class="cite" href="#p-Caffrey2008" data-cite="Caffrey2008" title="The Predictive Validity of Dynamic Assessment: A Review">[Caffrey 2008]</a></td><td>動態評量（看提示後的表現）的預測力</td><td class="num">193</td></tr><tr><td>6</td><td><a class="cite" href="#p-FlemingLau2014" data-cite="FlemingLau2014" title="How to measure metacognition">[Fleming &amp; Lau 2014]</a></td><td>怎麼量後設認知（自知之明）</td><td class="num">1,596</td></tr><tr><td>7</td><td><a class="cite" href="#p-Shute2013" data-cite="Shute2013" title="Assessment and Learning of Qualitative Physics in Newton&#x27;s Playground">[Shute 2013]</a></td><td>用物理遊戲同時評量與學習</td><td class="num">215</td></tr><tr><td>8</td><td><a class="cite" href="#p-ShuteMoore2017" data-cite="ShuteMoore2017" title="Consistency and Validity in Game-Based Stealth Assessment">[Shute &amp; Moore 2017]</a></td><td>遊戲內隱形評量的一致性與效度</td><td class="num">32</td></tr><tr><td>9</td><td><a class="cite" href="#p-Mislevy2003" data-cite="Mislevy2003" title="A Brief Introduction to Evidence-Centered Design">[Mislevy 2003]</a></td><td>證據中心設計（ECD）入門</td><td class="num">645</td></tr>
   </table>
   </div>
-  <p class="note" style="margin-top:8px">正文中的小標籤（例如 <a class="cite" href="#p-Zerr2018" data-cite="Zerr2018" title="Learning Efficiency: Identifying Individual Differences in Learning Rate and Retention in Healthy Adults">[Zerr 2018]</a>）都會跳到對應論文頁；論文頁右上角「↩ 回上一頁」回到原本那一頁。</p>
+  <p class="note" style="margin-top:8px">正文中的小標籤（例如 <a class="cite" href="#p-Zerr2018" data-cite="Zerr2018" title="Learning Efficiency: Identifying Individual Differences in Learning Rate and Retention in Healthy Adults">[Zerr 2018]</a>）都會跳到對應論文頁；論文頁右上角「↩ 回上一頁」回到進來前的那一頁。</p>
 </section>
 <section class="slide paper" id="p-Mokkink2010" data-paper="Mokkink2010" data-title="附錄 B-1：Mokkink 2010">
   <button class="pback" type="button">↩ 回上一頁</button>
@@ -1159,7 +1156,7 @@ body.mobile .tq-nrow{grid-template-columns:110px 1fr 54px}
   <div class="pthree">
     <div class="pblk"><div class="plab">支持什麼</div><p>量測性質可以分成信度、效度、反應性等，並有共同定義；本系統「量得穩／量得對／會變動」是借用這套分類。</p></div>
     <div class="pblk no"><div class="plab">不支持什麼</div><p>這是方法學共識；本系統量得穩、量得對，要靠 M1 的重測與效度資料來驗證。</p></div>
-    <div class="pblk lim"><div class="plab">限制</div><p>原本為健康自陳量表設計；專家共識不是效度資料。</p></div>
+    <div class="pblk lim"><div class="plab">限制</div><p>最初為健康自陳量表設計；專家共識不是效度資料。</p></div>
   </div>
   <p class="pfoot" style="font-size:12.5px"><span class="pcount">被引用 <span class="v">5,200</span> 次 <span class="d">OpenAlex 2026-11-22 查詢</span></span><a class="pdoi" href="https://doi.org/10.1016/j.jclinepi.2010.02.006" target="_blank" rel="noopener noreferrer">DOI ↗ 10.1016/j.jclinepi.2010.02.006</a></p>
   
