@@ -422,7 +422,7 @@ body.mobile .journey .step::after{display:none}
 .tq-day p{font-size:14.5px;line-height:1.5;color:var(--ink2)}
 .tq-day.side{background:#faf6f0;border:2px dashed #d9cdb9;box-shadow:none}
 .tq-day.side .d{background:var(--lilac)}
-.tq-fixed{margin-top:14px;display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.tq-fixed{margin-top:10px;display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
 .tq-fx{background:#eefbe9;border-radius:14px;padding:8px 12px;font-size:14.5px;line-height:1.45}
 .tq-fx b{display:block;color:#2f7d22;font-size:15px}
 table.tq-res{width:100%;border-collapse:separate;border-spacing:0 6px;font-size:16.5px}
@@ -456,6 +456,75 @@ table.tq-res td.no{color:#9a3422}
 body.mobile .tq-two,body.mobile .tq-vs,body.mobile .tq-stair,body.mobile .tq-games,body.mobile .tq-gates,body.mobile .tq-arms,body.mobile .tq-sched,body.mobile .tq-fixed,body.mobile .tq-model,body.mobile .tq-flow,body.mobile .tq-rail{grid-template-columns:1fr!important}
 body.mobile .tq-lane{grid-template-columns:1fr}
 body.mobile .tq-gate::after{display:none}
+
+.tq-pipe{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:2px}
+.tq-pipe .st{background:#fff;border-radius:16px;padding:12px 12px;box-shadow:var(--shadow);text-align:center;position:relative;font-size:16.5px;font-weight:800;line-height:1.4}
+.tq-pipe .st:not(:last-child)::after{content:"➜";position:absolute;right:-15px;top:50%;transform:translateY(-50%);color:var(--sun);font-weight:900;font-size:20px;z-index:2}
+.tq-kids{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:12px}
+.tq-kid{background:#fff;border-radius:18px;padding:11px 14px;box-shadow:var(--shadow);border-top:6px solid var(--sea);display:flex;flex-direction:column;min-height:138px}
+.tq-kid.k2{border-top-color:var(--coral)}
+.tq-kid.k3{border-top-color:var(--lilac)}
+.tq-kid .who{font-size:13.5px;font-weight:900;color:var(--sea-d);letter-spacing:.04em}
+.tq-kid h4{margin:2px 0 6px;font-size:18px;line-height:1.35}
+.tq-kid .then{display:block;font-size:16px;line-height:1.45;font-weight:800;color:var(--coral-d);margin-top:auto}
+.tq-seed{margin-top:10px;background:#e6f8fb;border-radius:14px;padding:7px 14px;font-size:14.5px;line-height:1.5;color:#0d6370}
+.tq-keep{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+.tq-keep .k{background:#fff;border-radius:14px;padding:8px 14px;font-size:15.5px;line-height:1.45;box-shadow:0 3px 0 rgba(0,0,0,.05)}
+.tq-keep .n{display:inline-block;font-weight:900;color:#fff;background:var(--sea);border-radius:9px;padding:0 8px;margin-right:6px;font-size:13.5px}
+.tq-start{margin-top:10px;font-size:16.5px;font-weight:800;text-align:center;background:#fffbe9;border-radius:14px;padding:7px 14px}
+body.mobile .tq-pipe,body.mobile .tq-kids,body.mobile .tq-keep{grid-template-columns:1fr!important}
+body.mobile .tq-pipe .st::after{display:none}
+/* v3：依模擬調整 */
+.tq-adj{position:absolute;top:16px;right:22px;z-index:5;background:#fff0bf;color:#8a5b00;border:2px solid #f3d37a;border-radius:999px;padding:2px 12px;font-size:13px;font-weight:900;letter-spacing:.04em}
+.sim{font-size:12.5px;font-weight:800;color:#8a5b00;white-space:nowrap}
+.tq-r3{display:grid;grid-template-columns:1.05fr 1fr;gap:20px;align-items:stretch}
+.tq-num{background:#fff;border-radius:22px;box-shadow:var(--shadow);padding:18px 24px;display:flex;flex-direction:column;gap:16px}
+.tq-num h3{margin:0;font-size:19px;color:var(--ink2)}
+.tq-nrow{display:grid;grid-template-columns:150px 1fr 76px;gap:14px;align-items:center;font-size:18px}
+.tq-nrow .bar{height:30px;border-radius:999px;background:#eef6f8;position:relative;overflow:visible}
+.tq-nrow .bar i{display:block;height:100%;border-radius:999px;background:#b8aa9b}
+.tq-nrow .bar i.o{background:var(--sea)}.tq-nrow .bar i.p{background:var(--coral)}
+.tq-nrow .bar .m{position:absolute;top:-6px;bottom:-6px;border-left:2px dashed var(--ink2)}
+.tq-nrow .v{font-size:32px;font-weight:900;text-align:right}
+.tq-nrow .lb{line-height:1.3}
+.tq-nrow .lb small{display:block;font-size:14px;color:var(--ink2)}
+.tq-chg{background:#fff;border-radius:22px;box-shadow:var(--shadow);padding:18px 26px;border-top:8px solid var(--leaf)}
+.tq-chg h3{margin:0 0 10px;font-size:23px}
+.tq-chg ul{margin:0;padding-left:22px;font-size:19px;line-height:1.6}
+.tq-chg li{margin-bottom:12px}
+.tq-facts{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:18px}
+.tq-fact{background:#fffbe9;border:2px solid #f6e3a6;border-radius:16px;padding:12px 16px;font-size:16.5px;line-height:1.5}
+.tq-fact b{display:block;font-size:18.5px;color:var(--ink);margin-bottom:2px}
+.tq-n{margin-top:10px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;background:#fffbe9;border-radius:16px;padding:8px 16px;font-size:15.5px}
+.tq-n b{color:var(--ink)}
+.tq-n .pill{font-size:14.5px;padding:2px 10px}
+.tq-ek{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-top:2px}
+.tq-ek .st{background:#fff;border-radius:16px;padding:10px 10px;box-shadow:var(--shadow);text-align:center;position:relative;font-size:16px;font-weight:800;line-height:1.35}
+.tq-ek .st small{display:block;font-weight:600;font-size:13px;color:var(--ink2);margin-top:3px}
+.tq-ek .st:not(:last-child)::after{content:"➜";position:absolute;right:-14px;top:50%;transform:translateY(-50%);color:var(--sun);font-weight:900;font-size:18px;z-index:2}
+.tq-ek .st.back{background:#e6f8fb}
+.tq-loop{font-size:13.5px;color:var(--sea-d);font-weight:800;text-align:right;margin-top:4px}
+.tq-ekgrid{display:grid;grid-template-columns:1.6fr 1fr;gap:16px;margin-top:6px}
+table.tq-map{width:100%;border-collapse:separate;border-spacing:0 6px;font-size:16.5px}
+table.tq-map th{font-size:13.5px;text-align:left;color:var(--ink2);padding:0 12px;font-weight:800}
+table.tq-map td{background:#fff;padding:9px 12px;line-height:1.4;vertical-align:middle}
+table.tq-map td:first-child{border-radius:12px 0 0 12px;font-weight:800;width:42%}
+table.tq-map td:last-child{border-radius:0 12px 12px 0;color:#0d6370;font-weight:700}
+table.tq-map tr.dflt td{background:#f6f3ee}
+.tq-own{display:flex;flex-direction:column;gap:6px;font-size:14px;line-height:1.45;background:#fff;border-radius:14px;padding:8px 12px;box-shadow:0 3px 0 rgba(0,0,0,.05);margin-bottom:6px}
+.tq-own .r{display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:baseline}
+.tq-own .who{font-weight:900;color:#fff;background:var(--sea);border-radius:8px;padding:1px 8px;font-size:13px;white-space:nowrap}
+.tq-own .who.ek{background:var(--coral)}
+.tq-prep{background:#fff;border-radius:18px;box-shadow:var(--shadow);padding:12px 16px;border-top:6px solid var(--coral);font-size:15.5px;line-height:1.5}
+.tq-prep h4{margin:0 0 4px;font-size:18px}
+.tq-prep ul{margin:4px 0 0;padding-left:20px}
+.tq-who2{margin-top:10px;background:#e6f8fb;border-radius:14px;padding:8px 14px;font-size:15.5px;line-height:1.5;color:#0d6370}
+.tq-who2 b{color:var(--ink)}
+table.ap td.num{text-align:center;font-variant-numeric:tabular-nums;white-space:nowrap}
+body.mobile .tq-r3,body.mobile .tq-facts,body.mobile .tq-ek,body.mobile .tq-ekgrid{grid-template-columns:1fr!important}
+body.mobile .tq-ek .st::after{display:none}
+body.mobile .tq-adj{top:6px;right:10px}
+body.mobile .tq-nrow{grid-template-columns:110px 1fr 54px}
 </style>
 </head>
 <body>
@@ -681,6 +750,7 @@ body.mobile .tq-gate::after{display:none}
 
 <!-- ========== 7 三款遊戲 ========== -->
 <section class="slide" data-title="這一關用的三款遊戲">
+  <span class="tq-adj">已依模擬調整</span>
   <div class="kicker"><span class="dot"></span>材料</div>
   <h2 class="hl">沿用<em>三款遊戲、三條自創規則</em>，不新做遊戲</h2>
   <div class="body">
@@ -689,25 +759,25 @@ body.mobile .tq-gate::after{display:none}
         <div class="img img-hf"></div>
         <h3>海風小館</h3>
         <p>照比例備料，遇到條件要改算法。看他能不能把比例規則用到新的份量。</p>
-        <div class="rl">主規則：星露換潮貝 · 比例＋條件</div>
-        <a class="tq-play" href="../lq-tendency-games/haifeng/" target="_blank" rel="noopener">試玩</a>
+        <div class="rl">主規則：星露換潮貝 · 比例＋條件<br>6 關 · 21 個決策點（後期 17）</div>
+        <a class="tq-play" href="https://affordtolose-collab.github.io/nous-d1-prototype/lq-tendency-games/haifeng/" target="_blank" rel="noopener">試玩</a>
       </div>
       <div class="tq-g">
         <div class="img img-gk"></div>
         <h3>港口調度站</h3>
         <p>木箱到門檻才放行，但有例外。看他能不能抓到門檻，也記得例外。</p>
-        <div class="rl">主規則：共用木箱 · 門檻＋例外</div>
-        <a class="tq-play" href="../lq-tendency-games/gangkou/" target="_blank" rel="noopener">試玩</a>
+        <div class="rl">主規則：共用木箱 · 門檻＋例外<br>6 關 · 23 個決策點（後期 16）</div>
+        <a class="tq-play" href="https://affordtolose-collab.github.io/nous-d1-prototype/lq-tendency-games/gangkou/" target="_blank" rel="noopener">試玩</a>
       </div>
       <div class="tq-g">
         <div class="img img-zd"></div>
         <h3>棧道工坊</h3>
         <p>修補有先後，條件不同順序就不同。看他能不能排對順序、處理沒教過的組合。</p>
-        <div class="rl">主規則：棧道修補 · 條件＋順序</div>
-        <a class="tq-play" href="../lq-tendency-games/zhandao/" target="_blank" rel="noopener">試玩</a>
+        <div class="rl">主規則：棧道修補 · 條件＋順序<br>6 關 · 24 個決策點（後期 18）</div>
+        <a class="tq-play" href="https://affordtolose-collab.github.io/nous-d1-prototype/lq-tendency-games/zhandao/" target="_blank" rel="noopener">試玩</a>
       </div>
     </div>
-    <p class="note" style="margin-top:10px">每款都有輕量試玩：短教學＋4 個計分關，結束後說明量什麼、怎麼量、怎麼換算。只算第一次送出；重玩不算。<a class="cite" href="#p-ShuteMoore2017" data-cite="ShuteMoore2017" title="Consistency and Validity in Game-Based Stealth Assessment">[Shute &amp; Moore 2017]</a> <a class="cite" href="#p-Mislevy2003" data-cite="Mislevy2003" title="A Brief Introduction to Evidence-Centered Design">[Mislevy 2003]</a></p>
+    <p class="note" style="margin-top:10px">每款都有輕量試玩：短教學＋6 個計分關（理解 2 關、推演 4 關），結束後說明量什麼、怎麼量、怎麼換算。只算第一次送出；重玩不算。另記作答時間、修改次數、錯誤類型、把握。<a class="cite" href="#p-ShuteMoore2017" data-cite="ShuteMoore2017" title="Consistency and Validity in Game-Based Stealth Assessment">[Shute &amp; Moore 2017]</a> <a class="cite" href="#p-Mislevy2003" data-cite="Mislevy2003" title="A Brief Introduction to Evidence-Centered Design">[Mislevy 2003]</a></p>
   </div>
 </section>
 
@@ -747,6 +817,38 @@ body.mobile .tq-gate::after{display:none}
   </div>
 </section>
 
+
+<!-- ========== 9 依模擬調整 ========== -->
+<section class="slide" data-title="依模擬調整：加訊號、加後期關">
+  <span class="tq-adj">已依模擬調整</span>
+  <div class="kicker"><span class="dot"></span>第 0 關 · 模擬之後</div>
+  <h2 class="hl">加訊號、加後期關：重測從 .38 到 <em>.68／.47</em></h2>
+  <div class="body">
+    <div class="tq-r3">
+      <div class="tq-num">
+        <h3>T1–T2 重測 r　<span class="sim">〔模擬〕最好情況</span></h3>
+        <div class="tq-nrow"><div class="lb">原本 41 點<small>只看對錯</small></div><div class="bar"><i style="width:38%"></i><span class="m" style="left:60%"></span></div><div class="v">.38</div></div>
+        <div class="tq-nrow"><div class="lb">68 點＋訊號<small>樂觀假設</small></div><div class="bar"><i class="o" style="width:68%"></i><span class="m" style="left:60%"></span></div><div class="v" style="color:var(--sea-d)">.68</div></div>
+        <div class="tq-nrow"><div class="lb">68 點＋訊號<small>悲觀假設</small></div><div class="bar"><i class="p" style="width:47%"></i><span class="m" style="left:60%"></span></div><div class="v" style="color:var(--coral-d)">.47</div></div>
+        <p class="note" style="font-size:14px">虛線＝研究級 .60。合成＝改變分數＋作答時間、極短答錯、錯誤類型、修改次數。2000 位虛擬學生完全照模型作答，真實學生只會更低。</p>
+      </div>
+      <div class="tq-chg">
+        <h3>我們改了</h3>
+        <ul>
+          <li>每款加 <b>2 個後期關</b>（L5、L6）：決策點 41 → 68</li>
+          <li>每個決策點記<b>作答時間、修改次數、錯誤類型、把握</b></li>
+          <li><b>把握先只記不算</b>；重開規則只當品管</li>
+        </ul>
+      </div>
+    </div>
+    <div class="tq-facts">
+      <div class="tq-fact"><b>規則掌握與起始能力分得開</b>合成與起始能力的相關 −.02／−.03 <span class="sim">〔模擬〕最好情況</span></div>
+      <div class="tq-fact"><b>.80 不是這一階段目標</b>這一階段瞄準研究級 .60；第 0 關實測決定落在樂觀或悲觀 <span class="sim">〔模擬〕最好情況</span></div>
+      <div class="tq-fact"><b>人數</b>重測 300+、交叉／短測 250+、正控制每組約 45 <span class="sim">〔模擬〕最好情況</span></div>
+    </div>
+  </div>
+</section>
+
 <!-- ========== 9 正控制 ========== -->
 <section class="slide" data-title="正控制：尺會不會動">
   <div class="kicker"><span class="dot"></span>旁線 · 正控制</div>
@@ -783,6 +885,7 @@ body.mobile .tq-gate::after{display:none}
 
 <!-- ========== 10 怎麼跑 ========== -->
 <section class="slide" data-title="怎麼跑：場次安排">
+  <span class="tq-adj">已依模擬調整</span>
   <div class="kicker"><span class="dot"></span>場次</div>
   <h2 class="hl">怎麼跑：<em>每場只做一件主要的事</em></h2>
   <div class="body">
@@ -813,7 +916,8 @@ body.mobile .tq-gate::after{display:none}
         <p>同一條規則、三種教學強度。不併入主估計。</p>
       </div>
     </div>
-    <p class="note" style="margin-top:10px">先試玩（垂直切片、表格與短測試做一次，不判過關），再進寒假研究試點。回島的資料只用來看群體「記得住」，不當重測。</p>
+    <div class="tq-n"><b>人數</b><span class="pill">T2 重測 300+</span><span class="pill">交叉子樣本 250+</span><span class="pill">獨立短測 250+</span><span class="pill">正控制每組約 45</span><span class="sim">〔模擬〕最好情況</span></div>
+    <p class="note" style="margin-top:8px">先試玩（三款 v2，每款 6 關，表格與短測試做一次，不判過關），再進寒假研究試點。回島的資料只用來看群體「記得住」，不當重測。</p>
     <div class="tq-fixed">
       <div class="tq-fx"><b>已定 ① 短測</b>EA 起草、EK 審後凍結；放基線時段，不夠另開短場。</div>
       <div class="tq-fx"><b>已定 ② T1 與重測</b>T1 拆兩段（2+1 款）；重測放 T2，不夠再開專場。</div>
@@ -825,6 +929,7 @@ body.mobile .tq-gate::after{display:none}
 
 <!-- ========== 11 過了或沒過 ========== -->
 <section class="slide" data-title="過了或沒過代表什麼">
+  <span class="tq-adj">已依模擬調整</span>
   <div class="kicker"><span class="dot"></span>結果怎麼讀</div>
   <h2 class="hl">每種結果都<em>有用</em>：過了能說什麼、沒過退到哪</h2>
   <div class="body">
@@ -837,7 +942,7 @@ body.mobile .tq-gate::after{display:none}
       <tr><td>第 3 關 不只是推理</td><td class="ok">對「改變」有額外說明力</td><td class="no">比較像好玩的短推理測驗</td><td>退回行為描述＋EK 內部訊號</td></tr>
       <tr><td>正控制</td><td class="ok">尺會跟著教學動</td><td class="no">不能說量到的是「學習」</td><td>查教學有沒有送到，再改關卡</td></tr>
     </table>
-    <p class="note" style="margin-top:8px">也會排除速度與認真程度：首次決策時間、修正次數、疑似亂按只當共變量，排除後結論方向要不變。</p>
+    <p class="note" style="margin-top:8px">作答時間、修改次數進主用合成（模擬中與起始能力、速度都幾乎無關）；把握只記不算；重開規則、疑似亂按只當品管。排除低投入的人之後，結論方向要不變。</p>
   </div>
 </section>
 
@@ -883,35 +988,79 @@ body.mobile .tq-gate::after{display:none}
   </div>
 </section>
 
-<!-- ========== 14 下一步工作目標 ========== -->
+
+<!-- ========== 14 LQ 指標帶動 EK ========== -->
+<section class="slide" data-title="LQ 指標怎麼帶動 EK 的下一步">
+  <div class="kicker"><span class="dot"></span>指標 → 教法</div>
+  <h2 class="hl">LQ 指標怎麼帶動 <em>EK 的下一步</em></h2>
+  <div class="body">
+    <div class="tq-ek">
+      <div class="st">LQ 指標<small>附不確定度</small></div>
+      <div class="st">規則對照表<small>指標 → 教學變體</small></div>
+      <div class="st">EK 先備課<small>教案不給學生看</small></div>
+      <div class="st">下一輪<br>影片／練習版本</div>
+      <div class="st back">下一輪訊號回流<small>更新指標</small></div>
+    </div>
+    <div class="tq-loop">↺ 每一輪的作答訊號回到第一步</div>
+    <div class="tq-ekgrid">
+      <div>
+        <div class="tq-own">
+          <div class="r"><span class="who">擁有者</span><span><b>Engine A／正一</b>：提供指標＋不確定度</span></div>
+          <div class="r"><span class="who ek">擁有者</span><span><b>EK</b>：設計教學變體與內容</span></div>
+        </div>
+        <table class="tq-map">
+          <tr><th>指標（規則對照表）</th><th>下一輪怎麼教</th></tr>
+          <tr><td>規則掌握慢</td><td>範例拆解優先，加更多後期練習</td></tr>
+          <tr><td>規則掌握快</td><td>跳過基礎，直接上遷移題</td></tr>
+          <tr><td>記得住低（群體層級）</td><td>排間隔複習</td></tr>
+          <tr><td>修改多／錯誤類型偏規則誤解</td><td>反例影片＋規則對比影片</td></tr>
+          <tr class="dflt"><td>指標不確定時</td><td>用預設教法，不分流</td></tr>
+        </table>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <div class="tq-prep">
+          <h4>EK 先備課</h4>
+          <p>每個教學變體先寫教案（不給學生看）：</p>
+          <ul><li>解法</li><li>易錯點</li><li>講解順序</li></ul>
+          <p style="margin-top:4px">再依教案產出下一輪的影片與練習版本。</p>
+        </div>
+        <div class="tq-who2"><b>分工</b>：這一輪提供指標與不確定度；效力驗證（下一關：照指標分流是否學得更好）由 EK 負責。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 15 下一步工作目標 ========== -->
 <section class="slide" data-title="下一步工作目標">
+  <span class="tq-adj">已依模擬調整</span>
   <div class="kicker"><span class="dot"></span>下一步</div>
   <h2 class="hl">下一步：<em>交得出來的東西</em></h2>
   <div class="body">
     <div class="goals">
       <div class="goal"><span class="when">EA</span><div><b>獨立短測草案</b>：規則、三類題、教學稿、練習量、計分；試玩時試做一次</div></div>
       <div class="goal"><span class="when p">EK</span><div><b>凍結版短測</b>：審完草案後凍結</div></div>
-      <div class="goal"><span class="when">EA</span><div><b>第 8 輪模擬加條件</b>：各門檻範圍；交叉、重測、正控制人數建議</div></div>
-      <div class="goal"><span class="when">EA</span><div><b>預先登記表一頁</b>：每關效標、算法、判讀，收資料前凍結</div></div>
-      <div class="goal"><span class="when">EA</span><div><b>基準工具選定</b>：工作記憶測驗、短推理題數與授權、學科題來源</div></div>
-      <div class="goal"><span class="when p">研究組</span><div><b>場次表初版</b>：T1 兩天、T2 不開 EK 人數、短測場次與時間估計</div></div>
+      <div class="goal"><span class="when">EA</span><div><b>主用合成與備案事前登錄</b>：改變分數＋作答時間、極短答錯、錯誤類型、修改次數；訊號偏弱時改用改變分數＋修改次數</div></div>
+      <div class="goal"><span class="when">EA</span><div><b>預先登記表一頁</b>：每關效標、算法、判讀；把握只記不算；收資料前凍結</div></div>
+      <div class="goal"><span class="when">EA</span><div><b>第 0 關訊號判讀</b>：實測重測對照模擬的 .68（樂觀）／.47（悲觀），決定要不要再加後期關</div></div>
+      <div class="goal"><span class="when p">研究組</span><div><b>場次表初版</b>：T2 重測 300+、交叉與短測 250+、正控制每組約 45；短測場次與時間估計</div></div>
       <div class="goal"><span class="when p">研究組</span><div><b>編碼表＋三種教學稿</b>：出聲思考、結構觀察、正控制教學稿初版</div></div>
-      <div class="goal"><span class="when p">研究組</span><div><b>回島第 3 天方案</b>：超出寒假窗口的調整方案一頁</div></div>
-      <div class="goal"><span class="when" style="background:var(--leaf)">遊戲組</span><div><b>港口垂直切片</b>：決策點事件紀錄、跳過教學版、平行版 A／B</div></div>
-      <div class="goal"><span class="when" style="background:var(--wood)">產品組</span><div><b>回饋與同意流程</b>：第一場三種回饋文案設定、隔幾天回訪的同意書段落</div></div>
+      <div class="goal"><span class="when">EA</span><div><b>基準工具選定</b>：工作記憶測驗、短推理題數與授權、學科題來源</div></div>
+      <div class="goal"><span class="when" style="background:var(--leaf)">遊戲組</span><div><b>三款 v2 → 平行版</b>：每款 6 關已記過程訊號；下一步做平行版 A／B、跳過教學版</div></div>
+      <div class="goal"><span class="when p">EK</span><div><b>規則對照表初版</b>：五種指標狀態各配一個教學變體與先備課教案</div></div>
     </div>
   </div>
 </section>
 
 <!-- ========== 附錄 A ========== -->
 <section class="slide" data-title="附錄 A：設計細節">
+  <span class="tq-adj">已依模擬調整</span>
   <div class="kicker"><span class="dot"></span>附錄 A · 設計細節</div>
   <h2 class="hl" style="font-size:30px;margin-bottom:12px">附錄 A：交叉子樣本、短測流程、場次負荷、已定四項</h2>
   <div class="body">
     <div class="cols c2" style="gap:16px">
       <div style="display:flex;flex-direction:column;gap:10px">
         <div class="card small" style="line-height:1.55;padding:10px 16px">
-          <b class="k">交叉子樣本</b>　主樣本裡，遊戲、規則、順序綁在同一人身上，拆不開。一部分人用<b>同一條規則</b>在<b>兩款遊戲</b>各玩一場，才能看「換遊戲還是同一人」。人數推論為數十人，精確數交模擬。沒做成：第 1 關只說「跨任務一致」。
+          <b class="k">交叉子樣本</b>　主樣本裡，遊戲、規則、順序綁在同一人身上，拆不開。一部分人用<b>同一條規則</b>在<b>兩款遊戲</b>各玩一場，才能看「換遊戲還是同一人」。人數約 250+（相關的 95% 區間半寬 ≤ .12）<span class="sim">〔模擬〕最好情況</span>。沒做成：第 1 關只說「跨任務一致」。
         </div>
         <div class="card small" style="line-height:1.55;padding:10px 16px">
           <b class="k">獨立短測流程（每人一樣）</b>
@@ -948,6 +1097,44 @@ body.mobile .tq-gate::after{display:none}
       </div>
     </div>
     <p class="note" style="margin-top:8px">T1 拆兩段：三款加交叉場一次做完會疲勞。門檻（第 0 關研究／個人級）為暫定，其餘未定，全部交模擬後凍結。</p>
+  </div>
+</section>
+
+
+<!-- ========== 附錄 A-2 三輪模擬 ========== -->
+<section class="slide" data-title="附錄 A-2：三輪模擬數字">
+  <span class="tq-adj">已依模擬調整</span>
+  <div class="kicker"><span class="dot"></span>附錄 A · 模擬</div>
+  <h2 class="hl" style="font-size:30px;margin-bottom:10px">附錄 A-2：三輪模擬數字與剝離 <span class="sim">〔模擬〕最好情況</span></h2>
+  <div class="body">
+    <div class="ap-wrap">
+    <table class="ap">
+      <tr><th style="width:9%">輪次</th><th style="width:17%">結構</th><th>分數</th><th style="width:13%">重測 r</th><th style="width:13%">回復 r</th><th style="width:13%">與起始能力</th><th style="width:11%">與速度</th></tr>
+      <tr><td>第 1 輪</td><td>41 點</td><td>只用改變分數</td><td class="num">.38</td><td class="num">.54</td><td class="num">.02</td><td class="num">.00</td></tr>
+      <tr><td>第 2 輪</td><td>41 點＋訊號</td><td>合成（含把握、重開規則）</td><td class="num">.51／.34</td><td class="num">.58／.39</td><td class="num">−.06／−.07</td><td class="num">.01／.01</td></tr>
+      <tr><td>第 3 輪</td><td>68 點（v2 遊戲）</td><td>只用改變分數</td><td class="num">.49</td><td class="num">.60</td><td class="num">.01</td><td class="num">.01</td></tr>
+      <tr><td>第 3 輪</td><td>68 點（v2 遊戲）</td><td><b>主用合成</b></td><td class="num">.68／.47</td><td class="num">.72／.58</td><td class="num">−.02／−.03</td><td class="num">.01／.02</td></tr>
+      <tr><td>第 3 輪</td><td>68 點（v2 遊戲）</td><td>第 2 輪合成（對照）</td><td class="num">.62／.46</td><td class="num">.63／.45</td><td class="num">−.07／−.08</td><td class="num">.00／.01</td></tr>
+    </table>
+    </div>
+    <div class="cols c2" style="gap:16px;margin-top:10px">
+      <div class="ap-wrap">
+      <table class="ap">
+        <tr><th>第 3 輪剝離（68 點，主用合成）</th><th>重測 r</th><th>回復 r</th><th>與起始能力</th></tr>
+        <tr><td>拿掉作答時間</td><td class="num">.60／.47</td><td class="num">.64／.58</td><td class="num">−.02／−.03</td></tr>
+        <tr><td>拿掉極短答錯</td><td class="num">.66／.42</td><td class="num">.73／.51</td><td class="num">−.03／−.03</td></tr>
+        <tr><td>拿掉錯誤類型</td><td class="num">.64／.50</td><td class="num">.68／.59</td><td class="num">−.02／−.03</td></tr>
+        <tr><td>拿掉修改次數</td><td class="num">.63／.40</td><td class="num">.69／.53</td><td class="num">.00／.00</td></tr>
+        <tr><td>加回重開規則</td><td class="num">.68／.49</td><td class="num">.72／.59</td><td class="num">−.03／−.04</td></tr>
+        <tr><td>加回把握</td><td class="num">.61／.46</td><td class="num">.61／.42</td><td class="num">−.07／−.07</td></tr>
+      </table>
+      </div>
+      <div class="card small" style="line-height:1.55;padding:10px 16px">
+        <b class="k">怎麼讀</b>　「／」左邊樂觀、右邊悲觀假設；只用改變分數兩種假設相同。回復 r＝與真的規則掌握的相關。
+        <p style="margin-top:6px">樂觀時四種訊號各有貢獻；悲觀時<b>修改次數</b>最重要，錯誤類型反而拖累。加回把握：回復下降、與起始能力的相關升高，所以先只記不算。</p>
+        <p style="margin-top:6px">第 2 輪：41 點＋訊號；第 3 輪：v2 遊戲實際 68 點（前期 17、後期 51）。N＝2000 虛擬學生，跑兩次結果相同。</p>
+      </div>
+    </div>
   </div>
 </section>
 
