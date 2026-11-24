@@ -65,6 +65,13 @@ table.res td,table.res th{border-bottom:1px solid var(--line);padding:6px 4px;te
 table.res{table-layout:fixed;word-break:break-word}
 table.res th:first-child{width:28%}
 .card{overflow-wrap:anywhere}
+/* v2：作答前把握（短、不搶眼） */
+.conf{display:flex;flex-wrap:wrap;align-items:center;gap:4px;margin-top:10px;font-size:13px;color:var(--ink2)}
+.conf .cl{margin-right:4px}
+.cf{appearance:none;border:1px solid var(--line);background:#fff;color:var(--ink2);border-radius:999px;padding:3px 9px;font-size:13px;font-family:inherit;cursor:pointer;min-height:30px}
+.cf.on{background:var(--sand2);border-color:var(--wood);color:var(--ink);font-weight:700}
+.warn{color:var(--coral-d);font-size:14px;font-weight:700}
+table.res.stage th:first-child{width:22%}
 
 .dayhead{font-weight:800;font-size:18px;margin:6px 0}
 .dayhead.fog{color:#5d6b72}
@@ -101,6 +108,8 @@ const LEVELS = [
   mk('L2','理解',[1,2,4,5],[1,3],[1],[5],3,'today',[[4,0]],2),
   mk('L3','推演',[1,2,3,5],[1,3,5],[1,0,1],[3,3,3],4,'all',[[2,0],[0,3],[2,0]],4),
   mk('L4','推演',[2,3,5],[1,2,4],[1,0],[4,4],3,'all',[[2,0],[1,3]],3),
+  mk('L5','推演',[1,2,3,4],[2,4,5],[1,0,1],[3,3,3],4,'all',[[2,0],[0,3],[2,0]],4),
+  mk('L6','推演',[1,2,4],[1,2,3],[1,0],[4,4],3,'all',[[2,0],[1,3]],3),
 ];
 const isSea = c => c[0] === 'X';
 const cname = c => (isSea(c) ? '靠海 ' : '靠岸 ') + c.slice(1);
@@ -135,15 +144,50 @@ function a3pass(L, days){
 }
 const cnt = q => [q.filter(t => t !== 'K' && !isSea(t)).length, q.filter(t => t !== 'K' && isSea(t)).length];
 const stakesOf = days => days.reduce((s, q) => s + q.filter(t => t === 'K').length, 0);
-const P = (id, type, label, f) => ({id, type, label, f, desc:[type]});
+// f：對不對；ch：這一點目前選成什麼（給紀錄看）；err：第一次選錯時 rule／slip（level_design_v2 表；L1–L4 用同一套判斷）
+const P = (id, type, label, f, ch, err) => ({id, type, label, f, ch, err, desc:[type]});
+const dayCh = d => days => { const c = cnt(days[d]); return `第 ${d + 1} 天：靠岸 ${c[0]}、靠海 ${c[1]}`; };
+const fogCh = ds => days => ds.map(d => `第 ${d + 1} 天靠海 ${cnt(days[d])[1]}`).join('；');
+const legal = (L, days) => days.every((q, d) => dayOk(L, q, d, true, false, true));
+const ordCh = L => days => `木樁 ${stakesOf(days)} 根，順序${legal(L, days) ? '合法' : '不合法'}`;
+const goalCh = days => { const c = cnt(days[0]); return `靠岸 ${c[0]}、靠海 ${c[1]}`; };
+const R = () => 'rule';
+// 順序：木板前沒樁、額度未用完就插新樁、或多插＝rule；順序合法但樁少（少修了）＝slip
+const ordErr = (L, k) => days => (!legal(L, days) || stakesOf(days) > k) ? 'rule' : 'slip';
+// 照著用（今天能修的都修）：霧天把工人用在靠海格而少修靠岸＝rule；其餘＝slip
+const goalErr = days => cnt(days[0])[1] > 0 ? 'rule' : 'slip';
+// 第 1 天（霧）該修 2 格靠岸：修 3 格（當天能修的都修）＝rule
+const d1Err = days => cnt(days[0])[0] === 3 ? 'rule' : 'slip';
+// 三天型的最後一個霧天：修不到 2 格靠岸（前面額度用完）＝rule
+const d3Err = d => days => cnt(days[d])[0] < 2 ? 'rule' : 'slip';
+// 兩天型第 2 天：樁不夠（第 1 天修了 3 格或剩樁不夠）或靠海沒修完＝rule
+const d2Err = L => days => {
+  const c = cnt(days[1]), n = c[0] + c[1], left = L.K - stakesOf([days[0]]);
+  return (c[1] < 3 || cnt(days[0])[0] === 3 || left < Math.ceil(n / 2)) ? 'rule' : 'slip';
+};
 const fogNoSea = ds => days => ds.every(d => cnt(days[d])[1] === 0);
 const dayIs = (d, s, x) => days => { const c = cnt(days[d]); return c[0] === s && c[1] === x; };
 const orderOk = (L, k) => days => days.every((q, d) => dayOk(L, q, d, true, false, true)) && stakesOf(days) === k;
+const threeDay = (n, L) => [
+  P(n + '-條件','條件','兩個霧天都沒修靠海', fogNoSea([0, 2]), fogCh([0, 2]), R),
+  P(n + '-日1','提前規劃','第 1 天（霧）修 2 格靠岸（不是 3）', dayIs(0, 2, 0), dayCh(0), d1Err),
+  P(n + '-日2','照著用','第 2 天（晴）修 3 格靠海', dayIs(1, 0, 3), dayCh(1), R),
+  P(n + '-日3','提前規劃','第 3 天（霧）修剩下 2 格靠岸', dayIs(2, 2, 0), dayCh(2), d3Err(2)),
+  P(n + '-順序','順序','各天順序合法，總共用 4 根樁', orderOk(L, 4), ordCh(L), ordErr(L, 4)),
+];
+const twoDay = (n, L) => [
+  P(n + '-條件','條件','霧天（第 1 天）沒修靠海', fogNoSea([0]), fogCh([0]), R),
+  P(n + '-日1','提前規劃','第 1 天只修 2 格靠岸', dayIs(0, 2, 0), dayCh(0), d1Err),
+  P(n + '-日2','提前規劃','第 2 天修 1 格靠岸＋3 格靠海', dayIs(1, 1, 3), dayCh(1), d2Err(L)),
+  P(n + '-順序','順序','各天順序合法，總共用 3 根樁', orderOk(L, 3), ordCh(L), ordErr(L, 3)),
+];
 const POINTS = {
-  L1:[P('L1-條件','條件','起霧時沒有修任何靠海格', fogNoSea([0])), P('L1-目標','照著用','修好 3 格壞掉的靠岸', days => cnt(days[0])[0] === 3), P('L1-順序','順序','木樁與木板順序合法，用了 2 根樁', orderOk(LEVELS[0], 2))],
-  L2:[P('L2-條件','條件','起霧時沒有修任何靠海格', fogNoSea([0])), P('L2-目標','照著用','修好 4 格壞掉的靠岸', days => cnt(days[0])[0] === 4), P('L2-順序','順序','順序合法，用了 2 根樁（第 3 根備用不動）', orderOk(LEVELS[1], 2))],
-  L3:[P('L3-條件','條件','兩個霧天都沒修靠海', fogNoSea([0, 2])), P('L3-日1','提前規劃','第 1 天（霧）修 2 格靠岸（不是 3）', dayIs(0, 2, 0)), P('L3-日2','照著用','第 2 天（晴）修 3 格靠海', dayIs(1, 0, 3)), P('L3-日3','提前規劃','第 3 天（霧）修剩下 2 格靠岸', dayIs(2, 2, 0)), P('L3-順序','順序','各天順序合法，總共用 4 根樁', orderOk(LEVELS[2], 4))],
-  L4:[P('L4-條件','條件','霧天（第 1 天）沒修靠海', fogNoSea([0])), P('L4-日1','提前規劃','第 1 天只修 2 格靠岸', dayIs(0, 2, 0)), P('L4-日2','提前規劃','第 2 天修 1 格靠岸＋3 格靠海', dayIs(1, 1, 3)), P('L4-順序','順序','各天順序合法，總共用 3 根樁', orderOk(LEVELS[3], 3))],
+  L1:[P('L1-條件','條件','起霧時沒有修任何靠海格', fogNoSea([0]), fogCh([0]), R), P('L1-目標','照著用','修好 3 格壞掉的靠岸', days => cnt(days[0])[0] === 3, goalCh, goalErr), P('L1-順序','順序','木樁與木板順序合法，用了 2 根樁', orderOk(LEVELS[0], 2), ordCh(LEVELS[0]), ordErr(LEVELS[0], 2))],
+  L2:[P('L2-條件','條件','起霧時沒有修任何靠海格', fogNoSea([0]), fogCh([0]), R), P('L2-目標','照著用','修好 4 格壞掉的靠岸', days => cnt(days[0])[0] === 4, goalCh, goalErr), P('L2-順序','順序','順序合法，用了 2 根樁（第 3 根備用不動）', orderOk(LEVELS[1], 2), ordCh(LEVELS[1]), ordErr(LEVELS[1], 2))],
+  L3: threeDay('L3', LEVELS[2]),
+  L4: twoDay('L4', LEVELS[3]),
+  L5: threeDay('L5', LEVELS[4]),
+  L6: twoDay('L6', LEVELS[5]),
 };
 function newBoard(L){ return {days: L.fog.map(() => []), cur:0, msg:''}; }
 function where(b, c){ for (let d = 0; d < b.days.length; d++) if (b.days[d].indexOf(c) >= 0) return d; return -1; }
@@ -215,10 +259,13 @@ window.G_DEF = {
     '順序':'順序錯過：木板前沒有可用的木樁，或上一根額度還沒用完就插了新樁。',
     '提前規劃':'提前規劃錯過：你把木樁額度在前一天用完或浪費了，後面的天不夠用。常見情形是第 1 天修了奇數格。',
   },
-  allOk:'這次起霧只能修靠岸、木樁要先插，以及額度不能隔夜，你都有處理到。這只說明這一條規則、這一場的做法。',
+  allOk:'這一場關鍵決策點都對：這次起霧只能修靠岸、木樁要先插，以及額度不能隔夜，你都有處理到。這只說明這一條規則、這一場的做法。',
   advice:'有「今天能做／不能做」和「工具隔天作廢」時，先按天數分配額度，再排當天的順序。',
-  measureHow:`<p>本款有 4 個計分關：第 1、2 關（理解：起霧的一天，今天能修的都修）、第 3、4 關（推演：好幾天、木樁有限，要先按天分配）。關鍵決策點共 15 個，分成：<b>照著用</b>、<b>條件</b>（起霧只修靠岸）、<b>順序</b>（樁、板、板）、<b>提前規劃</b>（每天修幾格）。同一類格子選了哪一號、同一天內合法的先後差異，都算同一種做法。</p>`,
+  measureHow:`<p>本款有 6 個計分關：前期第 1、2 關（理解：起霧的一天，今天能修的都修）、後期第 3–6 關（推演：好幾天、木樁有限，要先按天分配）。關鍵決策點共 24 個（前期 6、後期 18），分成：<b>照著用</b>、<b>條件</b>（起霧只修靠岸）、<b>順序</b>（樁、板、板）、<b>提前規劃</b>（每天修幾格）。同一類格子選了哪一號、同一天內合法的先後差異，都算同一種做法。</p>`,
   newBoard,
+  boardKey(L, b){ return b.days.map(q => q.join(',')).join('|'); },
+  pointChoice(L, p, b){ return p.ch(b.days); },
+  errorType(L, p, b){ return p.err(b.days); },
   setPlan(L, plan){
     const b = newBoard(L);
     const days = Array.isArray(plan) ? plan : (plan && plan.days) || [];
@@ -285,17 +332,30 @@ window.G_DEF = {
 
 </script>
 <script>
-// ===== 共用流程（每款 index.html 內嵌同一份） =====
+// ===== 共用流程（每款 index.html 內嵌同一份）v2 =====
+// v2：6 個計分關（前期 L1–L2、後期 L3–L6）＋過程訊號（只存在本機 localStorage，可匯出 JSON；不做任何網路送出）
 (function(){
 const G = window.G_DEF;
-const BACK = location.pathname.indexOf('lq-tendency-games') >= 0 ? '../../lq-tendency/' : '../../LQ學習傾向驗證簡報_v2.html';
+const BACK = location.pathname.indexOf('lq-tendency-games') >= 0 ? '../../lq-tendency/' : '../../LQ學習傾向驗證簡報_v3.html';
 const LIDS = G.levels.map(l => l.id);
+const EARLY = ['L1', 'L2'];
+const isEarly = id => EARLY.indexOf(id) >= 0;
 LIDS.forEach(id => G.points[id].forEach(p => p.lv = id));
 const Y = LIDS.reduce((s, id) => s + G.points[id].length, 0);
-let S;
+const EY = LIDS.filter(isEarly).reduce((s, id) => s + G.points[id].length, 0);
+const LOG_KEY = 'lq-tendency-log-v2-' + G.id;
+const CONF_LABELS = {1:'沒把握', 2:'有一點', 3:'大致有', 4:'很有把握'};
+const SETTLE_MS = 1200;   // 盤面停住這麼久，才當成「選了這個值」（避免 ＋／－ 一路點過去的中間值被記成選錯）
+const now = () => (window.performance && performance.now) ? performance.now() : Date.now();
+function randId(){
+  try { const a = new Uint8Array(8); crypto.getRandomValues(a); return Array.from(a, x => x.toString(16).padStart(2, '0')).join(''); }
+  catch (e) { return Math.random().toString(16).slice(2, 10) + Math.random().toString(16).slice(2, 10); }
+}
+let S, LOG;
 function fresh(){
-  S = {phase:'title', li:0, first:{}, boards:{}, locked:{}, fb:{}, teachDone:false};
+  S = {phase:'title', li:0, first:{}, boards:{}, locked:{}, fb:{}, teachDone:false, trk:{}, conf:{}};
   LIDS.forEach((id, i) => { S.boards[id] = G.newBoard(G.levels[i]); S.locked[id] = false; });
+  LOG = {sessionId: randId(), t0: now(), startedAt: new Date().toISOString(), events: [], firstSubmit: {}};
 }
 fresh();
 const $ = s => document.querySelector(s);
@@ -303,12 +363,75 @@ const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':
 G.esc = esc;
 function lv(){ return G.levels[S.li]; }
 function lid(){ return LIDS[S.li]; }
+function levelOf(id){ return G.levels[LIDS.indexOf(id)]; }
 function allFirst(){ return LIDS.every(id => S.first[id]); }
-function xCount(){
+function xCount(filter){
   let x = 0;
-  LIDS.forEach(id => { const f = S.first[id]; if (f) for (const k in f.points) x += f.points[k]; });
+  LIDS.forEach(id => { if (filter && !filter(id)) return; const f = S.first[id]; if (f) for (const k in f.points) x += f.points[k]; });
   return x;
 }
+const boardKey = (L, b) => G.boardKey ? G.boardKey(L, b) : JSON.stringify(b);
+
+// ---------- 過程訊號 ----------
+function logEvent(type, data){
+  LOG.events.push(Object.assign({t: Math.round(now() - LOG.t0), type}, data || {}));
+  persist();
+}
+function persist(){
+  try { localStorage.setItem(LOG_KEY, JSON.stringify(exportLog())); } catch (e) { /* 本機儲存不可用時就只留在記憶體 */ }
+}
+// 該關第一次送出前的追蹤（重玩不再追蹤計分用欄位）
+function trk(id){
+  if (!S.trk[id]) {
+    const L = levelOf(id), blank = G.newBoard(L);
+    const blankChoice = {};
+    G.points[id].forEach(p => blankChoice[p.id] = G.pointChoice(L, p, blank));
+    S.trk[id] = {t0:null, nRev:0, ruleOpened:false, firstWrong:{}, blankChoice, lastKey: boardKey(L, blank), timer:null};
+  }
+  return S.trk[id];
+}
+function ensureShown(id){
+  if (S.first[id]) return;
+  const t = trk(id);
+  if (t.t0 === null) { t.t0 = now(); logEvent('level_shown', {level:id}); }
+}
+// 看一次目前盤面：每個決策點若「已經離開空白開場」且與正確答案不同，而且還沒記過，就記成第一次選錯
+function observe(id, at){
+  if (S.first[id]) return;
+  const L = levelOf(id), b = S.boards[id], t = trk(id);
+  const ev = G.evaluate(L, b);
+  G.points[id].forEach(p => {
+    if (ev.points[p.id] || t.firstWrong[p.id]) return;
+    const ch = G.pointChoice(L, p, b);
+    if (ch === null || ch === t.blankChoice[p.id]) return;
+    t.firstWrong[p.id] = {choice: ch, errorType: G.errorType(L, p, b), at, t: Math.round(now() - t.t0)};
+  });
+}
+function boardChanged(id, src){
+  if (S.first[id]) { logEvent('edit', {level:id, replay:true, src}); return; }
+  const L = levelOf(id), t = trk(id), k = boardKey(L, S.boards[id]);
+  if (src !== 'setPlan' && k === t.lastKey) return;   // 只是切換分頁、選取等，不算修改
+  t.lastKey = k; t.nRev++;
+  logEvent('edit', {level:id, src, n: t.nRev});
+  clearTimeout(t.timer);
+  if (src === 'setPlan') observe(id, 'edit');
+  else t.timer = setTimeout(() => observe(id, 'edit'), SETTLE_MS);
+}
+function recordFirst(id, ev){
+  const L = levelOf(id), b = S.boards[id], t = trk(id);
+  clearTimeout(t.timer);
+  const rt = Math.round(now() - (t.t0 === null ? now() : t.t0));
+  const pts = G.points[id].map(p => {
+    const ok = !!ev.points[p.id];
+    let fw = t.firstWrong[p.id] || null;
+    // 第一次送出是錯的：用送出值分類（設計檔）
+    if (!ok) fw = {choice: G.pointChoice(L, p, b), errorType: G.errorType(L, p, b), at:'submit', t: rt};
+    return {id: p.id, type: p.type, correct: ok ? 1 : 0, submitted: G.pointChoice(L, p, b), firstWrong: fw};
+  });
+  LOG.firstSubmit[id] = {level: id, stage: isEarly(id) ? 'early' : 'late', rt_ms: rt, n_rev: t.nRev,
+    ruleOpened: t.ruleOpened, confidence: S.conf[id] || null, pass: !!ev.pass, points: pts};
+}
+
 function app(){ return $('#app'); }
 function shell(inner){
   return `<header class="top"><h1>${esc(G.name)}</h1><span class="sp"></span>
@@ -319,7 +442,7 @@ function render(){
   if (S.phase === 'title') {
     a.innerHTML = shell(`<div class="card"><div class="big-title">${esc(G.name)}</div>
       <p style="font-size:18px">${G.oneRule}</p>
-      <p class="muted">先有一段短教學（不計分），接著是 4 個關卡。每關只看第一次送出；之後可以「隔天再來」重玩。</p>
+      <p class="muted">先有一段短教學（不計分），接著是 ${LIDS.length} 個計分關：前面 2 關熟悉規則，後面 ${LIDS.length - 2} 關要把同一條規則用到新情況。每關只看第一次送出；送出前請標一下有多少把握。之後可以「隔天再來」重玩。</p>
       <button class="btn sea" id="go">開始</button></div>`);
     $('#go').onclick = () => { S.phase = 'teach'; render(); };
   } else if (S.phase === 'teach') {
@@ -335,10 +458,16 @@ function render(){
   }
   window.scrollTo && window.scrollTo(0, 0);
 }
-function startLevels(){ S.teachDone = true; S.phase = 'level'; S.li = 0; render(); }
+function startLevels(){ S.teachDone = true; S.phase = 'level'; S.li = 0; logEvent('levels_start'); render(); }
 function unlocked(i){ return i === 0 || !!S.first[LIDS[i - 1]]; }
+function confHtml(id){
+  const c = S.conf[id];
+  const btns = [1, 2, 3, 4].map(n => `<button class="cf ${c === n ? 'on' : ''}" data-cf="${n}" aria-pressed="${c === n}">${n} ${CONF_LABELS[n]}</button>`).join('');
+  return `<div class="conf"><span class="cl">送出前，有多少把握？</span>${btns}${S.first[id] ? '<span class="muted">（重玩，不計分）</span>' : ''}</div>`;
+}
 function renderLevel(){
   const L = lv(), id = lid();
+  ensureShown(id);
   const pills = G.levels.map((l, i) => `<button class="pill ${i === S.li ? 'on' : ''} ${S.first[l.id] ? 'done' : ''}" data-i="${i}" ${unlocked(i) ? '' : 'disabled'}>第 ${i + 1} 關</button>`).join('');
   const fb = S.fb[id];
   const fbHtml = fb ? `<div class="fb ${fb.pass ? 'ok' : 'no'}" id="fb">${fb.html}</div>` : '';
@@ -348,24 +477,42 @@ function renderLevel(){
     if (S.li < LIDS.length - 1) nav += `<button class="btn sea" id="next">下一關</button>`;
     if (allFirst()) nav += `<button class="btn leaf" id="res">看結果</button>`;
   }
+  const stage = isEarly(id) ? '前期' : '後期';
   app().innerHTML = shell(`<div class="pills">${pills}</div>
-    <div class="card"><h2>第 ${S.li + 1} 關 <span class="muted">${S.locked[id] ? '（已送出）' : S.first[id] ? '（隔天再來：重玩中，不計分）' : ''}</span></h2>
+    <div class="card"><h2>第 ${S.li + 1} 關 <span class="muted">${stage}・${esc(L.role)}　${S.locked[id] ? '（已送出）' : S.first[id] ? '（隔天再來：重玩中，不計分）' : ''}</span></h2>
       <div class="goal">${L.goalHtml}</div>
-      <details class="rule"><summary>規則提醒</summary>${G.ruleHtml}</details>
+      <details class="rule" id="ruleTip"><summary>規則提醒</summary>${G.ruleHtml}</details>
       <div id="board"></div>
-      <div class="row" style="margin-top:10px">${S.locked[id] ? '' : `<button class="btn coral" id="submit">${esc(G.submitLabel)}</button>`}<span id="msg" class="muted"></span></div>
+      ${S.locked[id] ? '' : confHtml(id)}
+      <div class="row" style="margin-top:6px">${S.locked[id] ? '' : `<button class="btn coral" id="submit">${esc(G.submitLabel)}</button>`}<span id="msg" class="muted"></span></div>
       ${fbHtml}
       <div class="row">${nav}</div>
     </div>`);
   app().querySelectorAll('.pill').forEach(b => b.onclick = () => { const i = +b.dataset.i; if (unlocked(i)) { S.li = i; render(); } });
-  G.renderBoard($('#board'), L, S.boards[id], S.locked[id], () => renderLevel());
-  const sb = $('#submit'); if (sb) sb.onclick = () => { const r = doSubmit(); if (r.blocked) $('#msg').textContent = r.feedback; };
+  G.renderBoard($('#board'), L, S.boards[id], S.locked[id], () => { boardChanged(id, 'ui'); renderLevel(); });
+  const rt = $('#ruleTip');
+  if (rt) rt.addEventListener('toggle', () => {
+    if (!rt.open) return;
+    if (!S.first[id] && !S.locked[id]) trk(id).ruleOpened = true;
+    logEvent('rule_opened', {level:id, replay: !!S.first[id]});
+  });
+  app().querySelectorAll('[data-cf]').forEach(b => b.onclick = () => { setConf(+b.dataset.cf); renderLevel(); });
+  const sb = $('#submit'); if (sb) sb.onclick = () => { const r = doSubmit(); if (r.blocked) { const m = $('#msg'); m.textContent = r.feedback; m.className = 'warn'; } };
   const rp = $('#replay'); if (rp) rp.onclick = () => doReplay();
   const nx = $('#next'); if (nx) nx.onclick = () => { S.li++; render(); };
   const rs = $('#res'); if (rs) rs.onclick = () => gotoResults();
   if (fb) { const f = $('#fb'); f && f.scrollIntoView && f.scrollIntoView({block:'nearest'}); }
 }
-function fbHtml(L, ev, scored, first){
+function setConf(n){
+  n = Math.floor(+n);
+  if (S.phase !== 'level' || !(n >= 1 && n <= 4)) return false;
+  const id = lid();
+  if (S.locked[id]) return false;
+  S.conf[id] = n;
+  logEvent('confidence', {level:id, value:n, replay: !!S.first[id]});
+  return true;
+}
+function fbHtml(L, ev, scored){
   let h = `<b>${ev.pass ? '過關了。' : '這次沒過。'}</b>`;
   if (!scored) h += ` <span class="muted">（重玩，不計分）</span>`;
   const lines = [];
@@ -382,31 +529,58 @@ function fbHtml(L, ev, scored, first){
 function doSubmit(){
   if (S.phase !== 'level') return {pass:false, first:false, scored:false, feedback:'目前不在關卡畫面', blocked:true};
   const L = lv(), id = lid(), b = S.boards[id];
+  if (S.locked[id]) return {pass:false, first:false, scored:false, feedback:'這一關已經送出了。', blocked:true};
   const block = G.canSubmit ? G.canSubmit(L, b) : null;
   if (block) return {pass:false, first:false, scored:false, feedback:block, blocked:true};
-  const ev = G.evaluate(L, b);
   const first = !S.first[id];
-  if (first) S.first[id] = {pass: ev.pass, points: Object.assign({}, ev.points)};
-  const html = fbHtml(L, ev, first, first);
+  if (first && !S.conf[id]) return {pass:false, first:false, scored:false, feedback:'送出前，請先在上面點一下你有多少把握（1–4）。', blocked:true, needConfidence:true};
+  const ev = G.evaluate(L, b);
+  if (first) { S.first[id] = {pass: ev.pass, points: Object.assign({}, ev.points)}; recordFirst(id, ev); }
+  logEvent('submit', {level:id, first, pass: !!ev.pass, confidence: S.conf[id] || null, points: Object.assign({}, ev.points)});
+  const html = fbHtml(L, ev, first);
   S.fb[id] = {pass: ev.pass, html};
   S.locked[id] = true;
   renderLevel();
   const tmp = document.createElement('div'); tmp.innerHTML = html;
   return {pass: ev.pass, first, scored: first, feedback: tmp.textContent.trim()};
 }
+function resetForReplay(id){
+  S.boards[id] = G.newBoard(levelOf(id)); S.locked[id] = false; S.fb[id] = null; S.conf[id] = null;
+  logEvent('replay', {level:id});
+}
 function doReplay(){
   if (S.phase !== 'level') return false;
-  const id = lid();
-  S.boards[id] = G.newBoard(lv()); S.locked[id] = false; S.fb[id] = null;
+  resetForReplay(lid());
   renderLevel();
   return true;
 }
 function gotoResults(){
   if (!allFirst()) return false;
-  S.phase = 'results'; render(); return true;
+  S.phase = 'results'; logEvent('results'); render(); return true;
+}
+function exportLog(){
+  const fs = LIDS.filter(id => LOG.firstSubmit[id]).map(id => LOG.firstSubmit[id]);
+  return {
+    game: G.id, version: 'v2', sessionId: LOG.sessionId, startedAt: LOG.startedAt, savedAt: new Date().toISOString(),
+    note: '只存在這台裝置；不含姓名、信箱或其他身分資料。作答前信心有記下，這一輪換算不用。',
+    decisionPoints: {early: EY, late: Y - EY, total: Y},
+    summary: {x: xCount(), y: Y, earlyX: xCount(isEarly), earlyY: EY, lateX: xCount(id => !isEarly(id)), lateY: Y - EY},
+    firstSubmit: fs,
+    events: LOG.events.slice(),
+  };
+}
+function downloadLog(){
+  const data = JSON.stringify(exportLog(), null, 1);
+  const blob = new Blob([data], {type:'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = `lq-tendency-log-v2-${G.id}-${LOG.sessionId}.json`;
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+  logEvent('export');
 }
 function renderResults(){
-  const x = xCount();
+  const x = xCount(), ex = xCount(isEarly), lx = xCount(id => !isEarly(id));
   const byType = {};
   G.typeOrder.forEach(t => byType[t] = {ok:[], no:[]});
   const missedDesc = [];
@@ -421,7 +595,7 @@ function renderResults(){
     return `<tr><td><b>${esc(t)}</b></td><td class="okc">對 ${o.ok.length}</td><td class="noc">錯 ${o.no.length}</td>
       <td class="muted">${o.no.length ? '錯過：' + o.no.map(p => '第 ' + (LIDS.indexOf(p.lv) + 1) + ' 關 ' + esc(p.label)).join('；') : '—'}</td></tr>`;
   }).join('');
-  const detail = LIDS.map((id, i) => `<tr><td>第 ${i + 1} 關</td><td>${S.first[id].pass ? '第一次就過' : '第一次沒過'}</td><td class="muted">${
+  const detail = LIDS.map((id, i) => `<tr><td>第 ${i + 1} 關<br><span class="muted">${isEarly(id) ? '前期' : '後期'}</span></td><td>${S.first[id].pass ? '第一次就過' : '第一次沒過'}</td><td class="muted">${
     G.points[id].map(p => `${S.first[id].points[p.id] ? '✓' : '✗'} ${esc(p.label)}`).join('<br>')}</td></tr>`).join('');
   const descHtml = missedDesc.length
     ? '<ul>' + missedDesc.map(d => `<li>${esc(G.describe[d])}</li>`).join('') + '</ul>'
@@ -432,44 +606,58 @@ function renderResults(){
     <p><b>記得住</b>：這一場量不到。要隔幾天用新關再量，而且這一輪只看群體。</p>
     <h3>2. 怎麼量</h3>
     ${G.measureHow}
-    <p>只算每關的<b>第一次送出</b>；教學與重玩不算；送出前改了幾次、用了多久，也都不算。</p>
+    <p>只算每關的<b>第一次送出</b>；教學與重玩不算。前期是第 1–2 關，後期是第 3–6 關。</p>
+    <p>每關也會在這台裝置上記下：用了多久、第一次選錯的是哪一種錯、送出前改了幾次、有沒有重開「規則提醒」（只當品管），以及送出前標的把握（1–4）。這些這一輪都不拿來改下面的 X/Y。</p>
     <h3>3. 怎麼換算</h3>
     <div class="xy">你在 ${Y} 個關鍵決策點裡，第一次做對了 ${x} 個。</div>
-    <p class="muted">這個 ${x}/${Y} 是這一次的證據摘要：不是分數、不是等級，也不是排名。</p>
+    <table class="res stage"><tr><th>階段</th><th>做對</th><th>說明</th></tr>
+      <tr><td><b>前期</b></td><td>${ex} / ${EY}</td><td class="muted">第 1、2 關：剛教完，熟悉規則</td></tr>
+      <tr><td><b>後期</b></td><td>${lx} / ${Y - EY}</td><td class="muted">第 3–6 關：同一條規則、新的盤面</td></tr></table>
+    <p class="muted">規則掌握看的是同樣教學之後，<b>後期相對前期</b>有沒有把規則用出來，不是看關卡本身難不難。這個 ${x}/${Y} 是這一次的證據摘要：不是分數、不是等級，也不是排名。</p>
+    <p class="muted">作答前信心有記下來，這一輪換算先不用，因為它的方向還不確定。</p>
     <table class="res"><tr><th>類型</th><th></th><th></th><th>說明</th></tr>${rows}</table>
     <details style="margin-top:8px"><summary>每關的決策點</summary><table class="res">${detail}</table></details>
     <h3>描述</h3>${descHtml}
     <h3>一個建議</h3><p>${esc(G.advice)}</p>
     <h3>下一步</h3><p>隔幾天再回來，用新關卡看看還記不記得這條規則；或先去玩另外一款，看同樣的做法換了規則還在不在。</p>
     <p class="muted">要出現個人分數，還需要：換遊戲換規則也量得穩、跟遊戲外的新規則短測對得上，並且證明它不只是推理或工作記憶。這些都不在這個原型裡完成。</p>
+    <div class="row"><button class="btn ghost" id="exp">匯出作答紀錄（JSON）</button><span class="muted">只下載到這台裝置；不含姓名，也不會上網送出。</span></div>
     <div class="row"><button class="btn sea" id="again">再玩一次</button><a class="btn ghost" href="${BACK}" style="text-decoration:none">回簡報</a></div>
   </div>`);
   $('#again').onclick = () => { fresh(); render(); };
+  $('#exp').onclick = () => downloadLog();
 }
 window.GAME = {
   id: G.id,
-  skipTeach(){ if (S.phase === 'title' || S.phase === 'teach') startLevels(); else if (S.phase === 'level') {} return true; },
+  skipTeach(){ if (S.phase === 'title' || S.phase === 'teach') startLevels(); return true; },
   setPlan(plan){
     if (S.phase !== 'level') return false;
     const id = lid();
     if (S.locked[id]) {
       // 已送出：若下一關還沒做，就前往下一關；否則視為「隔天再來」重玩本關
       if (S.li < LIDS.length - 1 && !S.first[LIDS[S.li + 1]]) S.li++;
-      else { S.boards[id] = G.newBoard(lv()); S.locked[id] = false; S.fb[id] = null; }
+      else resetForReplay(id);
     }
+    ensureShown(lid());
     S.boards[lid()] = G.setPlan(lv(), plan);
+    boardChanged(lid(), 'setPlan');
     render(); return true;
   },
+  setConfidence(n){ const ok = setConf(n); if (ok && S.phase === 'level') renderLevel(); return ok; },
   submit(){ const r = doSubmit(); delete r.blocked; return r; },
   replay(){ return doReplay(); },
   gotoResults,
   goto(i){ if (S.phase === 'level' && unlocked(i)) { S.li = i; render(); return true; } return false; },
   next(){ if (S.phase === 'level' && S.li < LIDS.length - 1 && unlocked(S.li + 1)) { S.li++; render(); return true; } return false; },
   reset(){ fresh(); render(); return true; },
+  exportLog,
   state(){
     const first = {};
     LIDS.forEach(id => { if (S.first[id]) first[id] = {pass: S.first[id].pass, points: Object.assign({}, S.first[id].points)}; });
-    return {phase: S.phase, levelId: S.phase === 'level' ? lid() : null, first, x: xCount(), y: Y, onResults: S.phase === 'results'};
+    const cur = S.phase === 'level' ? lid() : null;
+    return {phase: S.phase, levelId: cur, first, x: xCount(), y: Y, onResults: S.phase === 'results',
+      earlyX: xCount(isEarly), earlyY: EY, lateX: xCount(id => !isEarly(id)), lateY: Y - EY,
+      confidenceSet: cur ? !!S.conf[cur] : false, confidence: cur ? (S.conf[cur] || null) : null};
   }
 };
 render();
