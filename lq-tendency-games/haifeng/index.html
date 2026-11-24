@@ -1,0 +1,419 @@
+<!doctype html>
+<html lang="zh-Hant"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>海風小館｜試玩原型</title>
+<style>
+:root{
+  --sky:#5ec8f2; --sea:#1fb5c4; --sea-d:#0d8797; --sand:#fff7e8; --sand2:#ffe8c2;
+  --coral:#ff7a66; --coral-d:#d94f3a; --sun:#ffc63d; --leaf:#5cbf4a; --leaf-d:#3a9a2c;
+  --wood:#a86d3c; --wood-d:#6e4524; --ink:#3a2c25; --ink2:#6f5d52; --lilac:#8f6ee0;
+  --card:#fff; --line:#f0dfc4;
+  --shadow:0 5px 0 rgba(110,69,36,.10), 0 10px 22px rgba(58,44,37,.10);
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{font-family:"PingFang TC","Noto Sans TC","Microsoft JhengHei","Heiti TC",system-ui,sans-serif;
+  background:linear-gradient(180deg,var(--sky) 0,#bfe9f7 140px,var(--sand) 300px);color:var(--ink);
+  min-height:100vh;line-height:1.55;font-size:16px;-webkit-text-size-adjust:100%}
+.wrap{max-width:860px;margin:0 auto;padding:14px 14px 60px}
+header.top{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+header.top h1{font-size:22px;margin:0;color:#fff;text-shadow:0 2px 0 var(--sea-d)}
+header.top .sp{flex:1}
+a.back{color:#fff;background:var(--sea-d);padding:6px 12px;border-radius:999px;text-decoration:none;font-size:14px}
+.card{background:var(--card);border-radius:18px;box-shadow:var(--shadow);padding:16px;margin:12px 0;border:2px solid var(--line)}
+.card h2{margin:0 0 8px;font-size:20px}
+.card h3{margin:10px 0 6px;font-size:17px}
+.muted{color:var(--ink2);font-size:14px}
+.btn{appearance:none;border:0;border-radius:14px;padding:12px 18px;font-size:17px;font-weight:700;cursor:pointer;
+  background:var(--sun);color:var(--ink);box-shadow:0 4px 0 #d9a21d;min-height:48px;margin:4px 4px 4px 0;font-family:inherit}
+.btn:active{transform:translateY(2px);box-shadow:0 2px 0 #d9a21d}
+.btn.sea{background:var(--sea);color:#fff;box-shadow:0 4px 0 var(--sea-d)}
+.btn.coral{background:var(--coral);color:#fff;box-shadow:0 4px 0 var(--coral-d)}
+.btn.leaf{background:var(--leaf);color:#fff;box-shadow:0 4px 0 var(--leaf-d)}
+.btn.ghost{background:#fff;border:2px solid var(--line);box-shadow:none}
+.btn.small{padding:6px 10px;font-size:15px;min-height:40px;border-radius:10px}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
+.big-title{font-size:30px;margin:6px 0}
+.rule{background:var(--sand2);border-radius:12px;padding:10px 12px;margin:8px 0;font-size:15px}
+.goal{border-left:6px solid var(--sea);padding:8px 12px;background:#eefafc;border-radius:8px;margin:8px 0}
+.pills{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0}
+.pill{border-radius:999px;padding:6px 12px;font-size:14px;background:#fff;border:2px solid var(--line);cursor:pointer;font-weight:700;min-height:36px;font-family:inherit;color:var(--ink)}
+.pill.on{background:var(--sea);color:#fff;border-color:var(--sea-d)}
+.pill.done::after{content:" ✓";}
+.pill[disabled]{opacity:.4;cursor:not-allowed}
+.fb{border-radius:14px;padding:12px 14px;margin:10px 0;font-size:16px}
+.fb.ok{background:#e7f7e2;border:2px solid var(--leaf)}
+.fb.no{background:#fff0ec;border:2px solid var(--coral)}
+.fb ul{margin:6px 0 0;padding-left:20px}
+.tag{display:inline-block;border-radius:8px;padding:1px 8px;font-size:13px;font-weight:700;background:var(--sand2);color:var(--wood-d);margin-right:4px}
+.tag.tide{background:var(--lilac);color:#fff}
+.tag.fog{background:#9aa6ad;color:#fff}
+.tag.glow{background:var(--sun);color:var(--ink)}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.counter{display:inline-flex;align-items:center;gap:6px;background:var(--sand);border-radius:12px;padding:6px 10px;font-weight:700}
+table.res{border-collapse:collapse;width:100%;font-size:15px}
+table.res td,table.res th{border-bottom:1px solid var(--line);padding:6px 4px;text-align:left;vertical-align:top}
+.okc{color:var(--leaf-d);font-weight:700}.noc{color:var(--coral-d);font-weight:700}
+.hidden{display:none!important}
+.xy{font-size:20px;font-weight:800;background:var(--sand2);border-radius:12px;padding:10px 12px;margin:8px 0}
+@media (max-width:520px){
+  .wrap{padding:10px 10px 50px}
+  .big-title{font-size:26px}
+  .btn{width:100%;margin:5px 0}
+  .btn.small{width:auto;margin:2px}
+}
+table.res{table-layout:fixed;word-break:break-word}
+table.res th:first-child{width:28%}
+.card{overflow-wrap:anywhere}
+
+.cal{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.day{background:var(--sand);border:2px solid var(--line);border-radius:14px;padding:10px;text-align:center}
+.day.tide{background:#f1ebff;border-color:var(--lilac)}
+.day .dh{font-weight:800;font-size:17px}
+.day .need{margin:6px 0}
+.pm{display:flex;align-items:center;justify-content:center;gap:10px}
+.pm .num{font-size:28px;font-weight:800;min-width:36px}
+.pm .btn{font-size:22px;min-width:48px;min-height:48px;width:auto}
+
+</style></head><body><div class="wrap" id="app"></div>
+<script>
+// ===== 海風小館：規則 A1 星露換潮貝（比例＋條件） =====
+(function(){
+const S_TOTAL = 9;
+const rate = (L, d) => L.tide.indexOf(d) >= 0 ? 3 : 4;
+// 與 enumerate_levels.py a1_feas 相同：逐日累計，潮貝可留到隔天，不能欠
+function feas(L, p){
+  let sh = 0;
+  for (let d = 0; d < L.demand.length; d++) {
+    sh += p[d] * rate(L, d) - L.demand[d];
+    if (sh < 0) return {ok:false, day:d};
+  }
+  return {ok:true};
+}
+// 窮舉最少星露的解（同 a1_minplans）
+function minPlans(L){
+  const n = L.demand.length, out = [];
+  const rec = (d, acc, s) => {
+    if (d === n) { if (feas(L, acc).ok) out.push(acc.slice()); return; }
+    for (let e = 0; e + s <= S_TOTAL; e++) { acc.push(e); rec(d + 1, acc, s + e); acc.pop(); }
+  };
+  rec(0, [], 0);
+  const m = Math.min.apply(null, out.map(p => p.reduce((a, b) => a + b, 0)));
+  return {min: m, sols: out.filter(p => p.reduce((a, b) => a + b, 0) === m)};
+}
+const sum = p => p.reduce((a, b) => a + b, 0);
+const LEVELS = [
+  {id:'L1', role:'理解', demand:[12, 8], tide:[0], ans:[4, 2]},
+  {id:'L2', role:'理解', demand:[15, 4], tide:[0], ans:[5, 1]},
+  {id:'L3', role:'推演', demand:[12, 0, 8], tide:[0, 2], ans:[4, 2, 0]},
+  {id:'L4', role:'推演', demand:[12, 0, 0, 4], tide:[0, 1, 3], ans:[4, 0, 1, 0]},
+];
+LEVELS.forEach(L => {
+  const n = L.demand.length;
+  const days = L.demand.map((x, d) => `第 ${d + 1} 天${L.tide.indexOf(d) >= 0 ? '（漲潮）' : '（平日）'}要 ${x} 枚`).join('、');
+  L.goalHtml = `<b>目標：用最少的星露辦完這 ${n} 天。</b><br>${days}。<br>限制：一共 ${S_TOTAL} 顆星露；潮貝可留到隔天，不能欠；多換一顆就不算過關。`;
+  L.passNote = '用了最少的星露，每天都夠用。';
+  const ms = minPlans(L);
+  if (ms.sols.length !== 1 || ms.sols[0].join() !== L.ans.join()) console.warn('A1 level mismatch', L.id, ms);
+});
+const P = (id, type, label, day, val) => ({id, type, label, day, val, desc:[type]});
+const POINTS = {
+  L1:[P('L1-D1','條件','第 1 天（漲潮）換 4 顆',0,4), P('L1-D2','照著用','第 2 天（平日）換 2 顆',1,2)],
+  L2:[P('L2-D1','條件','第 1 天（漲潮）換 5 顆',0,5), P('L2-D2','照著用','第 2 天（平日）換 1 顆',1,1)],
+  L3:[P('L3-D1','條件','第 1 天（漲潮）換 4 顆',0,4), P('L3-D2','提前規劃','第 2 天（平日、當天不用）換 2 顆',1,2), P('L3-D3','提前規劃','第 3 天（漲潮）換 0 顆，用前一天留下的',2,0)],
+  L4:[P('L4-D1','條件','第 1 天（漲潮）換 4 顆',0,4), P('L4-D2','照著用','第 2 天（漲潮、當天不用）換 0 顆',1,0), P('L4-D3','提前規劃','第 3 天（平日）換 1 顆',2,1), P('L4-D4','提前規劃','第 4 天換 0 顆',3,0)],
+};
+function dayCards(L, plan, locked, onChange, opts){
+  opts = opts || {};
+  const left = S_TOTAL - sum(plan);
+  let h = `<div class="row" style="margin:6px 0"><span class="counter">剩餘星露 ⭐ ${left} / ${S_TOTAL}</span></div><div class="cal">`;
+  L.demand.forEach((dem, d) => {
+    const tide = L.tide.indexOf(d) >= 0;
+    h += `<div class="day ${tide ? 'tide' : ''}"><div class="dh">第 ${d + 1} 天</div>
+      <div>${tide ? '<span class="tag tide">🌊 漲潮</span>' : '<span class="tag">☀️ 平日</span>'}</div>
+      <div class="need">需要 <b>${dem}</b> 枚潮貝</div>
+      <div class="pm"><button class="btn small ghost" data-d="${d}" data-k="-1" ${locked || plan[d] <= 0 ? 'disabled' : ''} aria-label="減少">－</button>
+      <span class="num">${plan[d]}</span>
+      <button class="btn small ghost" data-d="${d}" data-k="1" ${locked || left <= 0 ? 'disabled' : ''} aria-label="增加">＋</button></div>
+      <div class="muted">換幾顆星露</div></div>`;
+  });
+  h += '</div>';
+  return h;
+}
+function bindPM(root, plan, onChange){
+  root.querySelectorAll('.pm button').forEach(b => b.onclick = () => {
+    const d = +b.dataset.d, k = +b.dataset.k;
+    if (k > 0 && sum(plan) >= S_TOTAL) return;
+    plan[d] = Math.max(0, plan[d] + k); onChange();
+  });
+}
+window.G_DEF = {
+  id:'haifeng', name:'海風小館', submitLabel:'開店',
+  oneRule:'1 顆星露換 4 枚潮貝；漲潮日只換 3 枚。潮貝能留到隔天，不能欠。用最少的星露辦完。',
+  ruleHtml:'<b>星露換潮貝</b>：1 顆星露換 4 枚潮貝；<b>漲潮日只換 3 枚</b>。潮貝可以留到隔天，但不能欠。每關有 9 顆星露，要「用最少的星露辦完」，多換一顆就不算過。',
+  levels: LEVELS, points: POINTS,
+  typeOrder:['照著用','條件','提前規劃'],
+  short:{
+    '條件':'漲潮日 1 顆只換 3 枚，顆數要照這個算。',
+    '照著用':'平日 1 顆換 4 枚，份量要照這個備。',
+    '提前規劃':'後面漲潮日要用的量，可以在平日先換好留著。',
+  },
+  describe:{
+    '條件':'條件錯過：漲潮日你用了平日的算法，或顆數對不上「1 顆換 3 枚」。',
+    '照著用':'照著用錯過：平日的份量沒按「1 顆換 4 枚」來備。',
+    '提前規劃':'提前規劃錯過：後面那個漲潮日要用的量，你沒有在平日先換好。',
+  },
+  allOk:'這次兩種匯率你都有用對，也有在平日先換好後面要用的量。這只說明這一條規則、這一場的做法。',
+  advice:'遇到「平日跟高峰日算法不一樣」的規定，先把哪一天適用哪一種寫下來，再決定要不要提前準備。',
+  measureHow:`<p>本款有 4 個計分關：第 1、2 關（理解：兩種匯率都要用到）、第 3、4 關（推演：要在平日先換好後面漲潮日的量）。每關裡「那一天換幾顆」就是一個關鍵決策點，共 11 個，分成三類：<b>照著用</b>（平日 1:4）、<b>條件</b>（漲潮 1:3）、<b>提前規劃</b>（在平日先換）。</p>`,
+  newBoard(L){ return L.demand.map(() => 0); },
+  setPlan(L, plan){ return L.demand.map((_, d) => Math.max(0, Math.floor(+plan[d] || 0))); },
+  canSubmit(L, b){ return sum(b) > S_TOTAL ? '星露不夠這麼多顆。' : null; },
+  evaluate(L, b){
+    const f = feas(L, b);
+    const ms = minPlans(L);
+    const pass = f.ok && sum(b) === ms.min;
+    const points = {};
+    POINTS[L.id].forEach(p => points[p.id] = b[p.day] === p.val ? 1 : 0);
+    const notes = [];
+    if (!f.ok) notes.push(`第 ${f.day + 1} 天潮貝不夠用（潮貝不能欠）。`);
+    else if (!pass) notes.push(`每天都夠用，但用了 ${sum(b)} 顆星露，不是最少。`);
+    return {pass, points, notes};
+  },
+  renderBoard(root, L, b, locked, rerender){
+    root.innerHTML = dayCards(L, b, locked);
+    if (!locked) bindPM(root, b, rerender);
+  },
+  renderTeach(root){
+    const steps = [
+      {L:{demand:[6], tide:[0]}, ans:2, ok:'對：漲潮日 1 顆只換 3 枚，要 6 枚就換 2 顆。', hint:'漲潮日 1 顆只換 3 枚。6 枚要幾顆？'},
+      {L:{demand:[4], tide:[]}, ans:1, ok:'對：平日 1 顆換 4 枚，要 4 枚換 1 顆就好。', hint:'平日 1 顆換 4 枚。4 枚要幾顆？'},
+    ];
+    let k = 0, plan = [0], msg = '';
+    const draw = () => {
+      const st = steps[k];
+      root.innerHTML = `<p><b>帶玩 ${k + 1}/2</b>：${k === 0 ? '先看一個漲潮日。' : '換你點一次平日。'}${st.hint}</p>
+        <div id="tb"></div>
+        <div class="row"><button class="btn sea small" id="chk">試開店</button>${k === 0 ? '<button class="btn ghost small" id="demo">看示範</button>' : ''}</div>
+        <p id="tm">${msg}</p>
+        ${k >= 2 ? '' : ''}`;
+      const tb = root.querySelector('#tb');
+      const L = Object.assign({}, st.L);
+      tb.innerHTML = dayCards(L, plan, false);
+      bindPM(tb, plan, draw);
+      root.querySelector('#chk').onclick = () => {
+        if (plan[0] === st.ans) {
+          msg = '✅ ' + st.ok;
+          if (k === 0) { k = 1; plan = [0]; draw(); msg = ''; return; }
+          finish(); return;
+        }
+        const got = plan[0] * (st.L.tide.length ? 3 : 4);
+        msg = got < st.L.demand[0] ? `換到 ${got} 枚，不夠（不能欠）。再試一次。` : `換到 ${got} 枚，夠了，但不是最少的顆數。再試一次。`;
+        draw();
+      };
+      const dm = root.querySelector('#demo');
+      if (dm) dm.onclick = () => { plan[0] = 2; msg = '示範：漲潮日 2 顆 × 3 枚 ＝ 6 枚。按「試開店」看看。'; draw(); };
+    };
+    const finish = () => {
+      root.innerHTML = `<p>✅ 漲潮日：要 6 枚 → 換 2 顆（1 顆換 3 枚）。</p><p>✅ 平日：要 4 枚 → 換 1 顆（1 顆換 4 枚）。</p>
+        <p><b>還要記得</b>：沒用完的潮貝可以<b>留到隔天</b>，但<b>不能欠</b>。計分關的目標是「<b>用最少的星露</b>辦完」，多換一顆就不算過。</p>`;
+    };
+    draw();
+  },
+};
+})();
+
+</script>
+<script>
+// ===== 共用流程（每款 index.html 內嵌同一份） =====
+(function(){
+const G = window.G_DEF;
+const BACK = location.pathname.indexOf('lq-tendency-games') >= 0 ? '../../lq-tendency/' : '../../LQ學習傾向驗證簡報_v2.html';
+const LIDS = G.levels.map(l => l.id);
+LIDS.forEach(id => G.points[id].forEach(p => p.lv = id));
+const Y = LIDS.reduce((s, id) => s + G.points[id].length, 0);
+let S;
+function fresh(){
+  S = {phase:'title', li:0, first:{}, boards:{}, locked:{}, fb:{}, teachDone:false};
+  LIDS.forEach((id, i) => { S.boards[id] = G.newBoard(G.levels[i]); S.locked[id] = false; });
+}
+fresh();
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+G.esc = esc;
+function lv(){ return G.levels[S.li]; }
+function lid(){ return LIDS[S.li]; }
+function allFirst(){ return LIDS.every(id => S.first[id]); }
+function xCount(){
+  let x = 0;
+  LIDS.forEach(id => { const f = S.first[id]; if (f) for (const k in f.points) x += f.points[k]; });
+  return x;
+}
+function app(){ return $('#app'); }
+function shell(inner){
+  return `<header class="top"><h1>${esc(G.name)}</h1><span class="sp"></span>
+  <a class="back" href="${BACK}">回簡報</a></header>${inner}`;
+}
+function render(){
+  const a = app();
+  if (S.phase === 'title') {
+    a.innerHTML = shell(`<div class="card"><div class="big-title">${esc(G.name)}</div>
+      <p style="font-size:18px">${G.oneRule}</p>
+      <p class="muted">先有一段短教學（不計分），接著是 4 個關卡。每關只看第一次送出；之後可以「隔天再來」重玩。</p>
+      <button class="btn sea" id="go">開始</button></div>`);
+    $('#go').onclick = () => { S.phase = 'teach'; render(); };
+  } else if (S.phase === 'teach') {
+    a.innerHTML = shell(`<div class="card"><h2>教學（不計分）</h2><div class="rule">${G.ruleHtml}</div><div id="teach"></div></div>
+      <div class="card"><button class="btn leaf" id="toL1">開始第 1 關</button>
+      <span class="muted">（教學裡的操作都不計入）</span></div>`);
+    G.renderTeach($('#teach'));
+    $('#toL1').onclick = () => { startLevels(); };
+  } else if (S.phase === 'level') {
+    renderLevel();
+  } else if (S.phase === 'results') {
+    renderResults();
+  }
+  window.scrollTo && window.scrollTo(0, 0);
+}
+function startLevels(){ S.teachDone = true; S.phase = 'level'; S.li = 0; render(); }
+function unlocked(i){ return i === 0 || !!S.first[LIDS[i - 1]]; }
+function renderLevel(){
+  const L = lv(), id = lid();
+  const pills = G.levels.map((l, i) => `<button class="pill ${i === S.li ? 'on' : ''} ${S.first[l.id] ? 'done' : ''}" data-i="${i}" ${unlocked(i) ? '' : 'disabled'}>第 ${i + 1} 關</button>`).join('');
+  const fb = S.fb[id];
+  const fbHtml = fb ? `<div class="fb ${fb.pass ? 'ok' : 'no'}" id="fb">${fb.html}</div>` : '';
+  let nav = '';
+  if (S.locked[id]) {
+    nav = `<button class="btn ghost" id="replay">隔天再來（重玩，不計分）</button>`;
+    if (S.li < LIDS.length - 1) nav += `<button class="btn sea" id="next">下一關</button>`;
+    if (allFirst()) nav += `<button class="btn leaf" id="res">看結果</button>`;
+  }
+  app().innerHTML = shell(`<div class="pills">${pills}</div>
+    <div class="card"><h2>第 ${S.li + 1} 關 <span class="muted">${S.locked[id] ? '（已送出）' : S.first[id] ? '（隔天再來：重玩中，不計分）' : ''}</span></h2>
+      <div class="goal">${L.goalHtml}</div>
+      <details class="rule"><summary>規則提醒</summary>${G.ruleHtml}</details>
+      <div id="board"></div>
+      <div class="row" style="margin-top:10px">${S.locked[id] ? '' : `<button class="btn coral" id="submit">${esc(G.submitLabel)}</button>`}<span id="msg" class="muted"></span></div>
+      ${fbHtml}
+      <div class="row">${nav}</div>
+    </div>`);
+  app().querySelectorAll('.pill').forEach(b => b.onclick = () => { const i = +b.dataset.i; if (unlocked(i)) { S.li = i; render(); } });
+  G.renderBoard($('#board'), L, S.boards[id], S.locked[id], () => renderLevel());
+  const sb = $('#submit'); if (sb) sb.onclick = () => { const r = doSubmit(); if (r.blocked) $('#msg').textContent = r.feedback; };
+  const rp = $('#replay'); if (rp) rp.onclick = () => doReplay();
+  const nx = $('#next'); if (nx) nx.onclick = () => { S.li++; render(); };
+  const rs = $('#res'); if (rs) rs.onclick = () => gotoResults();
+  if (fb) { const f = $('#fb'); f && f.scrollIntoView && f.scrollIntoView({block:'nearest'}); }
+}
+function fbHtml(L, ev, scored, first){
+  let h = `<b>${ev.pass ? '過關了。' : '這次沒過。'}</b>`;
+  if (!scored) h += ` <span class="muted">（重玩，不計分）</span>`;
+  const lines = [];
+  ev.notes.forEach(n => lines.push(n));
+  if (!ev.pass) {
+    const missed = [];
+    G.points[L.id].forEach(p => { if (!ev.points[p.id]) p.desc.forEach(d => { if (missed.indexOf(d) < 0) missed.push(d); }); });
+    missed.forEach(d => lines.push(`錯在「${d}」：${G.short[d]}`));
+  }
+  if (lines.length) h += '<ul>' + lines.map(l => `<li>${l}</li>`).join('') + '</ul>';
+  if (ev.pass) h += `<div class="muted">${esc(L.passNote || '')}</div>`;
+  return h;
+}
+function doSubmit(){
+  if (S.phase !== 'level') return {pass:false, first:false, scored:false, feedback:'目前不在關卡畫面', blocked:true};
+  const L = lv(), id = lid(), b = S.boards[id];
+  const block = G.canSubmit ? G.canSubmit(L, b) : null;
+  if (block) return {pass:false, first:false, scored:false, feedback:block, blocked:true};
+  const ev = G.evaluate(L, b);
+  const first = !S.first[id];
+  if (first) S.first[id] = {pass: ev.pass, points: Object.assign({}, ev.points)};
+  const html = fbHtml(L, ev, first, first);
+  S.fb[id] = {pass: ev.pass, html};
+  S.locked[id] = true;
+  renderLevel();
+  const tmp = document.createElement('div'); tmp.innerHTML = html;
+  return {pass: ev.pass, first, scored: first, feedback: tmp.textContent.trim()};
+}
+function doReplay(){
+  if (S.phase !== 'level') return false;
+  const id = lid();
+  S.boards[id] = G.newBoard(lv()); S.locked[id] = false; S.fb[id] = null;
+  renderLevel();
+  return true;
+}
+function gotoResults(){
+  if (!allFirst()) return false;
+  S.phase = 'results'; render(); return true;
+}
+function renderResults(){
+  const x = xCount();
+  const byType = {};
+  G.typeOrder.forEach(t => byType[t] = {ok:[], no:[]});
+  const missedDesc = [];
+  LIDS.forEach(id => G.points[id].forEach(p => {
+    const v = S.first[id].points[p.id];
+    if (!byType[p.type]) byType[p.type] = {ok:[], no:[]};
+    byType[p.type][v ? 'ok' : 'no'].push(p);
+    if (!v) p.desc.forEach(d => { if (missedDesc.indexOf(d) < 0) missedDesc.push(d); });
+  }));
+  const rows = Object.keys(byType).filter(t => byType[t].ok.length + byType[t].no.length).map(t => {
+    const o = byType[t];
+    return `<tr><td><b>${esc(t)}</b></td><td class="okc">對 ${o.ok.length}</td><td class="noc">錯 ${o.no.length}</td>
+      <td class="muted">${o.no.length ? '錯過：' + o.no.map(p => '第 ' + (LIDS.indexOf(p.lv) + 1) + ' 關 ' + esc(p.label)).join('；') : '—'}</td></tr>`;
+  }).join('');
+  const detail = LIDS.map((id, i) => `<tr><td>第 ${i + 1} 關</td><td>${S.first[id].pass ? '第一次就過' : '第一次沒過'}</td><td class="muted">${
+    G.points[id].map(p => `${S.first[id].points[p.id] ? '✓' : '✗'} ${esc(p.label)}`).join('<br>')}</td></tr>`).join('');
+  const descHtml = missedDesc.length
+    ? '<ul>' + missedDesc.map(d => `<li>${esc(G.describe[d])}</li>`).join('') + '</ul>'
+    : `<p>${esc(G.allOk)}</p>`;
+  app().innerHTML = shell(`<div class="card"><h2>${esc(G.name)}：這一場的結果說明</h2>
+    <h3>1. 量什麼</h3>
+    <p>這一場看的是「規則掌握」：剛教的規則，能不能照著用，也能用到說明沒直接寫的情況（邊界、例外、要提前準備的安排）。</p>
+    <p><b>記得住</b>：這一場量不到。要隔幾天用新關再量，而且這一輪只看群體。</p>
+    <h3>2. 怎麼量</h3>
+    ${G.measureHow}
+    <p>只算每關的<b>第一次送出</b>；教學與重玩不算；送出前改了幾次、用了多久，也都不算。</p>
+    <h3>3. 怎麼換算</h3>
+    <div class="xy">你在 ${Y} 個關鍵決策點裡，第一次做對了 ${x} 個。</div>
+    <p class="muted">這個 ${x}/${Y} 是這一次的證據摘要：不是分數、不是等級，也不是排名。</p>
+    <table class="res"><tr><th>類型</th><th></th><th></th><th>說明</th></tr>${rows}</table>
+    <details style="margin-top:8px"><summary>每關的決策點</summary><table class="res">${detail}</table></details>
+    <h3>描述</h3>${descHtml}
+    <h3>一個建議</h3><p>${esc(G.advice)}</p>
+    <h3>下一步</h3><p>隔幾天再回來，用新關卡看看還記不記得這條規則；或先去玩另外一款，看同樣的做法換了規則還在不在。</p>
+    <p class="muted">要出現個人分數，還需要：換遊戲換規則也量得穩、跟遊戲外的新規則短測對得上，並且證明它不只是推理或工作記憶。這些都不在這個原型裡完成。</p>
+    <div class="row"><button class="btn sea" id="again">再玩一次</button><a class="btn ghost" href="${BACK}" style="text-decoration:none">回簡報</a></div>
+  </div>`);
+  $('#again').onclick = () => { fresh(); render(); };
+}
+window.GAME = {
+  id: G.id,
+  skipTeach(){ if (S.phase === 'title' || S.phase === 'teach') startLevels(); else if (S.phase === 'level') {} return true; },
+  setPlan(plan){
+    if (S.phase !== 'level') return false;
+    const id = lid();
+    if (S.locked[id]) {
+      // 已送出：若下一關還沒做，就前往下一關；否則視為「隔天再來」重玩本關
+      if (S.li < LIDS.length - 1 && !S.first[LIDS[S.li + 1]]) S.li++;
+      else { S.boards[id] = G.newBoard(lv()); S.locked[id] = false; S.fb[id] = null; }
+    }
+    S.boards[lid()] = G.setPlan(lv(), plan);
+    render(); return true;
+  },
+  submit(){ const r = doSubmit(); delete r.blocked; return r; },
+  replay(){ return doReplay(); },
+  gotoResults,
+  goto(i){ if (S.phase === 'level' && unlocked(i)) { S.li = i; render(); return true; } return false; },
+  next(){ if (S.phase === 'level' && S.li < LIDS.length - 1 && unlocked(S.li + 1)) { S.li++; render(); return true; } return false; },
+  reset(){ fresh(); render(); return true; },
+  state(){
+    const first = {};
+    LIDS.forEach(id => { if (S.first[id]) first[id] = {pass: S.first[id].pass, points: Object.assign({}, S.first[id].points)}; });
+    return {phase: S.phase, levelId: S.phase === 'level' ? lid() : null, first, x: xCount(), y: Y, onResults: S.phase === 'results'};
+  }
+};
+render();
+})();
+
+</script>
+</body></html>
