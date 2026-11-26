@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>NOUS 高品質題庫提案｜從作答證據到 mac 與 LQ</title>
+<style>
+:root{
+  --sky:#5ec8f2; --sea:#1fb5c4; --sea-d:#0d8797; --sand:#fff7e8; --sand2:#ffe8c2;
+  --coral:#ff7a66; --coral-d:#d94f3a; --sun:#ffc63d; --leaf:#5cbf4a; --leaf-d:#3a9a2c;
+  --wood:#a86d3c; --wood-d:#6e4524; --ink:#3a2c25; --ink2:#6f5d52; --lilac:#8f6ee0;
+  --card:#fff; --line:#f0dfc4;
+  --shadow:0 5px 0 rgba(110,69,36,.10), 0 10px 22px rgba(58,44,37,.10);
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;}
+body{background:#cdeefa;font-family:"PingFang TC","Noto Sans TC","Noto Sans CJK TC","Source Han Sans TC","Microsoft JhengHei","Heiti TC","WenQuanYi Zen Hei",sans-serif;color:var(--ink);-webkit-text-size-adjust:100%;}
+button{font-family:inherit}
+#viewport{position:fixed;inset:0;overflow:hidden;display:flex;align-items:center;justify-content:center;
+  background:radial-gradient(circle at 20% 10%,#e9fbff 0,#bfe9f7 45%,#8fd6ec 100%);}
+#stage{width:1280px;height:720px;position:relative;flex:none;transform-origin:center center;border-radius:18px;overflow:hidden;box-shadow:0 20px 60px rgba(13,90,110,.25);}
+.slide{position:absolute;inset:0;padding:38px 60px 58px;display:none;flex-direction:column;overflow:hidden;
+  background:
+   url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1280' height='60' viewBox='0 0 1280 60'%3E%3Cpath d='M0 30 Q80 5 160 30 T320 30 T480 30 T640 30 T800 30 T960 30 T1120 30 T1280 30 V60 H0Z' fill='%23bfeaf5'/%3E%3Cpath d='M0 42 Q80 22 160 42 T320 42 T480 42 T640 42 T800 42 T960 42 T1120 42 T1280 42 V60 H0Z' fill='%238fd9ea'/%3E%3C/svg%3E") bottom/100% 46px no-repeat,
+   linear-gradient(180deg,#eaf9ff 0%,#fffaf0 46%,#fff2da 100%);}
+.slide.active{display:flex}
+.kicker{font-size:15px;font-weight:800;letter-spacing:.08em;color:var(--sea-d);margin-bottom:4px;display:flex;gap:8px;align-items:center}
+.kicker .dot{width:10px;height:10px;border-radius:50%;background:var(--sun);display:inline-block;box-shadow:0 0 0 3px #fff2c4}
+h2.hl{font-size:38px;line-height:1.2;margin:0 0 18px;font-weight:900;color:var(--ink);letter-spacing:.01em}
+h2.hl em{font-style:normal;color:var(--coral-d)}
+.body{flex:1;min-height:0;display:flex;flex-direction:column}
+p{margin:0}
+.lead{font-size:21px;line-height:1.55;color:var(--ink2)}
+.card{background:var(--card);border-radius:22px;box-shadow:var(--shadow);padding:18px 22px;border:2px solid #fff;}
+.cols{display:grid;gap:22px}
+.c2{grid-template-columns:1fr 1fr}.c3{grid-template-columns:1fr 1fr 1fr}
+.tag{display:inline-block;padding:2px 10px;border-radius:999px;font-size:13px;font-weight:800;vertical-align:middle;white-space:nowrap;line-height:1.5}
+.t-tent{background:#ffe2dc;color:#c2412d}
+.t-cal{background:#fff0bf;color:#8a5b00}
+.t-cand{background:#ece4ff;color:#6343c0}
+.t-int{background:#dcf2ff;color:#13698f}
+.t-ok{background:#dff6d6;color:#2f7d22}
+.pill{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:999px;background:#fff;border:2px solid var(--line);font-size:15px;font-weight:700;color:var(--ink2)}
+.muted{color:var(--ink2)}
+.small{font-size:15px}
+.note{font-size:15px;color:var(--ink2);line-height:1.5}
+b.k{color:var(--sea-d)}
+/* nav */
+#nav{position:absolute;right:16px;bottom:10px;display:flex;gap:8px;align-items:center;z-index:50}
+#nav button{width:38px;height:38px;border-radius:50%;border:0;background:#fff;box-shadow:0 3px 0 rgba(0,0,0,.08);font-size:18px;font-weight:900;color:var(--sea-d);cursor:pointer}
+#nav button:hover{background:#fff6dc}
+#counter{min-width:70px;text-align:center;font-weight:800;font-size:15px;color:var(--sea-d);background:#ffffffcc;border-radius:999px;padding:6px 10px}
+#progress{position:absolute;left:0;bottom:0;height:5px;background:var(--sun);z-index:50;transition:width .3s}
+.edge{position:absolute;top:80px;bottom:60px;width:34px;z-index:40;cursor:pointer}
+.edge.l{left:0}.edge.r{right:0}
+.edge:hover{background:linear-gradient(90deg,rgba(255,255,255,.35),transparent)}
+.edge.r:hover{background:linear-gradient(270deg,rgba(255,255,255,.35),transparent)}
+#hint{position:absolute;left:18px;bottom:16px;font-size:13px;color:#4c8fa0;z-index:50}
+body.mobile #viewport{position:static;display:block;overflow:visible;background:#eaf9ff}
+body.mobile #stage{width:100%;height:auto;transform:none!important;border-radius:0;box-shadow:none;overflow:visible}
+body.mobile .slide{position:relative;inset:auto;min-height:100vh;padding:22px 16px 90px;overflow:visible;background-size:100% 30px,auto}
+body.mobile h2.hl{font-size:26px}
+body.mobile #nav{position:fixed;bottom:12px;right:12px}
+body.mobile #progress{position:fixed}
+body.mobile .edge,body.mobile #hint{display:none}
+
+/* ===== NOUS 題庫提案：元件 ===== */
+.t-demo{background:#fff0bf;color:#8a5b00}
+.demo{font-size:13px;font-weight:800;color:#8a5b00;background:#fff0bf;border-radius:999px;padding:1px 9px;white-space:nowrap;vertical-align:middle}
+.lead{font-size:22px}
+.center{text-align:center}
+.grow{flex:1;min-height:0}
+.ar{display:flex;align-items:center;justify-content:center;color:var(--sun);font-weight:900;font-size:40px}
+.code{font-family:"SFMono-Regular",Menlo,Consolas,monospace;font-weight:800;font-size:.85em;background:#eef7fb;color:#13698f;border-radius:8px;padding:1px 7px}
+/* cover */
+.title-wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;height:100%}
+.title-wrap h1{font-size:64px;line-height:1.18;margin:8px 0 14px;font-weight:900;color:var(--ink)}
+.title-wrap h1 span{color:var(--sea-d)}
+.hook{font-size:30px;font-weight:900;color:var(--coral-d);margin-bottom:18px}
+.meta{font-size:16px;color:var(--ink2);line-height:1.7;margin-top:22px}
+.qmock{background:#fff;border-radius:26px;box-shadow:var(--shadow);padding:22px 24px;transform:rotate(1.5deg);border:6px solid #fff}
+.qmock .qh{font-size:14px;font-weight:900;color:var(--sea-d);letter-spacing:.06em}
+.qmock .qt{font-size:21px;font-weight:800;margin:6px 0 12px;line-height:1.45}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.opt{border:2px solid var(--line);border-radius:14px;padding:7px 12px;font-size:18px;font-weight:800;background:#fffdf8}
+.opt.pick{border-color:var(--coral);background:#fff1ee;color:var(--coral-d)}
+.opt.ok{border-color:var(--leaf);background:#effbea;color:var(--leaf-d)}
+.hintbub{margin-top:12px;background:#e9fbff;border-radius:14px;padding:8px 12px;font-size:16px;font-weight:700;color:#13698f;display:flex;gap:8px;align-items:center}
+.hintbub .lv{background:var(--sea);color:#fff;border-radius:8px;padding:1px 8px;font-size:13px}
+/* scene */
+.scene{display:grid;grid-template-columns:280px 80px 1fr;gap:0;align-items:center;flex:1;min-height:0}
+.kid{display:flex;flex-direction:column;align-items:center;gap:14px}
+.face{width:150px;height:150px;border-radius:50%;background:linear-gradient(160deg,#ffe8c2,#ffd49a);display:flex;align-items:center;justify-content:center;font-size:84px;box-shadow:var(--shadow)}
+.say{background:#fff;border-radius:22px;padding:14px 24px;font-size:30px;font-weight:900;box-shadow:var(--shadow);position:relative}
+.say:before{content:"";position:absolute;top:-14px;left:50%;margin-left:-12px;border:12px solid transparent;border-bottom:14px solid #fff;border-top:0}
+.paths{display:flex;flex-direction:column;gap:18px}
+.path{display:grid;grid-template-columns:1fr 50px 210px;align-items:center;background:#fff;border-radius:22px;box-shadow:var(--shadow);padding:18px 22px}
+.path .what{font-size:24px;font-weight:900}
+.path .what small{display:block;font-size:16px;font-weight:600;color:var(--ink2);margin-top:4px}
+.path .res{font-size:22px;font-weight:900;color:var(--leaf-d);text-align:center;background:#effbea;border-radius:14px;padding:10px 6px}
+.path.p2 .res{color:var(--sea-d);background:#e6f8fb}
+.punch{margin-top:20px;text-align:center;font-size:26px;font-weight:900}
+.punch em{font-style:normal;color:var(--coral-d)}
+/* big quote */
+.bq{background:#fffbe9;border:3px dashed #f3d37a;border-radius:26px;padding:26px 34px;font-size:32px;font-weight:900;line-height:1.5;text-align:center}
+.bq small{display:block;font-size:16px;color:var(--ink2);font-weight:700;margin-top:8px}
+.down{text-align:center;font-size:40px;color:var(--sun);font-weight:900;line-height:1;margin:12px 0}
+.goal{background:linear-gradient(160deg,#dff6ff,#fff);border-radius:26px;box-shadow:var(--shadow);padding:22px 30px;font-size:32px;font-weight:900;text-align:center;line-height:1.45}
+.goal em{font-style:normal;color:var(--coral-d)}
+.chips{display:flex;gap:14px;justify-content:center;margin-top:22px;flex-wrap:wrap}
+.chipb{background:#fff;border-radius:16px;padding:10px 18px;font-size:20px;font-weight:800;box-shadow:0 3px 0 rgba(0,0,0,.06)}
+.chipb .n{display:inline-flex;width:28px;height:28px;border-radius:50%;background:var(--sea);color:#fff;align-items:center;justify-content:center;font-size:15px;margin-right:8px}
+/* before / after */
+.ba{display:grid;grid-template-columns:1fr 110px 1fr;align-items:stretch;flex:1;min-height:0;max-height:440px}
+.bacard{border-radius:28px;padding:24px 28px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:12px}
+.bacard h3{margin:0;font-size:30px}
+.bacard .who{font-weight:900;font-size:16px;letter-spacing:.06em}
+.bacard.old{background:linear-gradient(160deg,#f3f0ea,#fff)}
+.bacard.old .who{color:#8a7a6b}
+.bacard.new{background:linear-gradient(160deg,#e3f7ec,#fff)}
+.bacard.new .who{color:var(--leaf-d)}
+.li{display:flex;gap:12px;align-items:flex-start;font-size:20px;line-height:1.5;font-weight:700}
+.li .ic{flex:none;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:900;margin-top:1px}
+.li .ic.x{background:#ffe2dc;color:var(--coral-d)}
+.li .ic.v{background:#dff6d6;color:var(--leaf-d)}
+.li q{quotes:"「" "」";color:var(--ink2)}
+.bamid{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;text-align:center;font-size:15px;font-weight:800;color:var(--ink2)}
+.bamid .big{font-size:48px;color:var(--sun);line-height:1}
+/* architecture */
+.arch{display:grid;grid-template-columns:1fr 46px 1fr 46px 1.15fr 46px 1fr;align-items:stretch;margin-top:6px}
+.node{background:#fff;border-radius:22px;box-shadow:var(--shadow);padding:16px 16px;display:flex;flex-direction:column;gap:8px;border-top:8px solid var(--sea)}
+.node .n{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;color:#fff;background:var(--sea)}
+.node h4{margin:0;font-size:22px}
+.node p{font-size:16px;line-height:1.5;color:var(--ink2)}
+.node.n2{border-top-color:var(--sun)}.node.n2 .n{background:#e0a400}
+.node.n3{border-top-color:var(--lilac);background:transparent;box-shadow:none;padding:0;border-top:0;gap:10px}
+.node.n4{border-top-color:var(--coral)}.node.n4 .n{background:var(--coral)}
+.sub{background:#fff;border-radius:18px;box-shadow:var(--shadow);padding:12px 16px;flex:1;border-left:8px solid var(--lilac)}
+.sub h4{margin:0 0 2px;font-size:21px}
+.sub p{font-size:15.5px;line-height:1.45;color:var(--ink2)}
+.sub.lq{border-left-color:var(--coral)}
+.loopbar{margin-top:22px;display:flex;align-items:center;justify-content:center;gap:12px;background:#fffbe9;border:2px dashed #f3d37a;border-radius:18px;padding:12px 18px;font-size:19px;font-weight:700;color:var(--ink2)}
+.loopbar b{color:var(--ink)}
+/* fields */
+.fgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.fc{background:#fff;border-radius:22px;box-shadow:var(--shadow);padding:16px 18px;display:flex;flex-direction:column;gap:10px;border-top:8px solid var(--sea)}
+.fc .ic{font-size:30px;line-height:1}
+.fc h4{margin:0;font-size:23px}
+.fc .why{font-size:16px;color:var(--ink2);line-height:1.5}
+.fc .ex{background:#f8fbff;border:2px solid #dcefff;border-radius:14px;padding:8px 10px;font-size:15.5px;line-height:1.55}
+.fc .ex .lab{font-size:12.5px;font-weight:900;color:#8a5b00;display:block;margin-bottom:2px}
+.fc.f2{border-top-color:var(--coral)}.fc.f3{border-top-color:var(--sun)}.fc.f4{border-top-color:var(--leaf)}
+.store{margin-top:20px;display:grid;grid-template-columns:auto 1fr 1fr auto;gap:14px;align-items:center;background:#fff;border-radius:20px;padding:14px 20px;box-shadow:var(--shadow)}
+.store .hd{font-size:19px;font-weight:900}
+.store .bx{border-radius:14px;padding:8px 14px;font-size:17px;font-weight:700;line-height:1.45}
+.store .bx.t{background:#fff7e8}.store .bx.c{background:#eef7fb}
+.store .nb{font-size:15px;color:var(--coral-d);font-weight:800;max-width:220px;line-height:1.45}
+/* walk-through */
+.walk{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;align-items:stretch}
+.ws{background:#fff;border-radius:20px;box-shadow:var(--shadow);padding:14px 14px;display:flex;flex-direction:column;gap:8px;position:relative}
+.ws .when{font-size:13.5px;font-weight:900;letter-spacing:.05em;color:var(--sea-d)}
+.ws h4{margin:0;font-size:20px;line-height:1.35}
+.ws .big{font-size:34px;font-weight:900;line-height:1.1}
+.ws p{font-size:15.5px;line-height:1.5;color:var(--ink2)}
+.ws.bad{background:linear-gradient(170deg,#fff1ee,#fff)} .ws.bad .big{color:var(--coral-d)}
+.ws.hint{background:linear-gradient(170deg,#e9fbff,#fff)}
+.ws.good .big{color:var(--leaf-d)} .ws.good{background:linear-gradient(170deg,#effbea,#fff)}
+.ws:not(:last-child)::after{content:"›";position:absolute;right:-12px;top:50%;transform:translateY(-50%);font-size:30px;font-weight:900;color:var(--sun);z-index:2}
+.recs{display:grid;grid-template-columns:3fr 2fr;gap:14px;margin-top:16px}
+.rec{background:#fffbe9;border:2px dashed #f3d37a;border-radius:18px;padding:10px 16px}
+.rec .hd{font-size:16px;font-weight:900;color:#8a5b00;margin-bottom:6px}
+.rec .cl{display:inline-block;background:#fff;border-radius:10px;padding:4px 10px;margin:0 6px 4px 0;font-size:16px;font-weight:800;box-shadow:0 2px 0 rgba(0,0,0,.05)}
+/* hint ladder */
+.ladder{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;align-items:end;flex:1;min-height:0}
+.rung{background:#fff;border-radius:22px 22px 14px 14px;box-shadow:var(--shadow);padding:16px 18px;display:flex;flex-direction:column;gap:10px;border-top:10px solid #9edfea}
+.rung .lv{font-size:14px;font-weight:900;color:var(--sea-d);letter-spacing:.06em}
+.rung h4{margin:0;font-size:25px}
+.rung .say2{background:#f4fbfd;border-radius:14px;padding:10px 12px;font-size:16.5px;line-height:1.5;font-weight:600}
+.rung .say2 .lab{display:block;font-size:12.5px;font-weight:900;color:#8a5b00;margin-bottom:2px}
+.rung.r1{height:250px}.rung.r2{height:300px;border-top-color:#5ec8f2}.rung.r3{height:350px;border-top-color:var(--sea)}.rung.r4{height:400px;border-top-color:var(--sea-d)}
+.axis{display:flex;justify-content:space-between;margin-top:10px;font-size:16px;font-weight:800;color:var(--ink2)}
+.axis span:nth-child(2){flex:1;margin:0 14px;border-bottom:3px dotted #d9cdb9;transform:translateY(-8px)}
+.foot{margin-top:12px;display:flex;gap:12px;align-items:center;justify-content:center;font-size:18px;font-weight:700;color:var(--ink2)}
+/* two records */
+.two{display:grid;grid-template-columns:1fr 90px 1fr;align-items:stretch}
+.tc{border-radius:28px;padding:22px 28px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:12px}
+.tc.a{background:linear-gradient(160deg,#e9fbff,#fff)}
+.tc.b{background:linear-gradient(160deg,#effbea,#fff)}
+.tc .who{font-size:15px;font-weight:900;letter-spacing:.06em;color:var(--sea-d)}
+.tc.b .who{color:var(--leaf-d)}
+.tc h3{margin:0;font-size:32px;line-height:1.3}
+.tc .means{font-size:21px;font-weight:800}
+.tc .ex{font-size:17px;color:var(--ink2);background:#fff;border-radius:14px;padding:8px 12px;line-height:1.5}
+.neq{display:flex;align-items:center;justify-content:center;font-size:64px;font-weight:900;color:var(--coral)}
+.why2{margin-top:20px;display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.why2 .w{background:#fff;border-radius:18px;padding:12px 18px;box-shadow:0 3px 0 rgba(0,0,0,.05);font-size:18px;line-height:1.5}
+.why2 .w b{color:var(--coral-d)}
+/* metrics */
+.mgrid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.mc{background:#fff;border-radius:22px;box-shadow:var(--shadow);padding:14px 20px;display:grid;grid-template-columns:1fr 250px;gap:16px;align-items:center;border-left:9px solid var(--sea)}
+.mc h4{margin:0 0 4px;font-size:22px}
+.mc h4 .code{font-size:15px;margin-left:4px}
+.mc .src{font-size:16px;line-height:1.5;color:var(--ink2)}
+.mc .calc{background:#fffbe9;border-radius:16px;padding:10px 12px;text-align:center}
+.mc .calc .eq{font-size:16px;font-weight:700;color:var(--ink2);line-height:1.45}
+.mc .calc .rs{font-size:28px;font-weight:900;color:var(--sea-d);line-height:1.2}
+.mc.m2{border-left-color:var(--leaf)} .mc.m2 .rs{color:var(--leaf-d)}
+.mc.m3{border-left-color:var(--sun)} .mc.m3 .rs{color:#b07a00}
+.mc.m4{border-left-color:var(--coral)} .mc.m4 .rs{color:var(--coral-d)}
+.mc.off{background:#f6f3ee;border-left-color:#b8aa9b;box-shadow:0 3px 0 rgba(0,0,0,.05)}
+.mc.off .calc{background:#fff}
+.mc.off .rs{color:#8a7a6b;font-size:24px}
+.note2{margin-top:16px;background:#fff;border-radius:16px;padding:10px 18px;font-size:17px;line-height:1.5;color:var(--ink2);box-shadow:0 3px 0 rgba(0,0,0,.05)}
+.note2 b{color:var(--ink)}
+/* labeling */
+.lab3{display:grid;grid-template-columns:1fr 54px 1fr 54px 1fr;align-items:stretch}
+.lc{background:#fff;border-radius:24px;box-shadow:var(--shadow);padding:18px 22px;display:flex;flex-direction:column;gap:10px}
+.lc .ic{font-size:40px;line-height:1}
+.lc h3{margin:0;font-size:27px}
+.lc p{font-size:17.5px;line-height:1.55;color:var(--ink2)}
+.lc ul{margin:0;padding-left:20px;font-size:17px;line-height:1.6}
+.lc.ai{border-top:8px solid var(--lilac)} .lc.ed{border-top:8px solid var(--sea)} .lc.ck{border-top:8px solid var(--sun)}
+.qa{margin-top:20px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+.qa .x{background:#fffbe9;border:2px dashed #f3d37a;border-radius:18px;padding:10px 16px;font-size:16.5px;line-height:1.5}
+.qa .x .q{font-weight:900;color:var(--ink);display:block;margin-bottom:2px}
+.qa .x .a{color:var(--ink2)}
+/* pilot */
+.pilot{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.pc{background:#fff;border-radius:22px;box-shadow:var(--shadow);padding:18px 18px;text-align:center;display:flex;flex-direction:column;gap:6px;align-items:center}
+.pc .ic{font-size:40px;line-height:1.1}
+.pc .v{font-size:28px;font-weight:900;color:var(--sea-d)}
+.pc .d{font-size:16px;color:var(--ink2);line-height:1.45}
+.bigq{margin-top:22px;background:linear-gradient(160deg,#fff4e0,#fff);border-radius:26px;box-shadow:var(--shadow);padding:20px 28px;text-align:center}
+.bigq .hd{font-size:16px;font-weight:900;color:var(--coral-d);letter-spacing:.06em}
+.bigq .qq{font-size:30px;font-weight:900;margin-top:6px;line-height:1.4}
+.bigq .qq em{font-style:normal;color:var(--sea-d)}
+.bigq .qq i{font-style:normal;color:var(--leaf-d)}
+.fork{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
+.fork .f{border-radius:18px;padding:12px 18px;font-size:18px;line-height:1.5;font-weight:700}
+.fork .f.y{background:#effbea}.fork .f.n{background:#fff1ee}
+/* risks */
+.risks{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.rk{background:#fff;border-radius:20px;box-shadow:var(--shadow);padding:14px 18px;display:grid;grid-template-columns:44px 1fr;gap:12px;align-items:start}
+.rk .ri{width:42px;height:42px;border-radius:14px;background:#ffe2dc;color:var(--coral-d);display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:900}
+.rk h4{margin:0 0 4px;font-size:21px}
+.rk p{font-size:16.5px;line-height:1.5;color:var(--ink2)}
+.rk p b{color:var(--leaf-d)}
+.notnow{margin-top:18px;background:#f3f0ea;border:2px dashed #d9cdb9;border-radius:20px;padding:12px 20px;display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.notnow .hd{font-size:19px;font-weight:900;color:#6f5d52}
+.notnow .it{background:#fff;border-radius:12px;padding:6px 12px;font-size:17px;font-weight:700}
+.notnow .it s{color:#8a7a6b}
+/* decisions */
+.dlist{display:grid;grid-template-columns:1fr 1fr;gap:12px 16px}
+.dc{background:#fff;border-radius:18px;box-shadow:var(--shadow);padding:12px 16px;display:grid;grid-template-columns:36px 1fr;gap:12px;align-items:start}
+.dc .box{width:30px;height:30px;border-radius:9px;border:3px solid var(--sea);margin-top:2px}
+.dc h4{margin:0 0 3px;font-size:20px}
+.dc p{font-size:15.5px;line-height:1.45;color:var(--ink2)}
+.dc .own{display:inline-block;margin-top:5px;font-size:14px;font-weight:800;color:#8a7a6b;border-bottom:2px dotted #c9b9a5;padding:0 4px}
+.dc.first{background:linear-gradient(160deg,#fff4e0,#fff)}
+.dc.first .box{border-color:var(--coral)}
+.ask{margin-top:16px;text-align:center;font-size:24px;font-weight:900}
+.ask em{font-style:normal;color:var(--coral-d)}
+/* mobile */
+body.mobile .scene,body.mobile .ba,body.mobile .arch,body.mobile .fgrid,body.mobile .walk,body.mobile .ladder,body.mobile .two,body.mobile .mgrid,body.mobile .mc,body.mobile .lab3,body.mobile .qa,body.mobile .pilot,body.mobile .fork,body.mobile .risks,body.mobile .dlist,body.mobile .recs,body.mobile .store,body.mobile .why2,body.mobile .path{grid-template-columns:1fr!important}
+body.mobile .rung{height:auto!important}
+body.mobile .ws::after{display:none}
+body.mobile .ar,body.mobile .neq,body.mobile .bamid .big{transform:rotate(90deg)}
+body.mobile .title-wrap h1{font-size:34px}
+body.mobile .bq,body.mobile .goal{font-size:22px}
+/* ===== size-up pass: fill the stage, bigger type for first-time readers ===== */
+.body{justify-content:center}
+.node{padding:20px 18px}.node h4{font-size:26px}.node p{font-size:19px}
+.sub h4{font-size:24px}.sub p{font-size:18px}.sub{padding:16px 18px}
+.loopbar{font-size:21px;margin-top:28px}
+.arch{min-height:330px}
+.fc{padding:20px 20px;gap:12px}.fc h4{font-size:26px}.fc .why{font-size:18px}.fc .ex{font-size:17.5px}.fc .ic{font-size:36px}
+.store{margin-top:26px}.store .hd{font-size:21px}.store .bx{font-size:19px}.store .nb{font-size:17px}
+.ws{padding:18px 16px;gap:10px;min-height:290px}.ws h4{font-size:23px}.ws .big{font-size:42px}.ws p{font-size:18px}.ws .when{font-size:15px}
+.recs{margin-top:22px}.rec .hd{font-size:18px}.rec .cl{font-size:18.5px;padding:5px 12px}
+.rung h4{font-size:27px}.rung .say2{font-size:18.5px}.rung .lv{font-size:15.5px}
+.tc{padding:28px 32px;gap:14px}.tc h3{font-size:36px}.tc .means{font-size:24px}.tc .ex{font-size:19px}
+.why2{margin-top:26px}.why2 .w{font-size:20px;padding:16px 20px}
+.mc{padding:20px 22px;grid-template-columns:1fr 270px}.mc h4{font-size:25px}.mc .src{font-size:18px}.mc .calc .eq{font-size:17.5px}.mc .calc .rs{font-size:32px}.mc.off .rs{font-size:26px}
+.note2{font-size:19px;margin-top:22px;padding:14px 20px}
+.lc{padding:24px 26px}.lc h3{font-size:30px}.lc p{font-size:20px}.lc ul{font-size:20px}.lc .ic{font-size:46px}
+.qa{margin-top:26px}.qa .x{font-size:18.5px;padding:14px 18px}
+.pc{padding:22px 18px}.pc .v{font-size:32px}.pc .d{font-size:18.5px}.pc .ic{font-size:46px}
+.bigq{margin-top:26px;padding:24px 28px}.bigq .qq{font-size:34px}.bigq .hd{font-size:18px}
+.fork{margin-top:20px}.fork .f{font-size:21px;padding:14px 20px}
+.rk{padding:20px 22px}.rk h4{font-size:24px}.rk p{font-size:19px}
+.notnow{margin-top:24px}.notnow .hd{font-size:21px}.notnow .it{font-size:19px}
+.dc{padding:16px 18px}.dc h4{font-size:22px}.dc p{font-size:17.5px}.dc .own{font-size:15.5px}
+.ask{font-size:26px;margin-top:22px}
+.bacard .li{font-size:22px}.bacard h3{font-size:32px}
+.path .what{font-size:27px}.path .what small{font-size:18px}.path .res{font-size:24px}
+.chipb{font-size:22px}
+.ba{max-height:none;align-items:center}.bacard{min-height:330px;justify-content:flex-start}.bacard .li{font-size:23px}
+.node.n3 .n{margin-bottom:-2px}
+.ws{min-height:250px}
+.foot{gap:14px}
+.fc.f2 .ex{font-size:16px;letter-spacing:-.01em}.fc .ex .vl{white-space:nowrap;display:block}
+.store .nb{max-width:260px}
+/* code tables */
+.ctabs{display:grid;grid-template-columns:.85fr 1.15fr;gap:18px}
+.ctab{background:#fff;border-radius:22px;box-shadow:var(--shadow);padding:18px 22px;display:flex;flex-direction:column;gap:12px}
+.cth{font-size:24px;font-weight:900;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.cth .ic{font-size:26px}
+.cth small{font-size:15.5px;font-weight:700;color:var(--ink2)}
+.tree{display:flex;flex-direction:column;gap:10px;font-size:20px;font-weight:800;color:#b3a597}
+.lvl{display:flex;align-items:center;gap:8px}
+.l1{padding-left:22px}.l2{padding-left:52px}.l3{padding-left:82px;color:var(--ink)}
+.chipx{background:#e6f8fb;color:var(--sea-d);border-radius:10px;padding:3px 12px;font-size:18px}
+.chipx.dim{background:#f3f0ea;color:#8a7a6b}
+table.ctbl{width:100%;border-collapse:separate;border-spacing:0 6px;font-size:17px}
+table.ctbl th{text-align:left;font-size:14.5px;color:var(--ink2);padding:0 10px;font-weight:800}
+table.ctbl td{background:#f8fbff;padding:9px 10px;line-height:1.45;vertical-align:middle}
+table.ctbl td:first-child{border-radius:12px 0 0 12px;white-space:nowrap}
+table.ctbl td:last-child{border-radius:0 12px 12px 0;color:var(--ink2);font-size:16px}
+.rules{margin-top:18px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.rl{background:#fffbe9;border:2px dashed #f3d37a;border-radius:18px;padding:12px 16px;font-size:18px;line-height:1.5;display:grid;grid-template-columns:32px 1fr;gap:8px;align-items:start}
+.rl .n{width:28px;height:28px;border-radius:50%;background:var(--sun);color:#6e4524;font-weight:900;display:flex;align-items:center;justify-content:center;font-size:15px;margin-top:2px}
+/* five categories */
+.five{display:flex;flex-direction:column;gap:8px}
+.fr{display:grid;grid-template-columns:170px 1fr 26px 330px 250px;gap:10px;align-items:center;background:#fff;border-radius:16px;box-shadow:0 3px 0 rgba(0,0,0,.05);padding:8px 12px}
+.fk{font-size:19px;font-weight:900;border-left:7px solid var(--sea);padding-left:10px;line-height:1.3}
+.fk.k2{border-left-color:var(--lilac)}.fk.k3{border-left-color:var(--coral)}.fk.k4{border-left-color:#b8aa9b}.fk.k5{border-left-color:var(--sun)}
+.fx{font-size:16px;color:var(--ink2);line-height:1.4}
+.far{color:var(--sun);font-weight:900;font-size:26px;text-align:center}
+.fh{display:flex;flex-wrap:wrap;gap:6px}
+.fh span{border-radius:10px;padding:3px 10px;font-size:15.5px;font-weight:800;white-space:nowrap}
+.hl1{background:#e3f6fb;color:#13698f}.hl2{background:#cdeff8;color:#0f5f7d}.hl3{background:#b8e7f0;color:#0b5568}.hl4{background:#0d8797;color:#fff}
+.hl0{background:#f3f0ea;color:#6f5d52}.hlm{background:#ffe2dc;color:#c2412d}
+.fcite{font-size:13px;color:#8a7a6b;line-height:1.35}
+.refs{margin-top:10px;font-size:11.5px;line-height:1.45;color:#7d6c60;background:#ffffffb0;border-radius:12px;padding:7px 12px}
+.refs b{color:var(--ink2)}
+body.mobile .ctabs,body.mobile .rules,body.mobile .fr{grid-template-columns:1fr!important}
+table.ctbl,table.ctbl td,table.ctbl th{font-family:inherit}
+.ctab{padding:22px 26px;gap:16px}.cth{font-size:27px}.cth small{font-size:16.5px}
+.tree{font-size:22px;gap:14px}.chipx{font-size:20px;padding:4px 14px}
+table.ctbl{font-size:19px;border-spacing:0 8px}table.ctbl td{padding:12px 12px}table.ctbl td:last-child{font-size:17.5px}table.ctbl th{font-size:15.5px}
+.rules{margin-top:22px}.rl{font-size:19.5px;padding:14px 18px}
+.fr{padding:11px 14px}.fk{font-size:20.5px}.fx{font-size:17px}.fh span{font-size:16px}.fcite{font-size:13.5px}
+.five{gap:10px}.refs{font-size:12px;margin-top:14px}
+.fk small{display:block;font-size:13px;font-weight:800;color:var(--coral-d)}
+/* simulation */
+.simgrid{display:grid;grid-template-columns:1.15fr 1fr;gap:18px}
+.simc,.sk{background:#fff;border-radius:22px;box-shadow:var(--shadow);padding:18px 22px;display:flex;flex-direction:column;gap:12px}
+.simr{display:flex;flex-direction:column;gap:14px}
+.sh{font-size:20px;font-weight:900;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.sh b{color:var(--coral-d)}
+.bars{display:flex;flex-direction:column;gap:12px;margin-top:2px}
+.br{display:grid;grid-template-columns:112px 1fr 104px;gap:10px;align-items:center}
+.bl{font-size:17px;font-weight:800}
+.bt{height:30px;background:#f3f0ea;border-radius:10px;overflow:hidden}
+.bf{height:100%;border-radius:10px}
+.bf.a{background:#c9bcae}.bf.b{background:var(--coral)}.bf.c{background:var(--sea)}.bf.d{background:var(--lilac)}
+.bv{font-size:22px;font-weight:900;display:flex;align-items:center;gap:6px}
+.bv .demo{font-size:11.5px;padding:0 6px}
+.sn{font-size:16.5px;line-height:1.5;color:var(--ink2)}
+.sn b{color:var(--ink)}
+.sn .demo{margin-left:4px}
+.cmp2{display:flex;align-items:center;gap:16px}
+.cmp2 small{display:block;font-size:14px;font-weight:800;color:var(--ink2)}
+.cmp2 b{font-size:36px;font-weight:900;color:var(--sea-d);line-height:1.15}
+.cmp2 b.g{color:var(--leaf-d)}
+.cmp2 .vs{font-size:30px;color:var(--sun);font-weight:900}
+.sk.warn{background:linear-gradient(160deg,#fff1ee,#fff)}
+.sk.warn .cmp2 b{color:var(--coral-d)}
+.disc{margin-top:16px;background:#fff6dc;border:2px solid #f3d37a;border-radius:16px;padding:10px 18px;font-size:18px;font-weight:800;color:#7a5200;text-align:center}
+.fix8{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.fx8{background:#fff;border-radius:20px;box-shadow:var(--shadow);padding:14px 16px;display:flex;flex-direction:column;gap:6px;border-top:7px solid var(--sea)}
+.fx8:nth-child(2n){border-top-color:var(--coral)}
+.fx8 .i{font-size:30px;line-height:1}
+.fx8 h4{margin:0;font-size:20px;line-height:1.3}
+.fx8 p{font-size:16px;line-height:1.5;color:var(--ink2)}
+.fx8 p .demo{font-size:12px}
+/* pilot success */
+.q2{display:flex;flex-direction:column;gap:8px;margin-top:8px;align-items:center}
+.qi{font-size:25px;font-weight:900;display:flex;align-items:center;gap:10px}
+.qi em{font-style:normal;color:var(--sea-d)}.qi i{font-style:normal;color:var(--leaf-d)}
+.qi .n{width:32px;height:32px;border-radius:50%;background:var(--coral);color:#fff;font-size:17px;display:inline-flex;align-items:center;justify-content:center;flex:none}
+.qnot{margin-top:10px;font-size:16.5px;font-weight:700;color:#8a7a6b}
+body.mobile .simgrid,body.mobile .fix8{grid-template-columns:1fr!important}
+.fx8{padding:18px 18px;gap:8px}.fx8 .i{font-size:34px}.fx8 h4{font-size:22px}.fx8 p{font-size:17.5px}
+.fix8{gap:16px}
+.simc,.sk{padding:20px 24px}.bl{font-size:18px}.bt{height:34px}.bars{gap:16px}.sn{font-size:17.5px}.sh{font-size:21px}
+.ctabs{grid-template-columns:.72fr 1.28fr}
+table.ctbl td:nth-child(2){white-space:nowrap}
+.ctabs{grid-template-columns:.8fr 1.2fr}
+.l3{padding-left:64px;white-space:nowrap}.l2{padding-left:44px}
+/* todo */
+.todo3{display:grid;grid-template-columns:1.75fr 1fr 1fr;gap:16px;align-items:stretch}
+.tcol{background:#fff;border-radius:22px;box-shadow:var(--shadow);padding:16px 18px;display:flex;flex-direction:column;gap:10px;border-top:8px solid var(--sea)}
+.tcol.t2{border-top-color:var(--coral)}.tcol.t3{border-top-color:var(--leaf)}
+.th{font-size:22px;font-weight:900;display:flex;align-items:center;gap:8px}
+.th .ic{font-size:24px}
+.tl2{display:grid;grid-template-columns:1fr 1fr;gap:8px 14px}
+.tl1{display:flex;flex-direction:column;gap:10px}
+.ti{display:grid;grid-template-columns:26px 1fr;gap:8px;align-items:start;background:#f8fbff;border-radius:12px;padding:8px 10px}
+.tcol.t2 .ti{background:#fff6f3}.tcol.t3 .ti{background:#f2fbee}
+.ti .n{width:24px;height:24px;border-radius:50%;background:var(--sea);color:#fff;font-weight:900;font-size:13px;display:flex;align-items:center;justify-content:center;margin-top:1px}
+.tcol.t2 .ti .n{background:var(--coral)}.tcol.t3 .ti .n{background:var(--leaf-d)}
+.ti b{display:block;font-size:17px;line-height:1.35}
+.ti small{display:block;font-size:14.5px;line-height:1.45;color:var(--ink2);margin-top:2px}
+body.mobile .todo3,body.mobile .tl2{grid-template-columns:1fr!important}
+/* sim settings */
+.disc.top{margin:0 0 14px}
+.trait5{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.tr{background:#fff;border-radius:18px;box-shadow:var(--shadow);padding:12px 16px;display:flex;flex-direction:column;gap:5px;border-top:6px solid var(--sea)}
+.tr:nth-child(2){border-top-color:var(--leaf)}.tr:nth-child(3){border-top-color:var(--sun)}.tr:nth-child(4){border-top-color:var(--coral)}
+.tr .i{font-size:26px;line-height:1}
+.tr h4{margin:0;font-size:19px;display:flex;align-items:center;gap:8px}
+.tr p{font-size:15.5px;line-height:1.5;color:var(--ink2)}
+.tr p .demo,.snn .demo{font-size:11.5px}
+.tr.wide{grid-column:1/-1;border-top-color:var(--lilac);display:grid;grid-template-columns:30px 200px 1fr 210px;align-items:center;gap:12px}
+.mix{display:flex;height:34px;border-radius:10px;overflow:hidden;font-size:13.5px;font-weight:800;color:#fff}
+.mix span{display:flex;align-items:center;justify-content:center;white-space:nowrap}
+.mix .m1{background:var(--sea)}.mix .m2{background:var(--lilac)}.mix .m3{background:var(--coral)}.mix .m4{background:#b8aa9b}.mix .m5{background:#e0a400}
+.snotes{margin-top:12px;display:grid;grid-template-columns:1fr 1.4fr 1.2fr;gap:12px}
+.snn{background:#fffbe9;border:2px dashed #f3d37a;border-radius:14px;padding:9px 14px;font-size:15px;line-height:1.5;color:var(--ink2)}
+.snn b{color:var(--ink)}
+.snn.key{background:#fff1ee;border-color:#f5b7a8}
+.snn.key b{color:var(--coral-d)}
+body.mobile .trait5,body.mobile .snotes,body.mobile .tr.wide{grid-template-columns:1fr!important}
+.todo3{grid-template-columns:2.1fr .95fr .95fr}
+.tr h4{font-size:21px}.tr p{font-size:16.5px}.tr{padding:14px 18px}.trait5{gap:14px}
+.snn{font-size:15.5px;padding:11px 16px}.snotes{margin-top:14px}
+.mix{height:38px;font-size:14px}
+.ti small{font-size:14px}
+/* knowledge chain */
+.crumb{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.crumb .chipx{font-size:16px;padding:2px 10px}
+.crumb .sep{color:#b3a597;font-weight:900}
+.chain{display:grid;grid-template-columns:1fr 1.05fr 1fr;gap:8px;align-items:stretch}
+.ck{border-radius:14px;padding:8px 10px;font-size:15.5px;line-height:1.4;font-weight:700;display:flex;flex-direction:column;justify-content:center}
+.ck small{display:block;font-size:12.5px;font-weight:900;margin-bottom:2px}
+.ck.pre{background:#f3f0ea;color:#6f5d52}.ck.nxt{background:#effbea;color:var(--leaf-d)}
+.ck.me{background:#e6f8fb;align-items:center;text-align:center;gap:4px;border:2px solid #9edfea}
+.ck.me b{font-size:18px;color:var(--ink)}
+.ctab{gap:12px}
+.rules{grid-template-columns:repeat(4,1fr)}
+.rl{font-size:16.5px;padding:10px 14px}
+.whyk{margin-top:12px;font-size:16.5px;font-weight:700;color:var(--ink2);text-align:center;background:#fff;border-radius:14px;padding:8px 14px;box-shadow:0 3px 0 rgba(0,0,0,.05)}
+body.mobile .chain{grid-template-columns:1fr!important}
+.ctabs{grid-template-columns:1fr 1fr}
+.ck{white-space:nowrap;font-size:15px}
+.ctabs{grid-template-columns:.92fr 1.08fr}
+table.ctbl td:last-child{white-space:nowrap}
+table.ctbl{font-size:18px}
+.chain{margin-top:6px}.ck{padding:12px 10px;font-size:15.5px}.ck.me b{font-size:20px}
+.cknote{font-size:14px;color:var(--ink2);font-weight:700}
+
+</style>
+</head>
+<body>
+<div id="viewport">
+<div id="stage">
+<!-- 1 封面 -->
+<section class="slide active" data-title="封面">
+  <div class="title-wrap">
+    <div>
+      <div class="kicker"><span class="dot"></span>給 NOUS 團隊的提案</div>
+      <h1><span>NOUS</span><br>高品質題庫提案</h1>
+      <div class="hook">從作答證據，到 mac 與 LQ</div>
+      <p class="lead">不另外做遊戲，把力氣放在學生本來就在寫的題目上：<br>每一題多記一點，讓我們更懂他怎麼學。</p>
+      <div class="meta">NOUS 團隊內部提案 · 2026-11-26 · 簡報中的數字皆為<span class="demo">示意</span></div>
+    </div>
+    <div>
+      <div class="qmock">
+        <div class="qh">一道題目 <span class="demo">示意</span></div>
+        <div class="qt">一件商品 100 元，先漲 20%，<br>再跌 20%，現在多少元？</div>
+        <div class="opts">
+          <div class="opt">A　120 元</div>
+          <div class="opt pick">B　100 元</div>
+          <div class="opt ok">C　96 元</div>
+          <div class="opt">D　80 元</div>
+        </div>
+        <div class="hintbub"><span class="lv">提示</span>跌 20% 的時候，是用哪個價錢來算？</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 2 教學現場 -->
+<section class="slide" data-title="一個教學現場">
+  <div class="kicker"><span class="dot"></span>從一個教學現場開始</div>
+  <h2 class="hl">同一句<em>「我不會」</em>，需要的幫助不一樣</h2>
+  <div class="body">
+    <div class="scene">
+      <div class="kid">
+        <div class="face">🙋</div>
+        <div class="say">「我不會」</div>
+      </div>
+      <div class="ar">›</div>
+      <div class="paths">
+        <div class="path">
+          <div class="what">把題目再念一遍<small>只是念題目，他就自己會了</small></div>
+          <div class="ar" style="font-size:30px">›</div>
+          <div class="res">他就會了</div>
+        </div>
+        <div class="path p2">
+          <div class="what">一步一步帶<small>要陪他把每一步走過</small></div>
+          <div class="ar" style="font-size:30px">›</div>
+          <div class="res">才走得出來</div>
+        </div>
+      </div>
+    </div>
+    <p class="punch">如果系統分得出這兩種情況，就能<em>給剛剛好的幫助</em>。</p>
+  </div>
+</section>
+
+<!-- 3 真正想做到的 -->
+<section class="slide" data-title="我們真正想做到的">
+  <div class="kicker"><span class="dot"></span>我們真正想做到的</div>
+  <h2 class="hl">先相信每個人都能學得更好，<em>再去了解他怎麼學</em></h2>
+  <div class="body" style="justify-content:center">
+    <div class="bq">「每個人都有可能學得更好，<br>只是我們還不夠了解他是如何學習的。」</div>
+    <div class="down">↓</div>
+    <div class="goal">在<em>對的時候</em>，給他<em>當下最有幫助</em>的那一層提示</div>
+    <div class="chips">
+      <span class="chipb"><span class="n">1</span>量他現在掌握多少</span>
+      <span class="chipb"><span class="n">2</span>量他隔一段時間還記不記得</span>
+      <span class="chipb"><span class="n">3</span>決定下一次給哪一層提示</span>
+    </div>
+  </div>
+</section>
+
+<!-- 4 為什麼轉向 -->
+<section class="slide" data-title="為什麼轉向題庫">
+  <div class="kicker"><span class="dot"></span>為什麼轉向</div>
+  <h2 class="hl">另做測驗收資料很難；<em>題庫</em>每天都有</h2>
+  <div class="body">
+    <div class="ba">
+      <div class="bacard old">
+        <div class="who">之前：D1 遊戲</div>
+        <h3>另外設計的測驗情境</h3>
+        <div class="li"><span class="ic x">✕</span><span><q>沒有學到規則，亂點就能過關</q></span></div>
+        <div class="li"><span class="ic x">✕</span><span>要先吸引學生進來，才收得到資料</span></div>
+        <div class="li"><span class="ic x">✕</span><span>情境裡的作答，不一定代表平常怎麼學</span></div>
+      </div>
+      <div class="bamid"><div class="big">›</div>把資源與<br>重心放在題庫</div>
+      <div class="bacard new">
+        <div class="who">現在：題庫</div>
+        <h3>學生本來就在作答</h3>
+        <div class="li"><span class="ic v">✓</span><span>每天的作答，就是現成的學習證據</span></div>
+        <div class="li"><span class="ic v">✓</span><span>QBot 已經在收集作答行為</span></div>
+        <div class="li"><span class="ic v">✓</span><span>同一套欄位，能延伸到國中、高中、技藝</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 5 整體架構 -->
+<section class="slide" data-title="整體架構">
+  <div class="kicker"><span class="dot"></span>整體架構</div>
+  <h2 class="hl">題目標得好 → 作答記得清楚 → <em>下一步排得對</em></h2>
+  <div class="body">
+    <div class="arch">
+      <div class="node"><div class="n">1</div><h4>題庫欄位</h4><p>每一題先標好能力、錯因、換題版本、分層提示</p></div>
+      <div class="ar">›</div>
+      <div class="node n2"><div class="n">2</div><h4>作答行為</h4><p>自己的第一答、看了哪層提示、提示後答案、信心、隔天回訪</p></div>
+      <div class="ar">›</div>
+      <div class="node n3"><div class="n" style="background:var(--lilac)">3</div>
+        <div class="sub"><h4>mac　看知識點</h4><p>這個能力，<b>現在</b>掌握到哪</p></div>
+        <div class="sub lq"><h4>LQ　看這個人</h4><p>跨任務累積的<b>學習傾向</b></p></div>
+      </div>
+      <div class="ar">›</div>
+      <div class="node n4"><div class="n">4</div><h4>NOUS EK／EM</h4><p>決定下一步：練什麼、怎麼教、何時給哪層提示</p></div>
+    </div>
+    <div class="loopbar">🔁　<b>一直循環：</b>下一段任務的作答又回到題庫，指標持續累積、更新</div>
+  </div>
+</section>
+
+<!-- 6 題庫要新增什麼 -->
+<section class="slide" data-title="題庫要新增什麼">
+  <div class="kicker"><span class="dot"></span>題庫要新增什麼</div>
+  <h2 class="hl">每一題多四個欄位</h2>
+  <div class="body">
+    <div class="fgrid">
+      <div class="fc"><div class="ic">🎯</div><h4>主測能力</h4><div class="why">這題主要在考哪一個能力</div>
+        <div class="ex"><span class="lab">欄位值（例 · 示意）</span><span class="code">PCT_BASE</span>「百分比漲跌」</div></div>
+      <div class="fc f2"><div class="ic">🧩</div><h4>選項 × 候選錯因</h4><div class="why">選錯時，可能是怎麼想的</div>
+        <div class="ex"><span class="lab">選 100 元的欄位值（例 · 示意）</span><span class="vl"><span class="code">CANCEL</span>「以為漲跌抵消」</span><span class="vl"><span class="code">OLD_BASE</span>「兩次都用原價」</span></div></div>
+      <div class="fc f3"><div class="ic">🔄</div><h4>換題版本</h4><div class="why">同一個能力、換個數字，隔天再考一次</div>
+        <div class="ex"><span class="lab">例 · 示意</span>原題：100 元 ±20%<br>換題：200 元 ±10%</div></div>
+      <div class="fc f4"><div class="ic">🪜</div><h4>分層提示</h4><div class="why">從輕到重四層，卡住時逐層給</div>
+        <div class="ex"><span class="lab">例 · 示意</span>重念題目 → 提醒條件<br>→ 給關鍵 → 一步一步帶</div></div>
+    </div>
+    <div class="store">
+      <div class="hd">欄位值<br>存兩份</div>
+      <div class="bx t">📝 <b>描述文字</b>：給人看<br>「以為漲跌抵消」</div>
+      <div class="bx c">🏷️ <b>標準代碼</b>：給系統統計<br><span class="code">CANCEL</span></div>
+      <div class="nb">代碼是內容分類的值，<br>不是欄位名稱；也不換算成分數</div>
+    </div>
+  </div>
+</section>
+
+<!-- 6a 代碼表先行 -->
+<section class="slide" data-title="代碼表先行">
+  <div class="kicker"><span class="dot"></span>代碼表先行 <span class="demo">例子皆為示意</span></div>
+  <h2 class="hl">先有<em>代碼表</em>，才開始標題目</h2>
+  <div class="body">
+    <div class="ctabs">
+      <div class="ctab">
+        <div class="cth"><span class="ic">🎯</span>能力代碼表<small>分層＋知識鏈（前置／延伸）</small></div>
+        <div class="crumb"><span class="chipx">國中</span><span class="chipx dim">高中</span><span class="chipx dim">技藝</span><span class="sep">›</span><span class="chipx">數學</span><span class="sep">›</span><span class="chipx">百分率</span></div>
+        <div class="chain">
+          <div class="ck pre"><small>← 前置</small>百分率基本換算<br>乘法換算</div>
+          <div class="ck me"><span class="code">PCT_BASE</span><b>百分比漲跌</b></div>
+          <div class="ck nxt"><small>延伸 →</small>連續漲跌／<br>複利</div>
+        </div>
+        <div class="cknote"><span class="demo">示意</span> 前置／延伸能力為舉例，試點時由教師核定</div>
+      </div>
+      <div class="ctab">
+        <div class="cth"><span class="ic">🧩</span>錯因代碼表<small>每個代碼都有：定義＋例子</small></div>
+        <table class="ctbl">
+          <tr><th>代碼</th><th>定義</th><th>例子</th></tr>
+          <tr><td><span class="code">CANCEL</span></td><td>以為先漲再跌同樣 %，會抵消</td><td>100 元 +20% −20%<br>→ 答 100</td></tr>
+          <tr><td><span class="code">OLD_BASE</span></td><td>第二次的 % 仍用原價來算</td><td>100 + 20 − 20<br>→ 答 100</td></tr>
+        </table>
+      </div>
+    </div>
+    <div class="rules">
+      <div class="rl"><span class="n">1</span><span><b>AI 草擬只能從表裡選</b>，<br>不自己發明代碼</span></div>
+      <div class="rl"><span class="n">2</span><span>需要新代碼：先提出，<br><b>教師核定</b>後才進表</span></div>
+      <div class="rl"><span class="n">3</span><span><b>知識鏈記在能力代碼表</b>，<br>題目只填主測能力代碼，<br>自動連到前置／延伸</span></div>
+      <div class="rl"><span class="n">4</span><span>試點只補齊<b>「百分比漲跌」</b>：<br>錯因表＋前置與一兩個延伸</span></div>
+    </div>
+    <div class="whyk">💡 為什麼要知識鏈：錯因可回溯到前置能力 · EK／EM 可退回補強或往延伸推進 · LQ 跨相關能力累積</div>
+  </div>
+</section>
+
+<!-- 6b 錯因五大類 -->
+<section class="slide" data-title="錯因五大類與研究基礎">
+  <div class="kicker"><span class="dot"></span>錯因五大類與研究基礎</div>
+  <h2 class="hl">錯因先分五大類，<em>每類對到一種提示</em></h2>
+  <div class="body" style="justify-content:flex-start">
+    <div class="five">
+      <div class="fr"><div class="fk k1">讀題理解錯</div><div class="fx">看錯、漏看條件</div><div class="far">›</div><div class="fh"><span class="hl1">第 1 層 重念題目</span><span class="hl2">第 2 層 提醒關鍵條件</span></div><div class="fcite">Newman 1977；Radatz 1979</div></div>
+      <div class="fr"><div class="fk k2">概念迷思</div><div class="fx">例：<span class="code">CANCEL</span> 以為漲跌抵消</div><div class="far">›</div><div class="fh"><span class="hl3">第 3 層 給解題關鍵</span></div><div class="fcite">Smith et al. 1994；Sadler 1998；Briggs et al. 2006</div></div>
+      <div class="fr"><div class="fk k3">程序錯誤<small>有系統性</small></div><div class="fx">例：<span class="code">OLD_BASE</span> 兩次都用原價</div><div class="far">›</div><div class="fh"><span class="hl3">第 3 層 給解題關鍵</span><span class="hl4">第 4 層 一步一步帶</span></div><div class="fcite">Brown &amp; Burton 1978；Brown &amp; VanLehn 1980；VanLehn 1990；Tatsuoka 1983</div></div>
+      <div class="fr"><div class="fk k4">計算失誤</div><div class="fx">偶發、不穩定的手誤</div><div class="far">›</div><div class="fh"><span class="hl0">通常自己會修正，不介入</span></div><div class="fcite">Reason 1990</div></div>
+      <div class="fr"><div class="fk k5">策略或後設錯誤</div><div class="fx">方法選錯、沒檢查、高估自己</div><div class="far">›</div><div class="fh"><span class="hl4">第 4 層 一步一步帶</span><span class="hlm">＋對到 mac 信心</span></div><div class="fcite">Radatz 1979</div></div>
+    </div>
+    <div class="refs"><b>參考文獻</b>（五類與提示層的對應是本提案的設計；分層提示見 Wood, Bruner &amp; Ross 1976）<br>
+      Newman, M. A. (1977). An analysis of sixth-grade pupils' errors on written mathematical tasks. <i>VIER Bulletin, 39</i>. ·
+      Radatz, H. (1979). Error analysis in mathematics education. <i>JRME, 10</i>(3). ·
+      Brown, J. S., &amp; Burton, R. R. (1978). Diagnostic models for procedural bugs in basic mathematical skills. <i>Cognitive Science, 2</i>(2). ·
+      Brown, J. S., &amp; VanLehn, K. (1980). Repair theory. <i>Cognitive Science, 4</i>(4). ·
+      VanLehn, K. (1990). <i>Mind bugs</i>. MIT Press. ·
+      Tatsuoka, K. K. (1983). Rule space. <i>J. Educational Measurement, 20</i>(4). ·
+      Smith, J. P., diSessa, A. A., &amp; Roschelle, J. (1994). Misconceptions reconceived. <i>J. Learning Sciences, 3</i>(2). ·
+      Sadler, P. M. (1998). Psychometric models of student conceptions in science. <i>JRST, 35</i>(3). ·
+      Briggs, D. C., Alonzo, A. C., Schwab, C., &amp; Wilson, M. (2006). Diagnostic assessment with ordered multiple-choice items. <i>Educational Assessment, 11</i>(1). ·
+      Reason, J. (1990). <i>Human error</i>. Cambridge Univ. Press. ·
+      Wood, D., Bruner, J. S., &amp; Ross, G. (1976). The role of tutoring in problem solving. <i>J. Child Psychology &amp; Psychiatry, 17</i>(2).
+    </div>
+  </div>
+</section>
+
+<!-- 7 一題走到底 -->
+<section class="slide" data-title="一題走到底">
+  <div class="kicker"><span class="dot"></span>一題走到底 <span class="demo">示意</span></div>
+  <h2 class="hl">100 元，先漲 20%、再跌 20%，現在多少？</h2>
+  <div class="body">
+    <div class="walk">
+      <div class="ws bad"><div class="when">第一天 · 自己作答</div><div class="big">100 元</div><p>選錯了</p></div>
+      <div class="ws"><div class="when">系統對照欄位</div><h4>候選錯因</h4><p><span class="code">CANCEL</span><br>以為漲跌抵消<br><span class="code">OLD_BASE</span><br>兩次都用原價</p></div>
+      <div class="ws hint"><div class="when">給一層提示</div><h4>「跌 20% 是用哪個價錢算？」</h4><p>先從輕的提示給</p></div>
+      <div class="ws good"><div class="when">提示後再答</div><div class="big">96 元</div><p>答對了，有人扶一把</p></div>
+      <div class="ws good"><div class="when">隔天 · 換題 · 不給提示</div><h4>200 元 ±10%</h4><div class="big">198 元</div><p>自己答對</p></div>
+    </div>
+    <div class="recs">
+      <div class="rec"><div class="hd">📒 第一天記下</div><span class="cl">第一次的答案</span><span class="cl">看過哪些提示</span><span class="cl">提示後的答案</span></div>
+      <div class="rec"><div class="hd">📒 隔天記下</div><span class="cl">換題版本</span><span class="cl">實際隔了多久</span><span class="cl">沒提示的第一答</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 8 四層提示 -->
+<section class="slide" data-title="四層提示">
+  <div class="kicker"><span class="dot"></span>四層提示</div>
+  <h2 class="hl">從最輕的開始，<em>不夠再往上一層</em></h2>
+  <div class="body">
+    <div class="ladder">
+      <div class="rung r1"><div class="lv">第 1 層</div><h4>重念題目</h4><div class="say2"><span class="lab">例 · 示意</span>「100 元，先漲 20%，再跌 20%……」</div></div>
+      <div class="rung r2"><div class="lv">第 2 層</div><h4>提醒關鍵條件</h4><div class="say2"><span class="lab">例 · 示意</span>「跌 20% 的時候，是用哪個價錢算？」</div></div>
+      <div class="rung r3"><div class="lv">第 3 層</div><h4>給解題關鍵</h4><div class="say2"><span class="lab">例 · 示意</span>「漲完是 120 元，再用 120 元算 20%。」</div></div>
+      <div class="rung r4"><div class="lv">第 4 層</div><h4>一步一步帶</h4><div class="say2"><span class="lab">例 · 示意</span>「100×1.2＝120 → 120×0.8＝？」</div></div>
+    </div>
+    <div class="axis"><span>幫得少</span><span></span><span>幫得多</span></div>
+    <div class="foot"><span>📌 記下學生<b>用到第幾層</b>才答對</span><span>·</span><span>QBot 目前沒有提示功能，第一版試點要先加上</span></div>
+  </div>
+</section>
+
+<!-- 9 最關鍵設計 -->
+<section class="slide" data-title="最關鍵的設計">
+  <div class="kicker"><span class="dot"></span>最關鍵的設計</div>
+  <h2 class="hl">這兩件事<em>分開記</em>，不要混在一起</h2>
+  <div class="body">
+    <div class="two">
+      <div class="tc a"><div class="who">當天</div><h3>提示後答對</h3><div class="means">有人扶一把，他就會了</div><div class="ex">例 <span class="demo">示意</span>：看了提示，100 元那題改答 96 元</div></div>
+      <div class="neq">≠</div>
+      <div class="tc b"><div class="who">隔天 · 換題 · 沒有提示</div><h3>隔天換題也能自己答對</h3><div class="means">真的帶走了</div><div class="ex">例 <span class="demo">示意</span>：200 元 ±10%，自己答 198 元</div></div>
+    </div>
+    <div class="why2">
+      <div class="w">混在一起：只看到「答對」，<br><b>分不出是提示的功勞，還是他真的學會</b>。</div>
+      <div class="w">分開記：才能回答<br>「<b>給了這層提示，之後他自己會不會</b>」。</div>
+    </div>
+  </div>
+</section>
+
+<!-- 10 mac 指標 -->
+<section class="slide" data-title="mac 指標怎麼算">
+  <div class="kicker"><span class="dot"></span>mac 指標怎麼算 <span class="demo">數字皆為示意</span></div>
+  <h2 class="hl">mac：這個人在<em>這個能力</em>上，現在怎麼樣</h2>
+  <div class="body">
+    <div class="mgrid">
+      <div class="mc"><div><h4>當下掌握 <span class="code">mac·m</span></h4><p class="src">用：每個能力的<b>獨立第一答</b><br>題目校準前，先寫成題數</p></div>
+        <div class="calc"><div class="eq">5 題獨立作答，答對 3 題</div><div class="rs">3 / 5</div></div></div>
+      <div class="mc m2"><div><h4>保留</h4><p class="src">用：隔了<b>真實間隔</b>後，<br>回訪題的獨立第一答</p></div>
+        <div class="calc"><div class="eq">7 天後 4 題回訪，答對 3 題</div><div class="rs">75%</div></div></div>
+      <div class="mc m3"><div><h4>作答方式 <span class="code">mac·a</span></h4><p class="src">用：改答次數；<br><b>求助另外算</b></p></div>
+        <div class="calc"><div class="eq">改答：10 題改 3 題 → 30%<br>求助：8 題求助 2 題 → 25%</div></div></div>
+      <div class="mc m4"><div><h4>信心 vs 結果 <span class="code">mac·c</span></h4><p class="src">用：作答信心 vs 實際答對<br>另外保留平方誤差平均</p></div>
+        <div class="calc"><div class="eq">平均信心 70%，實際答對 50%</div><div class="rs">高估 20 個百分點</div></div></div>
+    </div>
+    <div class="note2">💡 只有這四種資料會產生可計算的數值：<b>獨立第一答、提示後答案、信心、隔天回訪</b>。題目上的欄位只負責說明，不算分。</div>
+  </div>
+</section>
+
+<!-- 11 LQ 指標 -->
+<section class="slide" data-title="LQ 指標怎麼算">
+  <div class="kicker"><span class="dot"></span>LQ 指標怎麼算 <span class="demo">數字皆為示意</span></div>
+  <h2 class="hl">LQ：看<em>這個人</em>，要跨很多規則累積才估</h2>
+  <div class="body">
+    <div class="mgrid">
+      <div class="mc"><div><h4>學多快 <span class="tag t-ok">先以這個為主</span></h4><p class="src">前測、後測對照；<br>每次練習的增幅，要跨多條規則、多階段才估</p></div>
+        <div class="calc"><div class="eq">前測 2/5 → 後測 4/5</div><div class="rs">+40 分</div></div></div>
+      <div class="mc m2"><div><h4>記多久</h4><p class="src">預測 vs 實際回訪；<br>要在不同能力上重複出現</p></div>
+        <div class="calc"><div class="eq">第 7 天：預測 65%，實際 75%</div><div class="rs">高於預期 10 分</div></div></div>
+      <div class="mc off"><div><h4>用得出</h4><p class="src">能不能把學到的用在新情境</p></div>
+        <div class="calc"><div class="rs">本輪不做</div></div></div>
+      <div class="mc off"><div><h4>自我判斷</h4><p class="src">自己覺得會不會，<br>和實際對不對得上</p></div>
+        <div class="calc"><div class="rs">只用於當下回饋</div></div></div>
+    </div>
+    <div class="note2">💡 一題、一天的結果<b>不拿來估 LQ</b>；要跨規則累積夠了，才開始估。</div>
+  </div>
+</section>
+
+<!-- 12 誰來標 -->
+<section class="slide" data-title="誰來標">
+  <div class="kicker"><span class="dot"></span>誰來標</div>
+  <h2 class="hl">AI 先草擬，教師來核定</h2>
+  <div class="body">
+    <div class="lab3">
+      <div class="lc ai"><div class="ic">🤖</div><h3>AI 草擬</h3><ul><li>主測能力</li><li>選項 × 候選錯因</li><li>換題版本</li><li>四層提示</li></ul></div>
+      <div class="ar">›</div>
+      <div class="lc ed"><div class="ic">✍️</div><h3>教師核定</h3><p>逐題看過、修正，<br>確認後才進題庫。</p></div>
+      <div class="ar">›</div>
+      <div class="lc ck"><div class="ic">⚖️</div><h3>先量一致性</h3><p>大量標註之前，先抽一批題目，看 AI 和教師標得一不一致。</p></div>
+    </div>
+    <div class="qa">
+      <div class="x"><span class="q">能力欄位能讓 AI 分析嗎？</span><span class="a">可以草擬，教師核定。</span></div>
+      <div class="x"><span class="q">選項與錯因也能讓 AI 分析嗎？</span><span class="a">可以草擬，教師核定。</span></div>
+      <div class="x"><span class="q">欄位是文字還是數值？</span><span class="a">描述文字＋標準代碼，不換算成分數。</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 12a 模擬結果 -->
+<section class="slide" data-title="模擬結果：哪些欄位有用">
+  <div class="kicker"><span class="dot"></span>模擬結果 <span class="demo">模擬 · 500 位合成學生 × 20 次</span></div>
+  <h2 class="hl">模擬結果：<em>哪些欄位有用</em></h2>
+  <div class="body">
+    <div class="simgrid">
+      <div class="simc">
+        <div class="sh"><span>能不能回推學生的<b>主要錯因</b>？</span><span class="demo">模擬</span></div>
+        <div class="bars">
+          <div class="br"><div class="bl">只記對錯</div><div class="bt"><div class="bf a" style="width:25%"></div></div><div class="bv">0.25<span class="demo">模擬</span></div></div>
+          <div class="br"><div class="bl">選項標錯因</div><div class="bt"><div class="bf b" style="width:64%"></div></div><div class="bv">0.64<span class="demo">模擬</span></div></div>
+          <div class="br"><div class="bl">分層提示</div><div class="bt"><div class="bf c" style="width:46%"></div></div><div class="bv">0.46<span class="demo">模擬</span></div></div>
+          <div class="br"><div class="bl">兩者都做</div><div class="bt"><div class="bf d" style="width:64%"></div></div><div class="bv">0.64<span class="demo">模擬</span></div></div>
+        </div>
+        <div class="sn">👉 錯因主要靠「<b>選項標錯因</b>」回推；<br>只記對錯，只能猜最常見的那一類。</div>
+      </div>
+      <div class="simr">
+        <div class="sk">
+          <div class="sh">每次答對要用幾層提示 <span class="demo">模擬</span></div>
+          <div class="cmp2"><div><small>分層提示</small><b>2.20</b></div><div class="vs">→</div><div><small>兩者都做</small><b class="g">1.63</b></div></div>
+          <div class="sn">依錯因決定從哪層開始，<b>少用 15–26% 提示</b><span class="demo">模擬</span></div>
+        </div>
+        <div class="sk warn">
+          <div class="sh">「提示後答對」幾乎人人都會 <span class="demo">模擬</span></div>
+          <div class="cmp2"><div><small>提示後答對</small><b>93–97%</b></div></div>
+          <div class="sn">如果併進「答對」一起算，會<b>高估隔天表現 27 個百分點</b><span class="demo">模擬</span><br>→ <b>一定要分開記</b></div>
+        </div>
+      </div>
+    </div>
+    <div class="disc">⚠️ 模擬結果來自我們設定的假設，只能檢查欄位設計，不能證明真實教學效果。</div>
+  </div>
+</section>
+
+<!-- 12a2 模擬學生設定 -->
+<section class="slide" data-title="模擬學生設定">
+  <div class="kicker"><span class="dot"></span>模擬學生設定 <span class="demo">模擬假設</span></div>
+  <h2 class="hl">模擬學生是<em>我們假設出來的</em></h2>
+  <div class="body">
+    <div class="disc top">⚠️ 以下全是假設，不是真實學生資料：500 位虛擬學生用亂數抽出，重複 20 次 <span class="demo">模擬假設</span></div>
+    <div class="trait5">
+      <div class="tr"><div class="i">📈</div><h4>起始能力</h4><p>常態分布，<br>多數在中間 <span class="demo">模擬假設</span></p></div>
+      <div class="tr"><div class="i">🧠</div><h4>保留率（記多久）</h4><p>平均約 67%，<br>多數在五成到八成多 <span class="demo">模擬假設</span></p></div>
+      <div class="tr"><div class="i">⚡</div><h4>學習速度（LQ）</h4><p>多數接近平均，<br>最快約為平均的兩到三倍 <span class="demo">模擬假設</span></p></div>
+      <div class="tr"><div class="i">🙋</div><h4>信心偏差</h4><p>平均高估 10 個百分點，<br>有人高估、有人低估 <span class="demo">模擬假設</span></p></div>
+      <div class="tr wide"><div class="i">🧩</div><h4>主要錯因 <span class="demo">模擬假設</span></h4>
+        <div class="mix"><span style="flex:20" class="m1">讀題理解 20%</span><span style="flex:25" class="m2">概念迷思 25%</span><span style="flex:25" class="m3">程序錯誤 25%</span><span style="flex:15" class="m4">計算失誤 15%</span><span style="flex:15" class="m5">策略或後設 15%</span></div>
+        <p>他的錯有 <b>65%</b> 來自主要錯因</p></div>
+    </div>
+    <div class="snotes">
+      <div class="snn">預設<b>沒有亂猜型學生</b>；敏感度測試另放 20%／40% <span class="demo">模擬假設</span></div>
+      <div class="snn">各層提示的效果也是假設：概念迷思重念題目約一成答對、給解題關鍵約六成五；計算失誤重念題目約八成五自己改對 <span class="demo">模擬假設</span></div>
+      <div class="snn key">「65% 來自主要錯因」和「錯因決定哪層提示有效」，<b>正是試點要用真實資料驗證的</b></div>
+    </div>
+  </div>
+</section>
+
+<!-- 12b 模擬發現的設計問題 -->
+<section class="slide" data-title="模擬發現的設計問題">
+  <div class="kicker"><span class="dot"></span>模擬發現的設計問題 <span class="demo">模擬</span></div>
+  <h2 class="hl">模擬找到 <em>8 個要先修的設計</em></h2>
+  <div class="body">
+    <div class="fix8">
+      <div class="fx8"><div class="i">📝</div><h4>每能力至少 10–20 題</h4><p>5 題時，<br>錯因回推只有 0.44 <span class="demo">模擬</span></p></div>
+      <div class="fx8"><div class="i">🧭</div><h4>20 題估不出 LQ</h4><p>ρ ≤ 0.17 <span class="demo">模擬</span><br>LQ 要跨規則累積才估</p></div>
+      <div class="fx8"><div class="i">🧩</div><h4>錯誤選項覆蓋五大類</h4><p>五類全覆蓋時，<br>回推升到 0.89 <span class="demo">模擬</span></p></div>
+      <div class="fx8"><div class="i">🪜</div><h4>改記「第幾層答對」</h4><p>只記「提示後答對」，<br>幾乎都是對，看不出差別</p></div>
+      <div class="fx8"><div class="i">🎯</div><h4>mac·m 用提示前的題</h4><p>混入提示後的題，<br>準度 0.88 → 0.76 <span class="demo">模擬</span></p></div>
+      <div class="fx8"><div class="i">🔍</div><h4>先「自己再檢查一次」</h4><p>計算失誤自己會改，<br>不讓提示效果被灌水</p></div>
+      <div class="fx8"><div class="i">⏱️</div><h4>記作答時間與信心</h4><p>用來標出<br>疑似亂猜的作答</p></div>
+      <div class="fx8"><div class="i">⚖️</div><h4>標註要準</h4><p>每標錯 10%，<br>錯因回推少 4–5 點 <span class="demo">模擬</span></p></div>
+    </div>
+    <div class="disc">⚠️ 模擬結果來自我們設定的假設，只能檢查欄位設計，不能證明真實教學效果。</div>
+  </div>
+</section>
+
+<!-- 13 最小試點 -->
+<section class="slide" data-title="最小試點">
+  <div class="kicker"><span class="dot"></span>建議：先做一個最小試點</div>
+  <h2 class="hl">小範圍、兩週，<em>只看兩件事</em></h2>
+  <div class="body">
+    <div class="pilot">
+      <div class="pc"><div class="ic">🎯</div><div class="v">一個能力</div><div class="d">百分比漲跌</div></div>
+      <div class="pc"><div class="ic">📝</div><div class="v">15–20 題</div><div class="d">每能力 15–20 題＋換題版本</div></div>
+      <div class="pc"><div class="ic">🏫</div><div class="v">一兩個班</div><div class="d">在 QBot 上作答</div></div>
+      <div class="pc"><div class="ic">📅</div><div class="v">兩週</div><div class="d">包含隔天換題回訪</div></div>
+    </div>
+    <div class="bigq">
+      <div class="hd">怎樣算成功：看這兩件事</div>
+      <div class="q2">
+        <div class="qi"><span class="n">1</span><span>從學生選的選項，<em>回推得出主要錯因</em>嗎？</span></div>
+        <div class="qi"><span class="n">2</span><span>「<em>第幾層答對</em>」能不能預測「<i>隔天換題自己答對</i>」？</span></div>
+      </div>
+      <div class="qnot">LQ、保留率不當成功指標：單一能力、兩週估不出來</div>
+    </div>
+    <div class="fork">
+      <div class="f y">✅ 看得出來 → 提示與作答紀錄值得擴到更多能力</div>
+      <div class="f n">↩️ 看不出來 → 先回頭調整題目、提示與欄位，再談擴大</div>
+    </div>
+  </div>
+</section>
+
+<!-- 14 風險與本輪不做 -->
+<section class="slide" data-title="風險與本輪不做">
+  <div class="kicker"><span class="dot"></span>風險與本輪不做</div>
+  <h2 class="hl">先講清楚：哪些是前提，哪些還不能說</h2>
+  <div class="body">
+    <div class="risks">
+      <div class="rk"><div class="ri">!</div><div><h4>QBot 目前沒有提示功能</h4><p>這是試點的<b>前提</b>，不是加分項：<br>要先做出來才能開始。</p></div></div>
+      <div class="rk"><div class="ri">!</div><div><h4>模擬不能證明效果</h4><p>500 人模擬只能找欄位設計的漏洞；<br><b>效果要靠真實班級試點</b>。</p></div></div>
+      <div class="rk"><div class="ri">!</div><div><h4>標註可能不一致</h4><p>AI 和教師的標註，<br><b>先量一致性</b>，再大量標。</p></div></div>
+      <div class="rk"><div class="ri">!</div><div><h4>不能只適用高中學科</h4><p>欄位用通用的描述＋代碼，<br><b>國中、高中、技藝都要能用</b>。</p></div></div>
+    </div>
+    <div class="notnow">
+      <div class="hd">🚫 本輪不做</div>
+      <div class="it">LQ「用得出」</div>
+      <div class="it">「自我判斷」只當下回饋，不當成 LQ 指標</div>
+      <div class="it">不用模擬結果宣稱效果</div>
+    </div>
+  </div>
+</section>
+
+<!-- 19 接下來要做的事 -->
+<section class="slide" data-title="接下來要做的事">
+  <div class="kicker"><span class="dot"></span>下一步</div>
+  <h2 class="hl">接下來要做的事</h2>
+  <div class="body">
+    <div class="todo3">
+      <div class="tcol t1">
+        <div class="th"><span class="ic">💻</span>程式端（QBot）</div>
+        <div class="tl2">
+          <div class="ti"><span class="n">1</span><div><b>分層提示功能</b><small>四層；依選項錯因決定起始層；<br>計算失誤先「自己再檢查一次」</small></div></div>
+          <div class="ti"><span class="n">2</span><div><b>信心度選項</b></div></div>
+          <div class="ti"><span class="n">3</span><div><b>選項錯因欄位</b><small>代碼＋描述，<br>只能從代碼表選</small></div></div>
+          <div class="ti"><span class="n">4</span><div><b>其他題目欄位</b><small>主測能力代碼、換題版本連結、<br>測不到的錯因</small></div></div>
+          <div class="ti"><span class="n">5</span><div><b>作答紀錄</b><small>獨立第一答、第幾層答對、改答、<br>作答時間、信心、<br>隔天換題與實際間隔</small></div></div>
+          <div class="ti"><span class="n">6</span><div><b>數值設定</b><small>mac／LQ 指標換算；<br>mac·m 只用提示前的題</small></div></div>
+          <div class="ti"><span class="n">7</span><div><b>代碼表管理</b><small>含前置／延伸能力；<br>新代碼由教師核定</small></div></div>
+          <div class="ti"><span class="n">8</span><div><b>AI 草擬工具</b><small>教師逐題核定</small></div></div>
+        </div>
+      </div>
+      <div class="tcol t2">
+        <div class="th"><span class="ic">📝</span>內容端（題目）</div>
+        <div class="tl1">
+          <div class="ti"><span class="n">1</span><div><b>訂好代碼表</b><small>「百分比漲跌」的<br>能力與錯因代碼表</small></div></div>
+          <div class="ti"><span class="n">2</span><div><b>標好知識鏈</b><small>試點能力的前置與延伸能力</small></div></div>
+          <div class="ti"><span class="n">3</span><div><b>出 15–20 題＋換題版本</b><small>錯誤選項涵蓋五大類錯因</small></div></div>
+          <div class="ti"><span class="n">4</span><div><b>每題寫四層提示</b></div></div>
+          <div class="ti"><span class="n">5</span><div><b>教師核定錯因</b><small>抽題檢查<br>AI 與教師的一致性</small></div></div>
+        </div>
+      </div>
+      <div class="tcol t3">
+        <div class="th"><span class="ic">🏫</span>試點與驗證</div>
+        <div class="tl1">
+          <div class="ti"><span class="n">1</span><div><b>一到兩個班、兩週</b></div></div>
+          <div class="ti"><span class="n">2</span><div><b>看兩件事</b><small>① 錯因找不找得出來<br>②「第幾層答對」能否預測<br>　 隔天換題自己答對</small></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="edge l" title="上一頁"></div><div class="edge r" title="下一頁"></div>
+</div>
+<div id="nav"><button id="prev" aria-label="上一頁">‹</button><span id="counter">1 / 1</span><button id="next" aria-label="下一頁">›</button></div>
+<div id="progress"></div>
+</div>
+<script>
+/* ================= deck ================= */
+(function(){
+  const slides=[...document.querySelectorAll('.slide')];
+  const stage=document.getElementById('stage');
+  let cur=0, lastFrom=null;
+  const backStack=[];
+  const idxOf=id=>slides.findIndex(s=>s.id===id);
+  function fit(){
+    const mobile = (innerWidth<760 && innerHeight>innerWidth) || innerWidth<520;
+    document.body.classList.toggle('mobile',mobile);
+    if(mobile){stage.style.transform='none';return;}
+    const s=Math.min(innerWidth/1280, innerHeight/720)*0.98;
+    stage.style.transform='scale('+s+')';
+  }
+  function go(n){
+    n=Math.max(0,Math.min(slides.length-1,n));
+    if(n!==cur) lastFrom=cur;
+    slides[cur].classList.remove('active');
+    cur=n; slides[cur].classList.add('active');
+    document.getElementById('counter').textContent=(cur+1)+' / '+slides.length;
+    document.getElementById('progress').style.width=((cur+1)/slides.length*100)+'%';
+    if(location.hash!=='#'+(cur+1)) history.replaceState(null,'','#'+(cur+1));
+    if(document.body.classList.contains('mobile')) window.scrollTo(0,0);
+  }
+  document.getElementById('prev').onclick=()=>go(cur-1);
+  document.getElementById('next').onclick=()=>go(cur+1);
+  document.querySelector('.edge.l').onclick=()=>go(cur-1);
+  document.querySelector('.edge.r').onclick=()=>go(cur+1);
+  addEventListener('keydown',e=>{
+    if(e.altKey||e.ctrlKey||e.metaKey) return;
+    const onBtn = e.target && e.target.tagName==='BUTTON';
+    if(['ArrowRight','PageDown'].includes(e.key) || (e.key===' '&&!onBtn)){e.preventDefault();go(cur+1);}
+    else if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();go(cur-1);}
+    else if(e.key==='Home'){go(0);} else if(e.key==='End'){go(slides.length-1);}
+  });
+  let tx=null,ty=null;
+  addEventListener('touchstart',e=>{tx=e.touches[0].clientX;ty=e.touches[0].clientY;},{passive:true});
+  addEventListener('touchend',e=>{
+    if(tx===null) return; const dx=e.changedTouches[0].clientX-tx, dy=e.changedTouches[0].clientY-ty;
+    if(Math.abs(dx)>70 && Math.abs(dx)>Math.abs(dy)*1.6 && !e.target.closest('.demo')) go(cur+(dx<0?1:-1));
+    tx=null;
+  },{passive:true});
+  addEventListener('resize',fit);
+  // internal jumps: citation chips → paper slide; 「回上一頁」 returns to where the user came from
+  function jump(id){
+    const i=idxOf(id); if(i<0) return false;
+    if(i!==cur) backStack.push(cur);
+    go(i); return true;
+  }
+  function back(){
+    if(backStack.length) go(backStack.pop());
+    else if(lastFrom!==null) go(lastFrom);
+    else go(cur-1);
+  }
+  document.addEventListener('click',e=>{
+    const a=e.target.closest && e.target.closest('a.cite');
+    if(a){ e.preventDefault(); e.stopPropagation(); jump(a.getAttribute('href').slice(1)); return; }
+    if(e.target.closest && e.target.closest('.pback')){ e.preventDefault(); back(); }
+  });
+  function fromHash(){
+    const raw=decodeURIComponent((location.hash||'').slice(1));
+    if(!raw) return 0;
+    const byId=idxOf(raw); if(byId>=0) return byId;
+    const h=parseInt(raw); return isNaN(h)?0:h-1;
+  }
+  addEventListener('hashchange',()=>{const i=fromHash(); if(i!==cur){backStack.push(cur); go(i);}});
+  fit();
+  slides[0].classList.add('active'); go(fromHash()); lastFrom=null;
+  window.deck={go,jump,back,count:slides.length,get cur(){return cur;},get backStack(){return backStack.slice();}};
+})();
+</script>
+
+</body>
+</html>
